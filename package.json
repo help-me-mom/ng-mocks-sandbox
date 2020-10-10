@@ -49,6 +49,10 @@
     "tslint": "~5.9.1",
     "typescript": "3.9.7"
   },
-  "keywords": [],
-  "description": ""
+  "keywords": [
+    "ng-mocks",
+    "testbed",
+    "angular"
+  ],
+  "description": "A sandbox to play with ng-mocks"
 }
