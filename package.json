@@ -50,9 +50,11 @@
     "typescript": "3.9.7"
   },
   "keywords": [
+    "mocking",
     "ng-mocks",
-    "testbed",
-    "angular"
+    "mock",
+    "angular",
+    "testbed"
   ],
-  "description": "A sandbox to play with ng-mocks"
+  "description": "a sandbox to play with ng-mocks"
 }
