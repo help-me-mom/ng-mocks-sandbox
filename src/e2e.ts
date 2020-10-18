@@ -18,6 +18,7 @@
 // import "./examples/v10/MockModule/test.spec.ts";
 // import "./examples/v10/MockPipe/test.spec.ts";
 // import "./examples/v10/MockReactiveForms/test.spec.ts";
+// import "./examples/v10/performance/test.spec.ts";
 // import "./tests/context-with-directives/context-with-directives.spec.ts";
 // import "./tests/control-value-accessor-form-control/test.spec.ts";
 // import "./tests/control-value-accessor-ng-model/test.spec.ts";
@@ -52,9 +53,11 @@
 // import "./tests/mock-render-mirrors-component/test.spec.ts";
 // import "./tests/module-with-factory-tokens/test.spec.ts";
 // import "./tests/module-with-tokens/test.spec.ts";
+// import "./tests/multi-tokens/test.spec.ts";
 // import "./tests/nested-before-each/test.spec.ts";
 // import "./tests/normal-usage-after-mock-builder/test.spec.ts";
 // import "./tests/on-push/on-push.spec.ts";
+// import "./tests/performance/test.spec.ts";
 // import "./tests/provider-with-dependency/test.spec.ts";
 // import "./tests/rerender-rendered-content-child/test.spec.ts";
 // import "./tests/shared-mocked-module/test.spec.ts";
