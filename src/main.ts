@@ -33,6 +33,9 @@ setTimeout(() => {
     window.location.reload();
   } else {
     window.jasmineRef = jasmine.getEnv();
+    window.jasmineRef.configure({
+      random: false,
+    });
     window.onload(new Event("anything"));
   }
 }, 0);
