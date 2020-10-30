@@ -48,7 +48,11 @@ describe('spies:real', () => {
 describe('spies:manual-mock', () => {
   beforeEach(() => {
     const spy = MockService(TargetService);
-    ngMocks.stub<jasmine.Spy>(spy, 'echo').and.returnValue('fake');
+    if (typeof jest !== 'undefined') {
+      ngMocks.stub<any>(spy, 'echo').mockReturnValue('fake');
+    } else if (typeof jasmine !== 'undefined') {
+      ngMocks.stub<any>(spy, 'echo').and.returnValue('fake');
+    }
     (spy as any).manual = true;
 
     return MockBuilder(TargetComponent, TargetModule).mock(TargetService, spy);
@@ -76,7 +80,11 @@ describe('spies:auto-mock', () => {
     expect(component).toBeDefined();
     expect(targetService.echo).toHaveBeenCalledTimes(1);
     expect(targetService.echo).toHaveBeenCalledWith('constructor');
-    ngMocks.stub<jasmine.Spy>(targetService, 'echo').and.returnValue('faked');
+    if (typeof jest !== 'undefined') {
+      ngMocks.stub<any>(targetService, 'echo').mockReturnValue('faked');
+    } else if (typeof jasmine !== 'undefined') {
+      ngMocks.stub<any>(targetService, 'echo').and.returnValue('faked');
+    }
     expect(component.echo()).toEqual('faked');
     expect(targetService.echo).toHaveBeenCalledTimes(2);
   });

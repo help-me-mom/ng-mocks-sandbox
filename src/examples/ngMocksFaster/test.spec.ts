@@ -34,7 +34,8 @@ describe('examples:performance', () => {
     beforeAll(() => {
       MockInstance(TargetService, {
         init: instance => {
-          instance.method = jasmine.createSpy().and.returnValue(5);
+          instance.method =
+            typeof jest === 'undefined' ? jasmine.createSpy().and.returnValue(5) : jest.fn().mockReturnValue(5);
           instance.prop = 123;
         },
       });
@@ -69,13 +70,17 @@ describe('examples:performance', () => {
     // allows its pointer being the same between tests
     // and this let ngMocks.faster do its job.
     const mock = {
-      method: jasmine.createSpy().and.returnValue(5),
+      method: typeof jest === 'undefined' ? jasmine.createSpy().and.returnValue(5) : jest.fn().mockReturnValue(5),
       prop: 123,
     };
 
     // Don't forget to reset the spy between runs.
     beforeEach(() => {
-      (mock.method as jasmine.Spy).calls.reset();
+      if (typeof jest === 'undefined') {
+        (mock.method as jasmine.Spy).calls.reset();
+      } else {
+        mock.method = jest.fn().mockReturnValue(5);
+      }
       mock.prop = 123;
     });
 

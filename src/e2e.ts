@@ -1,20 +1,43 @@
 // // uncomment stuff below to run our e2e tests
 // // time to time it requires to refresh the internal browser.
 
-// import "./examples/MAIN/test.spec.ts";
-// import "./examples/MockBuilder/test.spec.ts";
-// import "./examples/MockComponent/test.spec.ts";
-// import "./examples/MockDirective-Attribute/test.spec.ts";
-// import "./examples/MockDirective-Structural/test.spec.ts";
-// import "./examples/MockForms/test.spec.ts";
-// import "./examples/MockInstance/test.spec.ts";
-// import "./examples/MockModule/test.spec.ts";
-// import "./examples/MockPipe/test.spec.ts";
-// import "./examples/MockReactiveForms/test.spec.ts";
-// import "./examples/MockRender/test.spec.ts";
-// import "./examples/NG_MOCKS/NG_MOCKS.spec.ts";
-// import "./examples/ngMocksFaster/test.spec.ts";
-// import "./examples/ngMocksGuts/test.spec.ts";
+import "./test.spec.ts";
+
+import "./examples/MAIN/test.spec.ts";
+import "./examples/MockBuilder/test.spec.ts";
+import "./examples/MockComponent/test.spec.ts";
+import "./examples/MockDirective-Attribute/test.spec.ts";
+import "./examples/MockDirective-Structural/test.spec.ts";
+import "./examples/MockForms/test.spec.ts";
+import "./examples/MockInstance/test.spec.ts";
+import "./examples/MockModule/test.spec.ts";
+import "./examples/MockPipe/test.spec.ts";
+import "./examples/MockReactiveForms/test.spec.ts";
+import "./examples/MockRender/test.spec.ts";
+import "./examples/NG_MOCKS/NG_MOCKS.spec.ts";
+import "./examples/TestAttributeDirective/test.spec.ts";
+import "./examples/TestHttpInterceptor/test.spec.ts";
+import "./examples/TestHttpRequest/test.spec.ts";
+import "./examples/TestMultiToken/test.spec.ts";
+import "./examples/TestPipe/test.spec.ts";
+import "./examples/TestProvider/test.spec.ts";
+import "./examples/TestProviderInComponent/test.spec.ts";
+import "./examples/TestProviderInDirective/test.spec.ts";
+import "./examples/TestProviderWithDependencies/test.spec.ts";
+import "./examples/TestProviderWithUseClass/test.spec.ts";
+import "./examples/TestProviderWithUseExisting/test.spec.ts";
+import "./examples/TestProviderWithUseFactory/test.spec.ts";
+import "./examples/TestProviderWithUseValue/test.spec.ts";
+import "./examples/TestRoute/test.spec.ts";
+import "./examples/TestRoutingGuard/test.spec.ts";
+import "./examples/TestRoutingResolver/test.spec.ts";
+import "./examples/TestStructuralDirective/test.spec.ts";
+import "./examples/TestStructuralDirectiveWithContext/test.spec.ts";
+import "./examples/TestToken/test.spec.ts";
+import "./examples/ngMocksFaster/test.spec.ts";
+import "./examples/ngMocksGuts/test.spec.ts";
+
+// import "./tests/abstract-methods-provider/test.spec.ts";
 // import "./tests/context-with-directives/context-with-directives.spec.ts";
 // import "./tests/control-value-accessor-form-control/test.spec.ts";
 // import "./tests/control-value-accessor-ng-model/test.spec.ts";
@@ -23,6 +46,7 @@
 // import "./tests/get-inputs-and-outputs/test.spec.ts";
 // import "./tests/get-mocked-ng-def-of/test.spec.ts";
 // import "./tests/injected-ng-templates/injected-ng-templates.spec.ts";
+// import "./tests/interceptor-kept-mocked/test.spec.ts";
 // import "./tests/internal-only-nested/test.spec.ts";
 // import "./tests/internal-only/test.spec.ts";
 // import "./tests/internal-vs-external/test.spec.ts";
@@ -48,6 +72,7 @@
 // import "./tests/issue-186/test.spec.ts";
 // import "./tests/issue-197/abstract.spec.ts";
 // import "./tests/issue-197/with-providers.spec.ts";
+// import "./tests/issue-218/test.spec.ts";
 // import "./tests/mock-builder-by-directive/test.spec.ts";
 // import "./tests/mock-builder-keeps-application-module/test.spec.ts";
 // import "./tests/mock-render-mirrors-component/test.spec.ts";
@@ -59,7 +84,15 @@
 // import "./tests/on-push/on-push.spec.ts";
 // import "./tests/performance/test.spec.ts";
 // import "./tests/provider-with-dependency/test.spec.ts";
+// import "./tests/replace-service-wherever/test.spec.ts";
 // import "./tests/rerender-rendered-content-child/test.spec.ts";
+// import "./tests/root-provider-with-root-dep/test.spec.ts";
+// import "./tests/root-provider-with-string-dep/test.spec.ts";
+// import "./tests/root-providers/test.spec.ts";
 // import "./tests/shared-mocked-module/test.spec.ts";
 // import "./tests/spies/test.spec.ts";
 // import "./tests/structural-directives/structural-directives.spec.ts";
+// import "./tests/tokens-class/test.spec.ts";
+// import "./tests/tokens-existing/test.spec.ts";
+// import "./tests/tokens-factory/test.spec.ts";
+// import "./tests/tokens-value/test.spec.ts";
