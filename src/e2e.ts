@@ -1,6 +1,3 @@
-// // uncomment stuff below to run our e2e tests
-// // time to time it requires to refresh the internal browser.
-
 import "./test.spec.ts";
 
 import "./examples/MAIN/test.spec.ts";
@@ -11,6 +8,7 @@ import "./examples/MockDirective-Structural/test.spec.ts";
 import "./examples/MockForms/test.spec.ts";
 import "./examples/MockInstance/test.spec.ts";
 import "./examples/MockModule/test.spec.ts";
+import "./examples/MockObservable/test.spec.ts";
 import "./examples/MockPipe/test.spec.ts";
 import "./examples/MockProvider/test.spec.ts";
 import "./examples/MockReactiveForms/test.spec.ts";
@@ -39,6 +37,7 @@ import "./examples/TestToken/test.spec.ts";
 import "./examples/ngMocksFaster/test.spec.ts";
 import "./examples/ngMocksGuts/test.spec.ts";
 
+// // uncomment stuff below to run our e2e tests
 // import "./tests/NG_MOCKS_ROOT_PROVIDERS/test.spec.ts";
 // import "./tests/abstract-methods-provider/test.spec.ts";
 // import "./tests/context-with-directives/context-with-directives.spec.ts";
@@ -86,6 +85,7 @@ import "./examples/ngMocksGuts/test.spec.ts";
 // import "./tests/issue-222/mock-keep-priorities.spec.ts";
 // import "./tests/mock-builder-by-directive/test.spec.ts";
 // import "./tests/mock-builder-keeps-application-module/test.spec.ts";
+// import "./tests/mock-render-all-properties/test.spec.ts";
 // import "./tests/mock-render-mirrors-component/test.spec.ts";
 // import "./tests/module-with-factory-tokens/test.spec.ts";
 // import "./tests/module-with-tokens/test.spec.ts";

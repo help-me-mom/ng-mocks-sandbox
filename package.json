@@ -1,5 +1,5 @@
 {
-  "name": "ng-mocks",
+  "name": "ng-mocks-cs",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -23,7 +23,7 @@
     "@types/jasmine": "3.5.14",
     "core-js": "3.6.4",
     "jasmine-core": "3.6.0",
-    "ng-mocks": "10.5.2",
+    "ng-mocks": "10.5.3",
     "rxjs": "6.5.4",
     "tslib": "1.13.0",
     "zone.js": "0.10.2"
@@ -48,14 +48,14 @@
     "typescript": "3.9.7"
   },
   "keywords": [
-    "mocking",
     "ng-mocks",
-    "mock",
+    "ngMocks",
+    "mock dependencies",
     "mocking",
-    "angular",
+    "create angular mocks",
     "testbed",
     "test",
     "testing"
   ],
-  "description": "A sandbox to play with ng-mocks examples"
+  "description": "A sandbox with test examples to play with ngMocks"
 }
