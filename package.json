@@ -1,5 +1,5 @@
 {
-  "name": "ng-mocks-cs",
+  "name": "ng-mocks-examples",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -57,5 +57,5 @@
     "test",
     "testing"
   ],
-  "description": "A sandbox with test examples to play with ngMocks"
+  "description": "A sandbox with test examples to play with ng-mocks"
 }
