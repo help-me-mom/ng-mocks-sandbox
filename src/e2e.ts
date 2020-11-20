@@ -94,6 +94,7 @@ import "./examples/ngMocksGuts/test.spec.ts";
 // import "./tests/mock-builder-keeps-application-module/test.spec.ts";
 // import "./tests/mock-render-all-properties/test.spec.ts";
 // import "./tests/mock-render-mirrors-component/test.spec.ts";
+// import "./tests/mock-service-override/test.spec.ts";
 // import "./tests/module-with-factory-tokens/test.spec.ts";
 // import "./tests/module-with-tokens/test.spec.ts";
 // import "./tests/multi-tokens/test.spec.ts";
