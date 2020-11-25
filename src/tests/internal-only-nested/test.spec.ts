@@ -1,4 +1,4 @@
-// tslint:disable:no-console
+// tslint:disable no-console
 
 import { MockBuilder, MockRender } from 'ng-mocks';
 
@@ -31,10 +31,7 @@ describe('InternalOnlyNested:real', () => {
 });
 
 describe('InternalOnlyNested:mock', () => {
-  beforeEach(async done => {
-    await MockBuilder().mock(TargetModule).mock(InternalComponent, { export: true });
-    done();
-  });
+  beforeEach(() => MockBuilder().mock(TargetModule).mock(InternalComponent, { export: true }));
 
   // The expectation is to see that InternalComponent was exported to the level of the TestingModule
   // and can be accessed in the test even it was deeply nested.

@@ -92,6 +92,7 @@ import "./examples/ngMocksGuts/test.spec.ts";
 // import "./tests/issue-222/mock-keep-priorities.spec.ts";
 // import "./tests/mock-builder-by-directive/test.spec.ts";
 // import "./tests/mock-builder-keeps-application-module/test.spec.ts";
+// import "./tests/mock-directive-with-multi-token/test.spec.ts";
 // import "./tests/mock-render-all-properties/test.spec.ts";
 // import "./tests/mock-render-mirrors-component/test.spec.ts";
 // import "./tests/mock-service-override/test.spec.ts";

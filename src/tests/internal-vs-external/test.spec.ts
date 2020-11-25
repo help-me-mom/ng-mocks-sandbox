@@ -1,4 +1,4 @@
-// tslint:disable:no-console
+// tslint:disable no-console
 
 import { MockBuilder, MockRender } from 'ng-mocks';
 
@@ -53,10 +53,7 @@ describe('InternalVsExternal:mock', () => {
     console.warn = backupWarn;
   });
 
-  beforeEach(async done => {
-    await MockBuilder().mock(TargetModule);
-    done();
-  });
+  beforeEach(() => MockBuilder().mock(TargetModule));
 
   // The expectation is to see that ExternalComponent was exported and InternalComponent wasn't.
   it('should render', () => {
