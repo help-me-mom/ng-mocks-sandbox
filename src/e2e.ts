@@ -1,7 +1,9 @@
 import "./test.spec.ts";
 
 import "./examples/MAIN/test.spec.ts";
-import "./examples/MockBuilder/test.spec.ts";
+import "./examples/MockBuilder/test.deep.spec.ts";
+import "./examples/MockBuilder/test.promise.spec.ts";
+import "./examples/MockBuilder/test.simple.spec.ts";
 import "./examples/MockComponent/test.spec.ts";
 import "./examples/MockDirective-Attribute/test.spec.ts";
 import "./examples/MockDirective-Structural/test.spec.ts";
@@ -100,7 +102,8 @@ import "./examples/ngMocksGuts/test.spec.ts";
 // import "./tests/module-with-tokens/test.spec.ts";
 // import "./tests/multi-tokens/test.spec.ts";
 // import "./tests/nested-before-each/test.spec.ts";
-// import "./tests/ng-mocks-search-with-no-fixture/test.spec.ts";
+// import "./tests/ng-mocks-search-with-no-fixture/test.fixture.spec.ts";
+// import "./tests/ng-mocks-search-with-no-fixture/test.no-fixture.spec.ts";
 // import "./tests/normal-usage-after-mock-builder/test.spec.ts";
 // import "./tests/on-push/on-push.spec.ts";
 // import "./tests/performance/test.spec.ts";
