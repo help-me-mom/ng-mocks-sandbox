@@ -64,31 +64,29 @@ describe('issue-162', () => {
     let setSpy: any;
 
     // creating spies
-    if (typeof jest !== 'undefined') {
-      getSpy = jest.spyOn(
-        fixture.point.componentInstance,
-        'title',
-        'get',
-      );
-      setSpy = jest.spyOn(
-        fixture.point.componentInstance,
-        'title',
-        'set',
-      );
-      getSpy.mockReturnValue('spy');
-    } else if (typeof jasmine !== 'undefined') {
-      getSpy = spyOnProperty(
-        fixture.point.componentInstance,
-        'title',
-        'get',
-      );
-      setSpy = spyOnProperty(
-        fixture.point.componentInstance,
-        'title',
-        'set',
-      );
-      getSpy.and.returnValue('spy');
-    }
+    getSpy = spyOnProperty(
+      fixture.point.componentInstance,
+      'title',
+      'get',
+    );
+    setSpy = spyOnProperty(
+      fixture.point.componentInstance,
+      'title',
+      'set',
+    );
+    getSpy.and.returnValue('spy');
+    // in case of jest
+    // getSpy = jest.spyOn(
+    //   fixture.point.componentInstance,
+    //   'title',
+    //   'get',
+    // );
+    // setSpy = jest.spyOn(
+    //   fixture.point.componentInstance,
+    //   'title',
+    //   'set',
+    // );
+    // getSpy.mockReturnValue('spy');
 
     expect(fixture.point.componentInstance.title).toEqual('spy');
     fixture.point.componentInstance.title = 'updated';

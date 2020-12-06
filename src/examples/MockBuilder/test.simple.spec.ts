@@ -1,7 +1,7 @@
 import { MockBuilder, MockRender } from 'ng-mocks';
 
-import { MyComponent } from './fixtures.components';
-import { MyModule } from './fixtures.modules';
+import { MyComponent } from './spec.components.fixtures';
+import { MyModule } from './spec.modules.fixtures';
 
 describe('MockBuilder:simple', () => {
   // Do not forget to return the promise of MockBuilder.
@@ -10,7 +10,7 @@ describe('MockBuilder:simple', () => {
   // beforeEach(() => TestBed.configureTestingModule({{
   //   imports: [MockModule(MyModule)],
   // }).compileComponents());
-  // but MyComponent has not been replaced with a mock copy for
+  // but MyComponent has not been replaced with a mock object for
   // the testing purposes.
 
   it('should render content ignoring all dependencies', () => {
