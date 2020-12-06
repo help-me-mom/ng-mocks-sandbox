@@ -41,5 +41,12 @@
     "sandbox",
     "playground"
   ],
-  "description": "A sandbox with guides and examples of tests to play with ng-mocks"
+  "description": "A sandbox with guides and examples of tests to play with ng-mocks",
+  "renovate": {
+    "rangeStrategy": "pin",
+    "rebaseWhen": "conflicted",
+    "separateMajorMinor": true,
+    "separateMinorPatch": true,
+    "separateMultipleMajor": true
+  }
 }
