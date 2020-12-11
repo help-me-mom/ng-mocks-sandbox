@@ -33,6 +33,7 @@ setTimeout(() => {
     window.location.reload();
   } else {
     window.jasmineRef = jasmine.getEnv();
+    window.jasmineRef.allowRespy(true);
     window.jasmineRef.configure({
       random: false,
     });
