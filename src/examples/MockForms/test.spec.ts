@@ -1,10 +1,19 @@
+// tslint:disable strict-type-predicates
+
 import { Component, forwardRef } from '@angular/core';
 import {
   ControlValueAccessor,
   FormsModule,
   NG_VALUE_ACCESSOR,
 } from '@angular/forms';
-import { isMockOf, MockBuilder, MockRender, ngMocks } from 'ng-mocks';
+import {
+  isMockControlValueAccessor,
+  MockBuilder,
+  MockInstance,
+  MockRender,
+  MockReset,
+  ngMocks,
+} from 'ng-mocks';
 
 @Component({
   providers: [
@@ -37,6 +46,24 @@ class TestedComponent {
 }
 
 describe('MockForms', () => {
+  // That's our spy on writeValue calls.
+  // With auto spy this code isn't needed.
+  const writeValue = jasmine.createSpy('writeValue');
+  // in case of jest
+  // const writeValue = jest.fn();
+
+  // Because of early calls of writeValue, we need to install
+  // the spy in the ctor call.
+  beforeAll(() =>
+    MockInstance(DependencyComponent, () => ({
+      writeValue,
+    })),
+  );
+
+  // To avoid influence in other tests
+  // we need to reset MockInstance effects.
+  afterAll(MockReset);
+
   beforeEach(() => {
     return MockBuilder(TestedComponent)
       .mock(DependencyComponent)
@@ -51,8 +78,12 @@ describe('MockForms', () => {
     const mockControl = ngMocks.find(DependencyComponent)
       .componentInstance;
 
+    // During initialization it should be called
+    // with null.
+    expect(writeValue).toHaveBeenCalledWith(null);
+
     // Let's simulate its change, like a user does it.
-    if (isMockOf(mockControl, DependencyComponent, 'c')) {
+    if (isMockControlValueAccessor(mockControl)) {
       mockControl.__simulateChange('foo');
       fixture.detectChanges();
       await fixture.whenStable();
@@ -61,10 +92,9 @@ describe('MockForms', () => {
 
     // Let's check that change on existing value
     // causes calls of `writeValue` on the mock component.
-    spyOn(mockControl, 'writeValue');
     component.value = 'bar';
     fixture.detectChanges();
     await fixture.whenStable();
-    expect(mockControl.writeValue).toHaveBeenCalledWith('bar');
+    expect(writeValue).toHaveBeenCalledWith('bar');
   });
 });

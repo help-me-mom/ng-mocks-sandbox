@@ -102,6 +102,8 @@ import "./examples/ngMocksGuts/test.spec.ts";
 // import "./tests/issue-241/test.classic.spec.ts";
 // import "./tests/issue-241/test.guts.spec.ts";
 // import "./tests/issue-241/test.real.spec.ts";
+// import "./tests/issue-246/test.spec.ts";
+// import "./tests/issue-248/test.spec.ts";
 // import "./tests/mock-builder-by-directive/test.spec.ts";
 // import "./tests/mock-builder-keeps-application-module/test.spec.ts";
 // import "./tests/mock-directive-with-multi-token/test.spec.ts";
