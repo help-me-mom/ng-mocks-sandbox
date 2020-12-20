@@ -9,9 +9,10 @@ import {
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting
 } from "@angular/platform-browser-dynamic/testing";
+import { ngMocks } from 'ng-mocks';
 
 // ng-mocks customizations
-import "ng-mocks/dist/jasmine";
+ngMocks.autoSpy('jasmine');
 
 import "./e2e.ts";
 import "./test.spec.ts";
