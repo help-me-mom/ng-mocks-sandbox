@@ -97,9 +97,7 @@ describe('spies:auto-mock', () => {
     expect(component).toBeDefined();
     expect(targetService.echo).toHaveBeenCalledTimes(1);
     expect(targetService.echo).toHaveBeenCalledWith('constructor');
-    ngMocks
-      .stub<any>(targetService, 'echo')
-      .and.returnValue('faked');
+    ngMocks.stub<any>(targetService, 'echo').and.returnValue('faked');
     // in case of jest
     // ngMocks
     //   .stub<any>(targetService, 'echo')

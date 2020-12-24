@@ -1,33 +1,34 @@
-import "jasmine-core/lib/jasmine-core/jasmine.js";
-import "jasmine-core/lib/jasmine-core/jasmine-html.js";
-import "jasmine-core/lib/jasmine-core/boot.js";
+import './polyfills';
 
-import "zone.js/dist/zone-testing";
+import 'jasmine-core/lib/jasmine-core/jasmine.js';
+import 'jasmine-core/lib/jasmine-core/jasmine-html.js';
+import 'jasmine-core/lib/jasmine-core/boot.js';
 
-import { getTestBed } from "@angular/core/testing";
-import {
-  BrowserDynamicTestingModule,
-  platformBrowserDynamicTesting
-} from "@angular/platform-browser-dynamic/testing";
+import 'zone.js/dist/zone-testing';
+
+import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
+import { NgModuleRef } from '@angular/core';
+import { getTestBed } from '@angular/core/testing';
 import { ngMocks } from 'ng-mocks';
+
+declare global {
+  interface Window {
+    ngRef?: NgModuleRef<unknown>;
+    jasmineRef?: jasmine.Env;
+  }
+}
 
 // ng-mocks customizations
 ngMocks.autoSpy('jasmine');
 
-import "./e2e.ts";
-import "./test.spec.ts";
+import './e2e.ts';
+import './test.spec.ts';
 
-declare const jasmine: any;
 const platform = platformBrowserDynamicTesting();
+platform.onDestroy(() => window.ngRef?.destroy());
 
 getTestBed().resetTestEnvironment();
 getTestBed().initTestEnvironment(BrowserDynamicTestingModule, platform);
-
-platform.onDestroy(() => {
-  if (window["ngRef"]) {
-    window["ngRef"].destroy();
-  }
-});
 
 setTimeout(() => {
   if (window.jasmineRef) {
@@ -38,6 +39,8 @@ setTimeout(() => {
     window.jasmineRef.configure({
       random: false,
     });
-    window.onload(new Event("anything"));
+    if (window.onload) {
+      window.onload(new Event('anything'));
+    }
   }
 }, 0);

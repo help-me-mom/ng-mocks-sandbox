@@ -1,0 +1,38 @@
+version: 2.1
+jobs:
+  Core:
+    docker:
+      - image: satantime/puppeteer-node:14.15.3-buster-slim
+    steps:
+      - checkout
+      - restore_cache:
+          key: root-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
+      - run:
+          name: Install
+          command: npm install
+      - run:
+          name: NGCC
+          command: ./node_modules/.bin/ngcc
+      - save_cache:
+          key: root-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: Prettier
+          command: npm run prettier:check
+      - run:
+          name: Lint
+          command: npm run ts:check
+      - run:
+          name: Tests
+          command: WITH_COVERAGE=1 npm run test
+      - store_test_results:
+          path: ./test-reports
+      - store_artifacts:
+          path: ./test-reports/coverage
+          prefix: coverage
+workflows:
+  version: 2
+  build:
+    jobs:
+      - Core
