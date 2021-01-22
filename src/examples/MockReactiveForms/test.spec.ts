@@ -42,8 +42,8 @@ class TestedComponent {
 }
 
 describe('MockReactiveForms', () => {
-  // That's our spy on writeValue calls.
-  // With auto spy this code isn't needed.
+  // That is our spy on writeValue calls.
+  // With auto spy this code is not needed.
   const writeValue = jasmine.createSpy('writeValue');
   // in case of jest
   // const writeValue = jest.fn();

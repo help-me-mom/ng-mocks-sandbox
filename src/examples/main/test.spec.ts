@@ -16,15 +16,13 @@ import {
 import { RouterModule } from '@angular/router';
 import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
-import { staticFalse } from '../../tests';
-
 @Pipe({
   name: 'translate',
 })
 class TranslatePipe implements PipeTransform {
   public transform(value: string): string {
     // Just for the test purpose
-    // we don't use any translation services.
+    // we do not use any translation services.
     return `translated:${value}`;
   }
 }
@@ -71,7 +69,7 @@ class AppComponent {
 })
 class AppHeaderComponent {
   @Output() public readonly logo = new EventEmitter<void>();
-  @ContentChild('menu', staticFalse)
+  @ContentChild('menu', { static: false } as any)
   public menu?: TemplateRef<ElementRef>;
   @Input() public showLogo = false;
   @Input() public title = '';
@@ -144,7 +142,7 @@ describe('main', () => {
     // ));
     // return testBed.compileComponents();
     // But in this case TranslatePipe will return undefined,
-    // if we don't customize it via MockInstance or defaultMock.
+    // if we do not customize it via MockInstance or defaultMock.
   });
 
   it('asserts behavior of AppComponent', () => {
