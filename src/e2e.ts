@@ -38,6 +38,7 @@ import './examples/TestRoutingResolver/test.spec.ts';
 import './examples/TestStructuralDirective/test.spec.ts';
 import './examples/TestStructuralDirectiveWithContext/test.spec.ts';
 import './examples/TestToken/test.spec.ts';
+import './examples/TestViewChild/test.spec.ts';
 import './examples/main/test.spec.ts';
 import './examples/ngMocksFaster/test.spec.ts';
 import './examples/ngMocksGuts/test.spec.ts';
