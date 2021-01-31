@@ -1,20 +1,28 @@
 version: 2.1
+orbs:
+  win: circleci/windows@2.4.0
+parameters:
+  lockindex:
+    type: string
+    default: '1'
 jobs:
-  Core:
+  Core Chrome:
     docker:
-      - image: satantime/puppeteer-node:14.15.4-buster-slim
+      - image: satantime/puppeteer-node:14.15.4-buster
     steps:
       - checkout
       - restore_cache:
-          key: root-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
+          key: root-<< pipeline.parameters.lockindex >>-{{ arch }}-{{ checksum "package-lock.json" }}
       - run:
           name: Install
-          command: npm install
-      - run:
-          name: NGCC
-          command: ./node_modules/.bin/ngcc
+          command: |
+            if [ ! -d "./node_modules/" ]; then
+              npm ci --no-optional --ignore-scripts && \
+              node ./node_modules/puppeteer/install.js && \
+              ./node_modules/.bin/ngcc
+            fi
       - save_cache:
-          key: root-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
+          key: root-<< pipeline.parameters.lockindex >>-{{ arch }}-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
       - run:
@@ -31,8 +39,34 @@ jobs:
       - store_artifacts:
           path: ./test-reports/coverage
           prefix: coverage
+  Core IE:
+    executor:
+      name: win/default
+    steps:
+      - checkout
+      - restore_cache:
+          key: root-<< pipeline.parameters.lockindex >>-{{ arch }}-{{ checksum "package-lock.json" }}
+      - run:
+          name: NPM Install
+          command: |
+            if ((Test-Path "node_modules") -ne "True") {
+              npm ci --no-optional --ignore-scripts
+              ./node_modules/.bin/ngcc
+            }
+      - save_cache:
+          key: root-<< pipeline.parameters.lockindex >>-{{ arch }}-{{ checksum "package-lock.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: Unit Tests
+          command: npm run test -- --reporters=junit --browsers=IECi
+      - store_test_results:
+          path: ./test-reports
+    environment:
+      IE_BIN: 'C:\Program Files\Internet Explorer\iexplore.exe'
 workflows:
   version: 2
   build:
     jobs:
-      - Core
+      - Core Chrome
+      - Core IE
