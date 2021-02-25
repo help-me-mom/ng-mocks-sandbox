@@ -25,7 +25,7 @@ class CellDirective {
   </div>`,
 })
 class TableComponent {
-  @ContentChild(CellDirective, {} as any) public cell?: CellDirective;
+  @ContentChild(CellDirective) public cell?: CellDirective;
   @Input() public data: any[] = [];
 }
 

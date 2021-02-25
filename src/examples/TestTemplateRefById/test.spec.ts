@@ -12,10 +12,10 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
   template: 'xd-card',
 })
 class XdCardComponent {
-  @ContentChild('footer', {} as any)
+  @ContentChild('footer')
   public readonly footer: TemplateRef<any> | undefined;
 
-  @ContentChild('header', {} as any)
+  @ContentChild('header')
   public readonly header: TemplateRef<any> | undefined;
 }
 

@@ -29,7 +29,7 @@ class CellDirective {
 class TableComponent {
   @ContentChildren(CellDirective, {
     read: TemplateRef,
-  } as any)
+  })
   public templates?: QueryList<TemplateRef<CellDirective>>;
 }
 

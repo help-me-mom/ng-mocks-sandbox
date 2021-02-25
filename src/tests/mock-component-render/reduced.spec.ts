@@ -20,7 +20,7 @@ class TargetDirective {}
 class TargetComponent {
   @ContentChildren(TargetDirective, {
     read: TemplateRef,
-  } as any)
+  })
   public readonly templates?: QueryList<TemplateRef<TargetDirective>>;
 }
 
