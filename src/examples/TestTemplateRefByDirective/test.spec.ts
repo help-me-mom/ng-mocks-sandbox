@@ -24,7 +24,7 @@ class XdTplDirective {
   template: 'xd-card',
 })
 class XdCardComponent {
-  @ContentChildren(XdTplDirective, {} as any)
+  @ContentChildren(XdTplDirective)
   public readonly templates?: QueryList<XdTplDirective>;
 }
 
