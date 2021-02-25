@@ -20,7 +20,8 @@
     "test": "ng test",
     "prettier:repo": "prettier --loglevel warn -u -w .",
     "prettier:check": "prettier -u -c .",
-    "ts:check": "tsc --noEmit"
+    "ts:check": "tsc --noEmit",
+    "postinstall": "husky install"
   },
   "dependencies": {
     "@angular/animations": "11.2.1",
