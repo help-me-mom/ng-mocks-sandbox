@@ -1,3 +1,5 @@
+// tslint:disable strict-type-predicates
+
 import { MockRender, ngMocks } from 'ng-mocks';
 
 describe('ng-mocks-crawl', () => {

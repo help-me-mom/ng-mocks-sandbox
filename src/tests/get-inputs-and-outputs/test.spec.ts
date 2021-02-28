@@ -91,7 +91,6 @@ describe('get-inputs-and-outputs', () => {
     (params.output2 as jasmine.Spy).calls.reset();
     // in case of jest
     // (params.output2 as jest.Mock).mockReset();
-
     ngMocks.output(componentElement, 'output2').emit();
     expect(params.output2).toHaveBeenCalled();
     (params.output3 as jasmine.Spy).calls.reset();
