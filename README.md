@@ -5,4 +5,4 @@ on [CodeSandbox](https://codesandbox.io/s/github/ng-mocks/examples?file=/src/tes
 or
 on [StackBlitz](https://stackblitz.com/github/ng-mocks/examples?file=src/test.spec.ts).
 
-Documentation is on [ng-mocks.github.io](https://ng-mocks.github.io/).
+Documentation is on [ng-mocks.sudo.eu](https://ng-mocks.sudo.eu/).
