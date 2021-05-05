@@ -33,7 +33,7 @@
     "@angular/platform-browser-dynamic": "11.2.12",
     "@angular/router": "11.2.12",
     "@types/jasmine": "3.6.11",
-    "core-js": "3.11.2",
+    "core-js": "3.11.3",
     "jasmine-core": "3.7.1",
     "ng-mocks": "11.10.1",
     "rxjs": "6.6.7",
