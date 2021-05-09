@@ -54,6 +54,7 @@ class TargetComponent {
 
   @ViewChild(DependencyComponent, {
     read: DependencyDirective,
+    static: true,
   })
   public directive?: DependencyDirective;
 
