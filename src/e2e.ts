@@ -161,6 +161,7 @@ import './examples/ngMocksGuts/test.spec.ts';
 // import './tests/mock-instance-member/test.spec.ts';
 // import './tests/mock-instance-token/test.spec.ts';
 // import './tests/mock-render-all-properties/test.spec.ts';
+// import './tests/mock-render-factory/docs.spec.ts';
 // import './tests/mock-render-factory/test.spec.ts';
 // import './tests/mock-render-mirrors-component/test.spec.ts';
 // import './tests/mock-render-param-ref/test.spec.ts';
