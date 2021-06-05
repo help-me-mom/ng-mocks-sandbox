@@ -44,6 +44,8 @@ jobs:
       name: win/default
     steps:
       - checkout
+      - run: nvm install
+      - run: nvm use
       - restore_cache:
           key: root-<< pipeline.parameters.lockindex >>-{{ arch }}-{{ checksum "package-lock.json" }}
       - run:
