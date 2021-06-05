@@ -23,6 +23,14 @@
     "ts:check": "tsc --noEmit",
     "postinstall": "husky install"
   },
+  "optionalDependencies": {
+    "@ngrx/store": "12.0.0",
+    "@ngrx/store-devtools": "12.0.0",
+    "events": "3.3.0",
+    "jest-circus": "27.0.4",
+    "module": "1.2.5",
+    "url": "0.11.0"
+  },
   "dependencies": {
     "@angular/animations": "12.0.3",
     "@angular/common": "12.0.3",
@@ -32,12 +40,18 @@
     "@angular/platform-browser": "12.0.3",
     "@angular/platform-browser-dynamic": "12.0.3",
     "@angular/router": "12.0.3",
+    "@ngrx/store": "12.0.0",
+    "@ngrx/store-devtools": "12.0.0",
     "@types/jasmine": "3.7.7",
     "core-js": "3.14.0",
+    "events": "3.3.0",
     "jasmine-core": "3.7.1",
+    "jest-circus": "27.0.4",
+    "module": "1.2.5",
     "ng-mocks": "12.1.0",
     "rxjs": "6.6.7",
     "tslib": "2.2.0",
+    "url": "0.11.0",
     "zone.js": "0.11.4"
   },
   "devDependencies": {
