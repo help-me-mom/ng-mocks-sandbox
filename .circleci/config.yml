@@ -38,14 +38,13 @@ jobs:
           path: ./test-reports
       - store_artifacts:
           path: ./test-reports/coverage
-          prefix: coverage
   Core IE:
     executor:
       name: win/default
     steps:
       - checkout
-      - run: nvm install
-      - run: nvm use
+      - run: nvm install $(Get-Content .nvmrc)
+      - run: nvm use $(Get-Content .nvmrc)
       - restore_cache:
           key: root-<< pipeline.parameters.lockindex >>-{{ arch }}-{{ checksum "package-lock.json" }}
       - run:
