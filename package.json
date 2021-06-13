@@ -24,8 +24,8 @@
     "postinstall": "husky install"
   },
   "optionalDependencies": {
-    "@ngrx/store": "12.0.0",
-    "@ngrx/store-devtools": "12.0.0",
+    "@ngrx/store": "12.1.0",
+    "@ngrx/store-devtools": "12.1.0",
     "events": "3.3.0",
     "jest-circus": "27.0.4",
     "module": "1.2.5",
@@ -40,8 +40,8 @@
     "@angular/platform-browser": "12.0.4",
     "@angular/platform-browser-dynamic": "12.0.4",
     "@angular/router": "12.0.4",
-    "@ngrx/store": "12.0.0",
-    "@ngrx/store-devtools": "12.0.0",
+    "@ngrx/store": "12.1.0",
+    "@ngrx/store-devtools": "12.1.0",
     "@types/jasmine": "3.7.7",
     "core-js": "3.14.0",
     "events": "3.3.0",
