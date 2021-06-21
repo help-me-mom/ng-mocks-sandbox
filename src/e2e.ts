@@ -47,7 +47,8 @@ import './examples/TestViewChild/test.spec.ts';
 import './examples/main/test.spec.ts';
 import './examples/ngMocksFaster/test.spec.ts';
 import './examples/ngMocksGuts/test.spec.ts';
-import './examples/readme/test.spec.ts';
+import './examples/readme/builder.spec.ts';
+import './examples/readme/classic.spec.ts';
 
 // // uncomment stuff below to run our e2e tests
 // import './tests/NG_MOCKS_ROOT_PROVIDERS/test.spec.ts';
@@ -152,8 +153,13 @@ import './examples/readme/test.spec.ts';
 // import './tests/issue-576/test.spec.ts';
 // import './tests/issue-589/test.spec.ts';
 // import './tests/issue-621/test.spec.ts';
+// import './tests/issue-623/nested.spec.ts';
+// import './tests/issue-623/test.spec.ts';
 // import './tests/issue-625/test.spec.ts';
 // import './tests/issue-641/test.spec.ts';
+// import './tests/issue-721/before-all.spec.ts';
+// import './tests/issue-721/before-each.spec.ts';
+// import './tests/issue-726/test.spec.ts';
 // import './tests/mock-builder-by-directive/test.spec.ts';
 // import './tests/mock-builder-keeps-application-module/test.spec.ts';
 // import './tests/mock-component-render/content-child.spec.ts';
