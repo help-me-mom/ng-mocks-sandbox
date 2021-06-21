@@ -48,7 +48,7 @@
     "jasmine-core": "3.7.1",
     "jest-circus": "27.0.4",
     "module": "1.2.5",
-    "ng-mocks": "12.1.0",
+    "ng-mocks": "12.1.2",
     "rxjs": "6.6.7",
     "tslib": "2.3.0",
     "url": "0.11.0",
