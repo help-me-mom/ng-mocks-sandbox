@@ -6,6 +6,14 @@ import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@ang
 import { MockInstance, ngMocks } from 'ng-mocks';
 
 ngMocks.autoSpy('jasmine');
+jasmine.getEnv().allowRespy(true);
+jasmine.getEnv().addReporter({
+  specDone: MockInstance.restore,
+  specStarted: MockInstance.remember,
+  suiteDone: MockInstance.restore,
+  suiteStarted: MockInstance.remember,
+});
+
 declare const require: {
   context(
     path: string,
@@ -16,14 +24,6 @@ declare const require: {
     <T>(id: string): T;
   };
 };
-jasmine.getEnv().allowRespy(true);
-
-jasmine.getEnv().addReporter({
-  specDone: MockInstance.restore,
-  specStarted: MockInstance.remember,
-  suiteDone: MockInstance.restore,
-  suiteStarted: MockInstance.remember,
-});
 
 // First, initialize the Angular testing environment.
 getTestBed().initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
