@@ -8,7 +8,7 @@ parameters:
 jobs:
   Core Chrome:
     docker:
-      - image: satantime/puppeteer-node:14.17.5-buster
+      - image: satantime/puppeteer-node:14.17.6-buster
     steps:
       - checkout
       - restore_cache:
