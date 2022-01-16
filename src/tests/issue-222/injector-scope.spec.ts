@@ -4,7 +4,6 @@ import {
   Injectable as InjectableSource,
   NgModule,
   PLATFORM_ID,
-  VERSION,
 } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MockBuilder, MockRender } from 'ng-mocks';
@@ -46,12 +45,6 @@ class TargetComponent {}
 class TargetModule {}
 
 describe('issue-222:INJECTOR_SCOPE', () => {
-  beforeEach(() => {
-    if (parseInt(VERSION.major, 10) <= 5) {
-      pending('Need Angular > 5');
-    }
-  });
-
   beforeEach(() =>
     MockBuilder(TargetComponent, TargetModule).keep(KeepModule),
   );

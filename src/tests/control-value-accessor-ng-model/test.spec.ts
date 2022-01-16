@@ -23,8 +23,16 @@ describe('control-value-accessor-ng-model:real', () => {
       ControlComponent,
     );
     const mock = mockElement.componentInstance;
-    spyOn(mock, 'writeValue').and.callThrough();
-    spyOn(mock, 'setDisabledState').and.callThrough();
+    ngMocks.stubMember(
+      mock,
+      'writeValue',
+      jasmine.createSpy().and.callFake(mock.writeValue),
+    );
+    ngMocks.stubMember(
+      mock,
+      'setDisabledState',
+      jasmine.createSpy().and.callFake(mock.setDisabledState),
+    );
     const ngModel = ngMocks.get(mockElement, NgModel);
     fixture.detectChanges();
     await fixture.whenStable();
@@ -87,10 +95,26 @@ describe('control-value-accessor-ng-model:mock', () => {
       MockComponent(ControlComponent),
     );
     const mock = mockElement.componentInstance;
-    spyOn(mock, 'writeValue').and.callThrough();
-    spyOn(mock, 'setDisabledState').and.callThrough();
-    spyOn(mock, 'registerOnChange').and.callThrough();
-    spyOn(mock, 'registerOnTouched').and.callThrough();
+    ngMocks.stubMember(
+      mock,
+      'writeValue',
+      jasmine.createSpy().and.callFake(mock.writeValue),
+    );
+    ngMocks.stubMember(
+      mock,
+      'setDisabledState',
+      jasmine.createSpy().and.callFake(mock.setDisabledState),
+    );
+    ngMocks.stubMember(
+      mock,
+      'registerOnChange',
+      jasmine.createSpy().and.callFake(mock.registerOnChange),
+    );
+    ngMocks.stubMember(
+      mock,
+      'registerOnTouched',
+      jasmine.createSpy().and.callFake(mock.registerOnTouched),
+    );
     const ngModel = ngMocks.get(mockElement, NgModel);
     fixture.detectChanges();
     await fixture.whenStable();

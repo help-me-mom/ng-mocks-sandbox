@@ -4,7 +4,6 @@ import {
   Inject,
   Injectable as InjectableSource,
   NgModule,
-  VERSION,
 } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
@@ -50,12 +49,6 @@ class TargetUnusedService {
 }
 
 describe('issue-735:provider-for-module', () => {
-  beforeEach(() => {
-    if (parseInt(VERSION.major, 10) <= 5) {
-      pending('Need Angular > 5');
-    }
-  });
-
   describe('unprovided', () => {
     beforeAll(() => ngMocks.globalMock(TargetService));
     beforeAll(() =>

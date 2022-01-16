@@ -19,7 +19,7 @@ describe('issue-572', () => {
   beforeAll(() => (consoleWarn = console.warn));
 
   beforeEach(() => {
-    console.warn = jasmine.createSpy('console.warn');
+    console.warn = jasmine.createSpy();
   });
 
   afterAll(() => {

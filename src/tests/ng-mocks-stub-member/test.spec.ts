@@ -37,8 +37,8 @@ describe('ng-mocks-stub-member', () => {
     expect(service.echo()).toEqual('mockEcho');
 
     // checking getters and setters
-    const getSpy = jasmine.createSpy('get').and.returnValue('spy');
-    const setSpy = jasmine.createSpy('set');
+    const getSpy = jasmine.createSpy().and.returnValue('spy');
+    const setSpy = jasmine.createSpy();
     ngMocks.stubMember(service, 'name', getSpy, 'get');
     ngMocks.stubMember(service, 'name', setSpy, 'set');
 
@@ -69,31 +69,42 @@ describe('ng-mocks-stub-member', () => {
 
     // checking methods
     expect(service.echo()).toEqual('target');
-    ngMocks
-      .stubMember(service, 'echo', jasmine.createSpy('echo'))
-      .and.returnValue('spy');
+    ngMocks.stubMember(
+      service,
+      'echo',
+      jasmine.createSpy().and.returnValue('spy'),
+    );
     expect(service.echo()).toEqual('spy');
 
     // checking getters
     expect(service.name).toEqual('target');
-    ngMocks
-      .stubMember(service, 'name', jasmine.createSpy('name'), 'get')
-      .and.returnValue('spy');
+    ngMocks.stubMember(
+      service,
+      'name',
+      jasmine.createSpy().and.returnValue('spy'),
+      'get',
+    );
     expect(service.name).toEqual('spy');
 
     // checking setters
-    ngMocks
-      .stubMember(service, 'name', jasmine.createSpy('name'), 'set')
-      .and.throwError('spy');
+    ngMocks.stubMember(
+      service,
+      'name',
+      jasmine.createSpy().and.throwError('spy'),
+      'set',
+    );
     expect(() => ((service as any).name = 'target')).toThrowError(
       'spy',
     );
 
     // checking real prop
     expect(service.norm).toEqual('normal');
-    ngMocks
-      .stubMember(service, 'norm', jasmine.createSpy('norm'), 'get')
-      .and.returnValue('spy');
+    ngMocks.stubMember(
+      service,
+      'norm',
+      jasmine.createSpy().and.returnValue('spy'),
+      'get',
+    );
     expect(service.norm).toEqual('spy');
   });
 });

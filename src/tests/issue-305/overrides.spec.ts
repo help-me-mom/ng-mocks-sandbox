@@ -24,6 +24,8 @@ class MyComponent {
 class MyModule {}
 
 describe('issue-305:overrides', () => {
+  MockInstance.scope();
+
   beforeEach(() =>
     MockBuilder(MyComponent)
       .keep(MyModule)
@@ -31,10 +33,10 @@ describe('issue-305:overrides', () => {
   );
 
   it('correctly overrides CVA', () => {
-    const registerOnChange = jasmine.createSpy('registerOnChange');
-    const registerOnTouched = jasmine.createSpy('registerOnTouched');
-    const setDisabledState = jasmine.createSpy('setDisabledState');
-    const writeValue = jasmine.createSpy('writeValue');
+    const registerOnChange = jasmine.createSpy();
+    const registerOnTouched = jasmine.createSpy();
+    const setDisabledState = jasmine.createSpy();
+    const writeValue = jasmine.createSpy();
 
     MockInstance(DefaultValueAccessor, () => ({
       registerOnChange,

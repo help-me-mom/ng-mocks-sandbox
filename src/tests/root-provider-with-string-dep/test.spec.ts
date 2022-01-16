@@ -1,4 +1,4 @@
-import { Component, Inject, NgModule, VERSION } from '@angular/core';
+import { Component, Inject, NgModule } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { MockBuilder, MockRender } from 'ng-mocks';
 
@@ -17,12 +17,6 @@ class TargetComponent {
 class TargetModule {}
 
 describe('root-provider-with-string-dep', () => {
-  beforeEach(() => {
-    if (parseInt(VERSION.major, 10) <= 5) {
-      pending('Need Angular > 5');
-    }
-  });
-
   describe('real', () => {
     beforeEach(() =>
       TestBed.configureTestingModule({
