@@ -15,6 +15,7 @@
     "playground"
   ],
   "scripts": {
+    "npm": "npm",
     "ng": "ng",
     "start": "ng serve",
     "test": "ng test",
@@ -35,7 +36,7 @@
     "@types/jasmine": "3.10.0",
     "core-js": "3.11.1",
     "jasmine-core": "3.10.0",
-    "ng-mocks": "12.5.0",
+    "ng-mocks": "13.0.0-alpha.4",
     "rxjs": "6.6.7",
     "tslib": "2.3.1",
     "zone.js": "0.11.4"
@@ -53,6 +54,7 @@
     "karma-ie-launcher": "1.0.0",
     "karma-jasmine": "4.0.1",
     "karma-junit-reporter": "2.0.1",
+    "npm": "6.14.15",
     "prettier": "2.4.1",
     "puppeteer": "10.4.0",
     "ts-node": "10.2.1",
