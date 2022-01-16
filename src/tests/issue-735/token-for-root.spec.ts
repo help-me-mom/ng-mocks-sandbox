@@ -4,7 +4,6 @@ import {
   Inject,
   InjectionToken,
   NgModule,
-  VERSION,
 } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
@@ -31,12 +30,6 @@ class TargetComponent {
 class TargetModule {}
 
 describe('issue-735:token-for-root', () => {
-  beforeEach(() => {
-    if (parseInt(VERSION.major, 10) <= 5) {
-      pending('Need Angular > 5');
-    }
-  });
-
   describe('ngMocks.defaultMock', () => {
     beforeAll(() => ngMocks.globalMock(TOKEN));
     beforeAll(() => ngMocks.defaultMock(TOKEN, () => 'MOCK1'));

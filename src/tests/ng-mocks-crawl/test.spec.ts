@@ -127,7 +127,7 @@ describe('ng-mocks-crawl', () => {
   });
 
   it('handles missing fixture', () => {
-    const spy = jasmine.createSpy('callback');
+    const spy = jasmine.createSpy();
     ngMocks.crawl('div', spy);
     ngMocks.crawl(['attr'], spy);
     expect(spy).not.toHaveBeenCalled();

@@ -1,20 +1,13 @@
 // tslint:disable no-duplicate-imports
 
-import * as core from '@angular/core';
 import {
   Component,
-  Directive as DirectiveSource,
+  Directive,
   Injectable,
   NgModule,
 } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { MockBuilder, MockRender } from 'ng-mocks';
-
-// Because of A5 we need to cast Directive to any type
-// To let it accept 0 parameters.
-function Directive(...args: any[]): any {
-  return (DirectiveSource as any)(...args);
-}
 
 @Directive()
 class BaseClass {
@@ -40,22 +33,6 @@ class MyComponent {
 class ModuleWithComponent {}
 
 describe('double-decorator-ivy:without-selector', () => {
-  // Because of junit issue we need to return before beforeEach
-  // https://github.com/karma-runner/karma-junit-reporter/issues/186
-  if (!(core as any).ɵivyEnabled) {
-    it('ivy', () => {
-      pending('fails differently');
-    });
-
-    return;
-  }
-
-  beforeEach(() => {
-    if (!(core as any).ɵivyEnabled) {
-      pending('ivy fails differently');
-    }
-  });
-
   describe('default', () => {
     beforeEach(() =>
       TestBed.configureTestingModule({

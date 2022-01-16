@@ -4,7 +4,6 @@ import {
   Injectable as InjectableSource,
   InjectionToken,
   NgModule,
-  VERSION,
 } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
@@ -47,12 +46,6 @@ class TargetComponent {
 }
 
 describe('issue-377', () => {
-  beforeEach(() => {
-    if (parseInt(VERSION.major, 10) <= 5) {
-      pending('Need Angular > 5');
-    }
-  });
-
   describe('expected', () => {
     beforeEach(() =>
       TestBed.configureTestingModule({

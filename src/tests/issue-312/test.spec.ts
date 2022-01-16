@@ -5,7 +5,6 @@ import {
   Injectable as InjectableSource,
   NgModule,
   Optional,
-  VERSION,
 } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import {
@@ -80,12 +79,6 @@ class TargetModule {}
 
 // the idea is that all of the services have been injected besides StandardService.
 describe('issue-312', () => {
-  beforeEach(() => {
-    if (parseInt(VERSION.major, 10) <= 5) {
-      pending('Need Angular > 5');
-    }
-  });
-
   describe('default', () => {
     beforeEach(() =>
       TestBed.configureTestingModule({

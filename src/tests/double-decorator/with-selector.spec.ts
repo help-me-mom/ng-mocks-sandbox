@@ -1,6 +1,6 @@
 import {
   Component,
-  Directive as DirectiveSource,
+  Directive,
   Injectable,
   NgModule,
 } from '@angular/core';
@@ -12,12 +12,6 @@ import {
   MockReset,
   ngMocks,
 } from 'ng-mocks';
-
-// Because of A5 we need to cast Directive to any type
-// To let it accept 0 parameters.
-function Directive(...args: any[]): any {
-  return (DirectiveSource as any)(...args);
-}
 
 @Directive({
   selector: 'target',
@@ -77,7 +71,6 @@ describe('double-decorator:with-selector', () => {
         ngMocks.stub(instance, myProviderMock()),
       ),
     );
-
     afterAll(MockReset);
 
     it('provides correct decoration of the directive', () => {

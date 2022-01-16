@@ -30,9 +30,7 @@ describe('performance:correct', () => {
 
   beforeAll(() => {
     backupWarn = console.warn;
-    console.warn = jasmine
-      .createSpy('console')
-      .and.callFake(console.log);
+    console.warn = jasmine.createSpy().and.callFake(console.log);
   });
 
   afterAll(() => {
@@ -60,7 +58,7 @@ describe('performance:wrong', () => {
 
   beforeAll(() => {
     backupWarn = console.warn;
-    console.warn = jasmine.createSpy('console');
+    console.warn = jasmine.createSpy();
   });
 
   afterAll(() => {

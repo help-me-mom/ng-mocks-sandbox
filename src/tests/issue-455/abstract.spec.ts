@@ -2,7 +2,6 @@ import {
   Component,
   Inject,
   Injectable as InjectableSource,
-  VERSION,
 } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import {
@@ -26,10 +25,9 @@ interface InjectedAbstraction {
 @Injectable({
   providedIn: 'root',
   useFactory: () => {
-    const fn: InjectedAbstraction = jasmine.createSpy(
-      'Base',
-    ) as any as InjectedAbstraction;
-    fn.hello = jasmine.createSpy('Inner');
+    const fn: InjectedAbstraction =
+      jasmine.createSpy() as any as InjectedAbstraction;
+    fn.hello = jasmine.createSpy();
 
     return fn;
   },
@@ -53,17 +51,11 @@ export class TestWithDecoratorComponent {
 
 ngMocks.defaultMock(InjectedAbstraction, () => {
   return jasmine
-    .createSpy('InjectedAbstraction')
+    .createSpy()
     .and.returnValue('FOO') as any as InjectedAbstraction;
 });
 
 describe('issue-455:abstract', () => {
-  beforeEach(() => {
-    if (parseInt(VERSION.major, 10) <= 5) {
-      pending('Need Angular > 5');
-    }
-  });
-
   describe('without inject decorator', () => {
     describe('using TestBed', () => {
       beforeEach(() =>
@@ -113,6 +105,7 @@ describe('issue-455:abstract', () => {
         beforeEach(() =>
           MockInstance(InjectedAbstraction, 'test' as any, true),
         );
+        afterEach(() => MockInstance(InjectedAbstraction));
 
         it('should build properly but fails', () => {
           const fixture = MockRender(TestWithoutDecoratorComponent);

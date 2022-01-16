@@ -6,15 +6,14 @@ import {
   forwardRef,
   Optional,
   Self,
-  VERSION,
 } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import {
   ControlValueAccessor,
   FormControl,
   FormGroup,
-  NgControl,
   NG_VALUE_ACCESSOR,
+  NgControl,
   ReactiveFormsModule,
 } from '@angular/forms';
 import { MockBuilder, MockRender } from 'ng-mocks';
@@ -182,12 +181,6 @@ describe('issue-157:real', () => {
   });
 
   it('throws when NG_VALUE_ACCESSOR is not provided', () => {
-    if (VERSION.full === '11.1.0') {
-      pending('11.1.0 has a bug');
-
-      return;
-    }
-
     expect(() =>
       MockRender(
         `
@@ -222,12 +215,6 @@ describe('issue-157:real', () => {
   });
 
   it('throws when NG_VALUE_ACCESSOR is not provided on a normal tag', () => {
-    if (VERSION.full === '11.1.0') {
-      pending('11.1.0 has a bug');
-
-      return;
-    }
-
     expect(() =>
       MockRender(
         `
@@ -308,12 +295,6 @@ describe('issue-157:mock', () => {
   });
 
   it('throws when NG_VALUE_ACCESSOR is not provided', () => {
-    if (VERSION.full === '11.1.0') {
-      pending('11.1.0 has a bug');
-
-      return;
-    }
-
     expect(() =>
       MockRender(
         `
@@ -348,12 +329,6 @@ describe('issue-157:mock', () => {
   });
 
   it('throws when NG_VALUE_ACCESSOR is not provided on a normal tag', () => {
-    if (VERSION.full === '11.1.0') {
-      pending('11.1.0 has a bug');
-
-      return;
-    }
-
     expect(() =>
       MockRender(
         `

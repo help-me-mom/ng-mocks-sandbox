@@ -31,7 +31,7 @@ describe('issue-488', () => {
   describe('classic', () => {
     beforeEach(() => {
       service = TestBed.get(TargetService);
-      spyOn(service, 'method');
+      ngMocks.stubMember(service, 'method', jasmine.createSpy());
 
       TestBed.createComponent(TargetComponent);
     });
@@ -46,7 +46,7 @@ describe('issue-488', () => {
       const testBed: any = getTestBed();
 
       service = TestBed.get(TargetService);
-      spyOn(service, 'method');
+      ngMocks.stubMember(service, 'method', jasmine.createSpy());
 
       if (testBed._instantiated || testBed._testModuleRef) {
         expect(() => MockRender(TargetComponent)).toThrowError(

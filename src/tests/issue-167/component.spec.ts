@@ -98,10 +98,14 @@ describe('issue-167:component:real', () => {
       fixture.debugElement,
       TargetComponent,
     ).componentInstance;
-    spyOn(mock, 'validate').and.returnValue({
-      updated: true,
-    });
-    spyOn(mock, 'writeValue');
+    ngMocks.stubMember(
+      mock,
+      'validate',
+      jasmine.createSpy().and.returnValue({
+        updated: true,
+      }),
+    );
+    ngMocks.stubMember(mock, 'writeValue', jasmine.createSpy());
 
     fixture.point.componentInstance.control.setValue('updated');
     expect(mock.validate).toHaveBeenCalled();
@@ -126,10 +130,14 @@ describe('issue-167:component:mock', () => {
       fixture.debugElement,
       TargetComponent,
     ).componentInstance;
-    spyOn(mock, 'validate').and.returnValue({
-      updated: true,
-    });
-    spyOn(mock, 'writeValue');
+    ngMocks.stubMember(
+      mock,
+      'validate',
+      jasmine.createSpy().and.returnValue({
+        updated: true,
+      }),
+    );
+    ngMocks.stubMember(mock, 'writeValue', jasmine.createSpy());
 
     fixture.point.componentInstance.control.setValue('updated');
     expect(mock.validate).toHaveBeenCalled();

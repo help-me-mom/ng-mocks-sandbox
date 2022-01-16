@@ -1,3 +1,5 @@
+// tslint:disable no-console
+
 import { Component, NgModule, SecurityContext } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -82,14 +84,26 @@ describe('issue-735', () => {
     afterAll(() => ngMocks.globalWipe(DomSanitizer));
 
     describe('MockBuilder', () => {
+      let consoleLog: typeof console.log;
+      beforeAll(() => (consoleLog = console.log));
+      afterAll(() => (console.log = consoleLog));
+
+      beforeEach(() => {
+        console.log = jasmine.createSpy();
+      });
+
       beforeEach(() => MockBuilder(TargetComponent, TargetModule));
 
       it('uses default keep correctly', () => {
         const { point } = MockRender(TargetComponent);
         expect(() => {
-          spyOn(console, 'log').and.callFake(message => {
-            throw new Error(message);
-          });
+          ngMocks.stubMember(
+            console,
+            'log',
+            jasmine.createSpy().and.callFake(message => {
+              throw new Error(message);
+            }),
+          );
           point.componentInstance.service.sanitize(
             SecurityContext.HTML,
             '<script></script><div>test</div>',
@@ -108,9 +122,13 @@ describe('issue-735', () => {
       it('uses default keep correctly', () => {
         const { point } = MockRender(TargetComponent);
         expect(() => {
-          spyOn(console, 'log').and.callFake(message => {
-            throw new Error(message);
-          });
+          ngMocks.stubMember(
+            console,
+            'log',
+            jasmine.createSpy().and.callFake(message => {
+              throw new Error(message);
+            }),
+          );
           point.componentInstance.service.sanitize(
             SecurityContext.HTML,
             '<script></script><div>test</div>',

@@ -1,15 +1,10 @@
-import {
-  Component,
-  Inject,
-  InjectionToken,
-  VERSION,
-} from '@angular/core';
+import { Component, Inject, InjectionToken } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import {
   MockBuilder,
   MockRender,
-  ngMocks,
   NG_MOCKS_ROOT_PROVIDERS,
+  ngMocks,
 } from 'ng-mocks';
 
 interface InjectedFn {
@@ -20,8 +15,8 @@ interface InjectedFn {
 const injectedFn: InjectionToken<InjectedFn> =
   new (InjectionToken as any)('InjectedFn', {
     factory: () => {
-      const fn = jasmine.createSpy('Base') as any;
-      fn.hello = jasmine.createSpy('Inner');
+      const fn: any = jasmine.createSpy();
+      fn.hello = jasmine.createSpy();
 
       return fn;
     },
@@ -44,16 +39,10 @@ export class TestWithDecoratorComponent {
 
 ngMocks.defaultMock(
   injectedFn,
-  () => jasmine.createSpy('InjectedFn').and.returnValue('FOO') as any,
+  () => jasmine.createSpy().and.returnValue('FOO') as any,
 );
 
 describe('issue-455:token', () => {
-  beforeEach(() => {
-    if (parseInt(VERSION.major, 10) <= 5) {
-      pending('Need Angular > 5');
-    }
-  });
-
   describe('without inject decorator', () => {
     describe('using TestBed', () => {
       beforeEach(() =>
@@ -91,9 +80,7 @@ describe('issue-455:token', () => {
           MockBuilder(TestWithoutDecoratorComponent)
             .mock(
               injectedFn,
-              jasmine
-                .createSpy('InjectedFn')
-                .and.returnValue('BAR') as any,
+              jasmine.createSpy().and.returnValue('BAR') as any,
             )
             .keep(NG_MOCKS_ROOT_PROVIDERS),
         );
@@ -114,9 +101,7 @@ describe('issue-455:token', () => {
           MockBuilder(TestWithoutDecoratorComponent)
             .mock(
               injectedFn as any,
-              jasmine
-                .createSpy('InjectedFn')
-                .and.returnValue('BAR') as any,
+              jasmine.createSpy().and.returnValue('BAR') as any,
               { precise: true },
             )
             .keep(NG_MOCKS_ROOT_PROVIDERS),
@@ -141,7 +126,7 @@ describe('issue-455:token', () => {
         MockBuilder(TestWithDecoratorComponent).provide({
           provide: injectedFn,
           useFactory: () =>
-            jasmine.createSpy('InjectedFn').and.returnValue('QUX'),
+            jasmine.createSpy().and.returnValue('QUX'),
         }),
       );
 

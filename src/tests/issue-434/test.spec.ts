@@ -43,7 +43,7 @@ describe('issue-434', () => {
   it('sets the prop to a value', () => {
     const fixture = MockRender(TargetComponent, {
       prop1: 'mock',
-      update: jasmine.createSpy('update'),
+      update: jasmine.createSpy(),
     });
     expect(ngMocks.formatText(fixture)).toEqual('mock:default2');
   });
@@ -60,8 +60,16 @@ describe('issue-434', () => {
     );
 
     // let's set cross spies
-    spyOn(fixture.componentInstance, 'echo1').and.callThrough();
-    spyOn(fixture.point.componentInstance, 'echo2').and.callThrough();
+    fixture.componentInstance.echo1 = jasmine
+      .createSpy()
+      .and.callFake(fixture.componentInstance.echo1);
+    ngMocks.stubMember(
+      fixture.point.componentInstance,
+      'echo2',
+      jasmine
+        .createSpy()
+        .and.callFake(fixture.point.componentInstance.echo2),
+    );
 
     // a call on the pointer should be reflected in the wrapper
     fixture.point.componentInstance.echo1();
@@ -71,7 +79,7 @@ describe('issue-434', () => {
 
     // a call on the wrapper should be reflected in the pointer
     fixture.componentInstance.echo2();
-    expect(fixture.point.componentInstance.echo1).toHaveBeenCalled();
+    expect(fixture.point.componentInstance.echo2).toHaveBeenCalled();
     expect(fixture.componentInstance.echo2Called).toEqual(true);
     expect(fixture.point.componentInstance.echo2Called).toEqual(true);
   });

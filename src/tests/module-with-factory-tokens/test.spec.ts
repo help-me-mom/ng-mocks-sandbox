@@ -1,4 +1,3 @@
-import { VERSION } from '@angular/core';
 import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 import {
@@ -19,12 +18,6 @@ describe('module-with-factory-tokens:real', () => {
   );
 
   it('renders all tokens', () => {
-    if (parseInt(VERSION.major, 10) <= 5) {
-      pending('Need Angular > 5');
-
-      return;
-    }
-
     const fixture = MockRender(TargetComponent);
     expect(fixture.nativeElement.innerHTML).toEqual(
       '<internal-component>"MY_TOKEN_SINGLE" "MY_TOKEN_MULTI"</internal-component>',
@@ -42,12 +35,6 @@ describe('module-with-factory-tokens:keep', () => {
   );
 
   it('renders all tokens', () => {
-    if (parseInt(VERSION.major, 10) <= 5) {
-      pending('Need Angular > 5');
-
-      return;
-    }
-
     const fixture = MockRender(TargetComponent);
     expect(fixture.nativeElement.innerHTML).toEqual(
       '<internal-component>"MY_TOKEN_SINGLE" "MY_TOKEN_MULTI"</internal-component>',
@@ -126,12 +113,6 @@ describe('module-with-factory-tokens:mock-3', () => {
   );
 
   it('renders all tokens', () => {
-    if (parseInt(VERSION.major, 10) <= 5) {
-      pending('Need Angular > 5');
-
-      return;
-    }
-
     const fixture = MockRender(TargetComponent);
     expect(fixture.nativeElement.innerHTML).toEqual(
       '<internal-component>"MY_TOKEN_SINGLE" "MY_TOKEN_MULTI"</internal-component>',

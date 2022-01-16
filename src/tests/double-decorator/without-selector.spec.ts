@@ -2,19 +2,13 @@
 
 import {
   Component,
-  Directive as DirectiveSource,
+  Directive,
   Injectable,
   NgModule,
 } from '@angular/core';
 import * as core from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { MockBuilder, MockRender } from 'ng-mocks';
-
-// Because of A5 we need to cast Directive to any type
-// To let it accept 0 parameters.
-function Directive(...args: any[]): any {
-  return (DirectiveSource as any)(...args);
-}
 
 @Directive()
 class BaseClass {
@@ -64,9 +58,13 @@ describe('double-decorator:without-selector', () => {
         }).compileComponents();
         fail('should fail');
       } catch (error) {
-        expect(error.message).toMatch(
-          /Directive BaseClass has no selector/,
-        );
+        if (error instanceof Error) {
+          expect(error.message).toMatch(
+            /Directive BaseClass has no selector/,
+          );
+        } else {
+          fail('should fail');
+        }
       }
     });
   });
@@ -95,9 +93,13 @@ describe('double-decorator:without-selector', () => {
         );
         fail('should fail');
       } catch (error) {
-        expect(error.message).toMatch(
-          /Directive MockOfBaseClass has no selector/,
-        );
+        if (error instanceof Error) {
+          expect(error.message).toMatch(
+            /Directive MockOfBaseClass has no selector/,
+          );
+        } else {
+          fail('should fail');
+        }
       }
     });
   });
@@ -110,9 +112,13 @@ describe('double-decorator:without-selector', () => {
         );
         fail('should fail');
       } catch (error) {
-        expect(error.message).toMatch(
-          /Directive MockOfBaseClass has no selector/,
-        );
+        if (error instanceof Error) {
+          expect(error.message).toMatch(
+            /Directive MockOfBaseClass has no selector/,
+          );
+        } else {
+          fail('should fail');
+        }
       }
     });
   });

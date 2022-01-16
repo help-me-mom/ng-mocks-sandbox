@@ -1,10 +1,9 @@
-import { VERSION } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import {
   MockBuilder,
   MockRender,
-  ngMocks,
   NG_MOCKS_ROOT_PROVIDERS,
+  ngMocks,
 } from 'ng-mocks';
 
 import {
@@ -16,12 +15,6 @@ import {
 } from './fixtures';
 
 describe('root-providers', () => {
-  beforeEach(() => {
-    if (parseInt(VERSION.major, 10) <= 5) {
-      pending('Need Angular > 5');
-    }
-  });
-
   describe('real', () => {
     beforeEach(() =>
       TestBed.configureTestingModule({

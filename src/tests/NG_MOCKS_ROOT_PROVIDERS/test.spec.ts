@@ -2,7 +2,6 @@ import {
   Component,
   Injectable as InjectableSource,
   NgModule,
-  VERSION,
 } from '@angular/core';
 import {
   MockBuilder,
@@ -65,12 +64,6 @@ class Target2Module {}
 class CombinedModule {}
 
 describe('NG_MOCKS_ROOT_PROVIDERS', () => {
-  beforeEach(() => {
-    if (parseInt(VERSION.major, 10) <= 5) {
-      pending('Need Angular > 5');
-    }
-  });
-
   describe('default for a kept module', () => {
     beforeEach(() =>
       MockBuilder(Target1Component, CombinedModule).keep(
