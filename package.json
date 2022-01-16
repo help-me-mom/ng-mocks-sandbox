@@ -65,6 +65,7 @@
       "config:base",
       ":semanticCommitTypeAll(chore)"
     ],
+    "dependencyDashboard": false,
     "rangeStrategy": "pin",
     "rebaseWhen": "conflicted",
     "separateMajorMinor": true,
