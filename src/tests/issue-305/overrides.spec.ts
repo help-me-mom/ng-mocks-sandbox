@@ -33,10 +33,10 @@ describe('issue-305:overrides', () => {
   );
 
   it('correctly overrides CVA', () => {
-    const registerOnChange = jasmine.createSpy();
-    const registerOnTouched = jasmine.createSpy();
-    const setDisabledState = jasmine.createSpy();
-    const writeValue = jasmine.createSpy();
+    const registerOnChange = jasmine.createSpy(); // or jest.fn();
+    const registerOnTouched = jasmine.createSpy(); // or jest.fn();
+    const setDisabledState = jasmine.createSpy(); // or jest.fn();
+    const writeValue = jasmine.createSpy(); // or jest.fn();
 
     MockInstance(DefaultValueAccessor, () => ({
       registerOnChange,

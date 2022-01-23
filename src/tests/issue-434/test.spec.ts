@@ -43,7 +43,7 @@ describe('issue-434', () => {
   it('sets the prop to a value', () => {
     const fixture = MockRender(TargetComponent, {
       prop1: 'mock',
-      update: jasmine.createSpy(),
+      update: jasmine.createSpy(), // or jest.fn(),
     });
     expect(ngMocks.formatText(fixture)).toEqual('mock:default2');
   });

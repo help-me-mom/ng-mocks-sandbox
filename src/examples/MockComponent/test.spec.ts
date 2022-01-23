@@ -82,7 +82,11 @@ describe('MockComponent', () => {
     // called 'someOutput'. TestedComponent listens on the output via
     // `(someOutput)="trigger($event)"`.
     // Let's install a spy and trigger the output.
-    ngMocks.stubMember(component, 'trigger', jasmine.createSpy());
+    ngMocks.stubMember(
+      component,
+      'trigger',
+      jasmine.createSpy(), // or jest.fn(),
+    );
     mockComponent.someOutput.emit({
       payload: 'foo',
     });

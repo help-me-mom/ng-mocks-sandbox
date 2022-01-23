@@ -144,6 +144,7 @@ describe('issue-246:real', () => {
       ngMocks.findInstance(TargetDirective),
       'validate',
       jasmine.createSpy().and.returnValue(null),
+      // or jest.fn().mockReturnValue(null),
     );
     control.updateValueAndValidity();
     await fixture.whenStable();

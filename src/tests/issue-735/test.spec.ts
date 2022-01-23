@@ -89,7 +89,7 @@ describe('issue-735', () => {
       afterAll(() => (console.log = consoleLog));
 
       beforeEach(() => {
-        console.log = jasmine.createSpy();
+        console.log = jasmine.createSpy(); // or jest.fn();
       });
 
       beforeEach(() => MockBuilder(TargetComponent, TargetModule));

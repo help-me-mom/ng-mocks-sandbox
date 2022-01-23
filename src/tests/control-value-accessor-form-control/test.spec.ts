@@ -26,11 +26,13 @@ describe('control-value-accessor-form-control:real', () => {
       mock,
       'writeValue',
       jasmine.createSpy().and.callFake(mock.writeValue),
+      // or jest.fn(mock.writeValue),
     );
     ngMocks.stubMember(
       mock,
       'setDisabledState',
       jasmine.createSpy().and.callFake(mock.setDisabledState),
+      // or jest.fn(mock.setDisabledState),
     );
     fixture.detectChanges();
 
@@ -103,21 +105,25 @@ describe('control-value-accessor-form-control:mock', () => {
       mock,
       'writeValue',
       jasmine.createSpy().and.callFake(mock.writeValue),
+      // or jest.fn(mock.writeValue),
     );
     ngMocks.stubMember(
       mock,
       'setDisabledState',
       jasmine.createSpy().and.callFake(mock.setDisabledState),
+      // or jest.fn(mock.setDisabledState),
     );
     ngMocks.stubMember(
       mock,
       'registerOnChange',
       jasmine.createSpy().and.callFake(mock.registerOnChange),
+      // or jest.fn(mock.registerOnChange),
     );
     ngMocks.stubMember(
       mock,
       'registerOnTouched',
       jasmine.createSpy().and.callFake(mock.registerOnTouched),
+      // or jest.fn(mock.registerOnTouched),
     );
     fixture.detectChanges();
 

@@ -104,7 +104,7 @@ describe('profile:classic', () => {
   // https://ng-mocks.sudo.eu/api/ngMocks/faster
   ngMocks.faster();
 
-  // Helps to reset MockInstance customizations after each test.
+  // Helps to reset customizations after each test.
   MockInstance.scope();
 
   // Let's declare TestBed in beforeAll instead of beforeEach.
@@ -157,7 +157,7 @@ describe('profile:classic', () => {
     const spySave = MockInstance(
       StorageService,
       'save',
-      jasmine.createSpy(),
+      jasmine.createSpy(), // or jest.fn(),
     );
 
     // Renders <profile [profile]="params.profile">
