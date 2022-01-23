@@ -45,8 +45,16 @@ describe('issue-240:classic', () => {
 
     // We do not have auto-spies, because we provided callbacks.
     // Now we need to install spies.
-    ngMocks.stubMember(pure, 'transform', jasmine.createSpy());
-    ngMocks.stubMember(impure, 'transform', jasmine.createSpy());
+    ngMocks.stubMember(
+      pure,
+      'transform',
+      jasmine.createSpy(), // or jest.fn(),
+    );
+    ngMocks.stubMember(
+      impure,
+      'transform',
+      jasmine.createSpy(), // or jest.fn(),
+    );
 
     expect(pure.transform).toHaveBeenCalledTimes(0);
     expect(impure.transform).toHaveBeenCalledTimes(0);

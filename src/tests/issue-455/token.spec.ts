@@ -15,8 +15,8 @@ interface InjectedFn {
 const injectedFn: InjectionToken<InjectedFn> =
   new (InjectionToken as any)('InjectedFn', {
     factory: () => {
-      const fn: any = jasmine.createSpy();
-      fn.hello = jasmine.createSpy();
+      const fn: any = jasmine.createSpy(); // or jest.fn();
+      fn.hello = jasmine.createSpy(); // or jest.fn();
 
       return fn;
     },
@@ -81,6 +81,7 @@ describe('issue-455:token', () => {
             .mock(
               injectedFn,
               jasmine.createSpy().and.returnValue('BAR') as any,
+              // or jest.fn().mockReturnValue('BAR')) as any,
             )
             .keep(NG_MOCKS_ROOT_PROVIDERS),
         );
@@ -102,6 +103,7 @@ describe('issue-455:token', () => {
             .mock(
               injectedFn as any,
               jasmine.createSpy().and.returnValue('BAR') as any,
+              // or jest.fn().mockReturnValue('BAR')) as any,
               { precise: true },
             )
             .keep(NG_MOCKS_ROOT_PROVIDERS),
@@ -127,6 +129,7 @@ describe('issue-455:token', () => {
           provide: injectedFn,
           useFactory: () =>
             jasmine.createSpy().and.returnValue('QUX'),
+          // or jest.fn().mockReturnValue('QUX'),
         }),
       );
 

@@ -31,6 +31,7 @@ describe('performance:correct', () => {
   beforeAll(() => {
     backupWarn = console.warn;
     console.warn = jasmine.createSpy().and.callFake(console.log);
+    // or jest.fn(console.log);
   });
 
   afterAll(() => {
@@ -58,7 +59,7 @@ describe('performance:wrong', () => {
 
   beforeAll(() => {
     backupWarn = console.warn;
-    console.warn = jasmine.createSpy();
+    console.warn = jasmine.createSpy(); // or jest.fn();
   });
 
   afterAll(() => {

@@ -171,7 +171,7 @@ describe('profile:builder', () => {
     const spySave = MockInstance(
       StorageService,
       'save',
-      jasmine.createSpy(),
+      jasmine.createSpy(), // or jest.fn(),
     );
 
     // <profile [profile]="params.profile">

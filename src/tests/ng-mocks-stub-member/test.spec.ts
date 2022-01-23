@@ -38,7 +38,8 @@ describe('ng-mocks-stub-member', () => {
 
     // checking getters and setters
     const getSpy = jasmine.createSpy().and.returnValue('spy');
-    const setSpy = jasmine.createSpy();
+    // or jest.fn().mockReturnValue('spy');
+    const setSpy = jasmine.createSpy(); // or jest.fn();
     ngMocks.stubMember(service, 'name', getSpy, 'get');
     ngMocks.stubMember(service, 'name', setSpy, 'set');
 
@@ -73,6 +74,7 @@ describe('ng-mocks-stub-member', () => {
       service,
       'echo',
       jasmine.createSpy().and.returnValue('spy'),
+      // or jest.fn().mockReturnValue('spy'),
     );
     expect(service.echo()).toEqual('spy');
 
@@ -82,6 +84,7 @@ describe('ng-mocks-stub-member', () => {
       service,
       'name',
       jasmine.createSpy().and.returnValue('spy'),
+      // or jest.fn().mockReturnValue('spy'),
       'get',
     );
     expect(service.name).toEqual('spy');
@@ -103,6 +106,7 @@ describe('ng-mocks-stub-member', () => {
       service,
       'norm',
       jasmine.createSpy().and.returnValue('spy'),
+      // or jest.fn().mockReturnValue('spy'),
       'get',
     );
     expect(service.norm).toEqual('spy');

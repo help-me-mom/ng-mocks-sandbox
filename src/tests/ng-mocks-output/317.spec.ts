@@ -13,7 +13,7 @@ describe('ng-mocks-output:317', () => {
   beforeEach(() => MockBuilder(TargetComponent));
 
   it('finds by css selector', () => {
-    const spy = jasmine.createSpy();
+    const spy = jasmine.createSpy(); // or jest.fn();
     MockRender(
       `<div data-label="div">1</div><target data-target="target" (update)="spy($event)"></target>`,
       { spy },

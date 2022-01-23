@@ -84,7 +84,11 @@ describe('issue-625', () => {
   });
 
   beforeEach(() => {
-    spy = MockInstance(SomeService, 'method', jasmine.createSpy());
+    spy = MockInstance(
+      SomeService,
+      'method',
+      jasmine.createSpy(), // or jest.fn(),
+    );
   });
   afterEach(() => MockInstance(SomeService));
 
