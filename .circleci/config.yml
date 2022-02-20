@@ -41,19 +41,23 @@ jobs:
   Core IE:
     executor:
       name: win/default
+      shell: bash.exe
     steps:
       - checkout
-      - run: nvm install $(Get-Content .nvmrc)
-      - run: nvm use $(Get-Content .nvmrc)
+      - run: nvm install $(cat .nvmrc)
+      - run: nvm use $(cat .nvmrc)
+      - run:
+          name: NPM Shell
+          command: npm config set script-shell bash.exe
       - restore_cache:
           key: root-<< pipeline.parameters.lockindex >>-{{ arch }}-{{ checksum "package-lock.json" }}
       - run:
           name: NPM Install
           command: |
-            if ((Test-Path "node_modules") -ne "True") {
+            if [ ! -d "node_modules/" ]; then
               npm ci --no-optional --ignore-scripts
               ./node_modules/.bin/ngcc
-            }
+            fi
       - save_cache:
           key: root-<< pipeline.parameters.lockindex >>-{{ arch }}-{{ checksum "package-lock.json" }}
           paths:
