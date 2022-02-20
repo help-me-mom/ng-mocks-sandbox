@@ -50,16 +50,16 @@ jobs:
           name: NPM Shell
           command: npm config set script-shell bash.exe
       - restore_cache:
-          key: root-<< pipeline.parameters.lockindex >>-{{ arch }}-{{ checksum "package-lock.json" }}
+          key: root-<< pipeline.parameters.lockindex >>-{{ arch }}-{{ checksum "package-lock.json" }}-{{ checksum ".nvmrc" }}
       - run:
           name: NPM Install
           command: |
             if [ ! -d "node_modules/" ]; then
               npm ci --no-optional --ignore-scripts
-              ./node_modules/.bin/ngcc
+              npx ngcc
             fi
       - save_cache:
-          key: root-<< pipeline.parameters.lockindex >>-{{ arch }}-{{ checksum "package-lock.json" }}
+          key: root-<< pipeline.parameters.lockindex >>-{{ arch }}-{{ checksum "package-lock.json" }}-{{ checksum ".nvmrc" }}
           paths:
             - ./node_modules
       - run:
