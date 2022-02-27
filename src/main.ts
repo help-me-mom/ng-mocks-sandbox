@@ -11,10 +11,13 @@ import { NgModuleRef } from '@angular/core';
 import { getTestBed } from '@angular/core/testing';
 import { MockInstance, ngMocks } from 'ng-mocks';
 
+// TODO: remove when stackblitz has fixed it
+declare const jasmine: any;
+
 declare global {
   interface Window {
     ngRef?: NgModuleRef<unknown>;
-    jasmineRef?: jasmine.Env;
+    jasmineRef?: any; // jasmine.Env;
   }
 }
 
