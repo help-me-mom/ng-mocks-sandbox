@@ -10,26 +10,25 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
-    "module": "es2020",
+    "module": "esnext",
     "lib": ["es2018", "dom"],
-    "types": ["jasmine"],
+    "typeRoots": ["node_modules/@types"],
     "skipLibCheck": false,
-
     "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "strict": true,
+    "strict": false,
     "strictBindCallApply": true,
     "strictFunctionTypes": true,
-    "strictPropertyInitialization": true,
+    "strictPropertyInitialization": false,
     "strictNullChecks": true
   },
   "angularCompilerOptions": {
+    "enableIvy": true,
     "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true,
-    "strictTemplates": true
+    "strictInjectionParameters": true
   }
 }

@@ -74,6 +74,6 @@ workflows:
   build:
     jobs:
       - Core Chrome
-      - Core IE:
-          requires:
-            - Core Chrome
+#      - Core IE:
+#          requires:
+#            - Core Chrome
