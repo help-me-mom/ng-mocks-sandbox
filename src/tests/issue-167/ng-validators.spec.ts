@@ -93,6 +93,10 @@ describe('issue-167:NG_VALIDATORS:mock', () => {
       jasmine.createSpy().and.returnValue({
         mock: true,
       }),
+      // or
+      // jest.fn().mockReturnValue({
+      //   mock: true,
+      // }),
     );
 
     fixture.point.componentInstance.control.setValue('updated');

@@ -94,6 +94,10 @@ describe('ng-mocks-stub-member', () => {
       service,
       'name',
       jasmine.createSpy().and.throwError('spy'),
+      // or in case of jest
+      // jest.fn(() => {
+      //   throw 'spy';
+      // }),
       'set',
     );
     expect(() => ((service as any).name = 'target')).toThrowError(
