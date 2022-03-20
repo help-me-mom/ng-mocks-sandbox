@@ -217,6 +217,12 @@ describe('issue-246:mock', () => {
             targetAsync: true,
           }),
         ),
+        // in case of jest
+        // jest.fn().mockReturnValue(
+        //   Promise.resolve({
+        //     targetAsync: true,
+        //   }),
+        // ),
       );
       directiveAsync.__simulateValidatorChange();
     }
@@ -233,6 +239,10 @@ describe('issue-246:mock', () => {
         jasmine.createSpy().and.returnValue({
           test: true,
         }),
+        // in case of jest
+        // jest.fn().mockReturnValue({
+        //   test: true,
+        // }),
       );
       directive.__simulateValidatorChange();
     }

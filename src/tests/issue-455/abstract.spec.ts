@@ -26,8 +26,8 @@ interface InjectedAbstraction {
   providedIn: 'root',
   useFactory: () => {
     const fn: InjectedAbstraction =
-      jasmine.createSpy() as any as InjectedAbstraction;
-    fn.hello = jasmine.createSpy();
+      jasmine.createSpy() as any as InjectedAbstraction; // or jest.fn();
+    fn.hello = jasmine.createSpy(); // or jest.fn();
 
     return fn;
   },
@@ -52,7 +52,7 @@ export class TestWithDecoratorComponent {
 ngMocks.defaultMock(InjectedAbstraction, () => {
   return jasmine
     .createSpy()
-    .and.returnValue('FOO') as any as InjectedAbstraction;
+    .and.returnValue('FOO') as any as InjectedAbstraction; // or jest.fn().mockReturnValue('FOO');
 });
 
 describe('issue-455:abstract', () => {
@@ -94,6 +94,8 @@ describe('issue-455:abstract', () => {
         const spy = jasmine
           .createSpy('InjectedAbstraction')
           .and.returnValue('BAR');
+        // in case of jest
+        // const spy = jest.fn().mockReturnValue('BAR');
         beforeEach(() =>
           MockBuilder(TestWithoutDecoratorComponent).mock(
             InjectedAbstraction,
@@ -134,7 +136,7 @@ describe('issue-455:abstract', () => {
             InjectedAbstraction,
             jasmine
               .createSpy('InjectedAbstraction')
-              .and.returnValue('BAR'),
+              .and.returnValue('BAR'), // or jest.fn().mockReturnValue('BAR'),
             { precise: true },
           ),
         );
@@ -160,7 +162,7 @@ describe('issue-455:abstract', () => {
           useFactory: () =>
             jasmine
               .createSpy('InjectedAbstraction')
-              .and.returnValue('QUX'),
+              .and.returnValue('QUX'), // or jest.fn().mockReturnValue('QUX'),
         }),
       );
 

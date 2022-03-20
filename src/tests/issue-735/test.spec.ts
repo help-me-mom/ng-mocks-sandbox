@@ -103,6 +103,10 @@ describe('issue-735', () => {
             jasmine.createSpy().and.callFake(message => {
               throw new Error(message);
             }),
+            // in case of jest
+            // jest.fn(message => {
+            //   throw new Error(message);
+            // }),
           );
           point.componentInstance.service.sanitize(
             SecurityContext.HTML,
@@ -128,6 +132,10 @@ describe('issue-735', () => {
             jasmine.createSpy().and.callFake(message => {
               throw new Error(message);
             }),
+            // in case of jest
+            // jest.fn(message => {
+            //   throw new Error(message);
+            // }),
           );
           point.componentInstance.service.sanitize(
             SecurityContext.HTML,
