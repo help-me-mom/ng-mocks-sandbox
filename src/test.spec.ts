@@ -8,6 +8,10 @@ import {
 } from '@angular/core';
 import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// you can check more examples in src/e2e.ts
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 @Component({
   selector: 'app-target',
   template: `<a (click)="click.emit()">name: {{ name }}</a>`,
