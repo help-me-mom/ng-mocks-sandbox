@@ -10,6 +10,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 })
 class TargetComponent {}
 
+// @see https://github.com/ike18t/ng-mocks/issues/572
 describe('issue-572', () => {
   ngMocks.faster();
   let consoleWarn: typeof console.warn;

@@ -29,6 +29,7 @@ class TargetComponent {
 })
 class TargetModule {}
 
+// @see https://github.com/ike18t/ng-mocks/issues/735
 describe('issue-735:token-for-root', () => {
   describe('ngMocks.defaultMock', () => {
     beforeAll(() => ngMocks.globalMock(TOKEN));

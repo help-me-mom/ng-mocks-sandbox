@@ -10,6 +10,7 @@ class TargetComponent {
   public constructor(public readonly service: Testability) {}
 }
 
+// @see https://github.com/ike18t/ng-mocks/issues/735
 describe('issue-735:provider', () => {
   describe('ngMocks.defaultMock', () => {
     beforeAll(() => ngMocks.globalMock(Testability));

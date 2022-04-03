@@ -47,7 +47,16 @@ class TargetComponent {
 })
 class TargetModule {}
 
+// @see https://github.com/ike18t/ng-mocks/issues/641
 describe('issue-641', () => {
+  beforeAll(() =>
+    ngMocks.globalReplace(
+      BrowserAnimationsModule,
+      NoopAnimationsModule,
+    ),
+  );
+  afterAll(() => ngMocks.globalWipe(BrowserAnimationsModule));
+
   describe('BrowserAnimationsModule:default', () => {
     beforeEach(() => MockBuilder(TargetComponent, TargetModule));
 

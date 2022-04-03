@@ -83,6 +83,7 @@ import './examples/readme/classic.spec.ts';
 // import './tests/issue-1165/test.spec.ts';
 // import './tests/issue-1168/test.spec.ts';
 // import './tests/issue-1256/test.spec.ts';
+// import './tests/issue-1377/test.spec.ts';
 // import './tests/issue-142/test.spec.ts';
 // import './tests/issue-1427/test.spec.ts';
 // import './tests/issue-145/components.spec.ts';

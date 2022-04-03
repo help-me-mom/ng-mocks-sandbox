@@ -42,6 +42,7 @@ ngMocks.defaultMock(
   () => jasmine.createSpy().and.returnValue('FOO') as any,
 );
 
+// @see https://github.com/ike18t/ng-mocks/issues/455
 describe('issue-455:token', () => {
   describe('without inject decorator', () => {
     describe('using TestBed', () => {

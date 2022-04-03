@@ -5,12 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import {
-  MockBuilder,
-  MockInstance,
-  MockRender,
-  NgModuleWithProviders,
-} from 'ng-mocks';
+import { MockBuilder, MockInstance, MockRender } from 'ng-mocks';
 
 /*
  * As you can see, SomeService provided in forRoot() function.
@@ -41,7 +36,7 @@ export class AnotherService {
   imports: [],
 })
 export class SomeModule {
-  public static forRoot(): NgModuleWithProviders<SomeRootModule> {
+  public static forRoot() {
     return {
       ngModule: SomeRootModule,
       providers: [SomeService, AnotherService],
@@ -74,6 +69,7 @@ export class MyComponent implements OnInit {
 })
 export class MyModule {}
 
+// @see https://github.com/ike18t/ng-mocks/issues/625
 describe('issue-625', () => {
   let spy: any;
 

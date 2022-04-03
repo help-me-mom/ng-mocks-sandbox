@@ -1,9 +1,5 @@
 import { Injectable, NgModule } from '@angular/core';
-import {
-  MockBuilder,
-  MockRender,
-  NgModuleWithProviders,
-} from 'ng-mocks';
+import { MockBuilder, MockRender } from 'ng-mocks';
 
 @Injectable()
 class TargetService {
@@ -12,7 +8,7 @@ class TargetService {
 
 @NgModule()
 class TargetModule {
-  public static forRoot(): NgModuleWithProviders<TargetModule> {
+  public static forRoot() {
     return {
       ngModule: TargetModule,
       providers: [TargetService],
@@ -25,6 +21,7 @@ class TargetModule {
 })
 class AppModule {}
 
+// @see https://github.com/ike18t/ng-mocks/issues/271
 describe('issue-271', () => {
   beforeEach(() =>
     MockBuilder(null, AppModule).exclude(TargetModule),
