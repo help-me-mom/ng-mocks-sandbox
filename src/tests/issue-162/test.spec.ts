@@ -32,6 +32,7 @@ export class MockComponent {
 })
 export class AppModule {}
 
+// @see https://github.com/ike18t/ng-mocks/issues/162
 describe('issue-162', () => {
   beforeEach(() => MockBuilder(AppComponent, AppModule));
 

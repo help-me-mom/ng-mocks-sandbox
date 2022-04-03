@@ -18,6 +18,7 @@ class TargetComponent {
 })
 class TargetModule {}
 
+// @see https://github.com/ike18t/ng-mocks/issues/735
 describe('issue-735', () => {
   // A5: log because of old angular
   ngMocks.throwOnConsole('log', 'warn', 'error');
