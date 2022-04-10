@@ -1,5 +1,4 @@
-// tslint:disable no-duplicate-imports
-
+import * as core from '@angular/core';
 import {
   Component,
   Directive,
@@ -7,9 +6,10 @@ import {
   NgModule,
 } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+
 import { MockBuilder, MockRender } from 'ng-mocks';
 
-@Directive()
+@Directive(undefined as any)
 class BaseClass {
   public name = 'directive';
 }
@@ -33,6 +33,17 @@ class MyComponent {
 class ModuleWithComponent {}
 
 describe('double-decorator-ivy:without-selector', () => {
+  // Because of junit issue we need to return before beforeEach
+  // https://github.com/karma-runner/karma-junit-reporter/issues/186
+  if (!(core as any).ɵivyEnabled) {
+    it('ivy fails differently', () => {
+      // pending('ivy fails differently');
+      expect(true).toBeTruthy();
+    });
+
+    return;
+  }
+
   describe('default', () => {
     beforeEach(() =>
       TestBed.configureTestingModule({

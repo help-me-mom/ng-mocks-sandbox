@@ -1,30 +1,33 @@
 import {
   Component,
-  Injectable as InjectableSource,
+  Injectable,
   NgModule,
   Optional,
   Self,
   SkipSelf,
 } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+
 import { MockBuilder, MockRender } from 'ng-mocks';
 
-// Because of A5 we need to cast Injectable to any type.
-// But because of A10+ we need to do it via a middle function.
-function Injectable(...args: any[]): any {
-  return InjectableSource(...args);
-}
+const injectableDep1ServiceArgs = [
+  {
+    providedIn: 'root',
+  } as never,
+];
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable(...injectableDep1ServiceArgs)
 class Dep1Service {
   public readonly name = 'dep-1';
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+const injectableDep2ServiceArgs = [
+  {
+    providedIn: 'root',
+  } as never,
+];
+
+@Injectable(...injectableDep2ServiceArgs)
 class Dep2Service {
   public readonly name = 'dep-2';
 }

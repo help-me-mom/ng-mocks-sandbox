@@ -1,10 +1,11 @@
 import { Component, Inject, NgModule } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+
 import { MockBuilder, MockRender } from 'ng-mocks';
 
 @Component({
   selector: 'target',
-  template: ` "name:{{ name }}" `,
+  template: ' "name:{{ name }}" ',
 })
 class TargetComponent {
   public constructor(@Inject('name') public readonly name: string) {}

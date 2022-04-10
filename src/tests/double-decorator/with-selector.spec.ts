@@ -5,6 +5,7 @@ import {
   NgModule,
 } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+
 import {
   MockBuilder,
   MockInstance,
@@ -16,12 +17,12 @@ import {
 @Directive({
   selector: 'target',
 })
-class BaseClass {
+class BaseDirective {
   public name = 'directive';
 }
 
 @Injectable()
-class MyProvider extends BaseClass {}
+class MyProvider extends BaseDirective {}
 
 @Component({
   providers: [MyProvider],
@@ -33,10 +34,14 @@ class MyComponent {
 }
 
 @NgModule({
-  declarations: [BaseClass, MyComponent],
-  exports: [BaseClass, MyComponent],
+  declarations: [BaseDirective, MyComponent],
+  exports: [BaseDirective, MyComponent],
 })
 class ModuleWithComponent {}
+
+const myProviderMock = () => ({
+  name: 'mock',
+});
 
 describe('double-decorator:with-selector', () => {
   describe('default', () => {
@@ -56,13 +61,9 @@ describe('double-decorator:with-selector', () => {
   });
 
   describe('hot-fix', () => {
-    const myProviderMock = () => ({
-      name: 'mock',
-    });
-
     beforeEach(() =>
       MockBuilder(MyComponent, ModuleWithComponent)
-        .exclude(BaseClass)
+        .exclude(BaseDirective)
         .mock(MyProvider),
     );
 
@@ -83,10 +84,6 @@ describe('double-decorator:with-selector', () => {
   });
 
   describe('the-issue', () => {
-    const myProviderMock = () => ({
-      name: 'mock',
-    });
-
     beforeEach(() =>
       MockBuilder(MyComponent, ModuleWithComponent).mock(
         MyProvider,

@@ -1,9 +1,6 @@
-import {
-  Component,
-  Inject,
-  Injectable as InjectableSource,
-} from '@angular/core';
+import { Component, Inject, Injectable } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+
 import {
   MockBuilder,
   MockInstance,
@@ -11,27 +8,25 @@ import {
   ngMocks,
 } from 'ng-mocks';
 
-// Because of A5 we need to cast Injectable to any type.
-// But because of A10+ we need to do it via a middle function.
-function Injectable(...args: any[]): any {
-  return InjectableSource(...args);
-}
-
 interface InjectedAbstraction {
   (): string;
   hello: () => number;
 }
 
-@Injectable({
-  providedIn: 'root',
-  useFactory: () => {
-    const fn: InjectedAbstraction =
-      jasmine.createSpy() as any as InjectedAbstraction; // or jest.fn();
-    fn.hello = jasmine.createSpy(); // or jest.fn();
+const injectableArgs = [
+  {
+    providedIn: 'root',
+    useFactory: () => {
+      const fn: InjectedAbstraction =
+        jasmine.createSpy() as any as InjectedAbstraction; // or jest.fn();
+      fn.hello = jasmine.createSpy(); // or jest.fn();
 
-    return fn;
-  },
-})
+      return fn;
+    },
+  } as never,
+];
+
+@Injectable(...injectableArgs)
 abstract class InjectedAbstraction {}
 
 @Component({ template: '' })
@@ -52,7 +47,8 @@ export class TestWithDecoratorComponent {
 ngMocks.defaultMock(InjectedAbstraction, () => {
   return jasmine
     .createSpy()
-    .and.returnValue('FOO') as any as InjectedAbstraction; // or jest.fn().mockReturnValue('FOO');
+    .and.returnValue('FOO') as any as InjectedAbstraction;
+  // or jest.fn().mockReturnValue('FOO');
 });
 
 // @see https://github.com/ike18t/ng-mocks/issues/455
@@ -95,8 +91,7 @@ describe('issue-455:abstract', () => {
         const spy = jasmine
           .createSpy('InjectedAbstraction')
           .and.returnValue('BAR');
-        // in case of jest
-        // const spy = jest.fn().mockReturnValue('BAR');
+        // or jest.fn().mockReturnValue('BAR');
         beforeEach(() =>
           MockBuilder(TestWithoutDecoratorComponent).mock(
             InjectedAbstraction,
@@ -137,7 +132,8 @@ describe('issue-455:abstract', () => {
             InjectedAbstraction,
             jasmine
               .createSpy('InjectedAbstraction')
-              .and.returnValue('BAR'), // or jest.fn().mockReturnValue('BAR'),
+              .and.returnValue('BAR'),
+            // or jest.fn().mockReturnValue('BAR'),
             { precise: true },
           ),
         );
@@ -163,7 +159,8 @@ describe('issue-455:abstract', () => {
           useFactory: () =>
             jasmine
               .createSpy('InjectedAbstraction')
-              .and.returnValue('QUX'), // or jest.fn().mockReturnValue('QUX'),
+              .and.returnValue('QUX'),
+          // or jest.fn().mockReturnValue('QUX'),
         }),
       );
 

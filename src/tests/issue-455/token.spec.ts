@@ -1,5 +1,6 @@
 import { Component, Inject, InjectionToken } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+
 import {
   MockBuilder,
   MockRender,
@@ -7,12 +8,12 @@ import {
   ngMocks,
 } from 'ng-mocks';
 
-interface InjectedFn {
+interface InjectedAbstraction {
   (): string;
   hello: () => number;
 }
 
-const injectedFn: InjectionToken<InjectedFn> =
+const TOKEN: InjectionToken<InjectedAbstraction> =
   new (InjectionToken as any)('InjectedFn', {
     factory: () => {
       const fn: any = jasmine.createSpy(); // or jest.fn();
@@ -26,20 +27,23 @@ const injectedFn: InjectionToken<InjectedFn> =
 @Component({ template: '' })
 export class TestWithoutDecoratorComponent {
   public constructor(
-    @Inject(injectedFn) public myInjectedFn: InjectedFn,
+    @Inject(TOKEN)
+    public token: InjectedAbstraction,
   ) {}
 }
 
 @Component({ template: '' })
 export class TestWithDecoratorComponent {
   public constructor(
-    @Inject(injectedFn) public myInjectedFn: InjectedFn,
+    @Inject(TOKEN)
+    public token: InjectedAbstraction,
   ) {}
 }
 
 ngMocks.defaultMock(
-  injectedFn,
+  TOKEN,
   () => jasmine.createSpy().and.returnValue('FOO') as any,
+  // or jest.fn().mockReturnValue('FOO')) as any,
 );
 
 // @see https://github.com/ike18t/ng-mocks/issues/455
@@ -66,11 +70,11 @@ describe('issue-455:token', () => {
 
       it('should build properly but fails', () => {
         const fixture = MockRender(TestWithoutDecoratorComponent);
+        expect(fixture.point.componentInstance.token()).toEqual(
+          'FOO',
+        );
         expect(
-          fixture.point.componentInstance.myInjectedFn(),
-        ).toEqual('FOO');
-        expect(
-          fixture.point.componentInstance.myInjectedFn,
+          fixture.point.componentInstance.token,
         ).toHaveBeenCalledTimes(1);
       });
     });
@@ -80,7 +84,7 @@ describe('issue-455:token', () => {
         beforeEach(() =>
           MockBuilder(TestWithoutDecoratorComponent)
             .mock(
-              injectedFn,
+              TOKEN,
               jasmine.createSpy().and.returnValue('BAR') as any,
               // or jest.fn().mockReturnValue('BAR')) as any,
             )
@@ -89,11 +93,11 @@ describe('issue-455:token', () => {
 
         it('should build properly but fails', () => {
           const fixture = MockRender(TestWithoutDecoratorComponent);
+          expect(fixture.point.componentInstance.token()).toEqual(
+            'BAR',
+          );
           expect(
-            fixture.point.componentInstance.myInjectedFn(),
-          ).toEqual('BAR');
-          expect(
-            fixture.point.componentInstance.myInjectedFn,
+            fixture.point.componentInstance.token,
           ).toHaveBeenCalledTimes(1);
         });
       });
@@ -102,7 +106,7 @@ describe('issue-455:token', () => {
         beforeEach(() =>
           MockBuilder(TestWithoutDecoratorComponent)
             .mock(
-              injectedFn as any,
+              TOKEN as any,
               jasmine.createSpy().and.returnValue('BAR') as any,
               // or jest.fn().mockReturnValue('BAR')) as any,
               { precise: true },
@@ -112,11 +116,11 @@ describe('issue-455:token', () => {
 
         it('should build properly and succeed', () => {
           const fixture = MockRender(TestWithoutDecoratorComponent);
+          expect(fixture.point.componentInstance.token()).toEqual(
+            'BAR',
+          );
           expect(
-            fixture.point.componentInstance.myInjectedFn(),
-          ).toEqual('BAR');
-          expect(
-            fixture.point.componentInstance.myInjectedFn,
+            fixture.point.componentInstance.token,
           ).toHaveBeenCalledTimes(1);
         });
       });
@@ -127,7 +131,7 @@ describe('issue-455:token', () => {
     describe('with provide', () => {
       beforeEach(() =>
         MockBuilder(TestWithDecoratorComponent).provide({
-          provide: injectedFn,
+          provide: TOKEN,
           useFactory: () =>
             jasmine.createSpy().and.returnValue('QUX'),
           // or jest.fn().mockReturnValue('QUX'),
@@ -136,11 +140,11 @@ describe('issue-455:token', () => {
 
       it('should build properly and succeed', () => {
         const fixture = MockRender(TestWithDecoratorComponent);
+        expect(fixture.point.componentInstance.token()).toEqual(
+          'QUX',
+        );
         expect(
-          fixture.point.componentInstance.myInjectedFn(),
-        ).toEqual('QUX');
-        expect(
-          fixture.point.componentInstance.myInjectedFn,
+          fixture.point.componentInstance.token,
         ).toHaveBeenCalledTimes(1);
       });
     });

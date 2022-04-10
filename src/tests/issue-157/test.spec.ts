@@ -1,5 +1,3 @@
-// tslint:disable max-file-line-count
-
 import {
   Component,
   Directive,
@@ -16,6 +14,7 @@ import {
   NgControl,
   ReactiveFormsModule,
 } from '@angular/forms';
+
 import { MockBuilder, MockRender } from 'ng-mocks';
 
 @Component({

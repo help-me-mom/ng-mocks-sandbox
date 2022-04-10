@@ -6,6 +6,7 @@ import {
   LOCALE_ID,
 } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+
 import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 const TOKEN = new (InjectionToken as any)('TOKEN', {
@@ -13,9 +14,13 @@ const TOKEN = new (InjectionToken as any)('TOKEN', {
   providedIn: 'root',
 });
 
-@((Injectable as any)({
-  providedIn: 'root',
-}))
+const injectableServiceArgs = [
+  {
+    providedIn: 'root',
+  } as never,
+];
+
+@Injectable(...injectableServiceArgs)
 class Service {
   public readonly value: string = 'ROOT_SERVICE';
 }
