@@ -2,17 +2,12 @@ import {
   Component,
   forwardRef,
   Inject,
-  Injectable as InjectableSource,
+  Injectable,
   NgModule,
 } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
-// Because of A5 we need to cast Injectable to any type.
-// But because of A10+ we need to do it via a middle function.
-function Injectable(...args: any[]): any {
-  return InjectableSource(...args);
-}
+import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Component({
   selector: 'target',
@@ -31,9 +26,13 @@ class TargetComponent {
 })
 class TargetModule {}
 
-@Injectable({
-  providedIn: TargetModule,
-})
+const injectableTargetServiceArgs = [
+  {
+    providedIn: TargetModule,
+  } as never,
+];
+
+@Injectable(...injectableTargetServiceArgs)
 class TargetService {
   public readonly name: string = 'target';
 }
@@ -41,9 +40,13 @@ class TargetService {
 @NgModule({})
 class TargetUnusedModule {}
 
-@Injectable({
-  providedIn: TargetUnusedModule,
-})
+const injectableTargetUnusedService = [
+  {
+    providedIn: TargetUnusedModule,
+  } as never,
+];
+
+@Injectable(...injectableTargetUnusedService)
 class TargetUnusedService {
   public readonly name: string = 'unused';
 }

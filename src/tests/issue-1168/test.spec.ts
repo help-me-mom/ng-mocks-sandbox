@@ -7,6 +7,7 @@ import {
   Pipe,
   PipeTransform,
 } from '@angular/core';
+
 import {
   MockComponent,
   MockDirective,
@@ -60,7 +61,7 @@ describe('issue-1168', () => {
   describe('MockPipe', () => {
     it('fails on TargetClass', () => {
       expect(() => MockPipe(TargetClass as any)).toThrowError(
-        /ng-mocks is not in JIT mode/,
+        /ng-mocks is imported in production code/,
       );
     });
 
@@ -102,7 +103,7 @@ describe('issue-1168', () => {
   describe('MockDirective', () => {
     it('fails on TargetClass', () => {
       expect(() => MockDirective(TargetClass as any)).toThrowError(
-        /ng-mocks is not in JIT mode/,
+        /ng-mocks is imported in production code/,
       );
     });
 
@@ -148,7 +149,7 @@ describe('issue-1168', () => {
   describe('MockComponent', () => {
     it('fails on TargetClass', () => {
       expect(() => MockComponent(TargetClass as any)).toThrowError(
-        /ng-mocks is not in JIT mode/,
+        /ng-mocks is imported in production code/,
       );
     });
 
@@ -194,7 +195,7 @@ describe('issue-1168', () => {
   describe('MockModule', () => {
     it('fails on TargetClass', () => {
       expect(() => MockModule(TargetClass as any)).toThrowError(
-        /ng-mocks is not in JIT mode/,
+        /ng-mocks is imported in production code/,
       );
     });
 

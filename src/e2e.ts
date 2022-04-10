@@ -274,7 +274,7 @@ import './examples/readme/classic.spec.ts';
 // import './tests/ng-mocks-render/debug-node.spec.ts';
 // import './tests/ng-mocks-render/directive.spec.ts';
 // import './tests/ng-mocks-render/idea.spec.ts';
-// import './tests/ng-mocks-render/params.spec.ts';
+// import './tests/ng-mocks-render/parameters.spec.ts';
 // import './tests/ng-mocks-render/use-existing.spec.ts';
 // import './tests/ng-mocks-reveal-all/317.spec.ts';
 // import './tests/ng-mocks-reveal/317.spec.ts';
