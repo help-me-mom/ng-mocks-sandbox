@@ -28,9 +28,9 @@ export const EMPTY = new Subject<any>();
 EMPTY.complete();
 
 interface User {
-  email: string;
-  firstName: string;
-  lastName: string;
+  email?: string | null;
+  firstName?: string | null;
+  lastName?: string | null;
 }
 
 @Injectable()
@@ -58,9 +58,9 @@ class StorageService {
 })
 class ProfileComponent implements OnInit {
   public readonly form = new FormGroup({
-    email: new FormControl(null, Validators.required),
-    firstName: new FormControl(null, Validators.required),
-    lastName: new FormControl(null, Validators.required),
+    email: new FormControl('', Validators.required),
+    firstName: new FormControl('', Validators.required),
+    lastName: new FormControl('', Validators.required),
   });
 
   @Input() public readonly profile: User | null = null;
@@ -69,7 +69,7 @@ class ProfileComponent implements OnInit {
 
   public ngOnInit(): void {
     if (this.profile) {
-      this.form.setValue(this.profile);
+      this.form.patchValue(this.profile);
     }
   }
 
@@ -95,20 +95,12 @@ ngMocks.defaultMock(AuthService, () => ({
 // In the following test suite, we would like to
 // cover behavior of the component.
 describe('profile:classic', () => {
-  // First of all, we would like to reuse the same
-  // TestBed in every test.
-  // ngMocks.faster suppresses reset of TestBed
-  // after each test and allows to use TestBed,
-  // MockBuilder and MockRender in beforeAll.
-  // https://ng-mocks.sudo.eu/api/ngMocks/faster
-  ngMocks.faster();
-
   // Helps to reset customizations after each test.
   MockInstance.scope();
 
   // Let's declare TestBed in beforeAll instead of beforeEach.
   // The code mocks everything in SharedModule and provides a mock AuthService.
-  beforeAll(async () => {
+  beforeEach(async () => {
     return TestBed.configureTestingModule({
       imports: [
         MockModule(SharedModule), // mock
