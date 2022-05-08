@@ -126,6 +126,7 @@ import './examples/readme/classic.spec.ts';
 // import './tests/issue-2302/test.spec.ts';
 // import './tests/issue-2311/test.spec.ts';
 // import './tests/issue-2314/test.spec.ts';
+// import './tests/issue-2398/test.spec.ts';
 // import './tests/issue-240/test.builder.spec.ts';
 // import './tests/issue-240/test.classic.spec.ts';
 // import './tests/issue-240/test.guts.spec.ts';
