@@ -57,7 +57,7 @@
     "npm": "6.14.17",
     "prettier": "2.6.2",
     "puppeteer": "14.1.1",
-    "ts-node": "10.7.0",
+    "ts-node": "10.8.0",
     "typescript": "4.6.4"
   },
   "renovate": {
