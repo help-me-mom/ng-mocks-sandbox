@@ -6,13 +6,9 @@ import {
   NG_MOCKS_ROOT_PROVIDERS,
 } from 'ng-mocks';
 
-const injectableTarget1ServiceArgs = [
-  {
-    providedIn: 'root',
-  } as never,
-];
-
-@Injectable(...injectableTarget1ServiceArgs)
+@Injectable({
+  providedIn: 'root',
+})
 class Target1Service {
   public readonly name = 'target-1';
 }
@@ -31,13 +27,9 @@ class Target1Component {
 })
 class Target1Module {}
 
-const injectableTarget2ServiceArgs = [
-  {
-    providedIn: 'root',
-  } as never,
-];
-
-@Injectable(...injectableTarget2ServiceArgs)
+@Injectable({
+  providedIn: 'root',
+})
 class Target2Service {
   public readonly name = 'target-2';
 }

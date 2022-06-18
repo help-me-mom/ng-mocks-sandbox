@@ -10,13 +10,9 @@ import { TestBed } from '@angular/core/testing';
 
 import { MockBuilder, MockRender } from 'ng-mocks';
 
-const injectableRootServiceArgs = [
-  {
-    providedIn: 'root',
-  } as never,
-];
-
-@Injectable(...injectableRootServiceArgs)
+@Injectable({
+  providedIn: 'root',
+})
 class RootService {
   public readonly name = 'RootService';
 }

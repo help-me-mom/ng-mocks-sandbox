@@ -12,24 +12,16 @@ export class ModuleService {
   public readonly name = 'module';
 }
 
-const injectableTargetServiceArgs = [
-  {
-    providedIn: 'root',
-  } as never,
-];
-
-@Injectable(...injectableTargetServiceArgs)
+@Injectable({
+  providedIn: 'root',
+})
 export class TargetService {
   public readonly name = 'service';
 }
 
-const injectableFakeServiceArgs = [
-  {
-    providedIn: 'root',
-  } as never,
-];
-
-@Injectable(...injectableFakeServiceArgs)
+@Injectable({
+  providedIn: 'root',
+})
 export class FakeService {
   public readonly name = 'fake';
 }

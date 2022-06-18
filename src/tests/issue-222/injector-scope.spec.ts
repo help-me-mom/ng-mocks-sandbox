@@ -9,13 +9,9 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { MockBuilder, MockRender } from 'ng-mocks';
 
-const injectableArgs = [
-  {
-    providedIn: 'root',
-  } as never,
-];
-
-@Injectable(...injectableArgs)
+@Injectable({
+  providedIn: 'root',
+})
 class KeepService {
   public constructor(@Inject(PLATFORM_ID) public readonly id: any) {}
 
