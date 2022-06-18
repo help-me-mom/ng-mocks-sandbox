@@ -1,5 +1,4 @@
 import { Component, Injector } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 
 import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
@@ -31,7 +30,7 @@ describe('issue-572', () => {
   });
 
   it('warns via console on TestBed change', () => {
-    TestBed.get(Injector);
+    ngMocks.findInstance(Injector);
     expect(console.warn).not.toHaveBeenCalled();
     const fixture = MockRender(TargetComponent);
     expect(console.warn).toHaveBeenCalled();
@@ -43,7 +42,7 @@ describe('issue-572', () => {
   it('keeps the config', () => {
     ngMocks.config({});
 
-    TestBed.get(Injector);
+    ngMocks.findInstance(Injector);
     expect(console.warn).not.toHaveBeenCalled();
     MockRender(TargetComponent);
     expect(console.warn).toHaveBeenCalled();
@@ -53,7 +52,7 @@ describe('issue-572', () => {
     ngMocks.config({ onTestBedFlushNeed: 'throw' });
 
     try {
-      TestBed.get(Injector);
+      ngMocks.findInstance(Injector);
       MockRender(TargetComponent);
       fail('should throw');
     } catch (error) {
@@ -69,7 +68,7 @@ describe('issue-572', () => {
   it('skips warnings on TestBed change', () => {
     ngMocks.config({ onTestBedFlushNeed: 'i-know-but-disable' });
 
-    TestBed.get(Injector);
+    ngMocks.findInstance(Injector);
     expect(console.warn).not.toHaveBeenCalled();
     const fixture = MockRender(TargetComponent);
     expect(console.warn).not.toHaveBeenCalled();

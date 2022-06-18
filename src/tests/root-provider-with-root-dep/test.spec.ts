@@ -7,20 +7,15 @@ import {
 } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 
-import { MockBuilder, MockRender } from 'ng-mocks';
+import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
-// Thanks A5.
-const TOKEN = new (InjectionToken as any)('TOKEN', {
+const TOKEN = new InjectionToken('TOKEN', {
   factory: () => 'token',
 });
 
-const injectableTargetServiceArgs = [
-  {
-    providedIn: 'root',
-  } as never,
-];
-
-@Injectable(...injectableTargetServiceArgs)
+@Injectable({
+  providedIn: 'root',
+})
 class TargetService {
   public constructor(
     @Inject(TOKEN) public readonly name: string,
@@ -67,7 +62,7 @@ describe('root-provider-with-root-dep', () => {
       const fixture = MockRender(TargetComponent);
       expect(fixture.nativeElement.innerHTML).toContain('"name:"');
       // A nested token as a dependency should be replaced with a mock copy.
-      expect(TestBed.get(TOKEN)).toBeUndefined();
+      expect(ngMocks.findInstance(TOKEN, undefined)).toBeUndefined();
     });
   });
 });

@@ -14,13 +14,9 @@ const TOKEN = new (InjectionToken as any)('TOKEN', {
   providedIn: 'root',
 });
 
-const injectableServiceArgs = [
-  {
-    providedIn: 'root',
-  } as never,
-];
-
-@Injectable(...injectableServiceArgs)
+@Injectable({
+  providedIn: 'root',
+})
 class Service {
   public readonly value: string = 'ROOT_SERVICE';
 }

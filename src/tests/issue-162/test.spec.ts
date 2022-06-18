@@ -38,7 +38,7 @@ describe('issue-162', () => {
   it('verifies that EventManager was not replaced with a mock copy', () => {
     MockRender(AppComponent);
     TestBed.resetTestingModule();
-    const target: EventManager = TestBed.get(EventManager);
+    const target = ngMocks.findInstance(EventManager);
     expect(target.addEventListener).toEqual(jasmine.any(Function));
     expect(
       (target.addEventListener as any).__ngMocks,
@@ -49,7 +49,7 @@ describe('issue-162', () => {
   it('verifies that RendererFactory2 was not replaced with a mock copy', () => {
     MockRender(AppComponent);
     TestBed.resetTestingModule();
-    const target: RendererFactory2 = TestBed.get(RendererFactory2);
+    const target = ngMocks.findInstance(RendererFactory2);
     expect(target.createRenderer).toEqual(jasmine.any(Function));
     expect((target.createRenderer as any).__ngMocks).toBeUndefined();
   });

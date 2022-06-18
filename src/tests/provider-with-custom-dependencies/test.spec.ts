@@ -8,26 +8,18 @@ import {
 } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 
-import { MockBuilder, MockRender } from 'ng-mocks';
+import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
-const injectableDep1ServiceArgs = [
-  {
-    providedIn: 'root',
-  } as never,
-];
-
-@Injectable(...injectableDep1ServiceArgs)
+@Injectable({
+  providedIn: 'root',
+})
 class Dep1Service {
   public readonly name = 'dep-1';
 }
 
-const injectableDep2ServiceArgs = [
-  {
-    providedIn: 'root',
-  } as never,
-];
-
-@Injectable(...injectableDep2ServiceArgs)
+@Injectable({
+  providedIn: 'root',
+})
 class Dep2Service {
   public readonly name = 'dep-2';
 }
@@ -101,8 +93,8 @@ describe('provider-with-custom-dependencies', () => {
         '"optional:missed"',
       );
       // The dependency should not be provided in TestBed.
-      expect(() => TestBed.get(Dep3Service)).toThrowError(
-        /No provider for Dep3Service/,
+      expect(() => ngMocks.findInstance(Dep3Service)).toThrowError(
+        'Cannot find an instance via ngMocks.findInstance(Dep3Service)',
       );
     });
   });
@@ -121,8 +113,8 @@ describe('provider-with-custom-dependencies', () => {
         '"optional:missed"',
       );
       // The dependency should not be provided in TestBed.
-      expect(() => TestBed.get(Dep3Service)).toThrowError(
-        /No provider for Dep3Service/,
+      expect(() => ngMocks.findInstance(Dep3Service)).toThrowError(
+        'Cannot find an instance via ngMocks.findInstance(Dep3Service)',
       );
     });
   });
@@ -131,9 +123,7 @@ describe('provider-with-custom-dependencies', () => {
     beforeEach(() =>
       MockBuilder(TargetComponent, TargetModule)
         .keep(TargetService)
-        .keep(Dep2Service, {
-          dependency: true,
-        }),
+        .exclude(Dep2Service),
     );
 
     it('creates component with kept Dep2Service', () => {
@@ -147,8 +137,8 @@ describe('provider-with-custom-dependencies', () => {
         '"optional:missed"',
       );
       // The dependency should not be provided in TestBed.
-      expect(() => TestBed.get(Dep3Service)).toThrowError(
-        /No provider for Dep3Service/,
+      expect(() => ngMocks.findInstance(Dep3Service)).toThrowError(
+        'Cannot find an instance via ngMocks.findInstance(Dep3Service)',
       );
     });
   });

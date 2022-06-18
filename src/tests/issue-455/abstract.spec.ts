@@ -13,20 +13,16 @@ interface InjectedAbstraction {
   hello: () => number;
 }
 
-const injectableArgs = [
-  {
-    providedIn: 'root',
-    useFactory: () => {
-      const fn: InjectedAbstraction =
-        jasmine.createSpy() as any as InjectedAbstraction; // or jest.fn();
-      fn.hello = jasmine.createSpy(); // or jest.fn();
+@Injectable({
+  providedIn: 'root',
+  useFactory: () => {
+    const fn: InjectedAbstraction =
+      jasmine.createSpy() as any as InjectedAbstraction; // or jest.fn();
+    fn.hello = jasmine.createSpy(); // or jest.fn();
 
-      return fn;
-    },
-  } as never,
-];
-
-@Injectable(...injectableArgs)
+    return fn;
+  },
+})
 abstract class InjectedAbstraction {}
 
 @Component({ template: '' })

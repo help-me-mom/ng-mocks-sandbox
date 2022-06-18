@@ -1,15 +1,14 @@
 import { Component, Injectable, NgModule } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 
-import { MockBuilder, NG_MOCKS_ROOT_PROVIDERS } from 'ng-mocks';
+import {
+  MockBuilder,
+  NG_MOCKS_ROOT_PROVIDERS,
+  ngMocks,
+} from 'ng-mocks';
 
-const injectableTargetServiceArgs = [
-  {
-    providedIn: 'root',
-  } as never,
-];
-
-@Injectable(...injectableTargetServiceArgs)
+@Injectable({
+  providedIn: 'root',
+})
 class TargetService {
   protected readonly name = 'target';
 
@@ -56,7 +55,7 @@ describe('issue-222:kept-root-injection', () => {
     );
 
     it('does not mock kept dependency', () => {
-      const service: TargetService = TestBed.get(TargetService);
+      const service = ngMocks.findInstance(TargetService);
       expect(service.echo()).toBeDefined();
     });
   });
@@ -69,7 +68,7 @@ describe('issue-222:kept-root-injection', () => {
     );
 
     it('does not mock kept dependency', () => {
-      const service: TargetService = TestBed.get(TargetService);
+      const service = ngMocks.findInstance(TargetService);
       expect(service.echo()).toBeUndefined();
     });
   });

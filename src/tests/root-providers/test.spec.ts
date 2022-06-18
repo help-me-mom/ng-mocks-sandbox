@@ -87,7 +87,7 @@ describe('root-providers', () => {
         TargetService,
         TargetService,
         {
-          dependency: true,
+          dependency: false,
         },
       ),
     );
@@ -108,7 +108,9 @@ describe('root-providers', () => {
 
   describe('keep', () => {
     beforeEach(() =>
-      MockBuilder(TargetComponent, TargetModule).keep(TargetService),
+      MockBuilder(TargetComponent, TargetModule).exclude(
+        TargetService,
+      ),
     );
 
     it('uses mock providers', () => {
@@ -174,9 +176,9 @@ describe('root-providers', () => {
 
   describe('keep as dependency', () => {
     beforeEach(() =>
-      MockBuilder(TargetComponent, TargetModule).keep(TargetService, {
-        dependency: true,
-      }),
+      MockBuilder(TargetComponent, TargetModule).exclude(
+        TargetService,
+      ),
     );
 
     it('uses mock providers', () => {
