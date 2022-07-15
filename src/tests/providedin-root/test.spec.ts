@@ -34,7 +34,7 @@ class TargetComponent {
 }
 
 // tokens provided on the root level, shouldn't be mocked unless it's explicitly specified.
-// @see https://github.com/ike18t/ng-mocks/issues/1932
+// @see https://github.com/help-me-mom/ng-mocks/issues/1932
 describe('providedIn:root', () => {
   describe('native', () => {
     beforeEach(() =>

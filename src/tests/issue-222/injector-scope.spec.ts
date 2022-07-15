@@ -39,7 +39,7 @@ class TargetComponent {}
 })
 class TargetModule {}
 
-// @see https://github.com/ike18t/ng-mocks/issues/222
+// @see https://github.com/help-me-mom/ng-mocks/issues/222
 describe('issue-222:INJECTOR_SCOPE', () => {
   beforeEach(() =>
     MockBuilder(TargetComponent, TargetModule).keep(KeepModule),

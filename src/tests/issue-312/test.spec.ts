@@ -73,7 +73,7 @@ class TargetComponent {
 class TargetModule {}
 
 // the idea is that all the services have been injected besides StandardService.
-// @see https://github.com/ike18t/ng-mocks/issues/312
+// @see https://github.com/help-me-mom/ng-mocks/issues/312
 describe('issue-312', () => {
   describe('default', () => {
     beforeEach(() =>
