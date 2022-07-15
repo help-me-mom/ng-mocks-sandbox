@@ -44,7 +44,7 @@ class TargetComponent {
   ) {}
 }
 
-// @see https://github.com/ike18t/ng-mocks/issues/377
+// @see https://github.com/help-me-mom/ng-mocks/issues/377
 describe('issue-377', () => {
   describe('expected', () => {
     beforeEach(() =>

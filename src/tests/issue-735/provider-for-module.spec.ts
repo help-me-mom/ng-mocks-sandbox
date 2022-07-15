@@ -51,7 +51,7 @@ class TargetUnusedService {
   public readonly name: string = 'unused';
 }
 
-// @see https://github.com/ike18t/ng-mocks/issues/735
+// @see https://github.com/help-me-mom/ng-mocks/issues/735
 describe('issue-735:provider-for-module', () => {
   describe('unprovided', () => {
     beforeAll(() => ngMocks.globalMock(TargetService));

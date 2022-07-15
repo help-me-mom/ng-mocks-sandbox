@@ -47,7 +47,7 @@ ngMocks.defaultMock(InjectedAbstraction, () => {
   // or jest.fn().mockReturnValue('FOO');
 });
 
-// @see https://github.com/ike18t/ng-mocks/issues/455
+// @see https://github.com/help-me-mom/ng-mocks/issues/455
 describe('issue-455:abstract', () => {
   describe('without inject decorator', () => {
     describe('using TestBed', () => {

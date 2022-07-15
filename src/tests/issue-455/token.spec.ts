@@ -46,7 +46,7 @@ ngMocks.defaultMock(
   // or jest.fn().mockReturnValue('FOO')) as any,
 );
 
-// @see https://github.com/ike18t/ng-mocks/issues/455
+// @see https://github.com/help-me-mom/ng-mocks/issues/455
 describe('issue-455:token', () => {
   describe('without inject decorator', () => {
     describe('using TestBed', () => {
