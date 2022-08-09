@@ -171,6 +171,8 @@ import './examples/readme/classic.spec.ts';
 // import './tests/issue-3161/exclude.spec.ts';
 // import './tests/issue-3161/keep.spec.ts';
 // import './tests/issue-3161/test.spec.ts';
+// import './tests/issue-3265/test.spec.ts';
+// import './tests/issue-3274/test.spec.ts';
 // import './tests/issue-333/test.spec.ts';
 // import './tests/issue-354/test.spec.ts';
 // import './tests/issue-377/e2e.spec.ts';
