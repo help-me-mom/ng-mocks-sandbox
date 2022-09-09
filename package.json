@@ -35,7 +35,7 @@
     "@angular/router": "14.2.1",
     "@types/jasmine": "4.3.0",
     "core-js": "3.25.1",
-    "jasmine-core": "3.10.1",
+    "jasmine-core": "3.99.1",
     "ng-mocks": "14.2.1",
     "rxjs": "6.6.7",
     "tslib": "2.4.0",
