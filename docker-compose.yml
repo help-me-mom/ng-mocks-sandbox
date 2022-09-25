@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  core:
+    image: satantime/puppeteer-node:16.17.0
+    working_dir: /app
+    volumes:
+      - .:/app
+      - gyp:/root/.node-gyp
+      - npm:/root/.npm
+    command:
+      - npm
+      - install
+      - --no-audit
+      - --omit=optional
+
+volumes:
+  npm:
+  gyp:
