@@ -49,7 +49,7 @@
     "@commitlint/config-conventional": "17.1.0",
     "@types/node": "16.11.60",
     "husky": "8.0.1",
-    "karma": "6.4.0",
+    "karma": "6.4.1",
     "karma-chrome-launcher": "3.1.1",
     "karma-ie-launcher": "1.0.0",
     "karma-jasmine": "5.1.0",
