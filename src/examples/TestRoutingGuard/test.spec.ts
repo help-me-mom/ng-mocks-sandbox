@@ -118,7 +118,7 @@ describe('TestRoutingGuard', () => {
 
   // It is important to run routing tests in fakeAsync.
   it('redirects to login', fakeAsync(() => {
-    const fixture = MockRender(RouterOutlet);
+    const fixture = MockRender(RouterOutlet, {});
     const router: Router = fixture.point.injector.get(Router);
     const location: Location = fixture.point.injector.get(Location);
 
@@ -135,7 +135,7 @@ describe('TestRoutingGuard', () => {
   }));
 
   it('loads dashboard', fakeAsync(() => {
-    const fixture = MockRender(RouterOutlet);
+    const fixture = MockRender(RouterOutlet, {});
     const router: Router = fixture.point.injector.get(Router);
     const location: Location = fixture.point.injector.get(Location);
     const loginService: LoginService =
