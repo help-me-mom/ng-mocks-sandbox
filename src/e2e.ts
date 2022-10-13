@@ -179,6 +179,8 @@ import './tests/issue-3635/test.spec.ts';
 import './tests/issue-3636/test.spec.ts';
 import './tests/issue-377/e2e.spec.ts';
 import './tests/issue-377/test.spec.ts';
+import './tests/issue-3791/test.spec.ts';
+import './tests/issue-3811/test.spec.ts';
 import './tests/issue-434/test.spec.ts';
 import './tests/issue-435/test.spec.ts';
 import './tests/issue-445/test.spec.ts';
