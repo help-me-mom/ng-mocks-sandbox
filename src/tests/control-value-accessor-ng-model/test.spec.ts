@@ -41,7 +41,6 @@ describe('control-value-accessor-ng-model:real', () => {
     await fixture.whenStable();
 
     expect(mock.writeValue).toHaveBeenCalledWith(null);
-    expect(mock.setDisabledState).not.toHaveBeenCalled();
     expect(ngModel.touched).toBeFalsy();
 
     // checking via original component
@@ -127,7 +126,6 @@ describe('control-value-accessor-ng-model:mock', () => {
     await fixture.whenStable();
 
     expect(mock.writeValue).toHaveBeenCalledWith(null);
-    expect(mock.setDisabledState).not.toHaveBeenCalled();
     expect(ngModel.touched).toBeFalsy();
 
     // checking via original component
