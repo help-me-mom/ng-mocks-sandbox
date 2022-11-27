@@ -25,26 +25,26 @@
     "postinstall": "husky install"
   },
   "dependencies": {
-    "@angular/animations": "14.2.12",
-    "@angular/common": "14.2.12",
-    "@angular/compiler": "14.2.12",
-    "@angular/core": "14.2.12",
-    "@angular/forms": "14.2.12",
-    "@angular/platform-browser": "14.2.12",
-    "@angular/platform-browser-dynamic": "14.2.12",
-    "@angular/router": "14.2.12",
+    "@angular/animations": "15.0.1",
+    "@angular/common": "15.0.1",
+    "@angular/compiler": "15.0.1",
+    "@angular/core": "15.0.1",
+    "@angular/forms": "15.0.1",
+    "@angular/platform-browser": "15.0.1",
+    "@angular/platform-browser-dynamic": "15.0.1",
+    "@angular/router": "15.0.1",
     "@types/jasmine": "4.3.0",
     "core-js": "3.26.1",
     "jasmine-core": "4.5.0",
     "ng-mocks": "14.4.0",
     "rxjs": "7.5.7",
     "tslib": "2.4.1",
-    "zone.js": "0.11.8"
+    "zone.js": "0.12.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "14.2.10",
-    "@angular/cli": "14.2.10",
-    "@angular/compiler-cli": "14.2.12",
+    "@angular-devkit/build-angular": "15.0.1",
+    "@angular/cli": "15.0.1",
+    "@angular/compiler-cli": "15.0.1",
     "@commitlint/cli": "17.3.0",
     "@commitlint/config-conventional": "17.3.0",
     "@types/node": "18.11.9",
@@ -82,11 +82,5 @@
     "extends": [
       "@commitlint/config-conventional"
     ]
-  },
-  "browserslist": [
-    "last 2 version",
-    "> 1%",
-    "IE 11",
-    "not IE 10"
-  ]
+  }
 }
