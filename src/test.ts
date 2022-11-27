@@ -20,22 +20,5 @@ jasmine.getEnv().addReporter({
   suiteStarted: MockInstance.remember,
 });
 
-declare const require: {
-  context(
-    path: string,
-    deep?: boolean,
-    filter?: RegExp,
-  ): {
-    keys(): string[];
-    <T>(id: string): T;
-  };
-};
-
 // First, initialize the Angular testing environment.
 getTestBed().initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
-// Then we find all the tests.
-const context = require.context('./', true, /\.spec\.ts$/);
-// And load the modules.
-for (const key of context.keys()) {
-  context(key);
-}

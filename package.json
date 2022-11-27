@@ -25,38 +25,38 @@
     "postinstall": "husky install"
   },
   "dependencies": {
-    "@angular/animations": "14.2.8",
-    "@angular/common": "14.2.8",
-    "@angular/compiler": "14.2.8",
-    "@angular/core": "14.2.8",
-    "@angular/forms": "14.2.8",
-    "@angular/platform-browser": "14.2.8",
-    "@angular/platform-browser-dynamic": "14.2.8",
-    "@angular/router": "14.2.8",
+    "@angular/animations": "15.0.1",
+    "@angular/common": "15.0.1",
+    "@angular/compiler": "15.0.1",
+    "@angular/core": "15.0.1",
+    "@angular/forms": "15.0.1",
+    "@angular/platform-browser": "15.0.1",
+    "@angular/platform-browser-dynamic": "15.0.1",
+    "@angular/router": "15.0.1",
     "@types/jasmine": "4.3.0",
-    "core-js": "3.26.0",
+    "core-js": "3.26.1",
     "jasmine-core": "4.5.0",
-    "ng-mocks": "14.3.2",
+    "ng-mocks": "14.4.0",
     "rxjs": "7.5.7",
-    "tslib": "2.4.0",
-    "zone.js": "0.11.8"
+    "tslib": "2.4.1",
+    "zone.js": "0.12.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "14.2.7",
-    "@angular/cli": "14.2.7",
-    "@angular/compiler-cli": "14.2.8",
-    "@commitlint/cli": "17.1.2",
-    "@commitlint/config-conventional": "17.1.0",
-    "@types/node": "18.11.7",
-    "husky": "8.0.1",
+    "@angular-devkit/build-angular": "15.0.1",
+    "@angular/cli": "15.0.1",
+    "@angular/compiler-cli": "15.0.1",
+    "@commitlint/cli": "17.3.0",
+    "@commitlint/config-conventional": "17.3.0",
+    "@types/node": "18.11.9",
+    "husky": "8.0.2",
     "karma": "6.4.1",
     "karma-chrome-launcher": "3.1.1",
     "karma-ie-launcher": "1.0.0",
     "karma-jasmine": "5.1.0",
     "karma-junit-reporter": "2.0.1",
-    "npm": "8.19.2",
-    "prettier": "2.7.1",
-    "puppeteer": "19.2.0",
+    "npm": "8.19.3",
+    "prettier": "2.8.0",
+    "puppeteer": "19.3.0",
     "ts-node": "10.9.1",
     "typescript": "4.8.4"
   },
@@ -82,11 +82,5 @@
     "extends": [
       "@commitlint/config-conventional"
     ]
-  },
-  "browserslist": [
-    "last 2 version",
-    "> 1%",
-    "IE 11",
-    "not IE 10"
-  ]
+  }
 }
