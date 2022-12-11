@@ -194,8 +194,6 @@ import './tests/issue-4344/with-providers.spec.ts';
 import './tests/issue-435/test.spec.ts';
 import './tests/issue-4367/test.spec.ts';
 import './tests/issue-445/test.spec.ts';
-import './tests/issue-4486/angular.spec.ts';
-import './tests/issue-4486/test.spec.ts';
 import './tests/issue-455/abstract.spec.ts';
 import './tests/issue-455/token.spec.ts';
 import './tests/issue-488/faster.spec.ts';
