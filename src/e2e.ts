@@ -1,5 +1,6 @@
 import './test.spec.ts';
 
+import './examples/MockActivatedRoute/test.spec.ts';
 import './examples/MockBuilder/test.deep.spec.ts';
 import './examples/MockBuilder/test.ng-mocks.spec.ts';
 import './examples/MockBuilder/test.promise.spec.ts';
