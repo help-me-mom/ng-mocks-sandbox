@@ -197,6 +197,7 @@ import './tests/issue-4367/test.spec.ts';
 import './tests/issue-445/test.spec.ts';
 import './tests/issue-455/abstract.spec.ts';
 import './tests/issue-455/token.spec.ts';
+import './tests/issue-4564/test.spec.ts';
 import './tests/issue-488/faster.spec.ts';
 import './tests/issue-488/test.spec.ts';
 import './tests/issue-522/test.spec.ts';
