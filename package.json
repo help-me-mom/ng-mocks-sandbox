@@ -76,6 +76,16 @@
     "additionalBranchPrefix": "{{#if baseDir}}{{baseDir}}/{{else}}root/{{/if}}",
     "reviewers": [
       "satanTime"
+    ],
+    "packageRules": [
+      {
+        "packageNames": [
+          "satantime/puppeteer-node",
+          "node",
+          "@types/node"
+        ],
+        "allowedVersions": "/^\\d*[02468]\\./"
+      }
     ]
   },
   "commitlint": {
