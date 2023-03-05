@@ -204,6 +204,7 @@ import './tests/issue-4641/mixed.spec.ts';
 import './tests/issue-4641/test.spec.ts';
 import './tests/issue-488/faster.spec.ts';
 import './tests/issue-488/test.spec.ts';
+import './tests/issue-5047/test.spec.ts';
 import './tests/issue-522/test.spec.ts';
 import './tests/issue-537/test.spec.ts';
 import './tests/issue-538/test.spec.ts';
