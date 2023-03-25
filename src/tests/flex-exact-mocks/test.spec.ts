@@ -1,5 +1,5 @@
 import { Injectable, InjectionToken } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { EMPTY, Observable, Subject } from 'rxjs';
 
 import { MockBuilder, ngMocks } from 'ng-mocks';
 
@@ -15,9 +15,6 @@ class TargetService {
 }
 
 describe('flex-exact-mocks:no-precise', () => {
-  const EMPTY = new Subject<any>();
-  EMPTY.complete();
-
   const mockService = { o1$: EMPTY };
   const mockToken = {};
   const mockStr = {};
@@ -48,9 +45,6 @@ describe('flex-exact-mocks:no-precise', () => {
 });
 
 describe('flex-exact-mocks:precise', () => {
-  const EMPTY = new Subject<any>();
-  EMPTY.complete();
-
   const mock = { o1$: EMPTY };
   const mockToken = {};
   const mockStr = {};

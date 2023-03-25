@@ -10,15 +10,15 @@ import { isMockOf, MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 @Injectable({
   providedIn: 'root',
 })
-export class TargetService {
+class TargetService {
   name = 'real';
 }
 
 @Component({
-  selector: 'target',
+  selector: 'target-4282',
   template: `{{ service.name }}`,
 })
-export class TargetComponent {
+class TargetComponent {
   readonly service = inject(TargetService);
 }
 

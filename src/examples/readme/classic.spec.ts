@@ -13,7 +13,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { EMPTY, Observable, Subject } from 'rxjs';
 
 import {
   MockInstance,
@@ -22,10 +22,6 @@ import {
   MockRender,
   ngMocks,
 } from 'ng-mocks';
-
-// remove with A5
-export const EMPTY = new Subject<any>();
-EMPTY.complete();
 
 interface User {
   email?: string | null;
@@ -36,7 +32,7 @@ interface User {
 @Injectable()
 class AuthService {
   public readonly currentUser?: User;
-  public readonly isLoggedIn$ = new Subject<boolean>();
+  public readonly isLoggedIn$ = new Observable<boolean>();
 }
 
 @Injectable()

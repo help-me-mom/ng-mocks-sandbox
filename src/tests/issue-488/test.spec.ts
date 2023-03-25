@@ -4,17 +4,17 @@ import { getTestBed, TestBed } from '@angular/core/testing';
 import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Injectable()
-export class TargetService {
+class TargetService {
   public method() {
     return 'inside method';
   }
 }
 
 @Component({
-  selector: 'target',
+  selector: 'target-488',
   template: '',
 })
-export class TargetComponent {
+class TargetComponent {
   public constructor(private readonly service: TargetService) {
     this.service.method();
   }

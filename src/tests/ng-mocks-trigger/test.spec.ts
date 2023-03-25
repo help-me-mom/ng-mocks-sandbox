@@ -10,17 +10,10 @@ import * as rxjs from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
-
-// TODO remove with A5
-let fromEvent: any;
-try {
-  fromEvent = (rxjs as any).fromEvent;
-} catch {
-  // nothing to do
-}
+import { fromEvent } from 'rxjs';
 
 @Component({
-  selector: 'target',
+  selector: 'target-ng-mocks-trigger',
   template: `
     <input
       [formControl]="control"
@@ -41,15 +34,13 @@ class TargetComponent implements OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
-    this.subscription = fromEvent
-      ? fromEvent(value.nativeElement, 'focus')
-          .pipe(
-            tap(event => {
-              this.focusFromEvent = event;
-            }),
-          )
-          .subscribe()
-      : undefined;
+    this.subscription = fromEvent(value.nativeElement, 'focus')
+      .pipe(
+        tap(event => {
+          this.focusFromEvent = event;
+        }),
+      )
+      .subscribe();
   }
 
   public ngOnDestroy(): void {
@@ -89,17 +80,13 @@ describe('ng-mocks-trigger:test', () => {
     component.control.disable();
     fixture.detectChanges();
     ngMocks.trigger(debugElement, 'focus');
-    if (fromEvent) {
-      expect(component.focusFromEvent).toBeUndefined();
-    }
+    expect(component.focusFromEvent).toBeUndefined();
     expect(component.focusTag).toBeUndefined();
 
     component.control.enable();
     fixture.detectChanges();
     ngMocks.trigger(debugElement, 'focus');
-    if (fromEvent) {
-      expect(component.focusFromEvent).toBeDefined();
-    }
+    expect(component.focusFromEvent).toBeDefined();
     expect(component.focusTag).toBeDefined();
   });
 });

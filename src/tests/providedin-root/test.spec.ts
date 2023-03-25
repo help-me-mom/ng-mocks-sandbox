@@ -9,7 +9,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
-const TOKEN = new (InjectionToken as any)('TOKEN', {
+const TOKEN = new InjectionToken('TOKEN', {
   factory: () => 'ROOT_TOKEN',
   providedIn: 'root',
 });
@@ -22,7 +22,7 @@ class Service {
 }
 
 @Component({
-  selector: 'target',
+  selector: 'target-providedin-root',
   template: ':{{ service.value }}:{{ token }}:{{localeId}}:',
 })
 class TargetComponent {
@@ -46,7 +46,7 @@ describe('providedIn:root', () => {
     it('finds token the root token', () => {
       const fixture = MockRender(TargetComponent);
       expect(ngMocks.formatHtml(fixture)).toEqual(
-        '<target>:ROOT_SERVICE:ROOT_TOKEN:en-US:</target>',
+        '<target-providedin-root>:ROOT_SERVICE:ROOT_TOKEN:en-US:</target-providedin-root>',
       );
     });
   });
@@ -57,7 +57,7 @@ describe('providedIn:root', () => {
     it('mocks all root provides apart from ApplicationModule:LOCALE_ID', () => {
       const fixture = MockRender(TargetComponent);
       expect(ngMocks.formatHtml(fixture)).toEqual(
-        '<target>:::en-US:</target>',
+        '<target-providedin-root>:::en-US:</target-providedin-root>',
       );
     });
   });
@@ -73,7 +73,7 @@ describe('providedIn:root', () => {
     it('keeps all original values', () => {
       const fixture = MockRender(TargetComponent);
       expect(ngMocks.formatHtml(fixture)).toEqual(
-        '<target>:ROOT_SERVICE:ROOT_TOKEN:en-US:</target>',
+        '<target-providedin-root>:ROOT_SERVICE:ROOT_TOKEN:en-US:</target-providedin-root>',
       );
     });
   });
@@ -89,7 +89,7 @@ describe('providedIn:root', () => {
     it('mocks all values', () => {
       const fixture = MockRender(TargetComponent);
       expect(ngMocks.formatHtml(fixture)).toEqual(
-        '<target>:MOCK_SERVICE:MOCK_TOKEN:MOCK_LOCALE_ID:</target>',
+        '<target-providedin-root>:MOCK_SERVICE:MOCK_TOKEN:MOCK_LOCALE_ID:</target-providedin-root>',
       );
     });
   });

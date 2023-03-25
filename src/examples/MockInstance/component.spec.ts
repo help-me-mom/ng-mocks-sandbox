@@ -6,17 +6,13 @@ import {
   ViewChild,
 } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { Observable, Subject } from 'rxjs';
+import { EMPTY, Observable, Subject } from 'rxjs';
 
 import { MockComponent, MockInstance } from 'ng-mocks';
 
-// A copy of EMPTY, which does not exist in A5.
-const EMPTY = new Subject<any>();
-EMPTY.complete();
-
 // A child component that contains update$ the parent component wants to listen to.
 @Component({
-  selector: 'target',
+  selector: 'target-mock-instance',
   template: '{{ update$ | async }}',
 })
 class ChildComponent {
@@ -28,7 +24,7 @@ class ChildComponent {
 // A parent component that uses @ViewChild to listen to update$ of its child component.
 @Component({
   selector: 'real',
-  template: '<target></target>',
+  template: '<target-mock-instance></target-mock-instance>',
 })
 class RealComponent implements AfterViewInit {
   @ViewChild(ChildComponent)

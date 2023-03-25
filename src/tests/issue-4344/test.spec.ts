@@ -12,11 +12,11 @@ import { isMockOf, MockModule, MockRender, ngMocks } from 'ng-mocks';
 class TargetService {}
 
 @Component({
-  selector: 'target',
+  selector: 'target-4344',
   template: '{{ 1 | number }}',
   providers: [AsyncPipe],
 })
-export class TargetComponent {
+class TargetComponent {
   constructor(
     public readonly service: TargetService,
     public readonly pipe: AsyncPipe,
@@ -29,7 +29,7 @@ export class TargetComponent {
   exports: [DecimalPipe, TargetComponent],
   providers: [TargetService, AsyncPipe],
 })
-export class TargetModule {}
+class TargetModule {}
 
 ngMocks.globalKeep(TargetComponent);
 ngMocks.globalMock(TargetModule);

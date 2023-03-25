@@ -1,8 +1,7 @@
 import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
+import { EMPTY, NEVER } from 'rxjs';
 
 import {
-  EMPTY,
-  NEVER,
   TargetComponent,
   TargetDirective,
   TargetModule,
@@ -21,7 +20,7 @@ describe('ng-mocks-default-mock:builder:no-overrides', () => {
 
     // Renders an empty template.
     expect(fixture.nativeElement.innerHTML).toContain(
-      '<target></target>',
+      '<target-ng-mocks-default-mock></target-ng-mocks-default-mock>',
     );
 
     // Component has a subject.
@@ -86,7 +85,7 @@ describe('ng-mocks-default-mock:builder:overrides', () => {
 
     // Renders an empty template.
     expect(fixture.nativeElement.innerHTML).toContain(
-      '<target></target>',
+      '<target-ng-mocks-default-mock></target-ng-mocks-default-mock>',
     );
 
     // Component has a subject.

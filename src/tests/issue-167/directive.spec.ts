@@ -32,9 +32,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
   ],
   selector: '[target]',
 })
-export class TargetDirective
-  implements ControlValueAccessor, Validator
-{
+class TargetDirective implements ControlValueAccessor, Validator {
   public valRegisterOnChange: any;
   public valRegisterOnTouched: any;
   public valRegisterOnValidatorChange: any;
@@ -72,10 +70,10 @@ export class TargetDirective
 }
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-root-167-directive',
   template: '<div [formControl]="control" target></div>',
 })
-export class RealComponent {
+class RealComponent {
   public readonly control = new FormControl();
 }
 
@@ -109,6 +107,10 @@ describe('issue-167:directive:real', () => {
       jasmine.createSpy().and.returnValue({
         updated: true,
       }),
+      // in case of jest
+      // jest.fn().mockReturnValue({
+      //   updated: true,
+      // }),
     );
     ngMocks.stubMember(
       mock,
@@ -145,6 +147,10 @@ describe('issue-167:directive:mock', () => {
       jasmine.createSpy().and.returnValue({
         updated: true,
       }),
+      // in case of jest
+      // jest.fn().mockReturnValue({
+      //   updated: true,
+      // }),
     );
     ngMocks.stubMember(
       mock,

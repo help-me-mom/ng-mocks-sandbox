@@ -18,7 +18,7 @@ import {
 class TargetService {}
 
 @Component({
-  selector: 'target',
+  selector: 'target-4344-standalone',
   template: '{{ 1 | number }}',
 })
 class TargetComponent {

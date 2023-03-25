@@ -9,15 +9,9 @@ import {
   Pipe,
   PipeTransform,
 } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { EMPTY, Observable, Subject } from 'rxjs';
 
 import { ngMocks } from 'ng-mocks';
-
-export const EMPTY = new Subject<any>();
-EMPTY.complete();
-
-export const NEVER = new Subject<any>();
-NEVER.complete();
 
 export const TOKEN = new InjectionToken('TOKEN');
 
@@ -49,7 +43,7 @@ export class TargetPipe implements PipeTransform {
 }
 
 @Component({
-  selector: 'target',
+  selector: 'target-ng-mocks-default-mock',
   template: "{{ 'target' | target: true }}",
 })
 export class TargetComponent implements OnDestroy {
@@ -76,7 +70,7 @@ export class TargetComponent implements OnDestroy {
 }
 
 @Directive({
-  selector: 'target',
+  selector: 'target-ng-mocks-default-mock',
 })
 export class TargetDirective implements OnDestroy {
   public readonly destroy$ = new Subject<void>();

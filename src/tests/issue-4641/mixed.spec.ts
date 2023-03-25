@@ -4,16 +4,20 @@ import { TestBed } from '@angular/core/testing';
 import { MockModule, MockRender, ngMocks } from 'ng-mocks';
 
 @Component({
-  selector: 'target',
-  template: ` replace:<replace></replace> `,
+  selector: 'target-4641-mixed',
+  template: ` replace:<replace-4641-mixed></replace-4641-mixed> `,
 })
 class TargetComponent {}
 
 @Component({
-  selector: 'replace',
+  selector: 'replace-4641-mixed',
   template: 'replace-real',
 })
-class ReplaceComponent {}
+class ReplaceComponent {
+  public replace() {
+    return true;
+  }
+}
 
 @NgModule({
   declarations: [ReplaceComponent],
@@ -22,20 +26,24 @@ class ReplaceComponent {}
 class ReplaceModule {}
 
 @Component({
-  selector: 'replace',
+  selector: 'replace-4641-mixed',
   template: 'replace-mock',
 })
-class ReplaceMockComponent {}
+class ReplaceMockComponent {
+  public replaceMock() {
+    return true;
+  }
+}
 
 @Component({
-  selector: 'dep1',
-  template: '<replace></replace>',
+  selector: 'dep1-4641-mixed',
+  template: '<replace-4641-mixed></replace-4641-mixed>',
 })
 class Dep1Component {}
 
 @Component({
-  selector: 'dep2',
-  template: '<replace></replace>',
+  selector: 'dep2-4641-mixed',
+  template: '<replace-4641-mixed></replace-4641-mixed>',
 })
 class Dep2Component {}
 

@@ -6,7 +6,7 @@ import { MockBuilder, MockRender } from 'ng-mocks';
   standalone: true,
   template: ``,
 })
-export class MyComponent {}
+class MyComponent {}
 
 // @see https://github.com/help-me-mom/ng-mocks/issues/3636
 // The problem was that a standalone component caused MockRender

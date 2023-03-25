@@ -14,7 +14,7 @@ import { MockBuilder } from 'ng-mocks';
   template: ` <a [routerLink]="['link']">Link</a> `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MyComponent {
+class MyComponent {
   constructor(public activatedRoute: ActivatedRoute) {}
 }
 

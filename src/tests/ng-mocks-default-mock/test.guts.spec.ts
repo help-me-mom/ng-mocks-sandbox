@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 
 import { MockRender, ngMocks } from 'ng-mocks';
+import { EMPTY } from 'rxjs';
 
 import {
-  EMPTY,
   TargetComponent,
   TargetDirective,
   TargetModule,
@@ -21,7 +21,7 @@ describe('ng-mocks-default-mock:guts:no-overrides', () => {
 
     // Renders an empty template.
     expect(fixture.nativeElement.innerHTML).toContain(
-      '<target></target>',
+      '<target-ng-mocks-default-mock></target-ng-mocks-default-mock>',
     );
 
     // Component has a subject.

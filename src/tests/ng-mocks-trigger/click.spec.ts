@@ -11,17 +11,10 @@ import * as rxjs from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
-
-// TODO remove with A5
-let fromEvent: any;
-try {
-  fromEvent = (rxjs as any).fromEvent;
-} catch {
-  // nothing to do
-}
+import { fromEvent } from 'rxjs';
 
 @Component({
-  selector: 'target',
+  selector: 'target-ng-mocks-trigger-click',
   template: ' <div (click)="clickTag = $event" #element></div> ',
 })
 class TargetComponent implements OnDestroy {
@@ -36,15 +29,13 @@ class TargetComponent implements OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
-    this.subscription = fromEvent
-      ? fromEvent(value.nativeElement, 'click')
-          .pipe(
-            tap(event => {
-              this.clickFromEvent = event;
-            }),
-          )
-          .subscribe()
-      : undefined;
+    this.subscription = fromEvent(value.nativeElement, 'click')
+      .pipe(
+        tap(event => {
+          this.clickFromEvent = event;
+        }),
+      )
+      .subscribe();
   }
 
   @HostListener('click', ['$event'])
@@ -71,9 +62,7 @@ describe('ng-mocks-trigger:click', () => {
   it('is able to click for all subscribers via ngMocks.click', () => {
     const component =
       MockRender(TargetComponent).point.componentInstance;
-    if (fromEvent) {
-      expect(component.clickFromEvent).toBeUndefined();
-    }
+    expect(component.clickFromEvent).toBeUndefined();
     expect(component.clickListener).toBeUndefined();
     expect(component.clickTag).toBeUndefined();
 
@@ -89,18 +78,14 @@ describe('ng-mocks-trigger:click', () => {
         y: 777,
       }),
     );
-    if (fromEvent) {
-      expect(component.clickFromEvent).toBe(component.clickListener);
-    }
+    expect(component.clickFromEvent).toBe(component.clickListener);
     expect(component.clickTag).toBe(component.clickListener);
   });
 
   it('is able to click for all subscribers via ngMocks.touch with string', () => {
     const component =
       MockRender(TargetComponent).point.componentInstance;
-    if (fromEvent) {
-      expect(component.clickFromEvent).toBeUndefined();
-    }
+    expect(component.clickFromEvent).toBeUndefined();
     expect(component.clickListener).toBeUndefined();
     expect(component.clickTag).toBeUndefined();
 
@@ -116,18 +101,14 @@ describe('ng-mocks-trigger:click', () => {
         y: 777,
       }),
     );
-    if (fromEvent) {
-      expect(component.clickFromEvent).toBe(component.clickListener);
-    }
+    expect(component.clickFromEvent).toBe(component.clickListener);
     expect(component.clickTag).toBe(component.clickListener);
   });
 
   it('is able to click for all subscribers via ngMocks.touch with event', () => {
     const component =
       MockRender(TargetComponent).point.componentInstance;
-    if (fromEvent) {
-      expect(component.clickFromEvent).toBeUndefined();
-    }
+    expect(component.clickFromEvent).toBeUndefined();
     expect(component.clickListener).toBeUndefined();
     expect(component.clickTag).toBeUndefined();
 
@@ -150,9 +131,7 @@ describe('ng-mocks-trigger:click', () => {
         y: 777,
       }),
     );
-    if (fromEvent) {
-      expect(component.clickFromEvent).toBe(component.clickListener);
-    }
+    expect(component.clickFromEvent).toBe(component.clickListener);
     expect(component.clickTag).toBe(component.clickListener);
   });
 });

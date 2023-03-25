@@ -1,11 +1,38 @@
+import { CommonModule } from '@angular/common';
+import {
+  Component,
+  Inject,
+  InjectionToken,
+  NgModule,
+} from '@angular/core';
+
 import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
-import {
-  MY_TOKEN_MULTI,
-  MY_TOKEN_SINGLE,
-  TargetComponent,
-  TargetModule,
-} from './fixtures';
+const MY_TOKEN_SINGLE = new InjectionToken('MY_TOKEN_SINGLE', {
+  factory: () => 'MY_TOKEN_SINGLE',
+});
+
+const MY_TOKEN_MULTI = new InjectionToken('MY_TOKEN_MULTI', {
+  factory: () => 'MY_TOKEN_MULTI',
+});
+
+@Component({
+  selector: 'internal-module-with-factory-tokens',
+  template: '{{ tokenSingle | json }} {{ tokenMulti | json }}',
+})
+class TargetComponent {
+  public constructor(
+    @Inject(MY_TOKEN_SINGLE) public readonly tokenSingle: string,
+    @Inject(MY_TOKEN_MULTI) public readonly tokenMulti: string[],
+  ) {}
+}
+
+@NgModule({
+  declarations: [TargetComponent],
+  exports: [TargetComponent],
+  imports: [CommonModule],
+})
+class TargetModule {}
 
 // Because all tokens have factories the test should render them correctly.
 // There is no way to specify multi in a factory, so we do not get an array.
@@ -20,7 +47,7 @@ describe('module-with-factory-tokens:real', () => {
   it('renders all tokens', () => {
     const fixture = MockRender(TargetComponent);
     expect(fixture.nativeElement.innerHTML).toEqual(
-      '<internal-component>"MY_TOKEN_SINGLE" "MY_TOKEN_MULTI"</internal-component>',
+      '<internal-module-with-factory-tokens>"MY_TOKEN_SINGLE" "MY_TOKEN_MULTI"</internal-module-with-factory-tokens>',
     );
   });
 });
@@ -38,7 +65,7 @@ describe('module-with-factory-tokens:keep', () => {
   it('renders all tokens', () => {
     const fixture = MockRender(TargetComponent);
     expect(fixture.nativeElement.innerHTML).toEqual(
-      '<internal-component>"MY_TOKEN_SINGLE" "MY_TOKEN_MULTI"</internal-component>',
+      '<internal-module-with-factory-tokens>"MY_TOKEN_SINGLE" "MY_TOKEN_MULTI"</internal-module-with-factory-tokens>',
     );
   });
 });
@@ -80,7 +107,7 @@ describe('module-with-factory-tokens:mock-1', () => {
   it('renders all tokens', () => {
     const fixture = MockRender(TargetComponent);
     expect(ngMocks.formatHtml(fixture)).toEqual(
-      '<internal-component></internal-component>',
+      '<internal-module-with-factory-tokens></internal-module-with-factory-tokens>',
     );
   });
 });
@@ -97,7 +124,7 @@ describe('module-with-factory-tokens:mock-2', () => {
   it('renders all tokens', () => {
     const fixture = MockRender(TargetComponent);
     expect(fixture.nativeElement.innerHTML).toEqual(
-      '<internal-component>"MOCK_MY_TOKEN_SINGLE" "MOCK_MY_TOKEN_MULTI"</internal-component>',
+      '<internal-module-with-factory-tokens>"MOCK_MY_TOKEN_SINGLE" "MOCK_MY_TOKEN_MULTI"</internal-module-with-factory-tokens>',
     );
   });
 });
@@ -119,7 +146,7 @@ describe('module-with-factory-tokens:mock-3', () => {
   it('renders all tokens', () => {
     const fixture = MockRender(TargetComponent);
     expect(fixture.nativeElement.innerHTML).toEqual(
-      '<internal-component>"MY_TOKEN_SINGLE" "MY_TOKEN_MULTI"</internal-component>',
+      '<internal-module-with-factory-tokens>"MY_TOKEN_SINGLE" "MY_TOKEN_MULTI"</internal-module-with-factory-tokens>',
     );
   });
 });
