@@ -1,4 +1,3 @@
-import * as core from '@angular/core';
 import {
   Component,
   Directive,
@@ -9,7 +8,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { MockBuilder, MockRender } from 'ng-mocks';
 
-@Directive(undefined as any)
+@Directive()
 class BaseClass {
   public name = 'directive';
 }
@@ -19,7 +18,7 @@ class MyProvider extends BaseClass {}
 
 @Component({
   providers: [MyProvider],
-  selector: 'target',
+  selector: 'target-double-decorator-without-selector-ivy',
   template: '{{ service.name }}',
 })
 class MyComponent {
@@ -35,7 +34,7 @@ class ModuleWithComponent {}
 describe('double-decorator-ivy:without-selector', () => {
   // Because of junit issue we need to return before beforeEach
   // https://github.com/karma-runner/karma-junit-reporter/issues/186
-  if (!(core as any).ɵivyEnabled) {
+  if (!(ModuleWithComponent as any).ɵmod) {
     it('ivy fails differently', () => {
       // pending('ivy fails differently');
       expect(true).toBeTruthy();
@@ -68,7 +67,7 @@ describe('double-decorator-ivy:without-selector', () => {
     it('fixes the issue via exclude', () => {
       const fixture = MockRender(MyComponent);
       expect(fixture.nativeElement.innerHTML).toContain(
-        '<target></target>',
+        '<target-double-decorator-without-selector-ivy></target-double-decorator-without-selector-ivy>',
       );
     });
   });

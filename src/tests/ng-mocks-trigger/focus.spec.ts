@@ -11,17 +11,10 @@ import * as rxjs from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
-
-// TODO remove with A5
-let fromEvent: any;
-try {
-  fromEvent = (rxjs as any).fromEvent;
-} catch {
-  // nothing to do
-}
+import { fromEvent } from 'rxjs';
 
 @Component({
-  selector: 'target',
+  selector: 'target-ng-mocks-trigger-focus',
   template: `
     <input
       [formControl]="control"
@@ -43,15 +36,13 @@ class TargetComponent implements OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
-    this.subscription = fromEvent
-      ? fromEvent(value.nativeElement, 'focus')
-          .pipe(
-            tap(event => {
-              this.focusFromEvent = event;
-            }),
-          )
-          .subscribe()
-      : undefined;
+    this.subscription = fromEvent(value.nativeElement, 'focus')
+      .pipe(
+        tap(event => {
+          this.focusFromEvent = event;
+        }),
+      )
+      .subscribe();
   }
 
   @HostListener('focus', ['$event'])
@@ -78,9 +69,7 @@ describe('ng-mocks-trigger:focus', () => {
   it('is able to focus for all subscribers via ngMocks.trigger with string', () => {
     const fixture = MockRender(TargetComponent);
     const component = fixture.point.componentInstance;
-    if (fromEvent) {
-      expect(component.focusFromEvent).toBeUndefined();
-    }
+    expect(component.focusFromEvent).toBeUndefined();
     expect(component.focusTag).toBeUndefined();
 
     const debugElement = ngMocks.find('input');
@@ -94,9 +83,7 @@ describe('ng-mocks-trigger:focus', () => {
         y: 777,
       }),
     );
-    if (fromEvent) {
-      expect(component.focusFromEvent).toBe(component.focusTag);
-    }
+    expect(component.focusFromEvent).toBe(component.focusTag);
 
     expect(component.focusListener).toBeUndefined();
     ngMocks.trigger(fixture.point, 'focus');
@@ -106,9 +93,7 @@ describe('ng-mocks-trigger:focus', () => {
   it('is able to focus for all subscribers via ngMocks.trigger with event', () => {
     const fixture = MockRender(TargetComponent);
     const component = fixture.point.componentInstance;
-    if (fromEvent) {
-      expect(component.focusFromEvent).toBeUndefined();
-    }
+    expect(component.focusFromEvent).toBeUndefined();
     expect(component.focusTag).toBeUndefined();
 
     const debugElement = ngMocks.find('input');
@@ -129,9 +114,7 @@ describe('ng-mocks-trigger:focus', () => {
         y: 777,
       }),
     );
-    if (fromEvent) {
-      expect(component.focusFromEvent).toBe(component.focusTag);
-    }
+    expect(component.focusFromEvent).toBe(component.focusTag);
 
     expect(component.focusListener).toBeUndefined();
     ngMocks.trigger(fixture.point, event);

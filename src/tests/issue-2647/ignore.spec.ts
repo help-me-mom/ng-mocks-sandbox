@@ -66,7 +66,7 @@ class TargetPipe implements PipeTransform {
 }
 
 @Directive({
-  selector: 'target',
+  selector: 'target-2647-ignore',
 })
 class TargetDirective {
   constructor(
@@ -76,7 +76,7 @@ class TargetDirective {
 }
 
 @Component({
-  selector: 'target',
+  selector: 'target-2647-ignore',
   template: 'target',
 })
 class TargetComponent {

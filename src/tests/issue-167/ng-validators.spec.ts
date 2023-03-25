@@ -25,7 +25,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
   ],
   selector: '[target]',
 })
-export class TargetDirective implements Validator {
+class TargetDirective implements Validator {
   public pubRegisterOnValidatorChange: any;
   public pubValidate: any;
 
@@ -43,10 +43,10 @@ export class TargetDirective implements Validator {
 }
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-root-167-ng-validators',
   template: '<input [formControl]="control" target>',
 })
-export class RealComponent {
+class RealComponent {
   public readonly control = new FormControl();
 }
 

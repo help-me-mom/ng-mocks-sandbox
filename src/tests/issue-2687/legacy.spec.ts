@@ -43,7 +43,7 @@ class StandaloneComponent {
 
 @Component(
   {
-    selector: 'target',
+    selector: 'target-2687-legacy',
     template:
       '<standalone></standalone> pipe:{{ null | standalone }}',
     standalone: true,
@@ -74,7 +74,7 @@ class RenderStandaloneServiceComponent {
 
 @Component({
   selector: 'render-target-component',
-  template: '<target></target>',
+  template: '<target-2687-legacy></target-2687-legacy>',
 })
 class RenderTargetComponentComponent {}
 
@@ -131,7 +131,7 @@ describe('issue-2687', () => {
       );
       fixture.detectChanges();
       expect(ngMocks.formatHtml(fixture)).toEqual(
-        '<target><standalone>service:StandaloneService</standalone> pipe:StandalonePipe</target>',
+        '<target-2687-legacy><standalone>service:StandaloneService</standalone> pipe:StandalonePipe</target-2687-legacy>',
       );
 
       expect(() =>
@@ -204,7 +204,7 @@ describe('issue-2687', () => {
       );
       fixture.detectChanges();
       expect(ngMocks.formatHtml(fixture)).toEqual(
-        '<target></target>',
+        '<target-2687-legacy></target-2687-legacy>',
       );
 
       expect(() =>

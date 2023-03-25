@@ -4,23 +4,31 @@ import { TestBed } from '@angular/core/testing';
 import { MockModule, MockRender, ngMocks } from 'ng-mocks';
 
 @Component({
-  selector: 'target1',
+  selector: 'target1-ng-mocks-global-replace-override',
   template: '{{ name }}',
 })
 class Target1Component {
   public readonly name = 'target1';
+
+  public target1() {
+    return true;
+  }
 }
 
 @Component({
-  selector: 'target1',
+  selector: 'target1-ng-mocks-global-replace-override',
   template: '{{ name }}',
 })
 class Fake1Component {
   public readonly name = 'fake1';
+
+  public fake1() {
+    return true;
+  }
 }
 
 @Component({
-  selector: 'target2',
+  selector: 'target2-ng-mocks-global-replace-override',
   template: '{{ name }}',
 })
 class Target2Component {
@@ -28,7 +36,7 @@ class Target2Component {
 }
 
 @Component({
-  selector: 'target2',
+  selector: 'target2-ng-mocks-global-replace-override',
   template: '{{ name }}',
 })
 class Fake2Component {
@@ -58,12 +66,20 @@ describe('ng-mocks-global-replace:override', () => {
 
     it('renders fake Target1Component', () => {
       expect(
-        MockRender('<target2></target2>').nativeElement.innerHTML,
-      ).toContain('<target2></target2>');
+        MockRender(
+          '<target2-ng-mocks-global-replace-override></target2-ng-mocks-global-replace-override>',
+        ).nativeElement.innerHTML,
+      ).toContain(
+        '<target2-ng-mocks-global-replace-override></target2-ng-mocks-global-replace-override>',
+      );
       ngMocks.flushTestBed();
       expect(
-        MockRender('<target1></target1>').nativeElement.innerHTML,
-      ).toContain('<target1>fake1</target1>');
+        MockRender(
+          '<target1-ng-mocks-global-replace-override></target1-ng-mocks-global-replace-override>',
+        ).nativeElement.innerHTML,
+      ).toContain(
+        '<target1-ng-mocks-global-replace-override>fake1</target1-ng-mocks-global-replace-override>',
+      );
     });
   });
 
@@ -78,12 +94,20 @@ describe('ng-mocks-global-replace:override', () => {
 
     it('renders fake Target2Component too', () => {
       expect(
-        MockRender('<target2></target2>').nativeElement.innerHTML,
-      ).toContain('<target2>fake2</target2>');
+        MockRender(
+          '<target2-ng-mocks-global-replace-override></target2-ng-mocks-global-replace-override>',
+        ).nativeElement.innerHTML,
+      ).toContain(
+        '<target2-ng-mocks-global-replace-override>fake2</target2-ng-mocks-global-replace-override>',
+      );
       ngMocks.flushTestBed();
       expect(
-        MockRender('<target1></target1>').nativeElement.innerHTML,
-      ).toContain('<target1>fake1</target1>');
+        MockRender(
+          '<target1-ng-mocks-global-replace-override></target1-ng-mocks-global-replace-override>',
+        ).nativeElement.innerHTML,
+      ).toContain(
+        '<target1-ng-mocks-global-replace-override>fake1</target1-ng-mocks-global-replace-override>',
+      );
     });
   });
 });

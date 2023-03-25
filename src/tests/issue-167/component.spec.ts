@@ -25,12 +25,10 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
       useExisting: forwardRef(() => TargetComponent),
     },
   ],
-  selector: 'target',
+  selector: 'target-167',
   template: 'target',
 })
-export class TargetComponent
-  implements ControlValueAccessor, Validator
-{
+class TargetComponent implements ControlValueAccessor, Validator {
   public valRegisterOnChange: any;
   public valRegisterOnTouched: any;
   public valRegisterOnValidatorChange: any;
@@ -68,10 +66,10 @@ export class TargetComponent
 }
 
 @Component({
-  selector: 'app-root',
-  template: '<target [formControl]="control"></target>',
+  selector: 'app-root-167-component',
+  template: '<target-167 [formControl]="control"></target-167>',
 })
-export class RealComponent {
+class RealComponent {
   public readonly control = new FormControl('mock');
 }
 
@@ -106,6 +104,10 @@ describe('issue-167:component:real', () => {
       jasmine.createSpy().and.returnValue({
         updated: true,
       }),
+      // in case of jest
+      // jest.fn().mockReturnValue({
+      //   updated: true,
+      // }),
     );
     ngMocks.stubMember(
       mock,
@@ -143,6 +145,10 @@ describe('issue-167:component:mock', () => {
       jasmine.createSpy().and.returnValue({
         updated: true,
       }),
+      // in case of jest
+      // jest.fn().mockReturnValue({
+      //   updated: true,
+      // }),
     );
     ngMocks.stubMember(
       mock,

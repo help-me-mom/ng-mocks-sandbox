@@ -8,7 +8,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { MockBuilder, MockRender } from 'ng-mocks';
 
-@Directive(undefined as any)
+@Directive()
 class TargetDirective {
   public name = 'directive';
 }
@@ -20,7 +20,7 @@ class TargetProvider extends TargetDirective {
 
 @Component({
   providers: [TargetProvider],
-  selector: 'target',
+  selector: 'target-double-decorator-2',
   template: '{{ service.name }}',
 })
 class TargetComponent {
@@ -65,7 +65,7 @@ describe('double-decorator:example-2', () => {
       const fixture = MockRender(TargetComponent);
 
       expect(fixture.nativeElement.innerHTML).toEqual(
-        '<target>mock</target>',
+        '<target-double-decorator-2>mock</target-double-decorator-2>',
       );
     });
   });

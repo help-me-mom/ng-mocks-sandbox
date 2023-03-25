@@ -27,14 +27,13 @@ class TargetService {
   }
 }
 
-// TODO Remove any with A5
-const TOKEN = new (InjectionToken as any)('TOKEN', {
+const TOKEN = new InjectionToken('TOKEN', {
   factory: () => 'TOKEN',
   providedIn: TargetModule,
 });
 
 @Component({
-  selector: 'target',
+  selector: 'target-377',
   template: 'service:{{ service.echo() }} token:{{ token }}',
 })
 class TargetComponent {

@@ -3,10 +3,10 @@ import { Component, HostBinding, HostListener } from '@angular/core';
 import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Component({
-  selector: 'target',
+  selector: 'target-1427',
   template: '{{ id }}',
 })
-export class TargetComponent {
+class TargetComponent {
   @HostBinding() public id = 'custom-form';
   @HostListener('click') public click = () => undefined;
 }
@@ -19,7 +19,9 @@ describe('issue-1427', () => {
     const fixture = MockRender(TargetComponent);
 
     // HostBinding with id doesn't cause a side effect.
-    expect(ngMocks.formatHtml(fixture)).toEqual('<target></target>');
+    expect(ngMocks.formatHtml(fixture)).toEqual(
+      '<target-1427></target-1427>',
+    );
 
     // HostListener doesn't cause a side effect.
     expect(

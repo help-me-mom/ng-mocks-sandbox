@@ -8,10 +8,10 @@ import { TestBed } from '@angular/core/testing';
 
 import { MockModule } from 'ng-mocks';
 
-export const TARGET_TOKEN = new InjectionToken('TARGET_TOKEN');
+const TARGET_TOKEN = new InjectionToken('TARGET_TOKEN');
 
 @NgModule()
-export class TargetModule {
+class TargetModule {
   public static forRoot() {
     return {
       ngModule: TargetModule,
@@ -31,10 +31,10 @@ export class TargetModule {
 }
 
 @Component({
-  selector: 'target',
+  selector: 'target-142',
   template: 'target',
 })
-export class TargetComponent {}
+class TargetComponent {}
 
 // @see https://github.com/help-me-mom/ng-mocks/issues/142
 describe('issue-142', () => {

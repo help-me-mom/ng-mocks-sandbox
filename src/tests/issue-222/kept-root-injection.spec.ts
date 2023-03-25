@@ -32,7 +32,7 @@ class KeepModule {
 }
 
 @Component({
-  selector: 'target',
+  selector: 'target-222-kept-root-injection',
   template: 'target',
 })
 class TargetComponent {}
@@ -41,7 +41,7 @@ class TargetComponent {}
   declarations: [TargetComponent],
   imports: [MockModule, KeepModule],
 })
-export class TargetModule {}
+class TargetModule {}
 
 // The problem here is that by the logic we keep KeepModule and mock MockModule.
 // Both of them use a root provider TargetService.

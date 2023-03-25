@@ -11,17 +11,10 @@ import * as rxjs from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
-
-// TODO remove with A5
-let fromEvent: any;
-try {
-  fromEvent = (rxjs as any).fromEvent;
-} catch {
-  // nothing to do
-}
+import { fromEvent } from 'rxjs';
 
 @Component({
-  selector: 'target',
+  selector: 'target-ng-mocks-trigger-blur',
   template: `
     <input
       [formControl]="control"
@@ -46,15 +39,13 @@ class TargetComponent implements OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
-    this.subscription = fromEvent
-      ? fromEvent(value.nativeElement, 'blur')
-          .pipe(
-            tap(event => {
-              this.blurFromEvent = event;
-            }),
-          )
-          .subscribe()
-      : undefined;
+    this.subscription = fromEvent(value.nativeElement, 'blur')
+      .pipe(
+        tap(event => {
+          this.blurFromEvent = event;
+        }),
+      )
+      .subscribe();
   }
 
   @HostListener('blur', ['$event'])
@@ -81,9 +72,7 @@ describe('ng-mocks-trigger:blur', () => {
   it('is able to blur for all subscribers via ngMocks.trigger with string', () => {
     const fixture = MockRender(TargetComponent);
     const component = fixture.point.componentInstance;
-    if (fromEvent) {
-      expect(component.blurFromEvent).toBeUndefined();
-    }
+    expect(component.blurFromEvent).toBeUndefined();
     expect(component.blurTag).toBeUndefined();
 
     const debugElement = ngMocks.find('input');
@@ -97,9 +86,7 @@ describe('ng-mocks-trigger:blur', () => {
         y: 777,
       }),
     );
-    if (fromEvent) {
-      expect(component.blurFromEvent).toBe(component.blurTag);
-    }
+    expect(component.blurFromEvent).toBe(component.blurTag);
 
     expect(component.blurListener).toBeUndefined();
     ngMocks.trigger(fixture.point, 'blur');
@@ -109,9 +96,7 @@ describe('ng-mocks-trigger:blur', () => {
   it('is able to blur for all subscribers via ngMocks.trigger with event', () => {
     const fixture = MockRender(TargetComponent);
     const component = fixture.point.componentInstance;
-    if (fromEvent) {
-      expect(component.blurFromEvent).toBeUndefined();
-    }
+    expect(component.blurFromEvent).toBeUndefined();
     expect(component.blurTag).toBeUndefined();
 
     const debugElement = ngMocks.find('input');
@@ -132,9 +117,7 @@ describe('ng-mocks-trigger:blur', () => {
         y: 777,
       }),
     );
-    if (fromEvent) {
-      expect(component.blurFromEvent).toBe(component.blurTag);
-    }
+    expect(component.blurFromEvent).toBe(component.blurTag);
 
     expect(component.blurListener).toBeUndefined();
     ngMocks.trigger(fixture.point, event);

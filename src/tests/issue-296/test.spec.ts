@@ -8,7 +8,7 @@ import {
 import { MockBuilder, MockRender } from 'ng-mocks';
 
 @Injectable()
-export class ModalService {
+class ModalService {
   public constructor(
     private readonly componentFactoryResolver: ComponentFactoryResolver,
   ) {}
@@ -25,7 +25,7 @@ export class ModalService {
 class ModalComponent {}
 
 @Component({
-  selector: 'target',
+  selector: 'target-296',
   template: 'target',
 })
 class TargetComponent {

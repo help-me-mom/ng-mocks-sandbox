@@ -16,11 +16,11 @@ const TOKEN = new InjectionToken('TOKEN');
 class NoSelectorService {}
 
 @Directive({
-  selector: 'target',
+  selector: 'target-ng-mocks-find-template-refs',
 })
 class NoAttributeSelectorDirective {}
 
-@Directive({} as any)
+@Directive()
 class NoSelectorDirective {}
 
 @Directive({
@@ -69,7 +69,7 @@ class UnusedDirective {
 }
 
 @Component({
-  selector: 'target',
+  selector: 'target-ng-mocks-find-template-refs',
   template: '',
 })
 class TargetComponent {}
@@ -77,7 +77,7 @@ class TargetComponent {}
 @Component({
   selector: 'test',
   template: `
-    <target>
+    <target-ng-mocks-find-template-refs>
       1
       <ng-template #id1>id1</ng-template>
       2
@@ -95,7 +95,7 @@ class TargetComponent {}
         8
       </span>
       9
-    </target>
+    </target-ng-mocks-find-template-refs>
   `,
 })
 class TestComponent {}

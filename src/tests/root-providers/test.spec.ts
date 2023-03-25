@@ -1,4 +1,16 @@
+import {
+  Component,
+  Inject,
+  Injectable,
+  InjectionToken,
+  Injector,
+  NgModule,
+  Optional,
+  SkipSelf,
+} from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {
   MockBuilder,
@@ -7,13 +19,80 @@ import {
   ngMocks,
 } from 'ng-mocks';
 
-import {
-  ModuleComponent,
-  TargetComponent,
-  TargetModule,
-  TargetService,
-  TOKEN,
-} from './fixtures';
+const TOKEN = new InjectionToken('TOKEN', {
+  factory: () => 'token',
+});
+
+@Injectable()
+class ModuleService {
+  public readonly name = 'module';
+}
+
+@Injectable({
+  providedIn: 'root',
+})
+class TargetService {
+  public readonly name = 'service';
+}
+
+@Injectable({
+  providedIn: 'root',
+})
+class FakeService {
+  public readonly name = 'fake';
+}
+
+@Injectable({
+  providedIn: 'any',
+})
+class ProvidedService {
+  public readonly name = 'provided';
+}
+
+@Component({
+  selector: 'target-root-providers',
+  template: `
+    "service:{{ service.name }}" "fake:{{ fake.name }}" "injected:{{
+      injected.name
+    }}" "provided:{{ provided.name }}" "token:{{ token }}"
+  `,
+})
+class TargetComponent {
+  public readonly injected: TargetService;
+
+  public constructor(
+    @Inject(FakeService) public readonly fake: TargetService,
+    @Optional()
+    @Inject(TOKEN)
+    @SkipSelf()
+    public readonly token: string,
+    @Optional() @SkipSelf() public readonly service: TargetService,
+    @Inject(TOKEN)
+    @Optional()
+    @SkipSelf()
+    public readonly token2: string,
+    public readonly provided: ProvidedService,
+    injector: Injector,
+  ) {
+    this.injected = injector.get(TargetService);
+  }
+}
+
+@Component({
+  selector: 'module',
+  template: '{{ moduleService.name }}',
+})
+class ModuleComponent {
+  public constructor(public readonly moduleService: ModuleService) {}
+}
+
+@NgModule({
+  declarations: [TargetComponent, ModuleComponent],
+  exports: [TargetComponent],
+  imports: [BrowserModule, BrowserAnimationsModule],
+  providers: [ProvidedService],
+})
+class TargetModule {}
 
 describe('root-providers', () => {
   describe('real', () => {

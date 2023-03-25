@@ -9,13 +9,13 @@ import { TestBed } from '@angular/core/testing';
 
 import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
-const TOKEN = new (InjectionToken as any)('TOKEN-FOR-ROOT', {
+const TOKEN = new InjectionToken('TOKEN-FOR-ROOT', {
   factory: () => 'TOKEN',
   providedIn: 'root',
 });
 
 @Component({
-  selector: 'target',
+  selector: 'target-735-token-for-root',
   template: '{{ token }}',
 })
 class TargetComponent {

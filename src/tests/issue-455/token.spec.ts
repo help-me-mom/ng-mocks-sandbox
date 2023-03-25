@@ -13,8 +13,9 @@ interface InjectedAbstraction {
   hello: () => number;
 }
 
-const TOKEN: InjectionToken<InjectedAbstraction> =
-  new (InjectionToken as any)('InjectedFn', {
+const TOKEN: InjectionToken<InjectedAbstraction> = new InjectionToken(
+  'InjectedFn',
+  {
     factory: () => {
       const fn: any = jasmine.createSpy(); // or jest.fn();
       fn.hello = jasmine.createSpy(); // or jest.fn();
@@ -22,10 +23,11 @@ const TOKEN: InjectionToken<InjectedAbstraction> =
       return fn;
     },
     providedIn: 'root',
-  });
+  },
+);
 
 @Component({ template: '' })
-export class TestWithoutDecoratorComponent {
+class TestWithoutDecoratorComponent {
   public constructor(
     @Inject(TOKEN)
     public token: InjectedAbstraction,
@@ -33,7 +35,7 @@ export class TestWithoutDecoratorComponent {
 }
 
 @Component({ template: '' })
-export class TestWithDecoratorComponent {
+class TestWithDecoratorComponent {
   public constructor(
     @Inject(TOKEN)
     public token: InjectedAbstraction,
