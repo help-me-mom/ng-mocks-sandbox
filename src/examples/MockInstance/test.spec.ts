@@ -12,22 +12,23 @@ import { MockBuilder, MockInstance, MockRender } from 'ng-mocks';
 
 // A child component that contains update$ the parent component wants to listen to.
 @Component({
-  selector: 'target-mock-instance-selector',
+  selector: 'child',
   template: '{{ update$ | async }}',
 })
 class ChildComponent {
   public readonly update$: Observable<void> = EMPTY;
 
   public constructor(public readonly injector: Injector) {}
+
+  public childMockInstance() {}
 }
 
 // A parent component that uses @ViewChild to listen to update$ of its child component.
 @Component({
-  selector: 'real',
-  template:
-    '<target-mock-instance-selector></target-mock-instance-selector>',
+  selector: 'target',
+  template: '<child></child>',
 })
-class RealComponent implements AfterViewInit {
+class TargetComponent implements AfterViewInit {
   @ViewChild(ChildComponent)
   protected child?: ChildComponent;
 
@@ -36,11 +37,13 @@ class RealComponent implements AfterViewInit {
       this.child.update$.subscribe();
     }
   }
+
+  public targetMockInstance() {}
 }
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [RealComponent, ChildComponent],
+  declarations: [TargetComponent, ChildComponent],
 })
 class ItsModule {}
 
@@ -51,7 +54,7 @@ describe('MockInstance', () => {
   // A normal setup of the TestBed, ChildComponent will be replaced
   // with its mock object.
   // Do not forget to return the promise of MockBuilder.
-  beforeEach(() => MockBuilder(RealComponent, ItsModule));
+  beforeEach(() => MockBuilder(TargetComponent, ItsModule));
 
   beforeEach(() => {
     // Because ChildComponent is replaced with its mock object,
@@ -67,6 +70,6 @@ describe('MockInstance', () => {
   it('should render', () => {
     // Without the custom initialization rendering would fail here
     // with "Cannot read property 'subscribe' of undefined".
-    expect(() => MockRender(RealComponent)).not.toThrow();
+    expect(() => MockRender(TargetComponent)).not.toThrow();
   });
 });

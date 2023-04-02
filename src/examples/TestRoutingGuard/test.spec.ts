@@ -60,7 +60,9 @@ class MockGuard implements CanActivate {
   selector: 'login',
   template: 'login',
 })
-class LoginComponent {}
+class LoginComponent {
+  public loginTestRoutingGuard() {}
+}
 
 // A simple component pretending a protected dashboard.
 // It will be replaced with a mock copy.
@@ -68,7 +70,9 @@ class LoginComponent {}
   selector: 'dashboard',
   template: 'dashboard',
 })
-class DashboardComponent {}
+class DashboardComponent {
+  public dashboardTestRoutingGuard() {}
+}
 
 // Definition of the routing module.
 @NgModule({
