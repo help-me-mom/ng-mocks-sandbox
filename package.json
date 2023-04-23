@@ -47,7 +47,7 @@
     "@angular/compiler-cli": "15.2.8",
     "@commitlint/cli": "17.6.1",
     "@commitlint/config-conventional": "17.6.1",
-    "@types/node": "18.15.13",
+    "@types/node": "18.16.0",
     "husky": "8.0.3",
     "karma": "6.4.2",
     "karma-chrome-launcher": "3.2.0",
