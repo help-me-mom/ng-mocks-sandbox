@@ -17,7 +17,7 @@
   "scripts": {
     "npm": "npm",
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --disable-host-check",
     "test": "ng test",
     "prettier:repo": "prettier --loglevel warn -u -w .",
     "prettier:check": "prettier -u -c .",

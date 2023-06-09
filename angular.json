@@ -39,5 +39,7 @@
       }
     }
   },
-  "defaultProject": "ng-mocks-sandbox"
+  "cli": {
+    "analytics": false
+  }
 }
