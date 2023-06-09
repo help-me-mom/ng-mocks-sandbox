@@ -4,21 +4,14 @@
   "newProjectRoot": "projects",
   "projects": {
     "ng-mocks-sandbox": {
-      "projectType": "application",
-      "schematics": {},
-      "root": "",
-      "sourceRoot": "src",
-      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/ng-mocks-sandbox",
-            "index": "index.html",
+            "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.json",
-            "styles": ["./node_modules/jasmine-core/lib/jasmine-core/jasmine.css"]
+            "tsConfig": "tsconfig.json"
           }
         },
         "serve": {
@@ -33,11 +26,18 @@
             "main": "src/test.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js"
+            "karmaConfig": "src/karma.conf.js"
           }
         }
-      }
+      },
+      "prefix": "app",
+      "projectType": "application",
+      "root": "",
+      "schematics": {},
+      "sourceRoot": "src"
     }
   },
-  "defaultProject": "ng-mocks-sandbox"
+  "cli": {
+    "analytics": false
+  }
 }

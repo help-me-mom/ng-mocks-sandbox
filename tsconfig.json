@@ -10,6 +10,7 @@
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
     "moduleResolution": "node",
+
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": false,
     "noImplicitReturns": true,
@@ -18,14 +19,17 @@
     "sourceMap": true,
     "strict": true,
     "useDefineForClassFields": false,
-    "target": "ES2015",
+
+    "target": "ES2022",
     "module": "ESNext",
     "lib": ["ES2018", "dom"],
-    "typeRoots": ["node_modules/@types"]
+    "typeRoots": ["node_modules/@types"],
+    "types": ["jasmine"]
   },
   "angularCompilerOptions": {
-    "enableIvy": true,
-    "fullTemplateTypeCheck": true,
+    "strictTemplates": true,
     "strictInjectionParameters": true
-  }
+  },
+  "files": ["src/main.ts", "src/polyfills.ts"],
+  "include": ["src/e2e.ts", "src/**/*.spec.ts"]
 }
