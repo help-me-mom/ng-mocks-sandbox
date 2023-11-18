@@ -3,5 +3,6 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "types": ["jasmine"]
-  }
+  },
+  "files": ["src/polyfills.ts", "src/test.ts", "src/e2e.ts"]
 }

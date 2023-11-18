@@ -17,8 +17,8 @@ jobs:
           name: Install
           command: |
             if [ ! -d "./node_modules/" ]; then
-              npm ci --no-optional --ignore-scripts && \
-              node ./node_modules/puppeteer/install.js && \
+              npm install --no-audit && \
+              node ./node_modules/puppeteer/install.mjs && \
               ./node_modules/.bin/ngcc
             fi
       - save_cache:
