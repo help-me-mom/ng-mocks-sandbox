@@ -8,6 +8,6 @@ export NVM_DIR="$HOME/.nvm" && \. "$NVM_DIR/nvm.sh"
 docker-compose up -- core && \
   nvm install && \
   nvm use && \
-  node ./node_modules/puppeteer/install.js
+  node ./node_modules/puppeteer/install.mjs
 
 docker-compose down --remove-orphans

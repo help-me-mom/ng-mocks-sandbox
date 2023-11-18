@@ -16,7 +16,15 @@
             "outputPath": "dist/ng-mocks-sandbox",
             "index": "index.html",
             "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "src/polyfills.ts",
+              "zone.js",
+              "zone.js/testing",
+              "jasmine-core/lib/jasmine-core/jasmine.js",
+              "jasmine-core/lib/jasmine-core/jasmine-html.js",
+              "jasmine-core/lib/jasmine-core/boot0.js",
+              "jasmine-core/lib/jasmine-core/boot1.js"
+            ],
             "tsConfig": "tsconfig.json",
             "styles": ["./node_modules/jasmine-core/lib/jasmine-core/jasmine.css"]
           }
@@ -31,7 +39,15 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "src/polyfills.ts",
+              "zone.js",
+              "zone.js/testing",
+              "jasmine-core/lib/jasmine-core/jasmine.js",
+              "jasmine-core/lib/jasmine-core/jasmine-html.js",
+              "jasmine-core/lib/jasmine-core/boot0.js",
+              "jasmine-core/lib/jasmine-core/boot1.js"
+            ],
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js"
           }
@@ -39,5 +55,7 @@
       }
     }
   },
-  "defaultProject": "ng-mocks-sandbox"
+  "cli": {
+    "analytics": false
+  }
 }
