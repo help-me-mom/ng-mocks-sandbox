@@ -35,7 +35,7 @@ jasmine.getEnv().addReporter({
   suiteStarted: MockInstance.remember,
 });
 
-import './e2e.ts';
+import './e2e';
 
 // Initialize the Angular testing environment.
 getTestBed().initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting(), {
