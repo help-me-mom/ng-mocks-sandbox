@@ -39,15 +39,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "src/test.ts",
-            "polyfills": [
-              "src/polyfills.ts",
-              "zone.js",
-              "zone.js/testing",
-              "jasmine-core/lib/jasmine-core/jasmine.js",
-              "jasmine-core/lib/jasmine-core/jasmine-html.js",
-              "jasmine-core/lib/jasmine-core/boot0.js",
-              "jasmine-core/lib/jasmine-core/boot1.js"
-            ],
+            "polyfills": ["core-js/proposals/reflect-metadata", "zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js"
           }
