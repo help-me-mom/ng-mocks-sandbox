@@ -348,7 +348,7 @@ describe('ng-mocks-render:component:mock', () => {
 
     const directive = ngMocks.findInstance(Mock3Directive);
     expect(() =>
-      ngMocks.render(directive, undefined as any),
+      ngMocks.render(directive, undefined as never),
     ).toThrowError(
       'Unknown template has been passed, only TemplateRef or a mock structural directive are supported',
     );

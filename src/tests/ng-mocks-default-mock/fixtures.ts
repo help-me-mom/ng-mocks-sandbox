@@ -31,7 +31,10 @@ export class TargetService {
 export class TargetPipe implements PipeTransform {
   public o1$: Observable<number> = new Subject();
 
-  public constructor(public readonly service: TargetService, @Inject(TOKEN) public readonly token: string) {}
+  public constructor(
+    public readonly service: TargetService,
+    @Inject(TOKEN) public readonly token: string,
+  ) {}
 
   public getO1(): Observable<number> {
     return this.o1$;
@@ -113,13 +116,13 @@ ngMocks.defaultMock(TOKEN, () => 'mockToken');
 
 ngMocks.defaultMock(TargetService, () => ({
   echo: () => 'mockEcho',
-  name: 'mockName' as any,
+  name: 'mockName' as never,
 }));
 
 ngMocks.defaultMock(TargetPipe, (_, injector) => ({
   getO1: () => EMPTY,
   o1$: EMPTY,
-  token: injector.get(TOKEN) as any,
+  token: injector.get(TOKEN) as never,
   transform: (...args: any[]) => JSON.stringify(args),
 }));
 
@@ -128,13 +131,13 @@ ngMocks.defaultMock(TargetComponent, (_, injector) => ({
   o2$: EMPTY,
   pipe: injector.get(TargetPipe),
   service: injector.get(TargetService),
-  token: injector.get(TOKEN) as any,
+  token: injector.get(TOKEN) as never,
 }));
 
 ngMocks.defaultMock(TargetDirective, (_, injector) => ({
   o3$: EMPTY,
   pipe: injector.get(TargetPipe),
-  token: injector.get(TOKEN) as any,
+  token: injector.get(TOKEN) as never,
 }));
 
 ngMocks.defaultMock(TargetDirective, (_, injector) => ({

@@ -40,7 +40,7 @@ class MockComponent {
 
 @NgModule({
   declarations: [MockComponent, DepComponent],
-  entryComponents: [MockComponent],
+  ['entryComponents' as never]: [MockComponent],
   exports: [MockComponent],
   imports: [CommonModule],
 })

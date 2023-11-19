@@ -132,12 +132,10 @@ describe('TestRoutingResolver:test', () => {
     const route: ActivatedRoute = el.injector.get(ActivatedRoute);
 
     // Now we can assert that it has expected data.
-    expect(route.snapshot.data).toEqual(
-      jasmine.objectContaining({
-        data: {
-          flag: false,
-        },
-      }),
-    );
+    expect(route.snapshot.data).toEqual({
+      data: {
+        flag: false,
+      },
+    });
   }));
 });
