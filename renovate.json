@@ -1,5 +1,9 @@
 {
-  "extends": ["config:recommended", ":semanticCommits", ":semanticCommitTypeAll(chore)"],
+  "extends": [
+    "config:recommended",
+    ":semanticCommits",
+    ":semanticCommitTypeAll(chore)"
+  ],
   "baseBranches": ["master"],
   "dependencyDashboard": false,
   "prConcurrentLimit": 0,
@@ -28,7 +32,7 @@
   "reviewers": ["satanTime"],
   "packageRules": [
     {
-      "packageNames": ["satantime/puppeteer-node", "node", "@types/node"],
+      "matchPackageNames": ["satantime/puppeteer-node", "node", "@types/node"],
       "allowedVersions": "/^[^0-9]*\\d*[02468]\\./",
       "branchTopic": "node-{{{newMajor}}}{{#if separateMinorPatch}}{{#if isPatch}}.{{{newMinor}}}{{/if}}{{/if}}.x{{#if isLockfileUpdate}}-lockfile{{/if}}"
     },
