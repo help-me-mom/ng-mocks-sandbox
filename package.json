@@ -26,26 +26,26 @@
     "postinstall": "husky install"
   },
   "dependencies": {
-    "@angular/animations": "15.2.10",
-    "@angular/common": "15.2.10",
-    "@angular/compiler": "15.2.10",
-    "@angular/core": "15.2.10",
-    "@angular/forms": "15.2.10",
-    "@angular/platform-browser": "15.2.10",
-    "@angular/platform-browser-dynamic": "15.2.10",
-    "@angular/router": "15.2.10",
+    "@angular/animations": "17.0.3",
+    "@angular/common": "17.0.3",
+    "@angular/compiler": "17.0.3",
+    "@angular/core": "17.0.3",
+    "@angular/forms": "17.0.3",
+    "@angular/platform-browser": "17.0.3",
+    "@angular/platform-browser-dynamic": "17.0.3",
+    "@angular/router": "17.0.3",
     "@types/jasmine": "5.1.2",
     "core-js": "3.33.2",
     "jasmine-core": "5.1.1",
     "ng-mocks": "14.12.0",
     "rxjs": "7.8.1",
     "tslib": "2.6.2",
-    "zone.js": "0.13.3"
+    "zone.js": "0.14.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "15.2.10",
-    "@angular/cli": "15.2.10",
-    "@angular/compiler-cli": "15.2.10",
+    "@angular-devkit/build-angular": "17.0.1",
+    "@angular/cli": "17.0.1",
+    "@angular/compiler-cli": "17.0.3",
     "@commitlint/cli": "18.4.2",
     "@commitlint/config-conventional": "18.4.2",
     "@types/node": "20.9.2",
@@ -60,35 +60,10 @@
     "prettier": "3.1.0",
     "puppeteer": "21.5.2",
     "ts-node": "10.9.1",
-    "typescript": "4.9.5"
+    "typescript": "5.2.2"
   },
-  "renovate": {
-    "extends": [
-      "config:base",
-      ":semanticCommitTypeAll(chore)"
-    ],
-    "dependencyDashboard": false,
-    "rangeStrategy": "pin",
-    "rebaseWhen": "conflicted",
-    "separateMajorMinor": true,
-    "separateMinorPatch": true,
-    "separateMultipleMajor": true,
-    "ignoreDeprecated": false,
-    "semanticCommitScope": "{{#if baseDir}}{{baseDir}}{{else}}deps{{/if}}",
-    "additionalBranchPrefix": "{{#if baseDir}}{{baseDir}}/{{else}}root/{{/if}}",
-    "reviewers": [
-      "satanTime"
-    ],
-    "packageRules": [
-      {
-        "packageNames": [
-          "satantime/puppeteer-node",
-          "node",
-          "@types/node"
-        ],
-        "allowedVersions": "/^\\d*[02468]\\./"
-      }
-    ]
+  "engines": {
+    "npm": "10.2.4"
   },
   "commitlint": {
     "extends": [

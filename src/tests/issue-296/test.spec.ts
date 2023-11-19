@@ -36,7 +36,7 @@ class TargetComponent {
 
 @NgModule({
   declarations: [TargetComponent, ModalComponent],
-  entryComponents: [ModalComponent],
+  ['entryComponents' as never]: [ModalComponent],
   providers: [ModalService],
 })
 class TargetModule {}

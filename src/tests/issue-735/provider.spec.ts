@@ -21,7 +21,7 @@ describe('issue-735:provider', () => {
         () =>
           ({
             mock1: true,
-          } as never),
+          }) as never,
       ),
     );
 
@@ -67,7 +67,7 @@ describe('issue-735:provider', () => {
         () =>
           ({
             mock2: true,
-          } as never),
+          }) as never,
       ),
     );
 

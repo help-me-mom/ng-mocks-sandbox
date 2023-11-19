@@ -48,7 +48,7 @@ class ChildComponent {}
 
 @NgModule({
   declarations: [ParentComponent, ChildComponent],
-  entryComponents: [ChildComponent],
+  ['entryComponents' as never]: [ChildComponent],
 })
 class TargetModule {}
 
