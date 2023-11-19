@@ -2,8 +2,9 @@
 // https://karma-runner.github.io/1.0/config/configuration-file.html
 
 const isCSB = !!process.env.CSB;
-const isLocal = !isCSB;
-const withCoverage = !isCSB && !!process.env.WITH_COVERAGE;
+const isSB = !!process.env.SB;
+const isLocal = !isCSB && !isSB;
+const withCoverage = isLocal && !!process.env.WITH_COVERAGE;
 
 if (isLocal) {
   process.env.CHROME_BIN = require('puppeteer').executablePath();
@@ -42,14 +43,14 @@ module.exports = function (config) {
       outputFile: 'specs-junit.xml',
       useBrowserName: false,
     },
-    reporters: withCoverage ? ['junit'] : isCSB ? ['kjhtml'] : ['dots', 'kjhtml'],
-    hostname: isCSB ? 'random-4200.csb.app' : 'localhost',
-    listenAddress: isCSB ? '0.0.0.0' : 'localhost',
-    port: isCSB ? 4200 : 9876,
+    reporters: withCoverage ? ['junit'] : isCSB || isSB ? ['kjhtml'] : ['dots', 'kjhtml'],
+    hostname: isCSB ? 'random-4200.csb.app' : isSB ? 'random.github.stackblitz.io' : 'localhost',
+    listenAddress: isCSB || isSB ? '0.0.0.0' : 'localhost',
+    port: isCSB ? 4200 : isSB ? 80 : 9876,
     colors: true,
     logLevel: config.LOG_INFO,
-    autoWatch: isCSB,
-    browsers: isCSB ? [] : ['ChromeCi'],
+    autoWatch: isCSB || isSB,
+    browsers: isCSB || isSB ? [] : ['ChromeCi'],
     singleRun: isLocal,
   });
 };
