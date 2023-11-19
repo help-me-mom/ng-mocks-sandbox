@@ -92,6 +92,8 @@ ngMocks.defaultMock(AuthService, () => ({
 // cover behavior of the component.
 describe('profile:classic', () => {
   // Helps to reset customizations after each test.
+  // Alternatively, you can enable
+  // automatic resetting in test.ts.
   MockInstance.scope();
 
   // Let's declare TestBed in beforeAll instead of beforeEach.
