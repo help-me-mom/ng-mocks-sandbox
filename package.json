@@ -26,16 +26,16 @@
     "postinstall": "husky install"
   },
   "dependencies": {
-    "@angular/animations": "17.0.3",
-    "@angular/common": "17.0.3",
-    "@angular/compiler": "17.0.3",
-    "@angular/core": "17.0.3",
-    "@angular/forms": "17.0.3",
-    "@angular/platform-browser": "17.0.3",
-    "@angular/platform-browser-dynamic": "17.0.3",
-    "@angular/router": "17.0.3",
-    "@types/jasmine": "5.1.2",
-    "core-js": "3.33.3",
+    "@angular/animations": "17.0.6",
+    "@angular/common": "17.0.6",
+    "@angular/compiler": "17.0.6",
+    "@angular/core": "17.0.6",
+    "@angular/forms": "17.0.6",
+    "@angular/platform-browser": "17.0.6",
+    "@angular/platform-browser-dynamic": "17.0.6",
+    "@angular/router": "17.0.6",
+    "@types/jasmine": "5.1.4",
+    "core-js": "3.34.0",
     "jasmine-core": "5.1.1",
     "ng-mocks": "14.12.1",
     "rxjs": "7.8.1",
@@ -43,13 +43,13 @@
     "zone.js": "0.14.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "17.0.1",
-    "@angular/cli": "17.0.1",
-    "@angular/compiler-cli": "17.0.3",
-    "@commitlint/cli": "18.4.2",
-    "@commitlint/config-conventional": "18.4.2",
-    "@types/jasmine": "5.1.2",
-    "@types/node": "20.9.2",
+    "@angular-devkit/build-angular": "17.0.6",
+    "@angular/cli": "17.0.6",
+    "@angular/compiler-cli": "17.0.6",
+    "@commitlint/cli": "18.4.3",
+    "@commitlint/config-conventional": "18.4.3",
+    "@types/jasmine": "5.1.4",
+    "@types/node": "20.10.4",
     "husky": "8.0.3",
     "karma": "6.4.2",
     "karma-chrome-launcher": "3.2.0",
@@ -57,14 +57,14 @@
     "karma-jasmine": "5.1.0",
     "karma-jasmine-html-reporter": "2.1.0",
     "karma-junit-reporter": "2.0.1",
-    "npm": "10.2.4",
+    "npm": "10.2.5",
     "prettier": "3.1.0",
-    "puppeteer": "21.5.2",
-    "ts-node": "10.9.1",
+    "puppeteer": "21.6.0",
+    "ts-node": "10.9.2",
     "typescript": "5.2.2"
   },
   "engines": {
-    "npm": "10.2.4"
+    "npm": "10.2.5"
   },
   "commitlint": {
     "extends": [
