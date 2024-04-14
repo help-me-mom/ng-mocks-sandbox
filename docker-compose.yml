@@ -2,7 +2,7 @@ version: '3'
 
 services:
   core:
-    image: satantime/puppeteer-node:20.12.1
+    image: satantime/puppeteer-node:20.12.2
     working_dir: /app
     volumes:
       - .:/app
