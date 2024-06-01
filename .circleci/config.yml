@@ -4,7 +4,7 @@ orbs:
 parameters:
   lockindex:
     type: string
-    default: '0'
+    default: '1'
 jobs:
   Core Chrome:
     docker:
@@ -16,11 +16,14 @@ jobs:
       - run:
           name: Install
           command: |
+            md5sum package-lock.json > package.md5
             if [ ! -d "./node_modules/" ]; then
               npm install --no-audit && \
               node ./node_modules/puppeteer/install.mjs && \
               ./node_modules/.bin/ngcc
             fi
+            md5sum -c package.md5
+            rm package.md5
       - save_cache:
           key: root-<< pipeline.parameters.lockindex >>-{{ arch }}-{{ checksum "package-lock.json" }}
           paths:
@@ -51,16 +54,19 @@ jobs:
           name: NPM Shell
           command: npm config set script-shell bash.exe
       - restore_cache:
-          key: root-<< pipeline.parameters.lockindex >>-{{ arch }}-{{ checksum "package-lock.json" }}-{{ checksum ".nvmrc" }}
+          key: root-<< pipeline.parameters.lockindex >>-{{ arch }}-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}-{{ checksum ".nvmrc" }}
       - run:
           name: NPM Install
           command: |
+            md5sum package-lock.json > package.md5
             if [ ! -d "node_modules/" ]; then
               npm ci --no-optional --ignore-scripts
               npx ngcc
             fi
+            md5sum -c package.md5
+            rm package.md5
       - save_cache:
-          key: root-<< pipeline.parameters.lockindex >>-{{ arch }}-{{ checksum "package-lock.json" }}-{{ checksum ".nvmrc" }}
+          key: root-<< pipeline.parameters.lockindex >>-{{ arch }}-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}-{{ checksum ".nvmrc" }}
           paths:
             - ./node_modules
             - ~/.cache/puppeteer
