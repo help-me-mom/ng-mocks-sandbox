@@ -33,7 +33,10 @@ jobs:
           name: Prettier
           command: npm run prettier:check
       - run:
-          name: Lint
+          name: Lint commits
+          command: npx commitlint -V --from=origin/master
+      - run:
+          name: Lint typescript
           command: npm run ts:check
       - run:
           name: Tests
