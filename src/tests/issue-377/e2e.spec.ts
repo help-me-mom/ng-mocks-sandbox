@@ -12,13 +12,9 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 @NgModule({})
 class TargetModule {}
 
-const injectableArgs = [
-  {
-    providedIn: TargetModule,
-  } as never,
-];
-
-@Injectable(...injectableArgs)
+@Injectable({
+  providedIn: TargetModule,
+})
 class TargetService {
   private readonly name = 'target';
 

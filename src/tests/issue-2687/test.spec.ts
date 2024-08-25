@@ -24,49 +24,40 @@ class StandaloneService {}
 })
 class StandaloneModule {}
 
-@Pipe(
-  {
-    name: 'standalone',
-    standalone: true,
-  } as never /* TODO: remove after upgrade to a14 */,
-)
+@Pipe({
+  name: 'standalone',
+  standalone: true,
+})
 class StandalonePipe implements PipeTransform {
   transform(): string {
     return this.constructor.name;
   }
 }
 
-@Component(
-  {
-    selector: 'standalone',
-    template: 'service:{{ service.constructor.name }}',
-    standalone: true,
-    imports: [StandaloneModule, StandalonePipe],
-  } as never /* TODO: remove after upgrade to a14 */,
-)
+@Component({
+  selector: 'standalone',
+  template: 'service:{{ service.constructor.name }}',
+  standalone: true,
+  imports: [StandaloneModule, StandalonePipe],
+})
 class StandaloneComponent {
   constructor(public readonly service: StandaloneService) {}
 }
 
-@Component(
-  {
-    selector: 'empty',
-    template: 'empty',
-    standalone: true,
-    imports: [], // this is the thing we assert: an empty imports array
-  } as never /* TODO: remove after upgrade to a14 */,
-)
+@Component({
+  selector: 'empty',
+  template: 'empty',
+  standalone: true,
+  imports: [], // this is the thing we assert: an empty imports array
+})
 class EmptyComponent {}
 
-@Component(
-  {
-    selector: 'target-2687',
-    template:
-      '<standalone></standalone> pipe:{{ null | standalone }}',
-    standalone: true,
-    imports: [StandaloneComponent, StandalonePipe, EmptyComponent],
-  } as never /* TODO: remove after upgrade to a14 */,
-)
+@Component({
+  selector: 'target-2687',
+  template: '<standalone></standalone> pipe:{{ null | standalone }}',
+  standalone: true,
+  imports: [StandaloneComponent, StandalonePipe, EmptyComponent],
+})
 class TargetComponent {}
 
 describe('issue-2687', () => {
@@ -108,7 +99,7 @@ describe('issue-2687', () => {
             MockComponent(StandaloneComponent),
             MockPipe(StandalonePipe),
           ],
-        } as never /* TODO: remove after upgrade to a14 */,
+        },
       });
     });
 
@@ -116,7 +107,7 @@ describe('issue-2687', () => {
       TestBed.overrideComponent(TargetComponent, {
         set: {
           imports: [StandaloneComponent, StandalonePipe],
-        } as never /* TODO: remove after upgrade to a14 */,
+        },
       });
     });
 

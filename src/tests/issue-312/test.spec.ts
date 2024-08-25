@@ -37,13 +37,9 @@ class ServiceModule {
   }
 }
 
-const injectableModuleServiceArgs = [
-  {
-    providedIn: ServiceModule,
-  } as never,
-];
-
-@Injectable(...injectableModuleServiceArgs)
+@Injectable({
+  providedIn: ServiceModule,
+})
 class ModuleService {
   public readonly name = 'ModuleService';
 }
