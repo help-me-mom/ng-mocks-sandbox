@@ -23,7 +23,7 @@
     "prettier:repo": "prettier --loglevel warn -u -w .",
     "prettier:check": "prettier -u -c .",
     "ts:check": "tsc --noEmit",
-    "postinstall": "husky install"
+    "prepare": "husky"
   },
   "dependencies": {
     "@angular/animations": "18.0.7",
