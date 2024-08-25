@@ -19,8 +19,7 @@ jobs:
             md5sum package-lock.json > package.md5
             if [ ! -d "./node_modules/" ]; then
               npm install --no-audit && \
-              node ./node_modules/puppeteer/install.mjs && \
-              ./node_modules/.bin/ngcc
+              node ./node_modules/puppeteer/install.mjs
             fi
             md5sum -c package.md5
             rm package.md5
@@ -64,7 +63,6 @@ jobs:
             md5sum package-lock.json > package.md5
             if [ ! -d "node_modules/" ]; then
               npm ci --no-optional --ignore-scripts
-              npx ngcc
             fi
             md5sum -c package.md5
             rm package.md5

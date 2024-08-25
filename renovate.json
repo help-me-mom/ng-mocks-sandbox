@@ -31,7 +31,7 @@
       "password": "dckr_pat_aLRNk3vH9pYc1EtJgrHdOntl4Fs"
     }
   ],
-  "reviewers": ["satanTime"],
+  "reviewers": ["renovate-approve"],
   "packageRules": [
     {
       "matchPackageNames": ["satantime/puppeteer-node", "node", "@types/node"],
