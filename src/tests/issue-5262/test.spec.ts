@@ -1,4 +1,4 @@
-import { InjectionToken, NgModule, VERSION } from '@angular/core';
+import { InjectionToken, NgModule } from '@angular/core';
 
 import { MockBuilder, MockRender } from 'ng-mocks';
 
@@ -12,10 +12,7 @@ const TOKEN = new InjectionToken('TOKEN');
         const recursive: any = {
           index: 0,
         };
-        // It fails without ivy on the compiler level.
-        if (Number.parseInt(VERSION.major, 10) >= 13) {
-          recursive.parent = recursive;
-        }
+        recursive.parent = recursive;
 
         return recursive;
       })(),

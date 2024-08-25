@@ -26,13 +26,9 @@ class TargetComponent {
 })
 class TargetModule {}
 
-const injectableTargetServiceArgs = [
-  {
-    providedIn: TargetModule,
-  } as never,
-];
-
-@Injectable(...injectableTargetServiceArgs)
+@Injectable({
+  providedIn: TargetModule,
+})
 class TargetService {
   public readonly name: string = 'target';
 }
@@ -40,13 +36,9 @@ class TargetService {
 @NgModule({})
 class TargetUnusedModule {}
 
-const injectableTargetUnusedService = [
-  {
-    providedIn: TargetUnusedModule,
-  } as never,
-];
-
-@Injectable(...injectableTargetUnusedService)
+@Injectable({
+  providedIn: TargetUnusedModule,
+})
 class TargetUnusedService {
   public readonly name: string = 'unused';
 }

@@ -7,15 +7,10 @@ import {
   ngMocks,
 } from 'ng-mocks';
 
-// @TODO remove with A5 support
-const injectableRootServiceArgs = [
-  {
-    providedIn: 'root',
-  } as never,
-];
-
 // A root service we want to mock.
-@Injectable(...injectableRootServiceArgs)
+@Injectable({
+  providedIn: 'root',
+})
 class RootService {
   trigger(name: string) {
     // does something very cool
