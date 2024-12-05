@@ -57,14 +57,14 @@
     "karma-jasmine": "5.1.0",
     "karma-jasmine-html-reporter": "2.1.0",
     "karma-junit-reporter": "2.0.1",
-    "npm": "10.9.1",
+    "npm": "10.9.2",
     "prettier": "3.4.2",
     "puppeteer": "23.10.1",
     "ts-node": "10.9.2",
     "typescript": "5.5.4"
   },
   "engines": {
-    "npm": "10.9.1"
+    "npm": "10.9.2"
   },
   "commitlint": {
     "extends": [
