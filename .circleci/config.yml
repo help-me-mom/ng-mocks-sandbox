@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  win: circleci/windows@5.0.0
+  win: circleci/windows@5.1.0
 parameters:
   lockindex:
     type: string
@@ -8,7 +8,7 @@ parameters:
 jobs:
   Core Chrome:
     docker:
-      - image: satantime/puppeteer-node:22.7.0
+      - image: satantime/puppeteer-node:22.14.0
     steps:
       - checkout
       - restore_cache:
