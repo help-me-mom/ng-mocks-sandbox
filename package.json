@@ -58,7 +58,7 @@
     "karma-jasmine-html-reporter": "2.1.0",
     "karma-junit-reporter": "2.0.1",
     "npm": "11.1.0",
-    "prettier": "3.5.2",
+    "prettier": "3.5.3",
     "puppeteer": "24.3.0",
     "ts-node": "10.9.2",
     "typescript": "5.5.4"
