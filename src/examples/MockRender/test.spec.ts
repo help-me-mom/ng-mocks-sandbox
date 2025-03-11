@@ -13,6 +13,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Component({
   selector: 'child',
+  standalone: false,
   template: 'dependency',
 })
 class ChildComponent {
@@ -32,6 +33,7 @@ class ChildModule {}
 
 @Component({
   selector: 'target',
+  standalone: false,
   template: `
     <child
       [someInput]="value1"

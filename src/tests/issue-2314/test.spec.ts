@@ -7,6 +7,7 @@ import { ngMocks } from 'ng-mocks';
 
 @Pipe({
   name: 'nothing',
+  standalone: false,
   pure: false,
 })
 class NothingPipe implements PipeTransform {
@@ -17,6 +18,7 @@ class NothingPipe implements PipeTransform {
 
 @Component({
   selector: 'target-2314',
+  standalone: false,
   template: `
     <div
       class="array"

@@ -15,12 +15,14 @@ describe('issue-6928', () => {
 
   @Component({
     selector: 'app-shared1',
+    standalone: false,
     template: '',
   })
   class Shared1Component {}
 
   @Component({
     selector: 'app-shared2',
+    standalone: false,
     template: '',
   })
   class Shared2Component {}
@@ -35,13 +37,13 @@ describe('issue-6928', () => {
   @Component({
     selector: 'app-standalone',
     template: '<app-shared1></app-shared1>',
-    standalone: true,
     imports: [CommonModule, SharedModule],
   })
   class StandaloneComponent {}
 
   @Component({
     selector: 'app-my-component',
+    standalone: false,
     template:
       '<app-shared2></app-shared2><app-standalone></app-standalone>',
   })

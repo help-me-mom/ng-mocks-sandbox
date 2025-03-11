@@ -11,6 +11,7 @@ import {
 
 @Directive({
   selector: 'target-ng-mocks-global-replace-directive',
+  standalone: false,
 })
 class TargetDirective {
   @HostBinding('attr.name')
@@ -19,6 +20,7 @@ class TargetDirective {
 
 @Directive({
   selector: 'target-ng-mocks-global-replace-directive',
+  standalone: false,
 })
 class FakeDirective {
   @HostBinding('attr.name')

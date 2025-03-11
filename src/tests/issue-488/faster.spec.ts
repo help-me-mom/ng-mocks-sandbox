@@ -9,6 +9,7 @@ import {
 
 @Component({
   selector: 'target',
+  standalone: false,
   template: '{{ value }}',
 })
 class TargetComponent implements OnInit {

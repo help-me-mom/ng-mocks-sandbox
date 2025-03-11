@@ -6,6 +6,7 @@ import { MockBuilder, MockRender } from 'ng-mocks';
 describe('issue-5520', () => {
   @Component({
     selector: 'dependency',
+    standalone: false,
     template: '',
   })
   class DependencyComponent {
@@ -20,7 +21,6 @@ describe('issue-5520', () => {
 
   @Component({
     selector: 'standalone',
-    standalone: true,
     template: '<dependency></dependency>',
     imports: [DependencyModule],
   })

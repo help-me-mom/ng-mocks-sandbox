@@ -4,6 +4,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Component({
   selector: 'target-ng-mocks-render-cdr',
+  standalone: false,
   template: '{{ value }}',
 })
 class TargetComponent implements OnInit {

@@ -10,7 +10,6 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Directive({
   selector: '[testDirective]',
-  standalone: true,
 })
 class TestDirective implements AfterViewInit {
   @Input() color = 'red';
@@ -24,7 +23,6 @@ class TestDirective implements AfterViewInit {
 
 @Component({
   selector: 'app-target',
-  standalone: true,
   template: `<a testDirective>name: {{ name }}</a>`,
   imports: [TestDirective],
 })

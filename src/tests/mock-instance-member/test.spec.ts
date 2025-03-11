@@ -10,6 +10,7 @@ import {
 
 @Component({
   selector: 'target-mock-instance-member',
+  standalone: false,
   template: '',
 })
 class TargetComponent {

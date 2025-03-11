@@ -12,6 +12,7 @@ class TargetService {
 @Component({
   providers: [TargetService],
   selector: 'target',
+  standalone: false,
   template: '{{ service.value }}',
 })
 class TargetComponent {

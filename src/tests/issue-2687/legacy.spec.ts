@@ -19,7 +19,6 @@ class StandaloneModule {}
 
 @Pipe({
   name: 'standalone',
-  standalone: true,
 })
 class StandalonePipe implements PipeTransform {
   transform(): string {
@@ -30,7 +29,6 @@ class StandalonePipe implements PipeTransform {
 @Component({
   selector: 'standalone',
   template: 'service:{{ service.constructor.name }}',
-  standalone: true,
   imports: [StandaloneModule, StandalonePipe],
 })
 class StandaloneComponent {
@@ -40,25 +38,27 @@ class StandaloneComponent {
 @Component({
   selector: 'target-2687-legacy',
   template: '<standalone></standalone> pipe:{{ null | standalone }}',
-  standalone: true,
   imports: [StandaloneComponent, StandalonePipe],
 })
 class TargetComponent {}
 
 @Component({
   selector: 'render-standalone-component',
+  standalone: false,
   template: '<standalone></standalone>',
 })
 class RenderStandaloneComponentComponent {}
 
 @Component({
   selector: 'render-standalone-pipe',
+  standalone: false,
   template: '{{ null | standalone }}',
 })
 class RenderStandalonePipeComponent {}
 
 @Component({
   selector: 'render-standalone-service',
+  standalone: false,
   template: '',
 })
 class RenderStandaloneServiceComponent {
@@ -67,6 +67,7 @@ class RenderStandaloneServiceComponent {
 
 @Component({
   selector: 'render-target-component',
+  standalone: false,
   template: '<target-2687-legacy></target-2687-legacy>',
 })
 class RenderTargetComponentComponent {}
@@ -91,7 +92,7 @@ describe('issue-2687', () => {
       );
       fixture.detectChanges();
       expect(ngMocks.formatHtml(fixture)).toEqual(
-        '<standalone>service:StandaloneService</standalone>',
+        `<standalone>service:${StandaloneService.name}</standalone>`,
       );
 
       expect(() =>
@@ -115,7 +116,7 @@ describe('issue-2687', () => {
       fixture.detectChanges();
       expect(
         fixture.componentInstance.service.constructor.name,
-      ).toEqual('StandaloneService');
+      ).toEqual(StandaloneService.name);
     });
 
     it('renders TargetComponent', () => {
@@ -124,7 +125,7 @@ describe('issue-2687', () => {
       );
       fixture.detectChanges();
       expect(ngMocks.formatHtml(fixture)).toEqual(
-        '<target-2687-legacy><standalone>service:StandaloneService</standalone> pipe:StandalonePipe</target-2687-legacy>',
+        `<target-2687-legacy><standalone>service:${StandaloneService.name}</standalone> pipe:${StandalonePipe.name}</target-2687-legacy>`,
       );
 
       expect(() =>
@@ -188,7 +189,7 @@ describe('issue-2687', () => {
       fixture.detectChanges();
       expect(
         fixture.componentInstance.service.constructor.name,
-      ).toEqual('StandaloneService');
+      ).toEqual(StandaloneService.name);
     });
 
     it('renders TargetComponent', () => {
@@ -206,10 +207,10 @@ describe('issue-2687', () => {
       expect(() =>
         ngMocks.findInstance(StandaloneComponent),
       ).toThrowError(
-        'Cannot find an instance via ngMocks.findInstance(StandaloneComponent)',
+        `Cannot find an instance via ngMocks.findInstance(${StandaloneComponent.name})`,
       );
       expect(() => ngMocks.findInstance(StandalonePipe)).toThrowError(
-        'Cannot find an instance via ngMocks.findInstance(StandalonePipe)',
+        `Cannot find an instance via ngMocks.findInstance(${StandalonePipe.name})`,
       );
       expect(() =>
         ngMocks.findInstance(StandaloneService),

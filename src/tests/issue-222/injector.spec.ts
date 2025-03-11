@@ -8,6 +8,7 @@ class MockService {}
 
 @Component({
   selector: 'target-222-injector',
+  standalone: false,
   template: 'target',
 })
 class TargetComponent {

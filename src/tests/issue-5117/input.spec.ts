@@ -5,7 +5,6 @@ import { isMockOf, MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Directive({
   selector: 'input',
-  standalone: true,
 })
 class InputDirective {
   @Input() public readonly input: string | undefined = undefined;
@@ -15,6 +14,7 @@ class InputDirective {
 
 @Component({
   selector: 'target',
+  standalone: false,
   template: '',
   hostDirectives: [
     {

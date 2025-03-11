@@ -11,18 +11,24 @@ import {
 
 @Component({
   selector: 'target-ng-mocks-global-keep',
+  standalone: false,
   template: '{{ name }}',
 })
 class TargetComponent {
   public readonly name = 'target';
+
+  public targetComponentNgMocksGlobalKeep() {}
 }
 
 @Component({
   selector: 'target-ng-mocks-global-keep',
+  standalone: false,
   template: '{{ name }}',
 })
 class FakeComponent {
   public readonly name = 'fake';
+
+  public fakeComponentNgMocksGlobalKeep() {}
 }
 
 @NgModule({

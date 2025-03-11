@@ -5,6 +5,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Pipe({
   name: 'pipe',
+  standalone: false,
   pure: false,
 })
 class MyPipe implements PipeTransform {
@@ -19,6 +20,7 @@ class MyPipe implements PipeTransform {
 
 @Component({
   selector: 'app',
+  standalone: false,
   template: `
     <div class="p1">{{ 'd1' | pipe }}</div>
     <div class="p2">{{ 'd2' | pipe }}</div>

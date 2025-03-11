@@ -14,6 +14,7 @@ import { fromEvent } from 'rxjs';
 
 @Component({
   selector: 'target-ng-mocks-trigger',
+  standalone: false,
   template: `
     <input
       [formControl]="control"

@@ -5,12 +5,14 @@ import { MockModule, MockRender, ngMocks } from 'ng-mocks';
 
 @Component({
   selector: 'target-4641-mixed',
+  standalone: false,
   template: ` replace:<replace-4641-mixed></replace-4641-mixed> `,
 })
 class TargetComponent {}
 
 @Component({
   selector: 'replace-4641-mixed',
+  standalone: false,
   template: 'replace-real',
 })
 class ReplaceComponent {
@@ -27,6 +29,7 @@ class ReplaceModule {}
 
 @Component({
   selector: 'replace-4641-mixed',
+  standalone: false,
   template: 'replace-mock',
 })
 class ReplaceMockComponent {
@@ -37,12 +40,14 @@ class ReplaceMockComponent {
 
 @Component({
   selector: 'dep1-4641-mixed',
+  standalone: false,
   template: '<replace-4641-mixed></replace-4641-mixed>',
 })
 class Dep1Component {}
 
 @Component({
   selector: 'dep2-4641-mixed',
+  standalone: false,
   template: '<replace-4641-mixed></replace-4641-mixed>',
 })
 class Dep2Component {}

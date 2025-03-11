@@ -9,7 +9,6 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MockBuilder } from 'ng-mocks';
 
 @Component({
-  standalone: true,
   imports: [CommonModule, RouterModule],
   template: ` <a [routerLink]="['link']">Link</a> `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -24,7 +23,7 @@ describe('issue-3635', () => {
   it('does not throw because CommonModule is an import in MyComponent', () => {
     expect(() =>
       MockBuilder(MyComponent, ActivatedRoute).build(),
-    ).not.toThrowError(/MockBuilder has found a missing dependency/);
+    ).not.toThrow();
   });
 
   it('throws because ApplicationModule is not imported anywhere', () => {
@@ -38,6 +37,6 @@ describe('issue-3635', () => {
   it('does not throw because NgIf is a part of CommonModule from MyComponent', () => {
     expect(() =>
       MockBuilder(MyComponent, ActivatedRoute).mock(NgIf).build(),
-    ).not.toThrowError(/MockBuilder has found a missing dependency/);
+    ).not.toThrow();
   });
 });

@@ -15,6 +15,7 @@ class Target1Service {
 
 @Component({
   selector: 'target-1',
+  standalone: false,
   template: '{{ service.name }}',
 })
 class Target1Component {
@@ -36,6 +37,7 @@ class Target2Service {
 
 @Component({
   selector: 'target-2',
+  standalone: false,
   template: '{{ service.name }}',
 })
 class Target2Component {

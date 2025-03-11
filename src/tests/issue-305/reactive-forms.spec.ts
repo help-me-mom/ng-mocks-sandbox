@@ -14,6 +14,7 @@ import {
 
 @Component({
   selector: 'target-305-reactive-forms',
+  standalone: false,
   template: `
     <input data-testid="inputControl" [formControl]="myControl" />
   `,

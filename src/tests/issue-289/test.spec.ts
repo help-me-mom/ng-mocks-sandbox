@@ -4,6 +4,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Directive({
   selector: '[tpl]',
+  standalone: false,
 })
 class TplDirective {
   public constructor(public readonly tpl: TemplateRef<any>) {}

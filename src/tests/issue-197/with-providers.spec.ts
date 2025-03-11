@@ -33,6 +33,7 @@ class DependencyModule {
 
 @Component({
   selector: 'target-197',
+  standalone: false,
   template: '{{ service.echo() }}',
 })
 class TargetComponent {

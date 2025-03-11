@@ -4,6 +4,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Pipe({
   name: 'phone',
+  standalone: false,
 })
 class PhonePipe implements PipeTransform {
   transform(value: string | number): string {

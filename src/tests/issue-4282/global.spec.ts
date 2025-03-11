@@ -17,6 +17,7 @@ class TargetService {
 
 @Component({
   selector: 'target-4282-global',
+  standalone: false,
   template: `{{ service.name }}`,
 })
 class TargetComponent {

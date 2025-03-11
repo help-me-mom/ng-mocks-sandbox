@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { MockBuilder, MockRender } from 'ng-mocks';
 
 @Component({
-  standalone: true,
   template: ``,
 })
 class MyComponent {}

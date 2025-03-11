@@ -10,6 +10,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Component({
   selector: 'app-target',
+  standalone: false,
   template: `<custom-component></custom-component>name: {{ name }}`,
 })
 class TargetComponent {

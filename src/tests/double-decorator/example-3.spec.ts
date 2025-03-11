@@ -23,6 +23,7 @@ class BaseClass {
 @Component({
   providers: [BaseClass],
   selector: 'target-double-decorator-3',
+  standalone: false,
   template: '{{ service.name }}',
 })
 class MyComponent {

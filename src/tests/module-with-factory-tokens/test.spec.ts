@@ -18,6 +18,7 @@ const MY_TOKEN_MULTI = new InjectionToken('MY_TOKEN_MULTI', {
 
 @Component({
   selector: 'internal-module-with-factory-tokens',
+  standalone: false,
   template: '{{ tokenSingle | json }} {{ tokenMulti | json }}',
 })
 class TargetComponent {

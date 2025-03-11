@@ -5,6 +5,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Component({
   selector: 'component1',
+  standalone: false,
   template: '',
 })
 class DefaultComponent {}
@@ -18,6 +19,7 @@ class DefaultComponent {}
     },
   ],
   selector: 'component2',
+  standalone: false,
   template: '',
 })
 class ValueAccessorComponent {}
@@ -31,6 +33,7 @@ class ValueAccessorComponent {}
     },
   ],
   selector: 'component3',
+  standalone: false,
   template: '',
 })
 class ValidatorComponent {}

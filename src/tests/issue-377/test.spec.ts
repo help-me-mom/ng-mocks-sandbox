@@ -10,6 +10,7 @@ import {
 
 @Component({
   selector: 'app-form',
+  standalone: false,
   template: `
     <form [formGroup]="form">
       <input type="text" formGroupName="name" />

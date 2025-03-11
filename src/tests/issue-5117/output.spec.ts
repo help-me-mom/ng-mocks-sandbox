@@ -10,7 +10,6 @@ import { isMockOf, MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Directive({
   selector: 'output',
-  standalone: true,
 })
 class OutputDirective {
   @Output() public readonly output = new EventEmitter<void>();
@@ -20,6 +19,7 @@ class OutputDirective {
 
 @Component({
   selector: 'target',
+  standalone: false,
   template: '',
   hostDirectives: [
     {

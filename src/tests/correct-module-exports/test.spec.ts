@@ -10,12 +10,14 @@ import {
 
 @Component({
   selector: 'internal-correct-module-exports',
+  standalone: false,
   template: 'internal',
 })
 class InternalComponent {}
 
 @Component({
   selector: 'external',
+  standalone: false,
   template: 'external',
 })
 class ExternalComponent {}

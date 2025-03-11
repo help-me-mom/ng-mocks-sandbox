@@ -22,6 +22,7 @@ class TargetService {
 
 @Component({
   selector: 'target',
+  standalone: false,
   template: '{{ list | json }}',
 })
 class TargetComponent {

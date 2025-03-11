@@ -7,6 +7,7 @@ class UndecoratedService {}
 
 @Component({
   selector: 'target-2845',
+  standalone: false,
   template: `{{ service ? 'provided' : 'missing' }}`,
 })
 class TargetComponent {

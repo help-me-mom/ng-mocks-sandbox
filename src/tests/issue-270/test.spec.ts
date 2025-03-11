@@ -11,6 +11,7 @@ class TargetService {
 
 @Component({
   selector: 'target-270',
+  standalone: false,
   template: '{{ service.stream$ | async }}',
 })
 class TargetComponent {

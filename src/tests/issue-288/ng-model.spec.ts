@@ -5,6 +5,7 @@ import { MockBuilder, MockRender } from 'ng-mocks';
 
 @Component({
   selector: 'target-288',
+  standalone: false,
   template: ' <input [ngModel]="dateValue" /> ',
 })
 class TargetComponent {
@@ -24,8 +25,6 @@ describe('issue-288:ng-model', () => {
   beforeEach(() => MockBuilder(TargetComponent, TargetModule));
 
   it('does not fail when mocked', () => {
-    expect(() => MockRender(TargetComponent)).not.toThrowError(
-      "Cannot set property 'model' of undefined",
-    );
+    expect(() => MockRender(TargetComponent)).not.toThrow();
   });
 });

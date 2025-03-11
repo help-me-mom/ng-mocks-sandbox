@@ -17,6 +17,7 @@ import {
 
 @Directive({
   selector: '[show]',
+  standalone: false,
 })
 class ShowDirective {
   public constructor(
@@ -35,6 +36,7 @@ class ShowDirective {
 
 @Directive({
   selector: '[hide]',
+  standalone: false,
 })
 class HideDirective {
   public constructor(
@@ -53,6 +55,7 @@ class HideDirective {
 
 @Component({
   selector: 'target-971',
+  standalone: false,
   template: `
     <ng-container *show="flag">:show:{{ content }}:</ng-container>
     <ng-container *hide="flag">:hide:{{ content }}:</ng-container>

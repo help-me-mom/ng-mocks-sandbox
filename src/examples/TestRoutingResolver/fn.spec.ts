@@ -51,6 +51,7 @@ const sideEffectResolver: ResolveFn<
 // It will be replaced with a mock copy.
 @Component({
   selector: 'route',
+  standalone: false,
   template: 'route',
 })
 class RouteComponent {

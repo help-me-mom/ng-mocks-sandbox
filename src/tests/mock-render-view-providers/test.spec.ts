@@ -9,6 +9,7 @@ class TargetService {
 
 @Component({
   selector: 'target-mock-render-view-providers',
+  standalone: false,
   template: '{{ service.name }}',
 })
 class TargetComponent {
@@ -20,7 +21,7 @@ describe('MockRender.viewProviders', () => {
 
   it('throws without the service', () => {
     expect(() => MockRender(TargetComponent)).toThrowError(
-      /No provider for TargetService/,
+      new RegExp(`No provider for ${TargetService.name}`),
     );
   });
 

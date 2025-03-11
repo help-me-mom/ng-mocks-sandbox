@@ -9,6 +9,7 @@ import {
 
 @Component({
   selector: 'internal-mock-builder-by-directive',
+  standalone: false,
   template: 'internal',
 })
 class InternalComponent {}

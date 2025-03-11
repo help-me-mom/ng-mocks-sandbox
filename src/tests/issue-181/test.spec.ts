@@ -12,6 +12,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
   inputs: ['header'],
   selector: 'app-target',
+  standalone: false,
   template: '<ng-content></ng-content>',
 })
 class TargetComponent {
@@ -23,6 +24,7 @@ class TargetComponent {
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
   inputs: ['header'],
   selector: '[appTarget]',
+  standalone: false,
 })
 class TargetDirective {
   @ContentChild('header')

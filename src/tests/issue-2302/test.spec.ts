@@ -16,6 +16,7 @@ class ItemService {
 
 @Component({
   selector: 'app-item-container',
+  standalone: false,
   template: 'ItemContainerComponent',
 })
 class ItemContainerComponent implements OnInit {
@@ -29,6 +30,7 @@ class ItemContainerComponent implements OnInit {
 
 @Component({
   selector: 'app-cake-item-container',
+  standalone: false,
   template: 'CakeItemContainerComponent',
 })
 class CakeItemContainerComponent

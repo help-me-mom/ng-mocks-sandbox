@@ -11,18 +11,24 @@ import {
 
 @Component({
   selector: 'target-ng-mocks-global-exclude',
+  standalone: false,
   template: '{{ name }}',
 })
 class TargetComponent {
   public readonly name = 'target';
+
+  public targetComponentNgMocksGlobalExclude() {}
 }
 
 @Component({
   selector: 'target-ng-mocks-global-exclude',
+  standalone: false,
   template: '{{ name }}',
 })
 class FakeComponent {
   public readonly name = 'fake';
+
+  public fakeComponentNgMocksGlobalExclude() {}
 }
 
 @NgModule({

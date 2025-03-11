@@ -11,6 +11,7 @@ import { MockBuilder, MockRenderFactory, ngMocks } from 'ng-mocks';
 
 @Component({
   selector: 'target-fake-async',
+  standalone: false,
   template: '{{ counter }}',
 })
 class TargetComponent implements OnInit, OnDestroy {

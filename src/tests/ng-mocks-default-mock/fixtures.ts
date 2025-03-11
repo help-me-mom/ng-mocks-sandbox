@@ -27,6 +27,7 @@ export class TargetService {
 @Injectable()
 @Pipe({
   name: 'target',
+  standalone: false,
 })
 export class TargetPipe implements PipeTransform {
   public o1$: Observable<number> = new Subject();
@@ -47,6 +48,7 @@ export class TargetPipe implements PipeTransform {
 
 @Component({
   selector: 'target-ng-mocks-default-mock',
+  standalone: false,
   template: "{{ 'target' | target: true }}",
 })
 export class TargetComponent implements OnDestroy {
@@ -74,6 +76,7 @@ export class TargetComponent implements OnDestroy {
 
 @Directive({
   selector: 'target-ng-mocks-default-mock',
+  standalone: false,
 })
 export class TargetDirective implements OnDestroy {
   public readonly destroy$ = new Subject<void>();

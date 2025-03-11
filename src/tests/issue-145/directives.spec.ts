@@ -5,6 +5,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Directive({
   selector: 'directive1',
+  standalone: false,
 })
 class DefaultDirective {}
 
@@ -17,6 +18,7 @@ class DefaultDirective {}
     },
   ],
   selector: 'directive2',
+  standalone: false,
 })
 class ValueAccessorDirective {}
 
@@ -29,6 +31,7 @@ class ValueAccessorDirective {}
     },
   ],
   selector: 'directive3',
+  standalone: false,
 })
 class ValidatorDirective {}
 

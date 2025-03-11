@@ -12,6 +12,7 @@ class TargetService {
 
 @Component({
   selector: 'target-488',
+  standalone: false,
   template: '',
 })
 class TargetComponent {

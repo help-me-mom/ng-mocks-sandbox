@@ -24,6 +24,7 @@ class ServiceChild {
 
 @Component({
   selector: 'internal-provider-with-dependency',
+  standalone: false,
   template: '{{ child.parent.echo() }}',
 })
 class InternalComponent {

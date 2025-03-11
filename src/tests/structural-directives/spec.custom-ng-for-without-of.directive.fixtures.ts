@@ -9,6 +9,7 @@ export interface ICustomNgForContext {
 
 @Directive({
   selector: '[customNgForWithoutOf]',
+  standalone: false,
 })
 export class CustomNgForWithoutOfDirective {
   public constructor(

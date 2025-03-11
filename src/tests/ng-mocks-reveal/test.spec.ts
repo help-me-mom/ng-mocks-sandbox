@@ -20,6 +20,7 @@ const TOKEN = new InjectionToken('TOKEN');
 
 @Pipe({
   name: 'pure',
+  standalone: false,
 })
 class PurePipe implements PipeTransform {
   public value: any;
@@ -33,6 +34,7 @@ class PurePipe implements PipeTransform {
 
 @Pipe({
   name: 'impure',
+  standalone: false,
   pure: false,
 })
 class ImpurePipe implements PipeTransform {
@@ -53,6 +55,7 @@ class ImpurePipe implements PipeTransform {
     },
   ],
   selector: '[tpl]',
+  standalone: false,
 })
 class TplDirective {
   @Input() public readonly data: any = null;
@@ -69,6 +72,7 @@ class TplDirective {
     },
   ],
   selector: '[tpl2]',
+  standalone: false,
 })
 class Tpl2Directive {
   @Input('tpl') public readonly name: string | null = null;
@@ -84,6 +88,7 @@ class Tpl2Directive {
     },
   ],
   selector: '[block]',
+  standalone: false,
 })
 class BlockDirective {
   @Input('block') public readonly name: string | null = null;
@@ -103,6 +108,7 @@ class BlockDirective {
     },
   ],
   selector: 'mock',
+  standalone: false,
   template: '',
 })
 class MockComponent {
@@ -427,7 +433,7 @@ describe('ng-mocks-reveal:test', () => {
     expect(() =>
       ngMocks.reveal(block3El, BlockDirective),
     ).toThrowError(
-      'Cannot find a DebugElement via ngMocks.reveal(BlockDirective)',
+      `Cannot find a DebugElement via ngMocks.reveal(${BlockDirective.name})`,
     );
 
     {

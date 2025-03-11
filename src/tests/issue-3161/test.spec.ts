@@ -10,6 +10,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Pipe({
   name: 'translate',
+  standalone: false,
 })
 class TranslatePipe implements PipeTransform {
   transform(value: string) {
@@ -25,6 +26,7 @@ class TranslateModule {}
 
 @Pipe({
   name: 'translate',
+  standalone: false,
 })
 class MockTranslatePipe implements PipeTransform {
   transform(value: string) {
@@ -42,7 +44,6 @@ ngMocks.globalReplace(TranslateModule, MockTranslateModule);
 
 @Component({
   selector: 'standalone',
-  standalone: true,
   template: `{{ name | translate }}`,
   imports: [TranslateModule],
 })
@@ -60,7 +61,7 @@ describe('issue-3161', () => {
     });
 
     expect(ngMocks.formatText(fixture)).toEqual(
-      'MockTranslatePipe:mock:sandbox',
+      `${MockTranslatePipe.name}:mock:sandbox`,
     );
   });
 });

@@ -11,7 +11,6 @@ import {
 // A simple standalone pipe we are going to mock.
 @Pipe({
   name: 'pipe',
-  standalone: true,
 })
 class StandalonePipe implements PipeTransform {
   transform(value: string | null): string {
@@ -25,7 +24,6 @@ class StandalonePipe implements PipeTransform {
 @Component({
   selector: 'dependency',
   template: 'dependency',
-  standalone: true,
   imports: [StandalonePipe],
 })
 class DependencyComponent {
@@ -36,7 +34,6 @@ class DependencyComponent {
 @Component({
   selector: 'standalone',
   template: `<dependency></dependency> {{ 'test' | pipe }}`,
-  standalone: true,
   imports: [DependencyComponent, StandalonePipe],
 })
 class StandaloneComponent {

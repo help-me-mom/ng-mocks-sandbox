@@ -6,6 +6,7 @@ import { isMockOf, MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Component({
   selector: 'dynamic-overlay',
+  standalone: false,
   template:
     '<ng-container *ngComponentOutlet="component"></ng-container>',
 })
@@ -26,12 +27,14 @@ class OverlayModule {}
 
 @Component({
   selector: 'dep-component',
+  standalone: false,
   template: 'Dependency',
 })
 class DepComponent {}
 
 @Component({
   selector: 'mock-component',
+  standalone: false,
   template: '<h1 *ngIf="flag"><dep-component></dep-component></h1>',
 })
 class MockComponent {
@@ -40,7 +43,6 @@ class MockComponent {
 
 @NgModule({
   declarations: [MockComponent, DepComponent],
-  ['entryComponents' as never]: [MockComponent],
   exports: [MockComponent],
   imports: [CommonModule],
 })
@@ -108,7 +110,7 @@ describe('issue-333', () => {
         const fixture = MockRender(DynamicOverlayComponent);
         fixture.point.componentInstance.attachComponent(DepComponent);
         expect(() => fixture.detectChanges()).toThrowError(
-          /DepComponent/,
+          new RegExp(DepComponent.name),
         );
       });
     }
@@ -135,7 +137,7 @@ describe('issue-333', () => {
       const fixture = MockRender(DynamicOverlayComponent);
       fixture.point.componentInstance.attachComponent(MockComponent);
       expect(() => fixture.detectChanges()).toThrowError(
-        /MockComponent/,
+        new RegExp(MockComponent.name),
       );
     });
   });

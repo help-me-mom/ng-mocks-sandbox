@@ -8,6 +8,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Component({
   selector: 'target-735',
+  standalone: false,
   template: '{{ service }}',
 })
 class TargetComponent {

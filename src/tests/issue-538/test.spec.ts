@@ -10,6 +10,7 @@ import {
 
 @Component({
   selector: 'target-538',
+  standalone: false,
   template: `
     <div
       [innerHTML]="

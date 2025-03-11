@@ -6,6 +6,7 @@ import { MockBuilder } from 'ng-mocks';
 
 @Component({
   selector: 'app-reproduction',
+  standalone: false,
   template: `
     <div>
       <input type="text" [formControl]="control" />

@@ -32,6 +32,7 @@ class TargetModule {
 
 @Component({
   selector: 'target-142',
+  standalone: false,
   template: 'target',
 })
 class TargetComponent {}

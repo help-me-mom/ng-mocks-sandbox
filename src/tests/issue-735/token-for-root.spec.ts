@@ -16,6 +16,7 @@ const TOKEN = new InjectionToken('TOKEN-FOR-ROOT', {
 
 @Component({
   selector: 'target-735-token-for-root',
+  standalone: false,
   template: '{{ token }}',
 })
 class TargetComponent {

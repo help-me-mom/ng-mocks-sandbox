@@ -12,6 +12,7 @@ const TOKEN = new InjectionToken<string>('TOKEN');
     },
   ],
   selector: 'parent-2097-nested',
+  standalone: false,
   template:
     '<child-2097-nested></child-2097-nested><child-2097-nested></child-2097-nested><ng-content></ng-content>',
 })
@@ -19,6 +20,7 @@ class ParentComponent {}
 
 @Component({
   selector: 'child-2097-nested',
+  standalone: false,
   template: 'child',
 })
 class ChildComponent {}

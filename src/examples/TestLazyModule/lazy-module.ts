@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'lazy',
+  standalone: false,
   template: 'lazy-component',
 })
 export class LazyComponent {}

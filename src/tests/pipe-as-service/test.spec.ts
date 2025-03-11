@@ -17,6 +17,7 @@ import {
 
 @Pipe({
   name: 'target',
+  standalone: false,
 })
 @Injectable()
 class TargetPipe implements PipeTransform {
@@ -33,6 +34,7 @@ class TargetPipe implements PipeTransform {
 
 @Component({
   selector: 'target-pipe-as-service',
+  standalone: false,
   template: `
     'pipe:{{ '123' | target }}' 's:transform:{{
       service.transform('123')
@@ -214,7 +216,7 @@ describe('pipe-as-service', () => {
 
     it('fails because of the missed function', () => {
       expect(() => MockRender(TargetComponent)).toThrowError(
-        /.echo is not a function|Object doesn't support property or method 'echo'/,
+        /\.echo is not a function|Object doesn't support property or method 'echo'/,
       );
     });
   });

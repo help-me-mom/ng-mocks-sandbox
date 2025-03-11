@@ -5,6 +5,7 @@ import { MockBuilder, MockComponent } from 'ng-mocks';
 
 @Component({
   selector: 'target-nested-before-each',
+  standalone: false,
   template: 'target',
 })
 class TargetComponent {}

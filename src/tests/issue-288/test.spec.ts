@@ -12,6 +12,7 @@ import { isMockOf, MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Directive({
   selector: '[appCell]',
+  standalone: false,
 })
 class CellDirective {
   public constructor(public el?: TemplateRef<any>) {}
@@ -19,6 +20,7 @@ class CellDirective {
 
 @Component({
   selector: 'app-table-288',
+  standalone: false,
   template: ` <div *ngFor="let item of data">
     <ng-container
       *ngTemplateOutlet="cell.el; context: { $implicit: item }"
@@ -32,6 +34,7 @@ class TableComponent {
 
 @Component({
   selector: 'app-root-288',
+  standalone: false,
   template: ` <app-table-288 [data]="data">
     <ng-template appCell let-item>
       <div class="custom-data-element">Data: {{ item.data }}</div>

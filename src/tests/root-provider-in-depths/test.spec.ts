@@ -30,6 +30,7 @@ class TargetService {
 
 @Component({
   selector: 'target-root-provider-in-depths',
+  standalone: false,
   template: '{{ service.name }}',
 })
 class TargetComponent {

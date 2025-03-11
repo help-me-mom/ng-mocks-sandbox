@@ -13,6 +13,7 @@ class TargetService {}
 
 @Component({
   selector: 'target-4344',
+  standalone: false,
   template: '{{ 1 | number }}',
   providers: [AsyncPipe],
 })

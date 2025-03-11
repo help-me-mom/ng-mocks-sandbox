@@ -10,6 +10,7 @@ import {
 
 @Component({
   selector: 'target-305-forms',
+  standalone: false,
   template: `
     <input data-testid="inputControl" [(ngModel)]="value" />
   `,

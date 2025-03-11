@@ -11,6 +11,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Component({
   selector: 'target-735-provider-for-module',
+  standalone: false,
   template: '{{ service.name }}',
 })
 class TargetComponent {
@@ -69,7 +70,7 @@ describe('issue-735:provider-for-module', () => {
 
       it('throws on unprovided global mock', () => {
         expect(() => MockRender(TargetUnusedService)).toThrowError(
-          /No provider for TargetUnusedService/,
+          new RegExp(`No provider for ${TargetUnusedService.name}`),
         );
       });
     });

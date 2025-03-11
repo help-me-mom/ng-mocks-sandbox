@@ -5,6 +5,7 @@ import { MockBuilder, MockRender } from 'ng-mocks';
 
 @Component({
   selector: 'target-root-provider-with-string-dep',
+  standalone: false,
   template: ' "name:{{ name }}" ',
 })
 class TargetComponent {

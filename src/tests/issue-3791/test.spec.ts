@@ -17,7 +17,6 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
     [value]="value"
     change="onValueChange($event.target.value)"
   />`,
-  standalone: true,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

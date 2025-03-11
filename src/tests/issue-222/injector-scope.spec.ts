@@ -29,6 +29,7 @@ class KeepModule {
 
 @Component({
   selector: 'target-222-injector-scope',
+  standalone: false,
   template: 'target',
 })
 class TargetComponent {}

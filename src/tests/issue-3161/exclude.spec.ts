@@ -10,6 +10,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Pipe({
   name: 'translate',
+  standalone: false,
 })
 class TranslatePipe implements PipeTransform {
   transform(value: string) {
@@ -27,7 +28,6 @@ ngMocks.globalExclude(TranslateModule);
 
 @Component({
   selector: 'standalone',
-  standalone: true,
   template: `{{ name | translate }}`,
   imports: [TranslateModule],
 })

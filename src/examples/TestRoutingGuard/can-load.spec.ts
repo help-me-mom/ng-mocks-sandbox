@@ -47,6 +47,7 @@ const sideEffectCanLoadGuard: CanLoadFn = () => false;
 // It will be replaced with a mock copy.
 @Component({
   selector: 'login',
+  standalone: false,
   template: 'login',
 })
 class LoginComponent {}
@@ -55,6 +56,7 @@ class LoginComponent {}
 // It will be replaced with a mock copy.
 @Component({
   selector: 'dashboard',
+  standalone: false,
   template: 'dashboard',
 })
 class DashboardComponent {}

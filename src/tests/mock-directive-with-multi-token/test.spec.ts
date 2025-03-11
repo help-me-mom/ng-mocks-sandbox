@@ -13,6 +13,7 @@ const TOKEN = new InjectionToken('TOKEN');
     },
   ],
   selector: 'target-mock-directive-with-multi-token',
+  standalone: false,
 })
 class TargetDirective {}
 

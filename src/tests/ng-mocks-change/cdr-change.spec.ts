@@ -20,6 +20,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
     },
   ],
   selector: 'cva-ng-mocks-change-cdr-change',
+  standalone: false,
   template: ' {{ show }} ',
 })
 class CvaComponent implements ControlValueAccessor {
@@ -39,6 +40,7 @@ class CvaComponent implements ControlValueAccessor {
 
 @Component({
   selector: 'target-ng-mocks-change-cdr-change',
+  standalone: false,
   template: `
     <cva-ng-mocks-change-cdr-change
       [formControl]="control"

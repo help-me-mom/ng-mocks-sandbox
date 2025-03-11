@@ -19,6 +19,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
     },
   ],
   selector: 'custom',
+  standalone: false,
 })
 class CustomDirective implements ControlValueAccessor {
   public registerOnChange = () => undefined;
@@ -29,6 +30,7 @@ class CustomDirective implements ControlValueAccessor {
 
 @Component({
   selector: 'target-ng-mocks-change-reactive-forms',
+  standalone: false,
   template: `
     <input data-testid="inputControl" [formControl]="myControl" />
     <input data-testid="ngModel" [(ngModel)]="value" />

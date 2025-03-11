@@ -10,6 +10,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Directive({
   selector: '[myDirective]',
+  standalone: false,
 })
 class MyDirective {
   @Input() public readonly value: string | null = null;
@@ -41,7 +42,7 @@ describe('issue-298', () => {
           MyDirective,
         ),
       ).toThrowError(
-        'Cannot find an element via ngMocks.find(MyDirective)',
+        `Cannot find an element via ngMocks.find(${MyDirective.name})`,
       );
       const instance3 = ngMocks.find(
         fixture.debugElement.query(By.css('.p3')),
@@ -103,7 +104,7 @@ describe('issue-298', () => {
           MyDirective,
         ),
       ).toThrowError(
-        'Cannot find an instance via ngMocks.findInstance(MyDirective)',
+        `Cannot find an instance via ngMocks.findInstance(${MyDirective.name})`,
       );
       const instance3 = ngMocks.findInstance(
         fixture.debugElement.query(By.css('.p3')),
@@ -167,7 +168,7 @@ describe('issue-298', () => {
           MyDirective,
         ),
       ).toThrowError(
-        'Cannot find a TemplateRef via ngMocks.findTemplateRef(MyDirective)',
+        `Cannot find a TemplateRef via ngMocks.findTemplateRef(${MyDirective.name})`,
       );
       const instance3 = ngMocks.findTemplateRef(
         fixture.debugElement.query(By.css('.p3')),
@@ -229,7 +230,7 @@ describe('issue-298', () => {
           MyDirective,
         ),
       ).toThrowError(
-        'Cannot find MyDirective instance via ngMocks.get',
+        `Cannot find ${MyDirective.name} instance via ngMocks.get`,
       );
       const instance3 = ngMocks.get(
         fixture.debugElement.query(By.css('.p3 span')),
@@ -298,7 +299,7 @@ describe('issue-298', () => {
           'valueChange',
         ),
       ).toThrowError(
-        'Cannot find valueChange output via ngMocks.output',
+        `Cannot find valueChange output via ngMocks.output`,
       );
       const value3 = ngMocks.output(
         fixture.debugElement.query(By.css('.p3 span')),

@@ -10,6 +10,7 @@ class TargetService {
 
 @Component({
   selector: 'target-726',
+  standalone: false,
   template: '{{ service.name }}',
 })
 class TargetComponent {
@@ -18,6 +19,7 @@ class TargetComponent {
 
 @Component({
   selector: 'view',
+  standalone: false,
   template: '<ng-content></ng-content>',
   viewProviders: [TargetService],
 })
@@ -26,6 +28,7 @@ class ViewComponent {}
 @Component({
   providers: [TargetService],
   selector: 'provider',
+  standalone: false,
   template: '<ng-content></ng-content>',
 })
 class ProviderComponent {}
@@ -58,7 +61,9 @@ describe('issue-726', () => {
 
     it('finds the view provider', () => {
       // TargetComponent doesn't have the access to TargetService.
-      expect(view).toThrowError(/No provider for TargetService/);
+      expect(view).toThrowError(
+        new RegExp(`No provider for ${TargetService.name}`),
+      );
 
       // Container knows how to provide TargetService for its views.
       expect(provider).not.toThrow();
@@ -79,7 +84,9 @@ describe('issue-726', () => {
 
     it('finds the view provider', () => {
       // TargetComponent doesn't have the access to TargetService.
-      expect(view).toThrowError(/No provider for TargetService/);
+      expect(view).toThrowError(
+        new RegExp(`No provider for ${TargetService.name}`),
+      );
 
       // Container knows how to provide TargetService for its views.
       expect(provider).not.toThrow();

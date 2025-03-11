@@ -2,6 +2,7 @@ import { APP_INITIALIZER, Component, InjectionToken, NgModule } from '@angular/c
 
 @Component({
   selector: 'target-component',
+  standalone: false,
   template: 'target',
 })
 export class TargetComponent {}
