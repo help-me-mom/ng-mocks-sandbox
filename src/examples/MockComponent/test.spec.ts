@@ -13,6 +13,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Component({
   selector: 'child',
+  standalone: false,
   template: 'child',
 })
 class ChildComponent {
@@ -30,6 +31,7 @@ class ChildComponent {
 
 @Component({
   selector: 'target-mock-component',
+  standalone: false,
   template: `
     <child [someInput]="value" (someOutput)="trigger($event)"></child>
   `,

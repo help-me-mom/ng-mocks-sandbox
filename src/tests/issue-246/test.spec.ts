@@ -29,6 +29,7 @@ import {
     },
   ],
   selector: 'target-246',
+  standalone: false,
   template: '{{ providedValue }}',
 })
 class TargetComponent implements ControlValueAccessor {
@@ -63,6 +64,7 @@ class TargetComponent implements ControlValueAccessor {
     },
   ],
   selector: '[target]',
+  standalone: false,
 })
 class TargetDirective implements Validator {
   public provideChange: any;
@@ -90,6 +92,7 @@ class TargetDirective implements Validator {
     },
   ],
   selector: '[targetAsync]',
+  standalone: false,
 })
 class TargetAsyncDirective implements Validator {
   public provideChange: any;

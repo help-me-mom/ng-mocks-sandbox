@@ -11,7 +11,6 @@ import { isMockOf, MockDirectives, ngMocks } from 'ng-mocks';
 
 @Directive({
   selector: 'base',
-  standalone: true,
 })
 class BaseDirective {
   @Input() public readonly input: string | undefined = undefined;
@@ -22,7 +21,6 @@ class BaseDirective {
 
 @Directive({
   selector: 'input',
-  standalone: true,
   hostDirectives: [BaseDirective],
 })
 class InputDirective {
@@ -33,7 +31,6 @@ class InputDirective {
 
 @Directive({
   selector: 'output',
-  standalone: true,
   hostDirectives: [
     {
       directive: InputDirective,
@@ -50,6 +47,7 @@ class OutputDirective {
 
 @Component({
   selector: 'target',
+  standalone: false,
   template: '',
   hostDirectives: [
     {
@@ -68,6 +66,7 @@ class TargetComponent {
 
 @Component({
   selector: 'render',
+  standalone: false,
   template:
     '<target [input]="input" (output)="output()" [customInput]="customInput" (customOutput)="customOutput()"></target>',
 })

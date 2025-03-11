@@ -11,6 +11,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Directive({
   selector: '[target]',
+  standalone: false,
 })
 class TargetDirective {
   @Input() public readonly target: string | null = null;
@@ -20,6 +21,7 @@ class TargetDirective {
 
 @Directive({
   selector: '[unused]',
+  standalone: false,
 })
 class UnusedDirective {
   public constructor(public readonly tpl: TemplateRef<any>) {}
@@ -27,12 +29,14 @@ class UnusedDirective {
 
 @Component({
   selector: 'target-ng-mocks-find-template-of',
+  standalone: false,
   template: '',
 })
 class TargetComponent {}
 
 @Component({
   selector: 'test',
+  standalone: false,
   template: `
     <target-ng-mocks-find-template-of>
       1
@@ -140,7 +144,7 @@ describe('ng-mocks-find-template-ref', () => {
     expect(() =>
       ngMocks.findTemplateRef(UnusedDirective),
     ).toThrowError(
-      'Cannot find a TemplateRef via ngMocks.findTemplateRef(UnusedDirective)',
+      `Cannot find a TemplateRef via ngMocks.findTemplateRef(${UnusedDirective.name})`,
     );
   });
 

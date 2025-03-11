@@ -5,6 +5,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Component({
   selector: 'target-ng-mocks-trigger-keyup',
+  standalone: false,
   template: `
     <input
       [formControl]="control"

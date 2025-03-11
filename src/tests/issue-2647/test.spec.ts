@@ -4,6 +4,7 @@ import { MockBuilder, MockRender } from 'ng-mocks';
 
 @Directive({
   selector: 'target-2647',
+  standalone: false,
 })
 class TargetDirective {}
 
@@ -20,6 +21,7 @@ class MiddleModule {}
 
 @Component({
   selector: 'target-2647',
+  standalone: false,
   template: `{{ directive.constructor.name }}`,
 })
 class TargetComponent {

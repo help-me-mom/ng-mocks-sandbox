@@ -17,6 +17,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
     },
   ],
   selector: 'custom',
+  standalone: false,
 })
 class CvaDirective implements ControlValueAccessor {
   public registerOnChange = (fn: never) =>
@@ -32,6 +33,7 @@ class CvaDirective implements ControlValueAccessor {
 
 @Component({
   selector: 'target-ng-mocks-touch-3341',
+  standalone: false,
   template: ` <custom [formControl]="myControl"></custom> `,
 })
 class TargetComponent {

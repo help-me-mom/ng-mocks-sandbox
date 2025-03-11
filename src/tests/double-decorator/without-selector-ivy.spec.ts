@@ -8,7 +8,9 @@ import { TestBed } from '@angular/core/testing';
 
 import { MockBuilder, MockRender } from 'ng-mocks';
 
-@Directive()
+@Directive({
+  standalone: false,
+} as never)
 class BaseClass {
   public name = 'directive';
 }
@@ -19,6 +21,7 @@ class MyProvider extends BaseClass {}
 @Component({
   providers: [MyProvider],
   selector: 'target-double-decorator-without-selector-ivy',
+  standalone: false,
   template: '{{ service.name }}',
 })
 class MyComponent {
@@ -52,7 +55,7 @@ describe('double-decorator-ivy:without-selector', () => {
 
     it('fails', () => {
       expect(() => MockRender(MyComponent)).toThrowError(
-        /Directive BaseClass has no selector/,
+        `Directive ${BaseClass.name} has no selector, please add it!`,
       );
     });
   });
@@ -79,7 +82,7 @@ describe('double-decorator-ivy:without-selector', () => {
 
     it('fails', () => {
       expect(() => MockRender(MyComponent)).toThrowError(
-        /Directive MockOfBaseClass has no selector/,
+        `Directive MockOf${BaseClass.name} has no selector, please add it!`,
       );
     });
   });
@@ -91,7 +94,7 @@ describe('double-decorator-ivy:without-selector', () => {
 
     it('fails', () => {
       expect(() => MockRender(MyComponent)).toThrowError(
-        /Directive MockOfBaseClass has no selector/,
+        `Directive MockOf${BaseClass.name} has no selector, please add it!`,
       );
     });
   });

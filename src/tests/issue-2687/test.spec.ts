@@ -26,7 +26,6 @@ class StandaloneModule {}
 
 @Pipe({
   name: 'standalone',
-  standalone: true,
 })
 class StandalonePipe implements PipeTransform {
   transform(): string {
@@ -37,7 +36,6 @@ class StandalonePipe implements PipeTransform {
 @Component({
   selector: 'standalone',
   template: 'service:{{ service.constructor.name }}',
-  standalone: true,
   imports: [StandaloneModule, StandalonePipe],
 })
 class StandaloneComponent {
@@ -47,7 +45,6 @@ class StandaloneComponent {
 @Component({
   selector: 'empty',
   template: 'empty',
-  standalone: true,
   imports: [], // this is the thing we assert: an empty imports array
 })
 class EmptyComponent {}
@@ -55,7 +52,6 @@ class EmptyComponent {}
 @Component({
   selector: 'target-2687',
   template: '<standalone></standalone> pipe:{{ null | standalone }}',
-  standalone: true,
   imports: [StandaloneComponent, StandalonePipe, EmptyComponent],
 })
 class TargetComponent {}
@@ -72,7 +68,7 @@ describe('issue-2687', () => {
       const fixture = TestBed.createComponent(StandaloneComponent);
       fixture.detectChanges();
       expect(ngMocks.formatHtml(fixture)).toEqual(
-        'service:StandaloneService',
+        `service:${StandaloneService.name}`,
       );
     });
 
@@ -80,7 +76,7 @@ describe('issue-2687', () => {
       const fixture = TestBed.createComponent(TargetComponent);
       fixture.detectChanges();
       expect(ngMocks.formatHtml(fixture)).toEqual(
-        '<standalone>service:StandaloneService</standalone> pipe:StandalonePipe',
+        `<standalone>service:${StandaloneService.name}</standalone> pipe:${StandalonePipe.name}`,
       );
     });
   });
@@ -159,7 +155,7 @@ describe('issue-2687', () => {
     it('renders TargetComponent', () => {
       const fixture = MockRender(TargetComponent);
       expect(ngMocks.formatHtml(fixture)).toEqual(
-        '<target-2687><standalone></standalone> pipe:StandalonePipe</target-2687>',
+        `<target-2687><standalone></standalone> pipe:${StandalonePipe.name}</target-2687>`,
       );
       expect(() =>
         ngMocks.findInstance(StandaloneComponent),

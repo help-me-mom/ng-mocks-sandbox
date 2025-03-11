@@ -20,12 +20,14 @@ class ModalService {
 
 @Component({
   selector: 'modal',
+  standalone: false,
   template: 'modal',
 })
 class ModalComponent {}
 
 @Component({
   selector: 'target-296',
+  standalone: false,
   template: 'target',
 })
 class TargetComponent {
@@ -36,7 +38,6 @@ class TargetComponent {
 
 @NgModule({
   declarations: [TargetComponent, ModalComponent],
-  ['entryComponents' as never]: [ModalComponent],
   providers: [ModalService],
 })
 class TargetModule {}

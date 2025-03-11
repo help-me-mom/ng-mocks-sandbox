@@ -7,14 +7,12 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Component({
   selector: 'my-test-one',
-  standalone: true,
-  imports: [CommonModule, RouterModule],
   template: `<a [routerLink]="['test']">Test</a>`,
+  imports: [CommonModule, RouterModule],
 })
 class TestOneComponent {}
 
 @Component({
-  standalone: true,
   imports: [CommonModule, RouterModule],
   template: `<a [routerLink]="['test']">Test</a>`,
 })

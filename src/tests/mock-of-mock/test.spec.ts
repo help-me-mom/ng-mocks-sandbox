@@ -16,17 +16,20 @@ import {
 
 @Component({
   selector: 'target-mock-of-mock',
+  standalone: false,
   template: '',
 })
 class TargetComponent {}
 
 @Directive({
   selector: 'target-mock-of-mock',
+  standalone: false,
 })
 class TargetDirective {}
 
 @Pipe({
   name: 'target',
+  standalone: false,
 })
 class TargetPipe implements PipeTransform {
   public transform(value: any): any {

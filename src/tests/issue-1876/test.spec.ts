@@ -14,6 +14,7 @@ class HelloService {
 
 @Component({
   providers: [HelloService],
+  standalone: false,
   template: '',
 })
 class HelloComponent {
@@ -26,6 +27,7 @@ class HelloComponent {
 
 @Directive({
   providers: [HelloService],
+  standalone: false,
   selector: 'hello',
 })
 class HelloDirective {

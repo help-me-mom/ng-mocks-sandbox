@@ -6,6 +6,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Component({
   selector: 'target-735-date-pipe',
+  standalone: false,
   template: '{{ stamp | date }}',
 })
 class TargetComponent {

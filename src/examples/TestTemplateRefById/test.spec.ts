@@ -10,6 +10,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Component({
   selector: 'xd-card-template-ref-by-id',
+  standalone: false,
   template: 'xd-card',
 })
 class XdCardComponent {
@@ -22,6 +23,7 @@ class XdCardComponent {
 
 @Component({
   selector: 'target-template-ref-by-id',
+  standalone: false,
   template: `
     <xd-card-template-ref-by-id>
       <ng-template #header>My Header</ng-template>

@@ -7,6 +7,7 @@ const TOKEN = new InjectionToken('TOKEN');
 
 @Component({
   selector: 'target-721-before-all',
+  standalone: false,
   template: '{{ value }}',
 })
 class TargetComponent {

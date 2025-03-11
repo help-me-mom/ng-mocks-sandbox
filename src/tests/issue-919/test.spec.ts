@@ -6,6 +6,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Component({
   selector: 'target-919',
+  standalone: false,
   template: `<ng-container *ngIf="context.data$ | async as data">{{
     data.value
   }}</ng-container>`,
@@ -40,6 +41,8 @@ describe('issue-919', () => {
   });
 
   it('fails on render', () => {
-    expect(() => MockRender(TargetComponent)).toThrowError(/data\$/);
+    expect(() => MockRender(TargetComponent)).toThrowError(
+      /'data\$'/,
+    );
   });
 });

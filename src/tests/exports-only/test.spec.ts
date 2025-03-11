@@ -5,6 +5,7 @@ import { MockBuilder, MockRender } from 'ng-mocks';
 
 @Component({
   selector: 'internal-exports-only',
+  standalone: false,
   template: 'internal',
 })
 class InternalComponent {}

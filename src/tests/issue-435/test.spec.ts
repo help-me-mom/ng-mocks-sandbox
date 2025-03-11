@@ -5,6 +5,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Component({
   selector: 'target-435',
+  standalone: false,
   template: '{{ stamp | date }}',
 })
 class TargetComponent {

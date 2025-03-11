@@ -5,6 +5,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Directive({
   selector: '[myDirective]',
+  standalone: false,
 })
 class MyDirective {
   @Input() public readonly value: string | null = null;

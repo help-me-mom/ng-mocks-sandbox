@@ -6,12 +6,14 @@ import { MockBuilder, MockRender } from 'ng-mocks';
 
 @Component({
   selector: 'app-hello-178',
+  standalone: false,
   template: 'app-hello',
 })
 class HelloComponent {}
 
 @Component({
   selector: 'app-hello2-178',
+  standalone: false,
   template: 'app-hello2',
 })
 class Hello2Component {}

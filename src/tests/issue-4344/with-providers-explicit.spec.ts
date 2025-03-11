@@ -19,6 +19,7 @@ class TargetService {}
 
 @Component({
   selector: 'target-4344-with-providers-explicit',
+  standalone: false,
   template: '{{ 1 | number }}',
 })
 class TargetComponent {
@@ -38,7 +39,6 @@ class TargetModule {}
 @Component({
   selector: 'standalone',
   template: '{{ 1 | number }}',
-  standalone: true,
   imports: [TargetModule],
   providers: [AsyncPipe],
 })

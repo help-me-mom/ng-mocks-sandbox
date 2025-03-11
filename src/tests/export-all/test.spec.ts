@@ -12,6 +12,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Pipe({
   name: 'target',
+  standalone: false,
 })
 class TargetPipe implements PipeTransform {
   protected readonly name = 'pipe';
@@ -22,6 +23,7 @@ class TargetPipe implements PipeTransform {
 
 @Component({
   selector: 'target-export-all',
+  standalone: false,
   template: `<ng-container *ngIf="!value">{{
     value | target
   }}</ng-container>`,
@@ -107,7 +109,9 @@ describe('export-all', () => {
 
     it('fails on no exclude due to a conflict in declarations', () => {
       expect(() => MockRender(TargetComponent)).toThrowError(
-        /Multiple components match node with tagname target|Conflicting components: MockOfTargetComponent,TargetComponent/,
+        new RegExp(
+          `Multiple components match node with tagname target|Conflicting components: MockOf${TargetComponent.name},${TargetComponent.name}`,
+        ),
       );
     });
   });

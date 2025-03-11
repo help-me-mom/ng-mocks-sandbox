@@ -11,7 +11,6 @@ import { isMockOf, MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Directive({
   selector: 'target1',
-  standalone: true,
   hostDirectives: [],
 })
 class Target1Directive {
@@ -23,7 +22,6 @@ class Target1Directive {
 
 @Directive({
   selector: 'target2',
-  standalone: true,
   hostDirectives: [Target1Directive],
 })
 class Target2Directive {
@@ -35,6 +33,7 @@ class Target2Directive {
 
 @Component({
   selector: 'target',
+  standalone: false,
   template: '',
   hostDirectives: [
     {
@@ -53,6 +52,7 @@ class TargetComponent {
 
 @Component({
   selector: 'render',
+  standalone: false,
   template:
     '<target [input]="input" (output)="output()" [customInput]="customInput" (customOutput)="customOutput()"></target>',
 })

@@ -8,6 +8,7 @@ import { MockBuilder, MockRender } from 'ng-mocks';
 describe('issue-5465', () => {
   @Component({
     selector: 'app-ng-for',
+    standalone: false,
     template: `
       <span *ngFor="let letter of this.test">{{ letter }}</span>
     `,
@@ -27,6 +28,7 @@ describe('issue-5465', () => {
 
   @Component({
     selector: 'app-root',
+    standalone: false,
     template: ` <app-ng-for></app-ng-for> `,
   })
   class AppRootComponent {

@@ -21,6 +21,7 @@ class ViewProviderService {
 @Component({
   providers: [ProviderService],
   selector: 'hello',
+  standalone: false,
   template: `
     <h1 class="name">{{ name }}</h1>
     <div class="provider">{{ provider.description }}</div>

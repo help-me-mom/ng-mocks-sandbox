@@ -16,6 +16,7 @@ import {
 
 @Directive({
   selector: 'target-double-decorator-with-selector',
+  standalone: false,
 })
 class BaseDirective {
   public name = 'directive';
@@ -27,6 +28,7 @@ class MyProvider extends BaseDirective {}
 @Component({
   providers: [MyProvider],
   selector: 'target-double-decorator-with-selector',
+  standalone: false,
   template: '{{ service.name }}',
 })
 class MyComponent {

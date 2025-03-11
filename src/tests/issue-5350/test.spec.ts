@@ -10,7 +10,9 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 // Angular 16 inputs can be objects which should be properly mocked.
 describe('issue-5350', () => {
-  @Directive()
+  @Directive({
+    standalone: false,
+  } as never)
   class TargetBase {
     @Input({
       alias: 'aInput1',
@@ -22,6 +24,7 @@ describe('issue-5350', () => {
 
   @Component({
     selector: 'target',
+    standalone: false,
     template: '{{ input1 }}{{ input2 }}',
   })
   class TargetComponent extends TargetBase {

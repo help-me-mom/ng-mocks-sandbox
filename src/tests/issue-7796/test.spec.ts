@@ -12,6 +12,7 @@ import {
 
 @Component({
   selector: 'route',
+  standalone: false,
   template: '{{ params$ | async }}',
 })
 class RouteComponent implements OnInit {

@@ -20,6 +20,7 @@ class TargetService {
 
 @Component({
   selector: 'target-ng-mocks-faster',
+  standalone: false,
   template: 'target',
 })
 class TargetComponent {

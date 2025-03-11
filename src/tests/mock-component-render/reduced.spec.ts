@@ -11,11 +11,13 @@ import { isMockOf, MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Directive({
   selector: '[target]',
+  standalone: false,
 })
 class TargetDirective {}
 
 @Component({
   selector: 'target-mock-component-render-reduced',
+  standalone: false,
   template: 'target',
 })
 class TargetComponent {

@@ -28,6 +28,7 @@ class ServiceModule {}
 
 @Component({
   selector: 'target-623-nested',
+  standalone: false,
   template: '{{ service.name }}',
 })
 class TargetComponent {

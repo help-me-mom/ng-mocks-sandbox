@@ -26,6 +26,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
     },
   ],
   selector: 'target-167',
+  standalone: false,
   template: 'target',
 })
 class TargetComponent implements ControlValueAccessor, Validator {
@@ -67,6 +68,7 @@ class TargetComponent implements ControlValueAccessor, Validator {
 
 @Component({
   selector: 'app-root-167-component',
+  standalone: false,
   template: '<target-167 [formControl]="control"></target-167>',
 })
 class RealComponent {

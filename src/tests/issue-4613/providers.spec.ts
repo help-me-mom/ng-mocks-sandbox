@@ -13,6 +13,7 @@ class Provider2Service {}
 
 @Component({
   selector: 'target-4613-providers',
+  standalone: false,
   template: '{{ service.constructor.name }}',
   providers: [Provider2Service],
 })
@@ -73,7 +74,7 @@ describe('issue-4613', () => {
 
     it('fails because no provider for ProviderService', () => {
       expect(() => MockRender(TargetComponent)).toThrowError(
-        /No provider for ProviderService/,
+        new RegExp(`No provider for ${ProviderService.name}`),
       );
     });
   });
@@ -88,7 +89,7 @@ describe('issue-4613', () => {
 
     it('renders ProviderService', () => {
       expect(ngMocks.formatText(MockRender(TargetComponent))).toEqual(
-        'ProviderService',
+        ProviderService.name,
       );
     });
   });
@@ -105,7 +106,7 @@ describe('issue-4613', () => {
       it('renders Provider1Service', () => {
         expect(
           ngMocks.formatText(MockRender(TargetComponent)),
-        ).toEqual('Provider1Service');
+        ).toEqual(Provider1Service.name);
 
         expect(
           isMockOf(
@@ -127,7 +128,7 @@ describe('issue-4613', () => {
       it('renders Provider1Service', () => {
         expect(
           ngMocks.formatText(MockRender(TargetComponent)),
-        ).toEqual('Provider1Service');
+        ).toEqual(Provider1Service.name);
 
         expect(
           isMockOf(
@@ -152,7 +153,7 @@ describe('issue-4613', () => {
       it('renders Provider1Service', () => {
         expect(
           ngMocks.formatText(MockRender(TargetComponent)),
-        ).toEqual('Provider1Service');
+        ).toEqual(Provider1Service.name);
 
         expect(
           isMockOf(
@@ -175,7 +176,7 @@ describe('issue-4613', () => {
       it('renders Provider1Service', () => {
         expect(
           ngMocks.formatText(MockRender(TargetComponent)),
-        ).toEqual('Provider1Service');
+        ).toEqual(Provider1Service.name);
 
         expect(
           isMockOf(

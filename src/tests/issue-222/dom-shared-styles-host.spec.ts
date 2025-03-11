@@ -39,6 +39,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
     ]),
   ],
   selector: 'target-222-dom-shared-styles-host',
+  standalone: false,
   template: `
     <div [@openClose]="isOpen ? 'open' : 'closed'">
       The box is now {{ isOpen ? 'Open' : 'Closed' }}!

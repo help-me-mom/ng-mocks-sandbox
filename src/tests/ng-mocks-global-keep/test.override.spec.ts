@@ -5,6 +5,7 @@ import { MockModule, MockRender, ngMocks } from 'ng-mocks';
 
 @Component({
   selector: 'target1-ng-mocks-global-keep',
+  standalone: false,
   template: '{{ name }}',
 })
 class Target1Component {
@@ -13,6 +14,7 @@ class Target1Component {
 
 @Component({
   selector: 'target2-ng-mocks-global-keep',
+  standalone: false,
   template: '{{ name }}',
 })
 class Target2Component {

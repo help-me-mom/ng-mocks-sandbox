@@ -46,6 +46,7 @@ class StorageService {
 
 @Component({
   selector: 'profile',
+  standalone: false,
   template: `<form [formGroup]="form">
     <input type="text" name="email" formControlName="email" />
     <input type="text" name="firstName" formControlName="firstName" />

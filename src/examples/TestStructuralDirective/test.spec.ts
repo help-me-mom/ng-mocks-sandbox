@@ -11,6 +11,7 @@ import { MockBuilder, MockRender } from 'ng-mocks';
 // it renders its content only when its input has truly value.
 @Directive({
   selector: '[target]',
+  standalone: false,
 })
 class TargetDirective {
   public constructor(

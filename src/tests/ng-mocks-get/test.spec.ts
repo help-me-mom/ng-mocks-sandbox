@@ -10,6 +10,7 @@ class ComponentService {}
 
 @Component({
   selector: 'target-ng-mocks-get',
+  standalone: false,
   template: 'target',
   providers: [ComponentService],
 })
@@ -28,7 +29,7 @@ describe('ng-mocks-get', () => {
     MockRender(TargetComponent);
     expect(() => ngMocks.get(RootService)).not.toThrow();
     expect(() => ngMocks.get(ComponentService)).toThrowError(
-      'Cannot find an instance via ngMocks.get(ComponentService)',
+      `Cannot find an instance via ngMocks.get(${ComponentService.name})`,
     );
   });
 });

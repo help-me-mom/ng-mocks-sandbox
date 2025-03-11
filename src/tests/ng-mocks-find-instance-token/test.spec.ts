@@ -12,6 +12,7 @@ const TOKEN = new InjectionToken('TOKEN');
     },
   ],
   selector: 'target-ng-mocks-find-instance-token',
+  standalone: false,
   template: 'target',
 })
 class TargetComponent {}

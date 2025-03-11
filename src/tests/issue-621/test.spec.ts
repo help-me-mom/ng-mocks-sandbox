@@ -9,6 +9,7 @@ import { MockBuilder, MockRenderFactory, ngMocks } from 'ng-mocks';
 
 @Component({
   selector: 'target-621',
+  standalone: false,
   template: `<button (click)="update.emit(value)">
     {{ value }}
   </button>`,

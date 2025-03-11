@@ -7,6 +7,7 @@ import { LazyComponent, LazyModule } from './lazy-module';
 
 @Component({
   selector: 'app-root',
+  standalone: false,
   template: '<router-outlet></router-outlet>',
 })
 class AppComponent {

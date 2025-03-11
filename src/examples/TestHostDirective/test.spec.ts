@@ -9,7 +9,6 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Directive({
   selector: 'host',
-  standalone: true,
 })
 class HostDirective {
   @HostBinding('attr.name') @Input() input?: string;
@@ -25,6 +24,7 @@ class HostDirective {
       inputs: ['input'],
     },
   ],
+  standalone: false,
   template: 'target',
 })
 class TargetComponent {

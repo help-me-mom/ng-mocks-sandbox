@@ -15,6 +15,7 @@ import { fromEvent } from 'rxjs';
 
 @Component({
   selector: 'target-ng-mocks-trigger-click',
+  standalone: false,
   template: ' <div (click)="clickTag = $event" #element></div> ',
 })
 class TargetComponent implements OnDestroy {

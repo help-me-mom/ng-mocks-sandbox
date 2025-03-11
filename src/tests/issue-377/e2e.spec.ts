@@ -30,6 +30,7 @@ const TOKEN = new InjectionToken('TOKEN', {
 
 @Component({
   selector: 'target-377',
+  standalone: false,
   template: 'service:{{ service.echo() }} token:{{ token }}',
 })
 class TargetComponent {

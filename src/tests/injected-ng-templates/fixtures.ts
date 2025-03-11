@@ -2,6 +2,7 @@ import { Component, ContentChild, Input, TemplateRef, ViewChild, ViewContainerRe
 
 @Component({
   selector: 'custom-injection',
+  standalone: false,
   template: `
     <div *ngIf="items && items.length">
       <ng-template ngFor [ngForOf]="items" [ngForTemplate]="injectedBlock"></ng-template>

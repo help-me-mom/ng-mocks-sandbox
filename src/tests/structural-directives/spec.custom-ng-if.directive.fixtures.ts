@@ -2,6 +2,7 @@ import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 
 @Directive({
   selector: '[customNgIf]',
+  standalone: false,
 })
 export class CustomNgIfDirective {
   public constructor(

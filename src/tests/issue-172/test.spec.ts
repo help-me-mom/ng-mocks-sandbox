@@ -29,6 +29,7 @@ class Target2Service {
 @Component({
   providers: [Target1Service, Target2Service],
   selector: 'app-target',
+  standalone: false,
   template: '{{echo}}',
 })
 class TargetComponent implements OnInit {

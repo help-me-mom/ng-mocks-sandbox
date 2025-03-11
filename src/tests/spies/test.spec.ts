@@ -18,6 +18,7 @@ class TargetService {
 
 @Component({
   selector: 'target-spies',
+  standalone: false,
   template: '<ng-content></ng-content>',
 })
 class TargetComponent {

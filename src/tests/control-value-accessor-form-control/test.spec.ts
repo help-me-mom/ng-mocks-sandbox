@@ -16,6 +16,7 @@ import {
 
 @Component({
   selector: 'target-cva-form-control',
+  standalone: false,
   template:
     '<control-cva-form-control [formControl]="control"></control-cva-form-control>',
 })
@@ -32,6 +33,7 @@ class TargetComponent {
     },
   ],
   selector: 'control-cva-form-control',
+  standalone: false,
   template: '',
 })
 class ControlComponent implements ControlValueAccessor {

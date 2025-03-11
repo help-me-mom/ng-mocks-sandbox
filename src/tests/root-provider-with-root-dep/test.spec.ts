@@ -26,6 +26,7 @@ class TargetService {
 
 @Component({
   selector: 'target-root-provider-with-root-dep',
+  standalone: false,
   template: ' "name:{{ service ? service.name : \'\' }}" ',
 })
 class TargetComponent {

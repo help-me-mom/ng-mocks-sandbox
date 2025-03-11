@@ -9,6 +9,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 describe('issue-5047', () => {
   @Component({
     selector: 'dependency',
+    standalone: false,
     template: '<ng-content></ng-content>',
   })
   class DependencyComponent {
@@ -18,7 +19,8 @@ describe('issue-5047', () => {
   // A standalone component we are going to test.
   @Component({
     selector: 'target-5047',
-    template: `<dependency *ngIf="name != null">target</dependency>`,
+    standalone: false,
+    template: `<dependency *ngIf="name !== null">target</dependency>`,
   })
   class TargetComponent {
     @Input() public readonly name: string | null = null;

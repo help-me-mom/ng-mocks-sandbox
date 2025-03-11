@@ -11,18 +11,24 @@ import {
 
 @Component({
   selector: 'target-ng-mocks-global-replace-component',
+  standalone: false,
   template: '{{ name }}',
 })
 class TargetComponent {
   public readonly name = 'target';
+
+  public targetComponentNgMocksGlobalReplace() {}
 }
 
 @Component({
   selector: 'target-ng-mocks-global-replace-component',
+  standalone: false,
   template: '{{ name }}',
 })
 class FakeComponent {
   public readonly name = 'fake';
+
+  public fakeComponentNgMocksGlobalReplace() {}
 }
 
 @NgModule({

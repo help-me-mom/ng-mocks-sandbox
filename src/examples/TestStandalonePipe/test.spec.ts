@@ -22,8 +22,7 @@ class RootService {
 // A standalone pipe we are going to test.
 @Pipe({
   name: 'standalone',
-  standalone: true,
-} as never)
+})
 class StandalonePipe implements PipeTransform {
   constructor(public readonly rootService: RootService) {}
 

@@ -54,6 +54,7 @@ export class TargetService {
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'target-lifecycle-hooks',
+  standalone: false,
   template: '',
 })
 export class TargetComponent

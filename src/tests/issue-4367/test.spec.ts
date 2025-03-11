@@ -21,6 +21,7 @@ class TargetService {
 
 @Component({
   selector: 'target-4367',
+  standalone: false,
   template: '',
 })
 class TargetComponent {

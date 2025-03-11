@@ -4,6 +4,7 @@ import { MockBuilder, MockRender } from 'ng-mocks';
 
 @Component({
   selector: 'target-445',
+  standalone: false,
   template: '<ng-content></ng-content>',
 })
 class ByAttributeComponent {
@@ -19,7 +20,7 @@ describe('issue-445', () => {
     it('should render correctly without content child but fails', () => {
       expect(() =>
         MockRender('<target-445></target-445>', {}, true),
-      ).not.toThrowError();
+      ).not.toThrow();
     });
 
     it('should render correctly with content child but fails', () => {
@@ -29,7 +30,7 @@ describe('issue-445', () => {
           {},
           true,
         ),
-      ).not.toThrowError();
+      ).not.toThrow();
     });
   });
 
@@ -39,7 +40,7 @@ describe('issue-445', () => {
     it('should render correctly without content child but fails', () => {
       expect(() =>
         MockRender('<target-445></target-445>', {}, true),
-      ).not.toThrowError();
+      ).not.toThrow();
     });
 
     it('should render correctly with content child but fails', () => {
@@ -49,7 +50,7 @@ describe('issue-445', () => {
           {},
           true,
         ),
-      ).not.toThrowError();
+      ).not.toThrow();
     });
   });
 });

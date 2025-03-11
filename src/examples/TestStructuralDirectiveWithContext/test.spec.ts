@@ -16,6 +16,7 @@ interface ITargetContext {
 // it renders every item as a new row.
 @Directive({
   selector: '[target]',
+  standalone: false,
 })
 class TargetDirective {
   public constructor(

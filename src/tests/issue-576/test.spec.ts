@@ -8,6 +8,7 @@ describe('issue-576', () => {
     ngMocks.faster();
 
     @Component({
+      standalone: false,
       template: '1:{{ value }}',
     })
     class TargetComponent {
@@ -35,6 +36,7 @@ describe('issue-576', () => {
     ngMocks.faster();
 
     @Component({
+      standalone: false,
       template: '2:{{ value }}',
     })
     class TargetComponent {

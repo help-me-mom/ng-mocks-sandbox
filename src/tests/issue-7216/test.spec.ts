@@ -7,6 +7,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 describe('issue-7216', () => {
   @Component({
     selector: 'target',
+    standalone: false,
     template: `
       @if (hasChild) {
         <child></child>
@@ -19,6 +20,7 @@ describe('issue-7216', () => {
 
   @Component({
     selector: 'child',
+    standalone: false,
     template: '',
   })
   class ChildComponent {}

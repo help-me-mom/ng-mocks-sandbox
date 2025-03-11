@@ -6,6 +6,7 @@ import { MockModule, MockRender } from 'ng-mocks';
 
 @Component({
   selector: 'target-222-common-module',
+  standalone: false,
   template: 'target',
 })
 class TargetComponent {}

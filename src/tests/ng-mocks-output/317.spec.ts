@@ -4,6 +4,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Component({
   selector: 'target-ng-mocks-output-317',
+  standalone: false,
   template: 'target',
 })
 class TargetComponent {

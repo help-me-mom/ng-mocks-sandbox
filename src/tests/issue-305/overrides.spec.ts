@@ -9,6 +9,7 @@ import { MockBuilder, MockInstance, MockRender } from 'ng-mocks';
 
 @Component({
   selector: 'target-305-overrides',
+  standalone: false,
   template: `
     <input data-testid="inputControl" [formControl]="myControl" />
   `,

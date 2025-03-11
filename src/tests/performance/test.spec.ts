@@ -14,6 +14,7 @@ class TargetService {
 
 @Component({
   selector: 'target-performance',
+  standalone: false,
   template: '{{ service.count }}',
 })
 class TargetComponent {

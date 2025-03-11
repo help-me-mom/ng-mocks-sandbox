@@ -4,6 +4,7 @@ import { MockBuilder, MockRenderFactory, ngMocks } from 'ng-mocks';
 
 @Component({
   selector: 'target-mock-render-factory-install',
+  standalone: false,
   template: '{{ value }}',
 })
 class TargetComponent {

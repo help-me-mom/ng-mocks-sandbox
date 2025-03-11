@@ -5,6 +5,7 @@ import { MockBuilder, MockInstance, MockRender } from 'ng-mocks';
 
 @Component({
   selector: 'route',
+  standalone: false,
   template: '{{ param }}',
 })
 class RouteComponent implements OnInit {

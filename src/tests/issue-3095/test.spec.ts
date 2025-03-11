@@ -6,6 +6,7 @@ import { MockRender } from 'ng-mocks';
 class RecursiveDirective {}
 Directive({
   selector: 'recursive',
+  standalone: false,
   providers: [
     {
       provide: RecursiveDirective,
@@ -16,6 +17,7 @@ Directive({
 
 @Directive({
   selector: 'target-2095',
+  standalone: false,
   providers: [
     {
       provide: RecursiveDirective,

@@ -13,6 +13,7 @@ import { MockBuilder, ngMocks } from 'ng-mocks';
 
 @Component({
   selector: 'parent',
+  standalone: false,
   template: '<div #parent>parent</div>',
 })
 class ParentComponent implements OnDestroy {
@@ -42,13 +43,13 @@ class ParentComponent implements OnDestroy {
 
 @Component({
   selector: 'child-1596',
+  standalone: false,
   template: '<span #child>child</span>',
 })
 class ChildComponent {}
 
 @NgModule({
   declarations: [ParentComponent, ChildComponent],
-  ['entryComponents' as never]: [ChildComponent],
 })
 class TargetModule {}
 

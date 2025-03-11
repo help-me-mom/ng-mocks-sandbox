@@ -25,14 +25,20 @@ interface InjectedAbstraction {
 })
 abstract class InjectedAbstraction {}
 
-@Component({ template: '' })
+@Component({
+  standalone: false,
+  template: '',
+})
 class TestWithoutDecoratorComponent {
   public constructor(
     public myInjectedAbstraction: InjectedAbstraction,
   ) {}
 }
 
-@Component({ template: '' })
+@Component({
+  standalone: false,
+  template: '',
+})
 class TestWithDecoratorComponent {
   public constructor(
     @Inject(InjectedAbstraction)

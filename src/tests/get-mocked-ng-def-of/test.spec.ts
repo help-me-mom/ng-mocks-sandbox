@@ -18,6 +18,7 @@ import {
 
 @Pipe({
   name: 'target',
+  standalone: false,
 })
 class TargetPipe implements PipeTransform {
   protected name = 'pipe:';
@@ -29,22 +30,26 @@ class TargetPipe implements PipeTransform {
 
 @Component({
   selector: 'target-get-mocked-ng-def-of',
+  standalone: false,
   template: 'target',
 })
 class TargetComponent {}
 
 @Directive({
   selector: 'target-get-mocked-ng-def-of',
+  standalone: false,
 })
 class TargetDirective {}
 
 @Directive({
   selector: 'real',
+  standalone: false,
 })
 class RealDirective {}
 
 @Directive({
   selector: 'side',
+  standalone: false,
 })
 class SideDirective {}
 
@@ -69,10 +74,10 @@ describe('getMockedNgDefOf:legacy', () => {
   it('throws an error outside of MockBuilder', () => {
     MockPipe(TargetPipe);
     expect(() => getMockedNgDefOf(TargetPipe, 'p')).toThrowError(
-      'There is no mock for TargetPipe',
+      `There is no mock for ${TargetPipe.name}`,
     );
     expect(() => getMockedNgDefOf(TargetPipe)).toThrowError(
-      'There is no mock for TargetPipe',
+      `There is no mock for ${TargetPipe.name}`,
     );
   });
 
@@ -84,7 +89,7 @@ describe('getMockedNgDefOf:legacy', () => {
 
   it('throws on untouched declarations', () => {
     expect(() => getMockedNgDefOf(SideDirective)).toThrowError(
-      'There is no mock for SideDirective',
+      `There is no mock for ${SideDirective.name}`,
     );
   });
 });
@@ -116,7 +121,7 @@ describe('getMockedNgDefOf:mocks', () => {
 
   it('throws on untouched declarations', () => {
     expect(() => getMockedNgDefOf(SideDirective)).toThrowError(
-      'There is no mock for SideDirective',
+      `There is no mock for ${SideDirective.name}`,
     );
   });
 });
@@ -148,13 +153,13 @@ describe('getMockedNgDefOf:builder', () => {
 
   it('throws on kept declarations', () => {
     expect(() => getMockedNgDefOf(RealDirective)).toThrowError(
-      'There is no mock for RealDirective',
+      `There is no mock for ${RealDirective.name}`,
     );
   });
 
   it('throws on untouched declarations', () => {
     expect(() => getMockedNgDefOf(SideDirective)).toThrowError(
-      'There is no mock for SideDirective',
+      `There is no mock for ${SideDirective.name}`,
     );
   });
 });

@@ -11,6 +11,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Directive({
   selector: '[dependency]',
+  standalone: false,
 })
 class DependencyDirective {
   @Input('dependency')
@@ -24,6 +25,7 @@ class DependencyDirective {
 
 @Component({
   selector: 'target',
+  standalone: false,
   template: '<span *dependency="value">content</span>',
 })
 class TargetComponent {

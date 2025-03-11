@@ -18,6 +18,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
     },
   ],
   selector: 'cva-ng-mocks-touch-cdr-touch',
+  standalone: false,
   template: ' {{ show }} ',
 })
 class CvaComponent implements ControlValueAccessor {
@@ -37,6 +38,7 @@ class CvaComponent implements ControlValueAccessor {
 
 @Component({
   selector: 'target-ng-mocks-touch-cdr-touch',
+  standalone: false,
   template: `
     <cva-ng-mocks-touch-cdr-touch
       [formControl]="control"

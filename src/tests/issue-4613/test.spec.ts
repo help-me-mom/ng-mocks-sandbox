@@ -8,6 +8,7 @@ class TargetService {}
 
 @Component({
   selector: 'target-4613',
+  standalone: false,
   template: '{{ service.constructor.name }}',
 })
 class TargetComponent {

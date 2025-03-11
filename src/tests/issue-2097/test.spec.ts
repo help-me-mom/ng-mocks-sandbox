@@ -26,6 +26,7 @@ abstract class AbstractService {
     },
   ],
   selector: 'target1-2097',
+  standalone: false,
   template: ' 1 ',
 })
 class Target1Component {}
@@ -42,6 +43,7 @@ class Target1Component {}
     },
   ],
   selector: 'target2-2097',
+  standalone: false,
   template: ' 2 ',
 })
 class Target2Component {}

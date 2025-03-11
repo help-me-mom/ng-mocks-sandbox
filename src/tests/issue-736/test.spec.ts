@@ -13,12 +13,14 @@ import {
 
 @Component({
   selector: 'modal',
+  standalone: false,
   template: 'modal',
 })
 class ModalComponent {}
 
 @Component({
   selector: 'target-736',
+  standalone: false,
   template: 'target',
 })
 class TargetComponent implements OnInit {

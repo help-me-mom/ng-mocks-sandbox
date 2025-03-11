@@ -21,6 +21,7 @@ class TargetService {
 
 @Directive({
   selector: 'target-3053',
+  standalone: false,
 })
 class TargetDirective {
   constructor(@Self() public service: TargetService) {}
@@ -28,6 +29,7 @@ class TargetDirective {
 
 @Component({
   selector: 'target-3053',
+  standalone: false,
   template: ``,
 })
 class TargetComponent {
@@ -42,7 +44,9 @@ describe('issue-3053', () => {
 
     it('throws because of missing service', () => {
       expect(() => MockRender(TargetDirective)).toThrowError(
-        /No provider for TargetService|NOT_FOUND \[TargetService]/,
+        new RegExp(
+          `No provider for ${TargetService.name}|NOT_FOUND \\[${TargetService.name}\\]`,
+        ),
       );
     });
   });
@@ -67,7 +71,9 @@ describe('issue-3053', () => {
 
     it('throws because of missing service', () => {
       expect(() => MockRender(TargetComponent)).toThrowError(
-        /No provider for TargetService|NOT_FOUND \[TargetService]/,
+        new RegExp(
+          `No provider for ${TargetService.name}|NOT_FOUND \\[${TargetService.name}\\]`,
+        ),
       );
     });
   });

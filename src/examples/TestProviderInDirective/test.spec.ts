@@ -21,6 +21,7 @@ class TargetService {
 @Directive({
   providers: [TargetService],
   selector: '[target]',
+  standalone: false,
 })
 class TargetDirective implements OnInit {
   public constructor(

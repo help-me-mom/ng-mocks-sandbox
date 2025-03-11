@@ -58,6 +58,7 @@ class SomeModule {
  */
 @Component({
   selector: 'my-component',
+  standalone: false,
   template: '',
 })
 class MyComponent implements OnInit {

@@ -51,6 +51,7 @@ class ProvidedService {
 
 @Component({
   selector: 'target-root-providers',
+  standalone: false,
   template: `
     "service:{{ service.name }}" "fake:{{ fake.name }}" "injected:{{
       injected.name
@@ -80,6 +81,7 @@ class TargetComponent {
 
 @Component({
   selector: 'module',
+  standalone: false,
   template: '{{ moduleService.name }}',
 })
 class ModuleComponent {
@@ -125,7 +127,7 @@ describe('root-providers', () => {
     it('fails', () => {
       expect(() =>
         TestBed.createComponent(ModuleComponent),
-      ).toThrowError(/-> ModuleService/);
+      ).toThrowError(new RegExp(`-> ${ModuleService.name}`));
     });
   });
 
@@ -153,7 +155,7 @@ describe('root-providers', () => {
 
     it('fails', () => {
       expect(() => MockRender(ModuleComponent)).toThrowError(
-        /-> ModuleService/,
+        new RegExp(`-> ${ModuleService.name}`),
       );
     });
   });

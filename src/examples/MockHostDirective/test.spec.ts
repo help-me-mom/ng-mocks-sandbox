@@ -16,7 +16,6 @@ import {
 
 @Directive({
   selector: 'host',
-  standalone: true,
 })
 class HostDirective {
   @Input() input?: string;
@@ -34,6 +33,7 @@ class HostDirective {
       outputs: ['output'],
     },
   ],
+  standalone: false,
   template: 'target',
 })
 class TargetComponent {

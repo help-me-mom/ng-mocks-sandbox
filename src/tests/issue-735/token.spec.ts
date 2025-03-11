@@ -5,6 +5,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Component({
   selector: 'target-735-token',
+  standalone: false,
   template: '{{ locale }}',
 })
 class TargetComponent {

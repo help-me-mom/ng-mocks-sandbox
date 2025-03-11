@@ -4,6 +4,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Component({
   selector: 'target-857',
+  standalone: false,
   template: 'target',
 })
 class Target857Component {}
@@ -14,7 +15,7 @@ class Target857Component {}
 })
 class TargetModule {}
 
-ngMocks.globalExclude('@Target857Component' as never);
+ngMocks.globalExclude(`@${Target857Component.name}`);
 
 // @see https://github.com/help-me-mom/ng-mocks/issues/857
 describe('issue-857:string', () => {

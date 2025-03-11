@@ -41,6 +41,7 @@ class TargetService {
 
 @Component({
   selector: 'target-provider-with-custom-dependencies',
+  standalone: false,
   template: `
     "service:{{ service.service ? service.service.name : 'missed' }}"
     "optional:{{
@@ -94,7 +95,7 @@ describe('provider-with-custom-dependencies', () => {
       );
       // The dependency should not be provided in TestBed.
       expect(() => ngMocks.findInstance(Dep3Service)).toThrowError(
-        'Cannot find an instance via ngMocks.findInstance(Dep3Service)',
+        `Cannot find an instance via ngMocks.findInstance(${Dep3Service.name})`,
       );
     });
   });
@@ -114,7 +115,7 @@ describe('provider-with-custom-dependencies', () => {
       );
       // The dependency should not be provided in TestBed.
       expect(() => ngMocks.findInstance(Dep3Service)).toThrowError(
-        'Cannot find an instance via ngMocks.findInstance(Dep3Service)',
+        `Cannot find an instance via ngMocks.findInstance(${Dep3Service.name})`,
       );
     });
   });
@@ -138,7 +139,7 @@ describe('provider-with-custom-dependencies', () => {
       );
       // The dependency should not be provided in TestBed.
       expect(() => ngMocks.findInstance(Dep3Service)).toThrowError(
-        'Cannot find an instance via ngMocks.findInstance(Dep3Service)',
+        `Cannot find an instance via ngMocks.findInstance(${Dep3Service.name})`,
       );
     });
   });

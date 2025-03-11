@@ -13,6 +13,7 @@ import { MockComponent, MockInstance } from 'ng-mocks';
 // A child component that contains update$ the parent component wants to listen to.
 @Component({
   selector: 'child',
+  standalone: false,
   template: '{{ update$ | async }}',
 })
 class ChildComponent {
@@ -26,6 +27,7 @@ class ChildComponent {
 // A parent component that uses @ViewChild to listen to update$ of its child component.
 @Component({
   selector: 'target',
+  standalone: false,
   template: '<child></child>',
 })
 class TargetComponent implements AfterViewInit {

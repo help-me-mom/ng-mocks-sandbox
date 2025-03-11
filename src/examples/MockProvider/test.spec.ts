@@ -35,6 +35,7 @@ class Dependency2Service {
 
 @Component({
   selector: 'target',
+  standalone: false,
   template: `
     "{{ dep1.name }}" "{{ dep2.name }}" "{{ unk }}" "{{ pri }}" "{{
       str

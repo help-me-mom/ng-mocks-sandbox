@@ -4,12 +4,14 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Component({
   selector: 'target1-885',
+  standalone: false,
   template: 'target1',
 })
 class Target1Component {}
 
 @Component({
   selector: 'target2-885',
+  standalone: false,
   template: 'target2',
 })
 class Target2Component {}

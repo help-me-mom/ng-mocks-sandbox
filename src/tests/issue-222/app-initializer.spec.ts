@@ -8,6 +8,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Component({
   selector: 'target-222-app-initializer',
+  standalone: false,
   template: '<router-outlet></router-outlet>',
 })
 class TargetComponent {}

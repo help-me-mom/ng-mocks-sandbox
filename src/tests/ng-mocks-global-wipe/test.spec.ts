@@ -11,26 +11,35 @@ import {
 
 @Component({
   selector: 'target-ng-mocks-global-wipe',
+  standalone: false,
   template: '{{ name }}',
 })
 class TargetComponent {
   public readonly name: string = 'target';
+
+  public targetComponentNgMocksGlobalWipe() {}
 }
 
 @Component({
   selector: 'target-ng-mocks-global-wipe',
+  standalone: false,
   template: '{{ name }}',
 })
 class FakeComponent {
   public readonly name: string = 'fake';
+
+  public fakeComponentNgMocksGlobalWipe() {}
 }
 
 @Component({
   selector: 'target-ng-mocks-global-wipe',
+  standalone: false,
   template: '{{ name }}',
 })
 class ShadowComponent {
   public readonly name: string = 'shadow';
+
+  public shadowComponentNgMocksGlobalWipe() {}
 }
 
 @NgModule({

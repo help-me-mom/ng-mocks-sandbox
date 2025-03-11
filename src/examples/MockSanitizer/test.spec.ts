@@ -10,6 +10,7 @@ import {
 
 @Component({
   selector: 'target',
+  standalone: false,
   template: `
     <div
       [innerHTML]="sanitizer.sanitize(1, '<strong>value1</strong>')"

@@ -11,7 +11,6 @@ import { isMockOf, MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 @Directive({
   selector: 'base',
-  standalone: true,
 })
 class BaseDirective {
   @Input() public readonly input: string | undefined = undefined;
@@ -22,6 +21,7 @@ class BaseDirective {
 
 @Component({
   selector: 'target',
+  standalone: false,
   template: '',
   hostDirectives: [BaseDirective],
 })
