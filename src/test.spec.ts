@@ -11,6 +11,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 @Component({
   selector: 'app-target',
   template: `<a (click)="click.emit()">name: {{ name }}</a>`,
+  standalone: false,
 })
 class TargetComponent {
   @Input() public readonly name: string = '';
