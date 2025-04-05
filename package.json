@@ -61,7 +61,7 @@
     "prettier": "3.5.3",
     "puppeteer": "24.5.0",
     "ts-node": "10.9.2",
-    "typescript": "5.8.2"
+    "typescript": "5.8.3"
   },
   "engines": {
     "npm": "11.2.0"
