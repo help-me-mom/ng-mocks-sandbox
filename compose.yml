@@ -1,6 +1,6 @@
 services:
   core:
-    image: satantime/puppeteer-node:24.4.0
+    image: satantime/puppeteer-node:24.4.1
     working_dir: /app
     volumes:
       - .:/app
