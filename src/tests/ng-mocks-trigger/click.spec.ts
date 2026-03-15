@@ -8,10 +8,10 @@ import {
   ViewChild,
 } from '@angular/core';
 import * as rxjs from 'rxjs';
+import { fromEvent } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
-import { fromEvent } from 'rxjs';
 
 @Component({
   selector: 'target-ng-mocks-trigger-click',

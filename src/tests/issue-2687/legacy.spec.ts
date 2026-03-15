@@ -207,10 +207,14 @@ describe('issue-2687', () => {
       expect(() =>
         ngMocks.findInstance(StandaloneComponent),
       ).toThrowError(
-        `Cannot find an instance via ngMocks.findInstance(${StandaloneComponent.name})`,
+        new RegExp(
+          `Cannot find an instance via ngMocks\\.findInstance\\(${StandaloneComponent.name}\\)`,
+        ),
       );
       expect(() => ngMocks.findInstance(StandalonePipe)).toThrowError(
-        `Cannot find an instance via ngMocks.findInstance(${StandalonePipe.name})`,
+        new RegExp(
+          `Cannot find an instance via ngMocks\\.findInstance\\(${StandalonePipe.name}\\)`,
+        ),
       );
       expect(() =>
         ngMocks.findInstance(StandaloneService),

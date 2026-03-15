@@ -7,11 +7,10 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import * as rxjs from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
-import { fromEvent } from 'rxjs';
 
 @Component({
   selector: 'target-ng-mocks-trigger-blur',
@@ -33,7 +32,7 @@ class TargetComponent implements OnDestroy {
     updateOn: 'blur',
   });
 
-  private subscription?: rxjs.Subscription;
+  private subscription?: Subscription;
 
   @ViewChild('element')
   public set element(value: ElementRef) {

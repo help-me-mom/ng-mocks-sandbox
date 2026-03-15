@@ -89,7 +89,7 @@ ngMocks.defaultMock(AuthService, () => ({
 // and it has 3 text fields: email, firstName,
 // lastName, and a user can edit them.
 // In the following test suite, we would like to
-// cover behavior of the component.
+// cover the behavior of the component.
 describe('profile:builder', () => {
   // First of all, we want to avoid creation of
   // the same TestBed for every test, because it
@@ -112,7 +112,7 @@ describe('profile:builder', () => {
     return MockBuilder(ProfileComponent, ProfileModule).keep(
       ReactiveFormsModule,
     );
-    // // or old fashion way
+    // Alternatively, the old-fashioned way.
     // return TestBed.configureTestingModule({
     //   imports: [
     //     MockModule(SharedModule), // mock
@@ -183,14 +183,16 @@ describe('profile:builder', () => {
     };
 
     // A spy to track save calls.
-    // MockInstance helps to configure mock
+    // MockInstance helps configure mock
     // providers, declarations and modules
     // before their initialization and usage.
     // https://ng-mocks.sudo.eu/api/MockInstance
     const spySave = MockInstance(
       StorageService,
       'save',
-      jasmine.createSpy(), // or jest.fn(),
+      jasmine.createSpy(),
+      // in case of jest
+      // jest.fn(),
     );
 
     // Renders <profile [profile]="params.profile">
@@ -219,7 +221,7 @@ describe('profile:builder', () => {
     // https://ng-mocks.sudo.eu/api/ngMocks/trigger
     ngMocks.trigger(point, 'keyup.control.s');
 
-    // The spy should be called with the user
+    // The spy should be called with the profile
     // and the random email address.
     expect(spySave).toHaveBeenCalledWith({
       email: 'test3@em.ail',

@@ -18,13 +18,13 @@ class HostDirective {
 
 @Component({
   selector: 'target',
+  standalone: false,
   hostDirectives: [
     {
       directive: HostDirective,
       inputs: ['input'],
     },
   ],
-  standalone: false,
   template: 'target',
 })
 class TargetComponent {

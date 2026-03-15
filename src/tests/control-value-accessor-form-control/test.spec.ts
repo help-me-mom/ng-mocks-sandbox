@@ -252,8 +252,8 @@ describe('control-value-accessor-form-control:mock', () => {
       .args[0]('test4');
     // in case of jest
     // ngMocks
-    //  .stub<any>(mock, 'registerOnChange')
-    //  .mock.calls[0][0]('test4');
+    //   .stub<any>(mock, 'registerOnChange')
+    //   .mock.calls[0][0]('test4');
     expect(mock.writeValue).not.toHaveBeenCalledWith('test4');
     expect(
       fixture.point.componentInstance.control.touched,

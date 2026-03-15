@@ -37,7 +37,8 @@ describe('issue-488', () => {
       ngMocks.stubMember(
         service,
         'method',
-        jasmine.createSpy(), // or jest.fn(),
+        jasmine.createSpy(),
+        // or jest.fn(),
       );
 
       TestBed.createComponent(TargetComponent);
@@ -56,7 +57,8 @@ describe('issue-488', () => {
       ngMocks.stubMember(
         service,
         'method',
-        jasmine.createSpy(), // or jest.fn(),
+        jasmine.createSpy(),
+        // or jest.fn(),
       );
 
       if (testBed._instantiated || testBed._testModuleRef) {

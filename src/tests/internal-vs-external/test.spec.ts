@@ -82,7 +82,7 @@ describe('InternalVsExternal:legacy', () => {
     // the code below will fail because the MockModule outside the MockBuilder exports everything.
     // try {
     //   MockRender(InternalComponent);
-    //   fail('should fail on the internal component');
+    //   fail('an error expected');
     // } catch (e) {
     //   expect(e).toEqual(jasmine.objectContaining({ngSyntaxError: true}));
     // }

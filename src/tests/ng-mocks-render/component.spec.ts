@@ -334,7 +334,7 @@ describe('ng-mocks-render:component:mock', () => {
 
     const tpl = ngMocks.findTemplateRef('header');
     expect(() => ngMocks.render({}, tpl)).toThrowError(
-      'Only instances of mock declarations are accepted',
+      new RegExp('Only instances of mock declarations are accepted'),
     );
   });
 
@@ -344,7 +344,41 @@ describe('ng-mocks-render:component:mock', () => {
     const directive = ngMocks.findInstance(Mock3Directive);
     const tpl = ngMocks.findTemplateRef('header');
     expect(() => ngMocks.render(directive, tpl)).toThrowError(
-      'Cannot find path to the TemplateRef',
+      new RegExp('Cannot find path to the TemplateRef'),
+    );
+  });
+
+  it('renders when query values are exposed as functions', () => {
+    const fixture = MockRender(TargetComponent);
+
+    const component = ngMocks.findInstance(MockComponent);
+    const tpl = ngMocks.findTemplateRef('header');
+
+    ngMocks.stubMember(
+      component as any,
+      'header',
+      (() => tpl) as any,
+    );
+
+    ngMocks.render(component, tpl);
+
+    expect(ngMocks.formatHtml(fixture.nativeElement)).toContain(
+      ':step:1: rendered-header :step:2:',
+    );
+  });
+
+  it('ignores query functions throwing errors and fails gracefully', () => {
+    MockRender(TargetComponent);
+
+    const component = ngMocks.findInstance(MockComponent);
+    const tpl = ngMocks.findTemplateRef('header');
+
+    ngMocks.stubMember(component as any, 'header', (() => {
+      throw new Error('signal lookup failed');
+    }) as any);
+
+    expect(() => ngMocks.render(component, tpl)).toThrowError(
+      new RegExp('Cannot find path to the TemplateRef'),
     );
   });
 
@@ -355,7 +389,9 @@ describe('ng-mocks-render:component:mock', () => {
     expect(() =>
       ngMocks.render(directive, undefined as never),
     ).toThrowError(
-      'Unknown template has been passed, only TemplateRef or a mock structural directive are supported',
+      new RegExp(
+        'Unknown template has been passed, only TemplateRef or a mock structural directive are supported',
+      ),
     );
   });
 
@@ -365,7 +401,7 @@ describe('ng-mocks-render:component:mock', () => {
     const directive = ngMocks.findInstance(Mock3Directive);
     const tpl = ngMocks.findTemplateRef('header');
     expect(() => ngMocks.hide(directive, tpl)).toThrowError(
-      'Cannot find path to the TemplateRef',
+      new RegExp('Cannot find path to the TemplateRef'),
     );
   });
 });

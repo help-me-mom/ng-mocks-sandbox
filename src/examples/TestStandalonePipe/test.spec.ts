@@ -45,8 +45,7 @@ describe('TestStandalonePipe', () => {
       RootService,
       'trigger',
       jasmine.createSpy().and.returnValue('mock'),
-      // or in case of jest
-      // jest.fn().mockReturnValue('mock'),
+      // or jest.fn().mockReturnValue('mock'),
     );
 
     // Rendering the pipe.

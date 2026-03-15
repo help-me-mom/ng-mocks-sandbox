@@ -78,6 +78,15 @@ describe('ng-mocks-change:3341', () => {
     ).toThrowError(/please ensure it has 'triggerChange' method/);
   });
 
+  it('throws error about the wrongly provided method', () => {
+    MockRender(TargetComponent);
+    const cvaEl = ngMocks.find('custom');
+
+    expect(() =>
+      ngMocks.change(cvaEl, 123, 'triggerChange'),
+    ).toThrowError(/please ensure it has 'triggerChange' method/);
+  });
+
   it('triggers change correctly', () => {
     const component =
       MockRender(TargetComponent).point.componentInstance;

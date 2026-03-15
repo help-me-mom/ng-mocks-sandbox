@@ -26,6 +26,7 @@ class HostDirective {
 
 @Component({
   selector: 'target',
+  standalone: false,
   hostDirectives: [
     {
       directive: HostDirective,
@@ -33,7 +34,6 @@ class HostDirective {
       outputs: ['output'],
     },
   ],
-  standalone: false,
   template: 'target',
 })
 class TargetComponent {

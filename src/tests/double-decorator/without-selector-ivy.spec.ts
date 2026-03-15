@@ -10,7 +10,7 @@ import { MockBuilder, MockRender } from 'ng-mocks';
 
 @Directive({
   standalone: false,
-} as never)
+})
 class BaseClass {
   public name = 'directive';
 }

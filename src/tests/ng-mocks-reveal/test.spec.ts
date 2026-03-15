@@ -387,12 +387,12 @@ describe('ng-mocks-reveal:test', () => {
   });
 
   it('throws on unknown selectors', () => {
-    expect(() => ngMocks.reveal(5 as never)).toThrowError(
-      'Unknown selector',
-    );
-    expect(() => ngMocks.revealAll({} as never)).toThrowError(
-      'Unknown selector',
-    );
+    expect(() => {
+      ngMocks.reveal(5 as never);
+    }).toThrowError('Unknown selector');
+    expect(() => {
+      ngMocks.revealAll({} as never);
+    }).toThrowError('Unknown selector');
   });
 
   it('throws on unknown elements', () => {

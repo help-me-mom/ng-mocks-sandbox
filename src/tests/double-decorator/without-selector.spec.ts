@@ -8,7 +8,9 @@ import { TestBed } from '@angular/core/testing';
 
 import { MockBuilder, MockRender } from 'ng-mocks';
 
-@Directive()
+@Directive({
+  standalone: false,
+})
 class BaseClass {
   public name = 'directive';
 }
@@ -50,14 +52,14 @@ describe('double-decorator:without-selector', () => {
         await TestBed.configureTestingModule({
           imports: [ModuleWithComponent],
         }).compileComponents();
-        fail('should fail');
+        fail('an error expected');
       } catch (error) {
         if (error instanceof Error) {
-          expect(error.message).toMatch(
-            new RegExp(`Directive ${BaseClass.name} has no selector`),
+          expect((error as Error).message).toContain(
+            `Directive ${BaseClass.name} has no selector`,
           );
         } else {
-          fail('should fail');
+          fail('an error expected');
         }
       }
     });
@@ -85,16 +87,14 @@ describe('double-decorator:without-selector', () => {
         await MockBuilder(MyComponent, ModuleWithComponent).mock(
           MyProvider,
         );
-        fail('should fail');
+        fail('an error expected');
       } catch (error) {
         if (error instanceof Error) {
-          expect(error.message).toMatch(
-            new RegExp(
-              `Directive MockOf${BaseClass.name} has no selector`,
-            ),
+          expect((error as Error).message).toContain(
+            `Directive MockOf${BaseClass.name} has no selector`,
           );
         } else {
-          fail('should fail');
+          fail('an error expected');
         }
       }
     });
@@ -106,16 +106,14 @@ describe('double-decorator:without-selector', () => {
         await MockBuilder(MyComponent, ModuleWithComponent).keep(
           MyProvider,
         );
-        fail('should fail');
+        fail('an error expected');
       } catch (error) {
         if (error instanceof Error) {
-          expect(error.message).toMatch(
-            new RegExp(
-              `Directive MockOf${BaseClass.name} has no selector`,
-            ),
+          expect((error as Error).message).toContain(
+            `Directive MockOf${BaseClass.name} has no selector`,
           );
         } else {
-          fail('should fail');
+          fail('an error expected');
         }
       }
     });

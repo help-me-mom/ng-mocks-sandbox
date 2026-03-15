@@ -65,13 +65,17 @@ describe('issue-434', () => {
     // let's set cross spies
     fixture.componentInstance.echo1 = jasmine
       .createSpy()
-      .and.callFake(fixture.componentInstance.echo1); // or jest.fn(fixture.componentInstance.echo1);
+      .and.callFake(fixture.componentInstance.echo1);
+    // in case of jest
+    // fixture.componentInstance.echo1 =
+    //   jest.fn(fixture.componentInstance.echo1);
     ngMocks.stubMember(
       fixture.point.componentInstance,
       'echo2',
       jasmine
         .createSpy()
-        .and.callFake(fixture.point.componentInstance.echo2), // or jest.fn(fixture.point.componentInstance.echo2),
+        .and.callFake(fixture.point.componentInstance.echo2),
+      // or jest.fn(fixture.point.componentInstance.echo2),
     );
 
     // a call on the pointer should be reflected in the wrapper

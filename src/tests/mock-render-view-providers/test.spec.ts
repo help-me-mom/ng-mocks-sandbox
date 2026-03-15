@@ -21,7 +21,9 @@ describe('MockRender.viewProviders', () => {
 
   it('throws without the service', () => {
     expect(() => MockRender(TargetComponent)).toThrowError(
-      new RegExp(`No provider for ${TargetService.name}`),
+      new RegExp(
+        `No provider( found)? for \`?${TargetService.name}\`?`,
+      ),
     );
   });
 

@@ -39,7 +39,9 @@ describe('ng-mocks-stub-member', () => {
 
     // checking getters and setters
     const getSpy = jasmine.createSpy().and.returnValue('spy');
-    // or jest.fn().mockReturnValue('spy');
+    // in case of jest
+    // const getSpy = jest.fn().mockReturnValue('spy');
+
     const setSpy = jasmine.createSpy(); // or jest.fn();
     ngMocks.stubMember(service, 'name', getSpy, 'get');
     ngMocks.stubMember(service, 'name', setSpy, 'set');

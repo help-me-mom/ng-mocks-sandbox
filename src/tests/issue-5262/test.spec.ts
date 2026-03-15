@@ -12,6 +12,7 @@ const TOKEN = new InjectionToken('TOKEN');
         const recursive: any = {
           index: 0,
         };
+        // Angular 21 path in the sandbox.
         recursive.parent = recursive;
 
         return recursive;

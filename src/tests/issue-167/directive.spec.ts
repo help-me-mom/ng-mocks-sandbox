@@ -117,7 +117,8 @@ describe('issue-167:directive:real', () => {
     ngMocks.stubMember(
       mock,
       'writeValue',
-      jasmine.createSpy(), // or jest.fn(),
+      jasmine.createSpy(),
+      // or jest.fn(),
     );
 
     fixture.point.componentInstance.control.setValue('updated');
@@ -157,7 +158,8 @@ describe('issue-167:directive:mock', () => {
     ngMocks.stubMember(
       mock,
       'writeValue',
-      jasmine.createSpy(), // or jest.fn(),
+      jasmine.createSpy(),
+      // or jest.fn(),
     );
 
     fixture.point.componentInstance.control.setValue('updated');

@@ -21,7 +21,9 @@ class NoSelectorService {}
 })
 class NoAttributeSelectorDirective {}
 
-@Directive()
+@Directive({
+  standalone: false,
+})
 class NoSelectorDirective {}
 
 @Directive({
@@ -189,9 +191,9 @@ describe('ng-mocks-find-template-refs', () => {
 
   it('fails on wrong selector type', () => {
     MockRender(TestComponent);
-    expect(() => ngMocks.findTemplateRefs(123 as any)).toThrowError(
-      'Unknown selector',
-    );
+    expect(() => {
+      ngMocks.findTemplateRefs(123 as any);
+    }).toThrowError('Unknown selector');
   });
 
   it('returns nothing on unknown fixture', () => {

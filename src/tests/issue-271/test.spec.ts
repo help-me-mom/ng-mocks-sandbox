@@ -30,7 +30,9 @@ describe('issue-271', () => {
 
   it('excludes modules with providers', () => {
     expect(() => MockRender(TargetService)).toThrowError(
-      new RegExp(`No provider for ${TargetService.name}`),
+      new RegExp(
+        `No provider( found)? for \`?${TargetService.name}\`?`,
+      ),
     );
   });
 });

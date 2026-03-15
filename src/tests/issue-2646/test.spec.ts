@@ -245,9 +245,9 @@ describe('issue-2646', () => {
         expect(() =>
           fixture.debugElement.injector.get(ModuleFromService),
         ).not.toThrow();
-        expect(() =>
-          fixture.debugElement.injector.get(TargetService),
-        ).toThrowError(/No provider/);
+        expect(() => {
+          fixture.debugElement.injector.get(TargetService);
+        }).toThrowError(/No provider/);
       });
     });
 
@@ -263,9 +263,9 @@ describe('issue-2646', () => {
         expect(() =>
           fixture.debugElement.injector.get(ModuleFromService),
         ).not.toThrow();
-        expect(() =>
-          fixture.debugElement.injector.get(TargetService),
-        ).toThrowError(/No provider/);
+        expect(() => {
+          fixture.debugElement.injector.get(TargetService);
+        }).toThrowError(/No provider/);
       });
     });
   });

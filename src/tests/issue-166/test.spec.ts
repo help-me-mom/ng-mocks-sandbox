@@ -24,6 +24,7 @@ describe('issue-166', () => {
     const spy = jasmine.createSpy();
     // in case of jest
     // const spy = jest.fn();
+
     const stub = ngMocks.stub(MockService(MyService), {
       onErrorSet$: new Subject<string>(),
       onWarningSet$: new Subject<string>(),

@@ -50,7 +50,9 @@ describe('issue-175', () => {
 
     it('fails', () => {
       expect(() => MockRender(Target1Component)).toThrowError(
-        new RegExp(`No provider for ${Target1Service.name}`),
+        new RegExp(
+          `No provider( found)? for \`?${Target1Service.name}\`?`,
+        ),
       );
     });
   });
@@ -74,7 +76,9 @@ describe('issue-175', () => {
 
     it('fails', () => {
       expect(() => MockRender('<dir-1></dir-1>')).toThrowError(
-        new RegExp(`No provider for ${Target1Service.name}`),
+        new RegExp(
+          `No provider( found)? for \`?${Target1Service.name}\`?`,
+        ),
       );
     });
   });
@@ -96,7 +100,9 @@ describe('issue-175', () => {
 
     it('fails', () => {
       expect(() => MockRender(Target2Component)).toThrowError(
-        new RegExp(`No provider for ${Target2Service.name}`),
+        new RegExp(
+          `No provider( found)? for \`?${Target2Service.name}\`?`,
+        ),
       );
     });
   });
@@ -108,7 +114,9 @@ describe('issue-175', () => {
 
     it('fails', () => {
       expect(() => MockRender(Target1Component)).toThrowError(
-        new RegExp(`No provider for ${Target1Service.name}`),
+        new RegExp(
+          `No provider( found)? for \`?${Target1Service.name}\`?`,
+        ),
       );
     });
   });
@@ -120,7 +128,9 @@ describe('issue-175', () => {
 
     it('fails', () => {
       expect(() => MockRender('<dir-1></dir-1>')).toThrowError(
-        new RegExp(`No provider for ${Target1Service.name}`),
+        new RegExp(
+          `No provider( found)? for \`?${Target1Service.name}\`?`,
+        ),
       );
     });
   });
@@ -141,7 +151,9 @@ describe('issue-175', () => {
       expect(() =>
         TestBed.createComponent(Target1Component),
       ).toThrowError(
-        new RegExp(`No provider for ${Target1Service.name}`),
+        new RegExp(
+          `No provider( found)? for \`?${Target1Service.name}\`?`,
+        ),
       );
     });
 
@@ -149,7 +161,9 @@ describe('issue-175', () => {
       expect(() =>
         TestBed.createComponent(Target1Component),
       ).toThrowError(
-        new RegExp(`No provider for ${Target1Service.name}`),
+        new RegExp(
+          `No provider( found)? for \`?${Target1Service.name}\`?`,
+        ),
       );
     });
   });
@@ -172,7 +186,9 @@ describe('issue-175', () => {
         expect(() =>
           TestBed.createComponent(Target1Component),
         ).toThrowError(
-          new RegExp(`No provider for ${Target1Service.name}`),
+          new RegExp(
+            `No provider( found)? for \`?${Target1Service.name}\`?`,
+          ),
         );
       });
 
@@ -180,7 +196,9 @@ describe('issue-175', () => {
         expect(() =>
           TestBed.createComponent(Target1Component),
         ).toThrowError(
-          new RegExp(`No provider for ${Target1Service.name}`),
+          new RegExp(
+            `No provider( found)? for \`?${Target1Service.name}\`?`,
+          ),
         );
       });
     });
@@ -214,13 +232,17 @@ describe('issue-175', () => {
 
     it('fails first time via MockRender', () => {
       expect(() => MockRender('<dir-1></dir-1>')).toThrowError(
-        new RegExp(`No provider for ${Target1Service.name}`),
+        new RegExp(
+          `No provider( found)? for \`?${Target1Service.name}\`?`,
+        ),
       );
     });
 
     it('fails second time via MockRender', () => {
       expect(() => MockRender('<dir-1></dir-1>')).toThrowError(
-        new RegExp(`No provider for ${Target1Service.name}`),
+        new RegExp(
+          `No provider( found)? for \`?${Target1Service.name}\`?`,
+        ),
       );
     });
   });

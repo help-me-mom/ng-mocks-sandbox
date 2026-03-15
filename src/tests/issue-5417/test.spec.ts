@@ -39,7 +39,7 @@ describe('issue-5417', () => {
   describe('core', () => {
     it('throws on existing methods', () => {
       MockBuilder.extend('mock', () => undefined);
-      expect(MockBuilder).toThrowError(
+      expect(() => MockBuilder()).toThrowError(
         /MockBuilder.mock is a base method/,
       );
       MockBuilder.extend('mock');

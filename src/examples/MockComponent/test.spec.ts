@@ -93,7 +93,8 @@ describe('MockComponent', () => {
     ngMocks.stubMember(
       component,
       'trigger',
-      jasmine.createSpy(), // or jest.fn(),
+      jasmine.createSpy(),
+      // or jest.fn(),
     );
     mockComponent.someOutput.emit({
       payload: 'foo',

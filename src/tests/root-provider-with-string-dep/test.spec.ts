@@ -29,7 +29,7 @@ describe('root-provider-with-string-dep', () => {
     it('finds tokens', () => {
       expect(() =>
         TestBed.createComponent(TargetComponent),
-      ).toThrowError(/No provider for name!/);
+      ).toThrowError(/No provider( found)? for `?name`?/);
     });
   });
 
@@ -38,7 +38,7 @@ describe('root-provider-with-string-dep', () => {
 
     it('mocks service', () => {
       expect(() => MockRender(TargetComponent)).toThrowError(
-        /No provider for name!/,
+        /No provider( found)? for `?name`?/,
       );
     });
   });

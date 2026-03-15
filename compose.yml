@@ -5,14 +5,15 @@ services:
     working_dir: /app
     volumes:
       - .:/app
+      - cache:/root/.cache
       - gyp:/root/.node-gyp
       - npm:/root/.npm
     command:
       - npm
       - install
       - --no-audit
-      - --omit=optional
 
 volumes:
+  cache:
   npm:
   gyp:

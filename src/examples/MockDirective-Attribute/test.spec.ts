@@ -96,7 +96,8 @@ describe('MockDirective:Attribute', () => {
     ngMocks.stubMember(
       component,
       'trigger',
-      jasmine.createSpy(), // or jest.fn(),
+      jasmine.createSpy(),
+      // or jest.fn(),
     );
     mockDirective.someOutput.emit();
 

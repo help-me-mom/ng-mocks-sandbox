@@ -92,7 +92,7 @@ describe('MockRender', () => {
   it('renders inputs and outputs automatically', () => {
     const spy = jasmine.createSpy();
     // in case of jest
-    // const logoClickSpy = jest.fn();
+    // const spy = jest.fn();
 
     // Generates a template like:
     // <target [value1]="value1" [value2]="value2"

@@ -47,9 +47,11 @@ describe('issue-736', () => {
             'ComponentFactoryResolver.resolveComponentFactory',
           ),
           // in case of jest
-          // resolveComponentFactory: jest.fn().mockName(
-          //   'ComponentFactoryResolver.resolveComponentFactory',
-          // ),
+          // jest
+          //   .fn()
+          //   .mockName(
+          //     'ComponentFactoryResolver.resolveComponentFactory',
+          //   )
         },
       }),
   );

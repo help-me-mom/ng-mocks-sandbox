@@ -61,8 +61,10 @@ describe('issue-726', () => {
 
     it('finds the view provider', () => {
       // TargetComponent doesn't have the access to TargetService.
-      expect(view).toThrowError(
-        new RegExp(`No provider for ${TargetService.name}`),
+      expect(() => view()).toThrowError(
+        new RegExp(
+          `No provider( found)? for \`?${TargetService.name}\`?`,
+        ),
       );
 
       // Container knows how to provide TargetService for its views.
@@ -84,8 +86,10 @@ describe('issue-726', () => {
 
     it('finds the view provider', () => {
       // TargetComponent doesn't have the access to TargetService.
-      expect(view).toThrowError(
-        new RegExp(`No provider for ${TargetService.name}`),
+      expect(() => view()).toThrowError(
+        new RegExp(
+          `No provider( found)? for \`?${TargetService.name}\`?`,
+        ),
       );
 
       // Container knows how to provide TargetService for its views.

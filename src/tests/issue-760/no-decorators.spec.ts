@@ -68,13 +68,17 @@ describe('issue-760:no-decorators', () => {
 
     it('throws on MockDeclaration', () => {
       expect(() => MockDeclaration(TargetComponent)).toThrowError(
-        `MockDeclaration does not know how to mock ${TargetComponent.name}`,
+        new RegExp(
+          `MockDeclaration does not know how to mock ${TargetComponent.name}`,
+        ),
       );
     });
 
     it('throws on MockDeclarations', () => {
       expect(() => MockDeclarations(TargetComponent)).toThrowError(
-        `MockDeclaration does not know how to mock ${TargetComponent.name}`,
+        new RegExp(
+          `MockDeclaration does not know how to mock ${TargetComponent.name}`,
+        ),
       );
     });
 
@@ -112,13 +116,17 @@ describe('issue-760:no-decorators', () => {
 
     it('throws on MockDeclaration', () => {
       expect(() => MockDeclaration(TargetDirective)).toThrowError(
-        `MockDeclaration does not know how to mock ${TargetDirective.name}`,
+        new RegExp(
+          `MockDeclaration does not know how to mock ${TargetDirective.name}`,
+        ),
       );
     });
 
     it('throws on MockDeclarations', () => {
       expect(() => MockDeclarations(TargetDirective)).toThrowError(
-        `MockDeclaration does not know how to mock ${TargetDirective.name}`,
+        new RegExp(
+          `MockDeclaration does not know how to mock ${TargetDirective.name}`,
+        ),
       );
     });
 
@@ -156,13 +164,17 @@ describe('issue-760:no-decorators', () => {
 
     it('throws on MockDeclaration', () => {
       expect(() => MockDeclaration(TargetPipe)).toThrowError(
-        `MockDeclaration does not know how to mock ${TargetPipe.name}`,
+        new RegExp(
+          `MockDeclaration does not know how to mock ${TargetPipe.name}`,
+        ),
       );
     });
 
     it('throws on MockDeclarations', () => {
       expect(() => MockDeclarations(TargetPipe)).toThrowError(
-        `MockDeclaration does not know how to mock ${TargetPipe.name}`,
+        new RegExp(
+          `MockDeclaration does not know how to mock ${TargetPipe.name}`,
+        ),
       );
     });
 

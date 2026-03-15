@@ -98,7 +98,7 @@ describe('issue-167:NG_VALIDATORS:mock', () => {
       jasmine.createSpy().and.returnValue({
         mock: true,
       }),
-      // or
+      // in case of jest
       // jest.fn().mockReturnValue({
       //   mock: true,
       // }),

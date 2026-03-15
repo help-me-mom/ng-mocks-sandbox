@@ -26,10 +26,13 @@ describe('mock-helper-flush-test-bed', () => {
     testBed.shouldTearDownTestingModule = jasmine
       .createSpy('spyShouldTearDown')
       .and.returnValue(true);
-    // or jest.fn().mockReturnValue(true);
+    // in case of jest
+    // testBed.shouldTearDownTestingModule =
+    //   jest.fn().mockReturnValue(true);
 
     testBed.tearDownTestingModule = jasmine.createSpy('spyTearDown');
-    // or jest.fn();
+    // in case of jest
+    // testBed.tearDownTestingModule = jest.fn();
 
     ngMocks.flushTestBed();
     expect(testBed.tearDownTestingModule).toHaveBeenCalledTimes(1);
@@ -41,10 +44,13 @@ describe('mock-helper-flush-test-bed', () => {
     testBed.shouldTearDownTestingModule = jasmine
       .createSpy('spyShouldTearDown')
       .and.returnValue(false);
-    // or jest.fn().mockReturnValue(false);
+    // in case of jest
+    // testBed.shouldTearDownTestingModule =
+    //   jest.fn().mockReturnValue(false);
 
     testBed.tearDownTestingModule = jasmine.createSpy('spyTearDown');
-    // or jest.fn();
+    // in case of jest
+    // testBed.tearDownTestingModule = jest.fn();
 
     ngMocks.flushTestBed();
     expect(testBed.tearDownTestingModule).not.toHaveBeenCalled();

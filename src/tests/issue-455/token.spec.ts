@@ -17,8 +17,12 @@ const TOKEN: InjectionToken<InjectedAbstraction> = new InjectionToken(
   'InjectedFn',
   {
     factory: () => {
-      const fn: any = jasmine.createSpy(); // or jest.fn();
-      fn.hello = jasmine.createSpy(); // or jest.fn();
+      const fn: any = jasmine.createSpy();
+      // in case of jest
+      // const fn: any = jest.fn();
+      fn.hello = jasmine.createSpy();
+      // in case of jest
+      // fn.hello = jest.fn();
 
       return fn;
     },
@@ -51,7 +55,7 @@ class TestWithDecoratorComponent {
 ngMocks.defaultMock(
   TOKEN,
   () => jasmine.createSpy().and.returnValue('FOO') as any,
-  // or jest.fn().mockReturnValue('FOO')) as any,
+  // or jest.fn().mockReturnValue('FOO') as any,
 );
 
 // @see https://github.com/help-me-mom/ng-mocks/issues/455
@@ -94,7 +98,7 @@ describe('issue-455:token', () => {
             .mock(
               TOKEN,
               jasmine.createSpy().and.returnValue('BAR') as any,
-              // or jest.fn().mockReturnValue('BAR')) as any,
+              // or jest.fn().mockReturnValue('BAR'),
             )
             .keep(NG_MOCKS_ROOT_PROVIDERS),
         );
@@ -115,8 +119,7 @@ describe('issue-455:token', () => {
           MockBuilder(TestWithoutDecoratorComponent)
             .mock(
               TOKEN as any,
-              jasmine.createSpy().and.returnValue('BAR') as any,
-              // or jest.fn().mockReturnValue('BAR')) as any,
+              jasmine.createSpy().and.returnValue('BAR') as any, // or jest.fn().mockReturnValue('BAR')
               { precise: true },
             )
             .keep(NG_MOCKS_ROOT_PROVIDERS),
@@ -141,8 +144,7 @@ describe('issue-455:token', () => {
         MockBuilder(TestWithDecoratorComponent).provide({
           provide: TOKEN,
           useFactory: () =>
-            jasmine.createSpy().and.returnValue('QUX'),
-          // or jest.fn().mockReturnValue('QUX'),
+            jasmine.createSpy().and.returnValue('QUX'), // or jest.fn().mockReturnValue('QUX')
         }),
       );
 

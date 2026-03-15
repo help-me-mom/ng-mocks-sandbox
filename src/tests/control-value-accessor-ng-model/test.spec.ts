@@ -251,8 +251,8 @@ describe('control-value-accessor-ng-model:mock', () => {
       .args[0]('test4');
     // in case of jest
     // ngMocks
-    //  .stub<any>(mock, 'registerOnChange')
-    //  .mock.calls[0][0]('test4');
+    //   .stub<any>(mock, 'registerOnChange')
+    //   .mock.calls[0][0]('test4');
     expect(mock.writeValue).not.toHaveBeenCalledWith('test4');
     expect(ngModel.touched).toBeFalsy();
     expect(ngModel.value).toBe('test4');

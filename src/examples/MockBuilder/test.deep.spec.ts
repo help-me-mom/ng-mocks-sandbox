@@ -51,7 +51,7 @@ import {
 
 describe('MockBuilder:deep', () => {
   beforeEach(async () => {
-    const ngModule = MockBuilder(MyComponent, MyModule)
+    const builder = MockBuilder(MyComponent, MyModule)
       .mock(ContentChildComponent, {
         render: {
           block: {
@@ -131,10 +131,10 @@ describe('MockBuilder:deep', () => {
 
       // Even it belongs to the module that is marked as kept,
       // the component will be replaced with its mock copy.
-      .mock(My3Component)
+      .mock(My3Component);
 
-      // and now we want to build our NgModule.
-      .build();
+    // and now we want to build our NgModule.
+    const ngModule = builder.build();
     TestBed.configureTestingModule(ngModule);
 
     // Extra configuration

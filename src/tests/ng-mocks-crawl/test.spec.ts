@@ -128,6 +128,7 @@ describe('ng-mocks-crawl', () => {
     const spy = jasmine.createSpy();
     // in case of jest
     // const spy = jest.fn();
+
     ngMocks.crawl('div', spy);
     ngMocks.crawl(['attr'], spy);
     expect(spy).not.toHaveBeenCalled();

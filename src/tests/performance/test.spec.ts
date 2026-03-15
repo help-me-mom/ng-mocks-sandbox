@@ -33,7 +33,8 @@ describe('performance:correct', () => {
   beforeAll(() => {
     backupWarn = console.warn;
     console.warn = jasmine.createSpy().and.callFake(console.log);
-    // or jest.fn(console.log);
+    // in case of jest
+    // console.warn = jest.fn(console.log);
   });
 
   afterAll(() => {

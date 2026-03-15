@@ -17,8 +17,13 @@ interface InjectedAbstraction {
   providedIn: 'root',
   useFactory: () => {
     const fn: InjectedAbstraction =
-      jasmine.createSpy() as any as InjectedAbstraction; // or jest.fn();
-    fn.hello = jasmine.createSpy(); // or jest.fn();
+      jasmine.createSpy() as any as InjectedAbstraction;
+    // in case of jest
+    // const fn: InjectedAbstraction =
+    //   jest.fn() as any as InjectedAbstraction;
+    fn.hello = jasmine.createSpy();
+    // in case of jest
+    // fn.hello = jest.fn();
 
     return fn;
   },
@@ -47,10 +52,11 @@ class TestWithDecoratorComponent {
 }
 
 ngMocks.defaultMock(InjectedAbstraction, () => {
+  // in case of jest
+  // return jest.fn().mockReturnValue('FOO') as any as InjectedAbstraction;
   return jasmine
     .createSpy()
     .and.returnValue('FOO') as any as InjectedAbstraction;
-  // or jest.fn().mockReturnValue('FOO');
 });
 
 // @see https://github.com/help-me-mom/ng-mocks/issues/455
@@ -93,7 +99,8 @@ describe('issue-455:abstract', () => {
         const spy = jasmine
           .createSpy('InjectedAbstraction')
           .and.returnValue('BAR');
-        // or jest.fn().mockReturnValue('BAR');
+        // in case of jest
+        // const spy = jest.fn().mockReturnValue('BAR');
         beforeEach(() =>
           MockBuilder(TestWithoutDecoratorComponent).mock(
             InjectedAbstraction,
@@ -134,8 +141,7 @@ describe('issue-455:abstract', () => {
             InjectedAbstraction,
             jasmine
               .createSpy('InjectedAbstraction')
-              .and.returnValue('BAR'),
-            // or jest.fn().mockReturnValue('BAR'),
+              .and.returnValue('BAR'), // or jest.fn().mockReturnValue('BAR')
             { precise: true },
           ),
         );
@@ -161,8 +167,7 @@ describe('issue-455:abstract', () => {
           useFactory: () =>
             jasmine
               .createSpy('InjectedAbstraction')
-              .and.returnValue('QUX'),
-          // or jest.fn().mockReturnValue('QUX'),
+              .and.returnValue('QUX'), // or jest.fn().mockReturnValue('QUX')
         }),
       );
 
