@@ -14,11 +14,10 @@
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
-    "lib": ["es2020", "dom"],
     "types": ["jasmine"],
     "skipLibCheck": true,
     "useDefineForClassFields": false
