@@ -1,2 +1,2 @@
-npm run prettier:repo
-npm run ts:check
+docker compose run core npm run prettier:repo
+docker compose run core npm run ts:check
