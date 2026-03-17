@@ -4,6 +4,7 @@
 const isCSB = !!process.env.CSB;
 const isSB = !!process.env.SB;
 const isLocal = !isCSB && !isSB;
+const sandboxListenAddress = isLocal ? 'localhost' : '0.0.0.0';
 const withCoverage = isLocal && !!process.env.WITH_COVERAGE;
 
 if (isLocal) {
@@ -44,8 +45,8 @@ module.exports = function (config) {
       useBrowserName: false,
     },
     reporters: withCoverage ? ['junit'] : isCSB || isSB ? ['kjhtml'] : ['dots', 'kjhtml'],
-    hostname: isCSB ? 'random-4200.csb.app' : isSB ? 'random.github.stackblitz.io' : 'localhost',
-    listenAddress: isCSB || isSB ? '0.0.0.0' : 'localhost',
+    hostname: 'localhost',
+    listenAddress: sandboxListenAddress,
     port: isCSB ? 4200 : isSB ? 80 : 9876,
     colors: true,
     logLevel: config.LOG_INFO,

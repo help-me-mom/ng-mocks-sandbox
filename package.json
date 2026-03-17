@@ -20,10 +20,10 @@
     "start": "ng test",
     "serve": "ng serve --disable-host-check",
     "test": "ng test",
+    "hooks:install": "husky",
     "prettier:repo": "prettier --loglevel warn -u -w .",
     "prettier:check": "prettier -u -c .",
-    "ts:check": "tsc --noEmit",
-    "prepare": "husky"
+    "ts:check": "tsc --noEmit"
   },
   "dependencies": {
     "@angular/animations": "21.2.4",

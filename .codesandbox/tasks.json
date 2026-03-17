@@ -1,8 +1,9 @@
 {
+  "$schema": "https://codesandbox.io/schemas/tasks.json",
   "setupTasks": [
     {
       "name": "Install Dependencies",
-      "command": "npm install"
+      "command": "npm ci --no-audit"
     }
   ],
   "tasks": {

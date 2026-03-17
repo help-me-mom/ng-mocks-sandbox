@@ -1,0 +1,9 @@
+{
+  "name": "ng-mocks-sandbox",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
+  "containerEnv": {
+    "CSB": "true",
+    "HUSKY": "0",
+    "PUPPETEER_SKIP_DOWNLOAD": "true"
+  }
+}
