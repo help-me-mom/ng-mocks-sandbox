@@ -85,12 +85,12 @@ describe('TestHttpInterceptor', () => {
   // we need to pass its module as the second parameter. Also we
   // should to pass HTTP_INTERCEPTORS into `.mock` and replace
   // HttpClientModule with HttpClientTestingModule.
-  beforeEach(() => {
-    return MockBuilder(TargetInterceptor, TargetModule)
+  beforeEach(() =>
+    MockBuilder(TargetInterceptor, TargetModule)
       .exclude(NG_MOCKS_INTERCEPTORS)
       .keep(HTTP_INTERCEPTORS)
-      .replace(HttpClientModule, HttpClientTestingModule);
-  });
+      .replace(HttpClientModule, HttpClientTestingModule),
+  );
 
   it('triggers interceptor', () => {
     MockRender();

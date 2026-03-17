@@ -9,7 +9,7 @@ import {
   Pipe,
   PipeTransform,
 } from '@angular/core';
-import { EMPTY, Observable, Subject } from 'rxjs';
+import { EMPTY, NEVER, Observable, Subject } from 'rxjs';
 
 import { ngMocks } from 'ng-mocks';
 

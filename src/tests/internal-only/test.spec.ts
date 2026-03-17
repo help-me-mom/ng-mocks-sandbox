@@ -23,7 +23,7 @@ describe('InternalOnly:real', () => {
 
   it('should render', () => {
     expect(() => MockRender(InternalComponent)).toThrowError(
-      /'internal-only' is not a known element/,
+      new RegExp(`'internal-only' is not a known element`),
     );
   });
 });

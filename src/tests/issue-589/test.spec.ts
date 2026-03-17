@@ -35,7 +35,9 @@ describe('issue-589', () => {
 
     it('excludes StoreDevtoolsModule', () => {
       expect(() => MockRender(TOKEN)).toThrowError(
-        /No provider for InjectionToken TOKEN/,
+        new RegExp(
+          `No provider( found)? for \`?${(TOKEN as any).ngMetadataName} ${(TOKEN as any)._desc}\`?`,
+        ),
       );
     });
   });

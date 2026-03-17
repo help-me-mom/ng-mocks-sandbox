@@ -56,7 +56,7 @@ describe('ng-mocks-touch:3341', () => {
     const cvaEl = ngMocks.find('custom');
 
     expect(() => ngMocks.touch(cvaEl)).toThrowError(
-      /please ensure it has 'onTouched' method/,
+      new RegExp(`please ensure it has 'onTouched' method`),
     );
   });
 
@@ -65,7 +65,7 @@ describe('ng-mocks-touch:3341', () => {
     const cvaEl = ngMocks.find('custom');
 
     expect(() => ngMocks.touch(cvaEl)).toThrowError(
-      /customChangeClb, customTouchedClb/,
+      new RegExp('customChangeClb, customTouchedClb'),
     );
   });
 
@@ -74,7 +74,7 @@ describe('ng-mocks-touch:3341', () => {
     const cvaEl = ngMocks.find('custom');
 
     expect(() => ngMocks.touch(cvaEl, 'triggerTouch')).toThrowError(
-      /please ensure it has 'triggerTouch' method/,
+      new RegExp(`please ensure it has 'triggerTouch' method`),
     );
   });
 

@@ -1,6 +1,5 @@
 import { Location } from '@angular/common';
 import { Component, Injectable, NgModule } from '@angular/core';
-import { fakeAsync, tick } from '@angular/core/testing';
 import {
   CanActivate,
   Router,
@@ -128,25 +127,27 @@ describe('TestRoutingGuard:test', () => {
     ).exclude(NG_MOCKS_GUARDS);
   });
 
-  // It is important to run routing tests in fakeAsync.
-  it('redirects to login', fakeAsync(() => {
-    const fixture = MockRender(RouterOutlet, {});
-    const router: Router = fixture.point.injector.get(Router);
-    const location: Location = fixture.point.injector.get(Location);
+  // It is important to wait for routing to become stable.
+  describe('redirects to login', () => {
+    it('redirects to login', async () => {
+      const fixture = MockRender(RouterOutlet, {});
+      const router: Router = fixture.point.injector.get(Router);
+      const location: Location = fixture.point.injector.get(Location);
 
-    // First we need to initialize navigation.
-    if (fixture.ngZone) {
-      fixture.ngZone.run(() => router.initialNavigation());
-      tick(); // is needed for rendering of the current route.
-    }
+      // First we need to initialize navigation.
+      if (fixture.ngZone) {
+        fixture.ngZone.run(() => router.initialNavigation());
+        await fixture.whenStable(); // is needed for rendering of the current route.
+      }
 
-    // Because by default we are not logged, the guard should
-    // redirect us /login page.
-    expect(location.path()).toEqual('/login');
-    expect(() => ngMocks.find(LoginComponent)).not.toThrow();
-  }));
+      // Because by default we are not logged, the guard should
+      // redirect us /login page.
+      expect(location.path()).toEqual('/login');
+      expect(() => ngMocks.find(LoginComponent)).not.toThrow();
+    });
+  });
 
-  it('loads dashboard', fakeAsync(() => {
+  it('loads dashboard', async () => {
     const fixture = MockRender(RouterOutlet, {});
     const router: Router = fixture.point.injector.get(Router);
     const location: Location = fixture.point.injector.get(Location);
@@ -159,12 +160,12 @@ describe('TestRoutingGuard:test', () => {
     // First we need to initialize navigation.
     if (fixture.ngZone) {
       fixture.ngZone.run(() => router.initialNavigation());
-      tick(); // is needed for rendering of the current route.
+      await fixture.whenStable(); // is needed for rendering of the current route.
     }
 
     // Because now we are logged in, the guard should let us land on
     // the dashboard.
     expect(location.path()).toEqual('/');
     expect(() => ngMocks.find(DashboardComponent)).not.toThrow();
-  }));
+  });
 });

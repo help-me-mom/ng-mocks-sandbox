@@ -90,7 +90,7 @@ describe('ng-mocks-touch:mock', () => {
   it('throws on bad element', () => {
     const element = MockRender(TargetComponent).point;
     expect(() => ngMocks.touch(element)).toThrowError(
-      /Cannot find ControlValueAccessor on the element/,
+      new RegExp('Cannot find ControlValueAccessor on the element'),
     );
   });
 
@@ -99,7 +99,7 @@ describe('ng-mocks-touch:mock', () => {
     const valueAccessorEl = ngMocks.find('custom');
 
     expect(() => ngMocks.touch(valueAccessorEl)).toThrowError(
-      /Unsupported type of ControlValueAccessor/,
+      new RegExp('Unsupported type of ControlValueAccessor'),
     );
   });
 });

@@ -21,7 +21,9 @@ describe('issue-762:token', () => {
 
     it('works correctly', () => {
       expect(() => MockRender(TOKEN)).toThrowError(
-        /No provider for InjectionToken TOKEN/,
+        new RegExp(
+          `No provider( found)? for \`?${(TOKEN as any).ngMetadataName} ${(TOKEN as any)._desc}\`?`,
+        ),
       );
     });
   });

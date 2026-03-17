@@ -63,7 +63,9 @@ describe('issue-623', () => {
 
       it('fails without the directive', () => {
         expect(withoutDirective).toThrowError(
-          new RegExp(`No provider for ${TargetService.name}`),
+          new RegExp(
+            `No provider( found)? for \`?${TargetService.name}\`?`,
+          ),
         );
       });
 
@@ -137,7 +139,9 @@ describe('issue-623', () => {
 
       it('fails without the directive', () => {
         expect(withoutDirective).toThrowError(
-          new RegExp(`No provider for ${TargetService.name}`),
+          new RegExp(
+            `No provider( found)? for \`?${TargetService.name}\`?`,
+          ),
         );
       });
 
@@ -161,7 +165,9 @@ describe('issue-623', () => {
 
       it('fails without export', () => {
         expect(withoutDirective).toThrowError(
-          new RegExp(`No provider for ${TargetService.name}`),
+          new RegExp(
+            `No provider( found)? for \`?${TargetService.name}\`?`,
+          ),
         );
       });
     });
@@ -207,7 +213,9 @@ describe('issue-623', () => {
 
       it('fails with dependency flag', () => {
         expect(withoutDirective).toThrowError(
-          new RegExp(`No provider for ${TargetService.name}`),
+          new RegExp(
+            `No provider( found)? for \`?${TargetService.name}\`?`,
+          ),
         );
       });
     });

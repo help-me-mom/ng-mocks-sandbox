@@ -41,7 +41,6 @@ class DependencyModule {}
   template: `<dependency-standalone-component [name]="name">{{
     name | standalone
   }}</dependency-standalone-component>`,
-  standalone: true,
   imports: [DependencyModule, StandalonePipe],
 })
 class StandaloneComponent {
@@ -69,9 +68,12 @@ describe('TestStandaloneComponent', () => {
     // it's possible because of autoSpy.
     expect(standalonePipe.transform).toHaveBeenCalledWith('test');
 
-    // or asserting the generated html
-    expect(ngMocks.formatHtml(fixture)).toEqual(
-      '<standalone ng-reflect-name="test"><dependency-standalone-component ng-reflect-name="test"></dependency-standalone-component></standalone>',
-    );
+    // or asserting virtual DOM
+    expect(
+      ngMocks.input(
+        ngMocks.find(fixture, DependencyComponent),
+        'name',
+      ),
+    ).toEqual('test');
   });
 });

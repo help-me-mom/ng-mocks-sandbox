@@ -39,7 +39,7 @@ import {
 
 describe('MockBuilder:ngMocks', () => {
   beforeEach(async () => {
-    const ngModule = MockBuilder(MyComponent, MyModule)
+    const builder = MockBuilder(MyComponent, MyModule)
       .keep(ModuleKeep)
       .keep(KeepComponent)
       .keep(KeepDirective)
@@ -66,10 +66,10 @@ describe('MockBuilder:ngMocks', () => {
 
       // Even it belongs to the module we want to keep,
       // it will be still replaced with a mock copy.
-      .mock(My3Component)
+      .mock(My3Component);
 
-      // and now we want to build our NgModule.
-      .build();
+    // and now we want to build our NgModule.
+    const ngModule = builder.build();
     TestBed.configureTestingModule(ngModule);
 
     // Extra configuration

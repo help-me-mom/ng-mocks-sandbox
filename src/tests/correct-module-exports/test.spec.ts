@@ -39,7 +39,9 @@ describe('correct-module-exports-11:proper', () => {
 
   it('fails on not exported module', () => {
     expect(() => MockRender(InternalComponent)).toThrowError(
-      /'internal-correct-module-exports' is not a known element/,
+      new RegExp(
+        `'internal-correct-module-exports' is not a known element`,
+      ),
     );
   });
 

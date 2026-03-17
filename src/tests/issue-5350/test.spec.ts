@@ -12,7 +12,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 describe('issue-5350', () => {
   @Directive({
     standalone: false,
-  } as never)
+  })
   class TargetBase {
     @Input({
       alias: 'aInput1',

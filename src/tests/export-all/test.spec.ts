@@ -83,10 +83,12 @@ describe('export-all', () => {
       } catch (error) {
         if (error instanceof Error) {
           expect(error.message).toMatch(
-            /Multiple components match node with tagname target|The pipe 'target' could not be found/,
+            new RegExp(
+              "Multiple components match node with tagname target|The pipe 'target' could not be found",
+            ),
           );
         } else {
-          fail('should fail');
+          fail('an error expected');
         }
       }
     });

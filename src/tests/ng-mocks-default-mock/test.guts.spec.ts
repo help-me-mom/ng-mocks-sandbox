@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
+import { EMPTY } from 'rxjs';
 
 import { MockRender, ngMocks } from 'ng-mocks';
-import { EMPTY } from 'rxjs';
 
 import {
   TargetComponent,

@@ -35,6 +35,9 @@ describe('MockBuilderKeepsApplicationModule:mock', () => {
     );
     expect(element).toBeDefined();
     expect(ngMocks.findInstance(TARGET_TOKEN)).toEqual('');
+    expect(
+      ngMocks.findInstance(APP_INITIALIZER, undefined),
+    ).toBeUndefined();
     expect(ngMocks.findInstance(APP_ID)).toBeDefined();
   });
 });
