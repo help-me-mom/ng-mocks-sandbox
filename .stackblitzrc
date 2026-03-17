@@ -2,6 +2,8 @@
   "installDependencies": true,
   "startCommand": "npm start",
   "env": {
-    "SB": "true"
+    "SB": "true",
+    "HUSKY": "0",
+    "PUPPETEER_SKIP_DOWNLOAD": "true"
   }
 }
