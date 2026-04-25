@@ -46,7 +46,7 @@
     "@angular-devkit/build-angular": "21.2.8",
     "@angular/cli": "21.2.8",
     "@angular/compiler-cli": "21.2.10",
-    "@commitlint/cli": "20.5.0",
+    "@commitlint/cli": "20.5.2",
     "@commitlint/config-conventional": "20.5.0",
     "@types/jasmine": "6.0.0",
     "@types/node": "24.12.2",
