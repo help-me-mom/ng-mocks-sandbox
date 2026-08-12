@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
@@ -11,6 +12,7 @@ import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 @Component({
   selector: 'app-target',
   template: `<a (click)="click.emit()">name: {{ name }}</a>`,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 class TargetComponent {

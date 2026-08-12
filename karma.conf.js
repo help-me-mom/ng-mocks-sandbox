@@ -8,7 +8,7 @@ const sandboxListenAddress = isLocal ? 'localhost' : '0.0.0.0';
 const withCoverage = isLocal && !!process.env.WITH_COVERAGE;
 
 if (isLocal) {
-  process.env.CHROME_BIN = require('puppeteer').executablePath();
+  process.env.CHROME_BIN = require('puppeteer').executablePath({ headless: 'shell' });
 }
 
 module.exports = function (config) {
@@ -21,7 +21,6 @@ module.exports = function (config) {
         ? [require('karma-chrome-launcher'), require('karma-ie-launcher'), require('karma-junit-reporter')]
         : []),
       require('karma-jasmine-html-reporter'),
-      require('@angular-devkit/build-angular/plugins/karma'),
     ],
     client: {
       clearContext: false, // leave Jasmine Spec Runner output visible in browser
