@@ -2,7 +2,7 @@
 set -eu
 
 browser_revision=$(node -p "require('puppeteer-core/internal/revisions.js').PUPPETEER_REVISIONS['chrome-headless-shell']")
-browser_executable=$(node -p "require('puppeteer').executablePath({headless: 'shell'})")
+browser_executable=$(node -e "Promise.resolve(require('puppeteer').executablePath({headless: 'shell'})).then(browserExecutable => process.stdout.write(browserExecutable))")
 browser_directory=${browser_executable%/chrome-headless-shell-linux64/chrome-headless-shell}
 
 if [ ! -x "$browser_executable" ]; then
