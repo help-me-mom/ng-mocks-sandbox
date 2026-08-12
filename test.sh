@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
-set -e
+#!/bin/sh
+set -eu
 
-docker compose run --rm core npm test
+docker compose run --rm core npm test -- "$@"

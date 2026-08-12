@@ -1,14 +1,5 @@
-#!/usr/bin/env bash
-set -e
+#!/bin/sh
+set -eu
 
-echo "Starting"
-
-export NVM_DIR="$HOME/.nvm" && \. "$NVM_DIR/nvm.sh"
-
-docker compose up --build -- core && \
-  docker compose run --rm core node ./node_modules/puppeteer/install.mjs && \
-  nvm install && \
-  nvm use && \
-  node ./node_modules/puppeteer/install.mjs
-
-docker compose down --remove-orphans
+docker compose run --rm -e PUPPETEER_SKIP_DOWNLOAD=true core npm ci --no-audit --omit=optional
+docker compose run --rm core sh ./install-browser.sh

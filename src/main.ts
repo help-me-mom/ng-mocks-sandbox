@@ -1,5 +1,3 @@
-import './polyfills';
-
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { NgModuleRef } from '@angular/core';
 import { getTestBed } from '@angular/core/testing';
@@ -42,8 +40,8 @@ jasmine.getEnv().addReporter({
   suiteStarted: MockInstance.remember,
 });
 
-import './e2e.ts';
-import './test.spec.ts';
+import './e2e';
+import './test.spec';
 
 const platform = platformBrowserDynamicTesting();
 platform.onDestroy(() => window.ngRef?.destroy());

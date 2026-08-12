@@ -1,10 +1,11 @@
 services:
   core:
-    image: satantime/puppeteer-node:24.14.0
+    image: satantime/puppeteer-node:26.5.1
     platform: linux/amd64
     working_dir: /app
     environment:
       - NODE_OPTIONS=--max-old-space-size=8192
+      - PUPPETEER_SKIP_CHROME_DOWNLOAD=true
     volumes:
       - .:/app
       - cache:/root/.cache
@@ -12,7 +13,7 @@ services:
       - npm:/root/.npm
     command:
       - npm
-      - install
+      - ci
       - --no-audit
       - --omit=optional
 

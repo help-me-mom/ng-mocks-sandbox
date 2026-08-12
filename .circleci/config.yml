@@ -4,11 +4,13 @@ orbs:
 parameters:
   lockindex:
     type: string
-    default: '1'
+    default: '2'
 jobs:
   Core Chrome:
     docker:
-      - image: satantime/puppeteer-node:24.14.0
+      - image: satantime/puppeteer-node:26.5.1
+    environment:
+      PUPPETEER_SKIP_CHROME_DOWNLOAD: 'true'
     steps:
       - checkout
       - restore_cache:
@@ -17,10 +19,10 @@ jobs:
           name: Install
           command: |
             md5sum package-lock.json > package.md5
-            if [ ! -d "./node_modules/" ]; then
-              npm install --no-audit && \
-              node ./node_modules/puppeteer/install.mjs
+            if ! npm ls --depth=0 >/dev/null 2>&1; then
+              PUPPETEER_SKIP_DOWNLOAD=true npm ci --no-audit
             fi
+            sh ./install-browser.sh
             md5sum -c package.md5
             rm package.md5
       - save_cache:

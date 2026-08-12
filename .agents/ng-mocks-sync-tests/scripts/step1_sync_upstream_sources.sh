@@ -28,7 +28,6 @@ ARCHIVE_URL="https://codeload.github.com/$REPO_SLUG/tar.gz/refs/tags/$TAG"
 
 TMP_DIR="$(mktemp -d)"
 trap 'rm -rf "$TMP_DIR"' EXIT
-
 ARCHIVE_PATH="$TMP_DIR/ng-mocks.tar.gz"
 
 curl --fail --silent --show-error --location "$ARCHIVE_URL" --output "$ARCHIVE_PATH"
