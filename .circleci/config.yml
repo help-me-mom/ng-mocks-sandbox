@@ -8,7 +8,7 @@ parameters:
 jobs:
   Core Chrome:
     docker:
-      - image: satantime/puppeteer-node:26.1.0
+      - image: satantime/puppeteer-node:26.5.1
     environment:
       PUPPETEER_SKIP_CHROME_DOWNLOAD: 'true'
     steps:
