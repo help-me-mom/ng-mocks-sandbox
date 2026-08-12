@@ -80,6 +80,11 @@ Preserve this split when editing `karma.conf.js`, `.codesandbox/tasks.json`,
   when a stack trace contains fewer frames than Jasmine expects. After a
   Jasmine or Karma upgrade, confirm `npm ls jasmine-core karma-jasmine`
   reports one deduplicated Jasmine version.
+- Jasmine 6 deliberately reports compatibility deprecations for
+  `karma-jasmine` and Zone.js. `src/jasmine-deprecations.js` filters only the
+  two known framework messages before `zone.js/testing` loads and passes every
+  other deprecation through. Keep the message matches exact so changed or new
+  upstream warnings become visible and can be reviewed.
 - Regenerate `package-lock.json` through `core`; do not hand-edit it.
 - Run Angular migrations when a major upgrade defines required workspace
   migrations. Treat optional build-runner migrations separately because this

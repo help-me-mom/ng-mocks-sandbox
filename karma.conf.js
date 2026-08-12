@@ -6,12 +6,26 @@ const isSB = !!process.env.SB;
 const isLocal = !isCSB && !isSB;
 const sandboxListenAddress = isLocal ? 'localhost' : '0.0.0.0';
 const withCoverage = isLocal && !!process.env.WITH_COVERAGE;
+const path = require('path');
 
 if (isLocal) {
   process.env.CHROME_BIN = require('puppeteer').executablePath({ headless: 'shell' });
 }
 
 module.exports = function (config) {
+  const testMainIndex = config.files.findIndex(file => file.pattern.endsWith('test_main.js'));
+
+  if (testMainIndex === -1) {
+    throw new Error('Could not place the Jasmine deprecation filter before test_main.js');
+  }
+
+  config.files.splice(testMainIndex, 0, {
+    pattern: path.join(__dirname, 'src/jasmine-deprecations.js'),
+    included: true,
+    served: true,
+    watched: false,
+  });
+
   config.set({
     basePath: '',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
@@ -39,7 +53,7 @@ module.exports = function (config) {
       },
     },
     junitReporter: {
-      outputDir: require('path').join(__dirname, './test-reports'),
+      outputDir: path.join(__dirname, './test-reports'),
       outputFile: 'specs-junit.xml',
       useBrowserName: false,
     },
