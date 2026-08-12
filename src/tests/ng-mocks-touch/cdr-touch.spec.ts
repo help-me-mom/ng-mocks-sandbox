@@ -62,7 +62,7 @@ class TargetComponent {
 class MyModule {}
 
 // checking how normal form works
-describe('ng-mocks-touch:cdr-blur', () => {
+describe('ng-mocks-touch:cdr-touch', () => {
   const dataSet: Array<[string, () => void]> = [
     ['real', () => MockBuilder(TargetComponent).keep(MyModule)],
     [
@@ -115,7 +115,7 @@ describe('ng-mocks-touch:cdr-blur', () => {
   }
 });
 
-describe('ng-mocks-touch:cdr-blur:full-mock', () => {
+describe('ng-mocks-touch:cdr-touch:full-mock', () => {
   beforeEach(() => MockBuilder(TargetComponent, MyModule));
 
   it('correctly touches CVA', () => {

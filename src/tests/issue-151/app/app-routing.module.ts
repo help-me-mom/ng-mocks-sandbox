@@ -6,13 +6,13 @@ import { HelloModule } from './hello.module';
 
 const routes: Routes = [
   {
+    component: HelloComponent,
+    path: 'hello',
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: '/hello',
-  },
-  {
-    component: HelloComponent,
-    path: 'hello',
   },
 ];
 

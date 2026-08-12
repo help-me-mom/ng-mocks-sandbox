@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   Input,
   NgZone,
@@ -10,6 +11,7 @@ import { fakeAsync, tick } from '@angular/core/testing';
 import { MockBuilder, MockRenderFactory, ngMocks } from 'ng-mocks';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.Default,
   selector: 'target-fake-async',
   standalone: false,
   template: '{{ counter }}',
@@ -44,7 +46,7 @@ describe('fake-async', () => {
   ngMocks.faster();
   beforeAll(() => MockBuilder(TargetComponent));
 
-  it('checks with 5', fakeAsync(() => {
+  it('checks with 1', fakeAsync(() => {
     const fixture = factory({ value: 1 });
     fixture.whenStable().then(() => {
       fixture.detectChanges();

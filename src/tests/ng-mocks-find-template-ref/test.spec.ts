@@ -148,7 +148,7 @@ describe('ng-mocks-find-template-ref', () => {
     );
   });
 
-  it('returns default value on missed directives', () => {
+  it('returns default value on missed directives initially', () => {
     const fixture = MockRender(TestComponent);
 
     expect(ngMocks.findTemplateRef('unknownId', null)).toEqual(null);
@@ -167,7 +167,7 @@ describe('ng-mocks-find-template-ref', () => {
     );
   });
 
-  it('returns default value on missed directives', () => {
+  it('returns default value on missed directives repeatedly', () => {
     const fixture = MockRender(TestComponent);
 
     expect(ngMocks.findTemplateRef('unknownId', null)).toEqual(null);

@@ -38,7 +38,7 @@ describe('injected-ng-templates:real', () => {
   });
 });
 
-describe('structural-directive-as-ng-for:mock', () => {
+describe('injected-ng-templates:mock', () => {
   beforeEach(() => MockBuilder().mock(CustomInjectionComponent));
 
   it('renders a mock component with injected template properly', () => {

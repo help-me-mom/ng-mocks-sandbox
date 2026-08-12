@@ -7,8 +7,13 @@ import {
   PipeTransform,
 } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import { isMockOf, MockBuilder, MockRender, ngMocks } from 'ng-mocks';
+
+// Seed an explicit spy so the regression does not depend on runner-specific auto-spy behavior.
+const createSpy = (name: string, value: string): any =>
+  jasmine.createSpy(name).and.returnValue(value);
 
 @Injectable()
 class TargetService {
@@ -96,6 +101,57 @@ describe('issue-2646', () => {
         ).toThrowError(/No provider/);
       });
     });
+
+    describe('mock inject', () => {
+      @Directive({
+        selector: 'target-2646[consumer]',
+        standalone: false,
+      })
+      class DirectiveConsumer {
+        public constructor(
+          public readonly target: ServiceToDirective,
+        ) {}
+      }
+
+      @Component({
+        selector: 'host-2646-directive',
+        standalone: false,
+        template: '<target-2646 consumer></target-2646>',
+      })
+      class DirectiveHostComponent {}
+
+      beforeEach(() =>
+        MockBuilder(DirectiveHostComponent)
+          .keep(DirectiveConsumer)
+          .mock(ServiceToDirective),
+      );
+
+      it('reuses TestBed.inject overrides', () => {
+        // Mocked declarations that double as providers are created locally by Angular. The fix makes
+        // the constructor-injected local instance inherit the overrides that were seeded through
+        // TestBed.inject before rendering.
+        const directive = TestBed.inject(ServiceToDirective);
+        const echo = createSpy('directiveEcho', 'mock directive');
+        ngMocks.stub(directive, { echo });
+
+        const fixture = TestBed.createComponent(
+          DirectiveHostComponent,
+        );
+        fixture.detectChanges();
+
+        const consumer = fixture.debugElement
+          .query(By.directive(DirectiveConsumer))
+          .injector.get(DirectiveConsumer);
+
+        expect(consumer.target).not.toBe(directive);
+        expect(consumer.target.echo).toBe(directive.echo);
+        expect(consumer.target.echo()).toEqual('mock directive');
+        expect(echo).toHaveBeenCalledTimes(1);
+        expect(TestBed.inject(ServiceToDirective)).toBe(
+          consumer.target,
+        );
+      });
+    });
   });
 
   describe('component', () => {
@@ -151,6 +207,56 @@ describe('issue-2646', () => {
         expect(() =>
           fixture.debugElement.injector.get(TargetService),
         ).toThrowError(/No provider/);
+      });
+    });
+
+    describe('mock inject', () => {
+      @Directive({
+        selector: 'target-2646[consumer]',
+        standalone: false,
+      })
+      class ComponentConsumer {
+        public constructor(
+          public readonly target: ServiceToComponent,
+        ) {}
+      }
+
+      @Component({
+        selector: 'host-2646-component',
+        standalone: false,
+        template: '<target-2646 consumer></target-2646>',
+      })
+      class ComponentHostComponent {}
+
+      beforeEach(() =>
+        MockBuilder(ComponentHostComponent)
+          .keep(ComponentConsumer)
+          .mock(ServiceToComponent),
+      );
+
+      it('reuses TestBed.inject overrides', () => {
+        // The same replay behavior should work for mocked components used as providers, not only for
+        // the pipe regression from #7937.
+        const component = TestBed.inject(ServiceToComponent);
+        const echo = createSpy('componentEcho', 'mock component');
+        ngMocks.stub(component, { echo });
+
+        const fixture = TestBed.createComponent(
+          ComponentHostComponent,
+        );
+        fixture.detectChanges();
+
+        const consumer = fixture.debugElement
+          .query(By.directive(ComponentConsumer))
+          .injector.get(ComponentConsumer);
+
+        expect(consumer.target).not.toBe(component);
+        expect(consumer.target.echo).toBe(component.echo);
+        expect(consumer.target.echo()).toEqual('mock component');
+        expect(echo).toHaveBeenCalledTimes(1);
+        expect(TestBed.inject(ServiceToComponent)).toBe(
+          consumer.target,
+        );
       });
     });
   });

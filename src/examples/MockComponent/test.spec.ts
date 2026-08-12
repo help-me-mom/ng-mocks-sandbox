@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
+  ChangeDetectionStrategy,
   Component,
   ContentChild,
   EventEmitter,
@@ -30,6 +31,7 @@ class ChildComponent {
 }
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.Default,
   selector: 'target-mock-component',
   standalone: false,
   template: `
@@ -47,7 +49,7 @@ class TargetComponent {
 })
 class ItsModule {}
 
-describe('MockComponent', () => {
+describe('MockComponent:example', () => {
   beforeEach(() => {
     return MockBuilder(TargetComponent, ItsModule);
   });

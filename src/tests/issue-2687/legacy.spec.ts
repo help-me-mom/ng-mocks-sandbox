@@ -72,7 +72,7 @@ class RenderStandaloneServiceComponent {
 })
 class RenderTargetComponentComponent {}
 
-describe('issue-2687', () => {
+describe('issue-2687:legacy', () => {
   describe('legacy:real', () => {
     beforeEach(() =>
       TestBed.configureTestingModule({

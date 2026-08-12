@@ -77,7 +77,7 @@ describe('mock-component-render:content-children-groups:real', () => {
   });
 });
 
-describe('mock-component-render:content-children:mock', () => {
+describe('mock-component-render:content-children-groups:mock', () => {
   beforeEach(() => MockBuilder(AppComponent, AppModule));
 
   it('renders the desired ContentChildren', () => {

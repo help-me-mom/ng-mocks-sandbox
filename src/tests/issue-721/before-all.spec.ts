@@ -26,13 +26,13 @@ describe('issue-721:before-all', () => {
     }).compileComponents(),
   );
 
-  it('works right value=1', () => {
+  it('works right value=1 on first render', () => {
     expect(ngMocks.formatText(MockRender(TargetComponent))).toEqual(
       '1',
     );
   });
 
-  it('works right value=1', () => {
+  it('works right value=1 on second render', () => {
     expect(ngMocks.formatText(MockRender(TargetComponent))).toEqual(
       '1',
     );

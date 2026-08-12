@@ -1,20 +1,36 @@
 import {
   Component,
-  ComponentFactoryResolver,
+  Inject,
   Injectable,
+  InjectionToken,
   NgModule,
+  Type,
 } from '@angular/core';
 
 import { MockBuilder, MockRender } from 'ng-mocks';
 
+interface ComponentResolver {
+  resolveComponentFactory(component: Type<unknown>): void;
+}
+
+const COMPONENT_RESOLVER = new InjectionToken<ComponentResolver>(
+  'ComponentFactoryResolver',
+  {
+    factory: () => ({
+      resolveComponentFactory: () => undefined,
+    }),
+  },
+);
+
 @Injectable()
 class ModalService {
   public constructor(
-    private readonly componentFactoryResolver: ComponentFactoryResolver,
+    @Inject(COMPONENT_RESOLVER)
+    private readonly componentResolver: ComponentResolver,
   ) {}
 
-  public open(component: any) {
-    this.componentFactoryResolver.resolveComponentFactory(component);
+  public open(component: Type<unknown>): void {
+    this.componentResolver.resolveComponentFactory(component);
   }
 }
 
@@ -47,7 +63,8 @@ describe('issue-296:without-entry', () => {
   beforeEach(() =>
     MockBuilder(TargetComponent)
       .keep(ModalService)
-      .keep(ModalComponent),
+      .keep(ModalComponent)
+      .keep(COMPONENT_RESOLVER),
   );
 
   it('behaves correctly with and without ivy', () => {

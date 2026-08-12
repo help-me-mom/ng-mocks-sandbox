@@ -142,7 +142,7 @@ describe('ng-mocks-change:cdr-input', () => {
   }
 });
 
-describe('ng-mocks-change:cdr-change:full-mock', () => {
+describe('ng-mocks-change:cdr-input:full-mock', () => {
   const destroy$ = new Subject<void>();
 
   beforeEach(() => MockBuilder(TargetComponent, MyModule));

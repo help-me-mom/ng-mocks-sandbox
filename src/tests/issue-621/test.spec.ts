@@ -28,15 +28,11 @@ describe('issue-621', () => {
   beforeAll(() => MockBuilder(TargetComponent));
 
   let factory: MockRenderFactory<TargetComponent, 'update' | 'value'>;
-  beforeAll(
-    () =>
-      (factory = MockRenderFactory(TargetComponent, [
-        'update',
-        'value',
-      ])),
-  );
+  beforeAll(() => {
+    factory = MockRenderFactory(TargetComponent, ['update', 'value']);
+  });
 
-  it('does not proxy update inout', () => {
+  it('does not proxy value input', () => {
     const fixture = factory();
     expect(fixture.componentInstance.value).toEqual(undefined);
     expect(fixture.point.componentInstance.value).toEqual(undefined);
@@ -46,7 +42,7 @@ describe('issue-621', () => {
     expect(fixture.point.componentInstance.value).toEqual(undefined);
   });
 
-  it('does not proxy update inout', () => {
+  it('proxies update output', () => {
     const fixture = factory();
     expect(fixture.componentInstance.update).toEqual(undefined);
 

@@ -68,7 +68,7 @@ class DependencyWithProvidersModule {}
 class ProviderModule {}
 
 // @see https://github.com/help-me-mom/ng-mocks/issues/4613
-describe('issue-4613', () => {
+describe('issue-4613:providers', () => {
   describe('fails without providers', () => {
     beforeEach(() => MockBuilder(TargetComponent, DependencyModule));
 

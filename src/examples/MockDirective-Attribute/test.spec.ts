@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   Directive,
   EventEmitter,
@@ -22,6 +23,7 @@ class DependencyDirective {
 }
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.Default,
   selector: 'target',
   standalone: false,
   template: `
