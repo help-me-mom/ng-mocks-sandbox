@@ -8,11 +8,11 @@ const sandboxListenAddress = isLocal ? 'localhost' : '0.0.0.0';
 const withCoverage = isLocal && !!process.env.WITH_COVERAGE;
 const path = require('path');
 
-if (isLocal) {
-  process.env.CHROME_BIN = require('puppeteer').executablePath({ headless: 'shell' });
-}
+module.exports = async function (config) {
+  if (isLocal) {
+    process.env.CHROME_BIN = await require('puppeteer').executablePath({ headless: 'shell' });
+  }
 
-module.exports = function (config) {
   const testMainIndex = config.files.findIndex(file => file.pattern.endsWith('test_main.js'));
 
   if (testMainIndex === -1) {
