@@ -74,6 +74,12 @@ Preserve this split when editing `karma.conf.js`, `.codesandbox/tasks.json`,
   major upgrade.
 - Verify the selected ng-mocks release explicitly supports that Angular
   major, and pin the published release rather than a repository checkout.
+- Preserve the `karma-jasmine` override that resolves its bundled
+  `jasmine-core` dependency to the project's pinned version. Without it,
+  `karma-jasmine` injects Jasmine 4.6.1, which crashes in StackBlitz on Safari
+  when a stack trace contains fewer frames than Jasmine expects. After a
+  Jasmine or Karma upgrade, confirm `npm ls jasmine-core karma-jasmine`
+  reports one deduplicated Jasmine version.
 - Regenerate `package-lock.json` through `core`; do not hand-edit it.
 - Run Angular migrations when a major upgrade defines required workspace
   migrations. Treat optional build-runner migrations separately because this

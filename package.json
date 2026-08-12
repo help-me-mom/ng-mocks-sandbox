@@ -67,6 +67,11 @@
   "engines": {
     "npm": "11.14.1"
   },
+  "overrides": {
+    "karma-jasmine": {
+      "jasmine-core": "$jasmine-core"
+    }
+  },
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
