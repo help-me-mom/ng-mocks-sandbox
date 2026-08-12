@@ -36,6 +36,12 @@ sh ./compose.sh
 sh ./test.sh
 ```
 
+`compose.sh` and CircleCI both call `install-browser.sh`. Keep those paths in
+sync. On Node 26, do not replace it with Puppeteer's CLI or `install.mjs`:
+those entry points do not await archive extraction reliably. The checked-in
+script derives the pinned headless-shell revision and executable path from
+Puppeteer, then verifies the executable before tests start.
+
 Before committing, run at least:
 
 ```sh

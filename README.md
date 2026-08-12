@@ -36,6 +36,11 @@ inside the `core` environment. Its named cache volume keeps that browser
 available to later test runs. `test.sh` starts Karma in single-run mode with
 the `ChromeCi` launcher.
 
+`install-browser.sh`, used by both `compose.sh` and CircleCI, derives the
+headless-shell revision and expected executable path from the pinned
+Puppeteer package. It downloads the matching official Chrome for Testing
+archive only when the executable is missing and verifies it before tests.
+
 Extra Angular test arguments are forwarded by the wrapper:
 
 ```sh

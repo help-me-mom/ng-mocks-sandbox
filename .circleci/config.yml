@@ -22,8 +22,7 @@ jobs:
             if ! npm ls --depth=0 >/dev/null 2>&1; then
               PUPPETEER_SKIP_DOWNLOAD=true npm ci --no-audit
             fi
-            PUPPETEER_SKIP_DOWNLOAD=false PUPPETEER_SKIP_CHROME_DOWNLOAD=true node --input-type=module -e "const { downloadBrowsers } = await import('puppeteer/internal/node/install.js'); await downloadBrowsers()"
-            node -e "require('fs').accessSync(require('puppeteer').executablePath({headless: 'shell'}), require('fs').constants.X_OK)"
+            sh ./install-browser.sh
             md5sum -c package.md5
             rm package.md5
       - save_cache:
