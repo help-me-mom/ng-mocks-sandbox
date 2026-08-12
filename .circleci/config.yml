@@ -22,7 +22,8 @@ jobs:
             if ! npm ls --depth=0 >/dev/null 2>&1; then
               PUPPETEER_SKIP_DOWNLOAD=true npm ci --no-audit
             fi
-            node ./node_modules/puppeteer/install.mjs
+            npx puppeteer browsers install chrome-headless-shell
+            node -e "require('fs').accessSync(require('puppeteer').executablePath({headless: 'shell'}), require('fs').constants.X_OK)"
             md5sum -c package.md5
             rm package.md5
       - save_cache:
