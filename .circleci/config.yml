@@ -4,7 +4,7 @@ orbs:
 parameters:
   lockindex:
     type: string
-    default: '2'
+    default: '3'
 jobs:
   Core Chrome:
     docker:
@@ -20,9 +20,20 @@ jobs:
           command: |
             md5sum package-lock.json > package.md5
             if ! npm ls --depth=0 >/dev/null 2>&1; then
-              PUPPETEER_SKIP_DOWNLOAD=true npm ci --no-audit
+              npm ci --no-audit
             fi
-            sh ./install-browser.sh
+            if [ -d "$HOME/.cache/puppeteer" ]; then
+              find "$HOME/.cache/puppeteer" -type f -name '*.zip' | while IFS= read -r zip; do
+                cache_dir="${zip%/*}"
+                browser_name="${cache_dir##*/}"
+                archive_name="${zip##*/}"
+                build_id="${archive_name%-${browser_name}-linux64.zip}"
+                unzip -qo "$zip" -d "$cache_dir/linux-${build_id}"
+                rm -f "$zip"
+              done
+            fi
+            browser_executable=$(node -e "Promise.resolve(require('puppeteer').executablePath({headless: 'shell'})).then(browserExecutable => process.stdout.write(browserExecutable))")
+            test -x "$browser_executable"
             md5sum -c package.md5
             rm package.md5
       - save_cache:

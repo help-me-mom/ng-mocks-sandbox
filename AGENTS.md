@@ -36,13 +36,14 @@ sh ./compose.sh
 sh ./test.sh
 ```
 
-`compose.sh` and CircleCI both call `install-browser.sh`. Keep those paths in
-sync. On Node 26, do not replace it with Puppeteer's CLI or `install.mjs`:
-those entry points do not await archive extraction reliably. The checked-in
-script derives the pinned headless-shell revision and executable path from
-Puppeteer, then verifies the executable before tests start. Puppeteer 25 made
-`executablePath()` asynchronous; await its result in both the installer and
-Karma configuration rather than coercing its promise to a path.
+`compose.sh` and CircleCI let Puppeteer's npm lifecycle download the pinned
+Chrome Headless Shell, then repair any ZIP left in Puppeteer's cache with the
+same extraction pattern used by upstream ng-mocks; keep those paths in sync.
+`PUPPETEER_SKIP_CHROME_DOWNLOAD` intentionally skips full Chrome while allowing
+the headless shell. Puppeteer's installer does not await archive extraction
+reliably on current Node versions, so keep the cache repair and executable
+check. Puppeteer 25 made `executablePath()` asynchronous; await its result
+before using it.
 
 Before committing, run at least:
 
