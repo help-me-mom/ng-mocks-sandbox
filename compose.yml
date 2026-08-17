@@ -1,6 +1,6 @@
 services:
   core:
-    image: satantime/puppeteer-node:26.5.1
+    image: satantime/puppeteer-node:26.7.0
     platform: linux/amd64
     working_dir: /app
     environment:
