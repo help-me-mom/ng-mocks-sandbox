@@ -48,7 +48,7 @@ describe('issue-298:case', () => {
     });
   });
 
-  describe('ngMocks.findInstance', () => {
+  describe('ngMocks.findInstances', () => {
     it('handles undefined as element', () => {
       const fixture = MockRender(`
       <div class="p1"><span myDirective value="d1"></span></div>

@@ -10,7 +10,6 @@ import {
   Component,
   NgModule,
   RendererFactory2,
-  VERSION,
 } from '@angular/core';
 import { fakeAsync, flush, tick } from '@angular/core/testing';
 import {
@@ -52,15 +51,6 @@ class TargetModule {}
 
 // @see https://github.com/help-me-mom/ng-mocks/issues/641
 describe('issue-641', () => {
-  if (Number.parseInt(VERSION.major, 10) >= 19) {
-    it('a19', () => {
-      // TODO pending('Need Angular < 19');
-      expect(true).toBeTruthy();
-    });
-
-    return;
-  }
-
   beforeAll(() =>
     ngMocks.globalReplace(
       BrowserAnimationsModule,
@@ -71,14 +61,6 @@ describe('issue-641', () => {
 
   describe('BrowserAnimationsModule:default', () => {
     beforeEach(() => MockBuilder(TargetComponent, TargetModule));
-
-    it('works on whenStable and due to NoopAnimationsModule', async () => {
-      const fixture = MockRender(TargetComponent);
-      await fixture.whenStable();
-      fixture.detectChanges();
-
-      expect(ngMocks.formatText(fixture)).toEqual('target');
-    });
 
     it('works on whenStable and due to NoopAnimationsModule', async () => {
       const fixture = MockRender(TargetComponent);
@@ -122,9 +104,9 @@ describe('issue-641', () => {
       ),
     );
 
-    it('fails due to missing BrowserAnimationsModule', () => {
+    it('fails due to missing animation providers', () => {
       expect(() => MockRender(TargetComponent)).toThrowError(
-        /BrowserAnimationsModule/,
+        /BrowserAnimationsModule|provide(?:Noop)?Animations/,
       );
     });
   });

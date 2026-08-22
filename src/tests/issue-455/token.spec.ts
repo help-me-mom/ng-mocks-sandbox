@@ -56,7 +56,7 @@ ngMocks.defaultMock(
 
 // @see https://github.com/help-me-mom/ng-mocks/issues/455
 describe('issue-455:token', () => {
-  describe('without inject decorator', () => {
+  describe('without inject decorator:TestBed', () => {
     describe('using TestBed', () => {
       beforeEach(() =>
         TestBed.configureTestingModule({
@@ -72,7 +72,7 @@ describe('issue-455:token', () => {
     });
   });
 
-  describe('without inject decorator', () => {
+  describe('without inject decorator:ng-mocks', () => {
     describe('using default mock', () => {
       beforeEach(() => MockBuilder(TestWithoutDecoratorComponent));
 

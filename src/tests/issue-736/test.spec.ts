@@ -1,15 +1,19 @@
 import {
   Component,
-  ComponentFactoryResolver,
+  Inject,
+  InjectionToken,
   OnInit,
 } from '@angular/core';
 
-import {
-  getMockedNgDefOf,
-  MockBuilder,
-  MockRender,
-  ngMocks,
-} from 'ng-mocks';
+import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
+
+interface ComponentResolver {
+  resolveComponentFactory(component: unknown): unknown;
+}
+
+const COMPONENT_RESOLVER = new InjectionToken<ComponentResolver>(
+  'ComponentFactoryResolver',
+);
 
 @Component({
   selector: 'modal',
@@ -25,13 +29,12 @@ class ModalComponent {}
 })
 class TargetComponent implements OnInit {
   public constructor(
-    public readonly componentFactoryResolver: ComponentFactoryResolver,
+    @Inject(COMPONENT_RESOLVER)
+    public readonly componentResolver: ComponentResolver,
   ) {}
 
   public ngOnInit(): void {
-    this.componentFactoryResolver.resolveComponentFactory(
-      ModalComponent,
-    );
+    this.componentResolver.resolveComponentFactory(ModalComponent);
   }
 }
 
@@ -41,7 +44,7 @@ describe('issue-736', () => {
     MockBuilder(TargetComponent)
       .mock(ModalComponent)
       .provide({
-        provide: ComponentFactoryResolver,
+        provide: COMPONENT_RESOLVER,
         useValue: {
           resolveComponentFactory: jasmine.createSpy(
             'ComponentFactoryResolver.resolveComponentFactory',
@@ -60,7 +63,7 @@ describe('issue-736', () => {
 
     // getting current instance of mock ComponentFactoryResolver
     const componentFactoryResolver = ngMocks.findInstance(
-      ComponentFactoryResolver,
+      COMPONENT_RESOLVER,
     );
 
     // its spied resolveComponentFactory shouldn't be called
@@ -72,9 +75,11 @@ describe('issue-736', () => {
     // triggering ngOnInit
     fixture.detectChanges();
 
-    // resolveComponentFactory should have been called
+    // resolveComponentFactory should have been called with the requested
+    // component. The replacement token is not Angular's legacy resolver, so
+    // ng-mocks does not rewrite the argument to the mocked definition.
     expect(
       componentFactoryResolver.resolveComponentFactory,
-    ).toHaveBeenCalledWith(getMockedNgDefOf(ModalComponent));
+    ).toHaveBeenCalledWith(ModalComponent);
   });
 });

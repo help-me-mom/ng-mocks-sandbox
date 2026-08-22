@@ -130,7 +130,7 @@ describe('ng-mocks-global-mock', () => {
     });
   });
 
-  describe('MockBuilder:exclude:token', () => {
+  describe('MockBuilder:keep:token', () => {
     beforeEach(() => MockBuilder(null, EntryModule).keep(TOKEN));
 
     it('switches to exclude', () => {
@@ -143,7 +143,7 @@ describe('ng-mocks-global-mock', () => {
     });
   });
 
-  describe('MockBuilder:exclude:directive', () => {
+  describe('MockBuilder:keep:directive', () => {
     beforeEach(() =>
       MockBuilder(null, EntryModule).keep(MockDirective),
     );
