@@ -95,9 +95,7 @@ describe('provider-with-custom-dependencies', () => {
       );
       // The dependency should not be provided in TestBed.
       expect(() => ngMocks.findInstance(Dep3Service)).toThrowError(
-        new RegExp(
-          `Cannot find an instance via ngMocks\\.findInstance\\(${Dep3Service.name}\\)`,
-        ),
+        `Cannot find an instance via ngMocks.findInstance(${Dep3Service.name})`,
       );
     });
   });
@@ -117,9 +115,7 @@ describe('provider-with-custom-dependencies', () => {
       );
       // The dependency should not be provided in TestBed.
       expect(() => ngMocks.findInstance(Dep3Service)).toThrowError(
-        new RegExp(
-          `Cannot find an instance via ngMocks\\.findInstance\\(${Dep3Service.name}\\)`,
-        ),
+        `Cannot find an instance via ngMocks.findInstance(${Dep3Service.name})`,
       );
     });
   });
@@ -143,9 +139,7 @@ describe('provider-with-custom-dependencies', () => {
       );
       // The dependency should not be provided in TestBed.
       expect(() => ngMocks.findInstance(Dep3Service)).toThrowError(
-        new RegExp(
-          `Cannot find an instance via ngMocks\\.findInstance\\(${Dep3Service.name}\\)`,
-        ),
+        `Cannot find an instance via ngMocks.findInstance(${Dep3Service.name})`,
       );
     });
   });

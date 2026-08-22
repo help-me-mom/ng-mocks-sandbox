@@ -19,8 +19,10 @@ matching the exact `ng-mocks` version in `package.json`.
   reusing it.
 - After the merge, verify that `package.json` still pins that exact version.
 - Run npm, npx, Node, formatting, and tests through `core`, never on the host.
-- Keep upstream behavior. Replay only sandbox compatibility edits that are
-  still necessary for the Angular version pinned here.
+- Keep effective upstream test behavior. Preserve an established destination
+  simplification from `origin/tests` when it still exercises the same result
+  under the versions pinned here; do not replace it merely to mirror upstream
+  syntax. Replay only sandbox compatibility edits that are still necessary.
 - Patch synced source files locally in logical batches. Do not start a Docker
   container merely to format or inspect each file.
 - Do not use the full browser suite as a per-file feedback loop. Settle the
@@ -69,6 +71,11 @@ matching the exact `ng-mocks` version in `package.json`.
 6. Review complete diffs in logical batches with `git diff -- <files>`:
    - classify each hunk as an upstream change, confirmed sandbox cleanup, or
      unclear;
+   - for existing files, distinguish a real release behavior change from the
+     import merely overwriting a prior destination simplification; consult the
+     upstream tag-to-tag diff or history when the distinction is unclear;
+   - restore the destination form exactly when its simpler representation
+     still asserts the same behavior under the pinned sandbox;
    - patch all confirmed instances of the same cleanup category across the
      full changed set, without broadening beyond imported paths;
    - stage reviewed upstream changes and necessary compatibility adaptations;
@@ -144,12 +151,15 @@ noise.
   and remove an adjacent Angular 5 comment when it only explains the shim.
 - Restore direct RxJS exports such as `EMPTY`, `NEVER`, and `fromEvent` instead
   of local compatibility fallbacks.
-- Use `new RegExp(...)` when interpolation or explicit partial matching needs
-  it. Keep an existing regex literal when it already preserves the assertion's
-  semantics.
+- Prefer the established destination matcher when it remains behaviorally
+  equivalent for the actual value exercised by the test. Use `new RegExp(...)`
+  only when interpolation plus materially partial or variable matching needs
+  it; do not introduce it merely because upstream expresses the same current
+  assertion with a regex or `.toContain(...)`.
 - Convert synchronous `try/catch` blocks used only to inspect
-  `error.message` to `toThrowError(...)`. Preserve the original semantics:
-  partial checks use regex matching and exact checks stay exact.
+  `error.message` to `toThrowError(...)`. First retain an existing destination
+  matcher when it remains valid. For a new conversion, preserve material
+  semantics: partial checks use regex matching and exact checks stay exact.
 - Keep an async `try/catch` when conversion would make the spec less readable
   or would move setup and the throwing call out of the same block.
 - Prefer `TestBed.inject(...)` when an old-version guard chooses between it
