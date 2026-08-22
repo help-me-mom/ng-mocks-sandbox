@@ -1,6 +1,6 @@
 ---
 name: ng-mocks-sync-tests
-description: Use when refreshing the tests branch from the ng-mocks tag pinned in package.json, including e2e regeneration, compatibility cleanup, and optional release handoff.
+description: Use when refreshing the tests branch from the ng-mocks tag pinned in package.json, including batched compatibility cleanup, e2e regeneration, validation, and optional release handoff.
 ---
 
 # Sync ng-mocks tests into the sandbox
@@ -21,18 +21,32 @@ matching the exact `ng-mocks` version in `package.json`.
 - Run npm, npx, Node, formatting, and tests through `core`, never on the host.
 - Keep upstream behavior. Replay only sandbox compatibility edits that are
   still necessary for the Angular version pinned here.
-- During the one-file cleanup loop, use only the diff printed by the Step 3
-  script. If its classification is unclear, stop and report it.
+- Patch synced source files locally in logical batches. Do not start a Docker
+  container merely to format or inspect each file.
+- Do not use the full browser suite as a per-file feedback loop. Settle the
+  complete imported diff before starting consolidated validation.
+- Classify every changed hunk before staging it. If a classification is
+  unclear, leave it unstaged and stop to report it.
 - Do not edit public documentation as part of the sync. Changes already made
   on `master` may flow through its merge normally.
 - User instructions override this skill.
 
 ## Workflow
 
-1. Confirm the worktree is clean and the current `tests` and `master` refs are
-   suitable for the requested release.
-2. Determine the exact target version from `master`, create the clean release
-   branch `releases/<version>` from `tests`, and merge `master` into it.
+1. Confirm the worktree is clean, then refresh the public upstream refs before
+   making branch or version decisions:
+
+   ```sh
+   git fetch https://github.com/help-me-mom/ng-mocks-sandbox.git \
+     master:refs/remotes/origin/master \
+     tests:refs/remotes/origin/tests
+   ```
+
+2. Determine the target version from `origin/master`. Require a concrete,
+   published version with no range operator, tag, or workspace protocol; do
+   not rely on the import script to normalize a non-exact dependency. Create
+   the clean release branch `releases/<version>` from `origin/tests`, then
+   merge `origin/master` into it.
 3. Confirm the merged `package.json` pins the same exact version, then import
    its matching tag:
 
@@ -46,42 +60,78 @@ matching the exact `ng-mocks` version in `package.json`.
    docker compose run --rm core sh ./.agents/ng-mocks-sync-tests/scripts/step2_regenerate_e2e.sh
    ```
 
-5. Repeatedly request the next changed file:
+5. Build the cleanup queue locally:
 
    ```sh
-   docker compose run --rm core sh ./.agents/ng-mocks-sync-tests/scripts/step3_list_changed_synced_files.sh
+   git status --short -- src/tests src/examples src/e2e.ts
    ```
 
-6. When the script prints a file and its diff:
-   - classify it as an upstream change, confirmed sandbox cleanup, or unclear;
-   - leave upstream changes untouched;
-   - for confirmed cleanup, patch only that file and complete only the same
-     cleanup category in that file;
-   - format it with
-     `docker compose run --rm core npx prettier --write <file>`;
-   - run Step 3 again;
-   - if the same file returns, stage only that file and continue, unless the
-     user requested review-stop mode.
-7. When no file is returned, run:
+6. Review complete diffs in logical batches with `git diff -- <files>`:
+   - classify each hunk as an upstream change, confirmed sandbox cleanup, or
+     unclear;
+   - patch all confirmed instances of the same cleanup category across the
+     full changed set, without broadening beyond imported paths;
+   - stage reviewed upstream changes and necessary compatibility adaptations;
+   - leave unclear files unstaged;
+   - do not format after each file.
+
+   `git diff` does not show untracked additions. Inspect every new file listed
+   by `git status` directly or with `git diff --no-index -- /dev/null <file>`.
+
+7. Use the cheap Step 3 script directly on the host as the final unstaged-file
+   queue:
+
+   ```sh
+   sh ./.agents/ng-mocks-sync-tests/scripts/step3_list_changed_synced_files.sh
+   ```
+
+   This is a final audit, not the primary review loop. If it exposes many
+   files, return to the batched review; otherwise classify, fix, or stage the
+   printed file and repeat until it prints nothing. Before starting Docker,
+   also inspect changed Jasmine labels:
+
+   ```sh
+   git diff --cached -U0 -- src/tests src/examples \
+     | rg "^[+-].*\\b(describe|it)\\("
+   ```
+
+   Restore a prior label only when the imported label clearly duplicates a
+   sibling in the same Jasmine parent, contradicts the API or fixture under
+   test, or is confirmed to abort this sandbox's suite. Do not discard a real
+   upstream rename merely because the same short label exists elsewhere.
+
+8. Confirm `src/e2e.ts` imports every synced `*.spec.ts` exactly once, including
+   new files. Then set up once, format all staged files together, review and
+   stage any formatter delta, and run the static checks together:
 
    ```sh
    sh ./compose.sh
-   docker compose run --rm core npm run prettier:check
-   docker compose run --rm core npm run ts:check
+   docker compose run --rm core sh -eu -c \
+     'git diff --cached --name-only --diff-filter=ACMR -z | xargs -0 -r npx prettier --write'
+   docker compose run --rm core sh -eu -c \
+     'npm run prettier:check && npm run ts:check'
    sh ./test.sh
    ```
 
-8. Fix only failures caused by the sync or the Angular version pinned in
-   `package.json`, then repeat the relevant checks until they pass.
+9. Fix only failures caused by the sync or the Angular version pinned in
+   `package.json`. Before rerunning the full suite, find and fix every reviewed
+   occurrence of the same failure category. For example, if Jasmine aborts on
+   a duplicate changed label, inspect all imported label changes first; if a
+   declaration-order-only change causes a pinned-Angular runtime failure,
+   restore the known-good order after confirming the cause. Then repeat the
+   relevant checks once.
 
 `test.sh` forwards arguments to `ng test`; it has no special `coverage`
-argument. CircleCI's `WITH_COVERAGE=1` environment variable selects the JUnit
+argument. On `tests`, `src/e2e.ts` imports the full suite, so `--include` may
+still execute every imported spec and should not be treated as a speedup.
+CircleCI's `WITH_COVERAGE=1` environment variable selects the JUnit
 reporter in this repository; despite the historical name, it does not enable
 Karma code coverage.
 
 ## Confirmed compatibility cleanup catalog
 
-Apply a cleanup only when the Step 3 diff proves it is sandbox-only noise.
+Apply a cleanup only when the reviewed synced diff proves it is sandbox-only
+noise.
 
 - Replace computed Angular metadata shims such as
   `['standalone' as never]: false` with `standalone: false`; remove obsolete
@@ -94,7 +144,9 @@ Apply a cleanup only when the Step 3 diff proves it is sandbox-only noise.
   and remove an adjacent Angular 5 comment when it only explains the shim.
 - Restore direct RxJS exports such as `EMPTY`, `NEVER`, and `fromEvent` instead
   of local compatibility fallbacks.
-- Use `new RegExp(...)`, not regex literals, for normalized error matchers.
+- Use `new RegExp(...)` when interpolation or explicit partial matching needs
+  it. Keep an existing regex literal when it already preserves the assertion's
+  semantics.
 - Convert synchronous `try/catch` blocks used only to inspect
   `error.message` to `toThrowError(...)`. Preserve the original semantics:
   partial checks use regex matching and exact checks stay exact.
@@ -117,24 +169,42 @@ When release handoff is authorized:
 
 1. Review the complete diff against `tests`. Include only the merge from
    `master`, the imported upstream sources, the generated `src/e2e.ts`, and
-   confirmed sandbox compatibility fixes.
+   confirmed sandbox compatibility fixes. If the user explicitly requested a
+   workflow-skill or agent-instruction update, keep it in a separate docs
+   commit in the same PR rather than folding it into the sync commit.
 2. Stage all intended sync files, including `src/e2e.ts`, which is outside the
    Step 3 queue. Do not stage generated reports, caches, credentials, or
    unrelated changes.
-3. Keep the merge from `master` separate from the sync commit. Use the
+3. Immediately before the sync commit, refresh both upstream refs and verify
+   that they are ancestors of the release branch:
+
+   ```sh
+   git fetch https://github.com/help-me-mom/ng-mocks-sandbox.git \
+     master:refs/remotes/origin/master \
+     tests:refs/remotes/origin/tests
+   git merge-base --is-ancestor origin/master HEAD
+   git merge-base --is-ancestor origin/tests HEAD
+   ```
+
+   If either ref advanced, integrate it and repeat the affected import or
+   validation work before publishing. If refreshed `master` pins a different
+   ng-mocks version, do not keep working under the old release branch name;
+   stop and restart from current `tests`, or ask how to preserve the old work.
+
+4. Keep the merge from `master` separate from the sync commit. Use the
    historical sync message:
 
    ```text
    feat(ng-mocks): <version> version with latest tests
    ```
 
-4. Push `releases/<version>` and open a ready pull request against `tests`
+5. Push `releases/<version>` and open a ready pull request against `tests`
    using the historical title:
 
    ```text
    feat(ng-mocks): latest version with latest tests
    ```
 
-5. Preserve the historically empty PR body unless the user asks for an
+6. Preserve the historically empty PR body unless the user asks for an
    explanation or the change needs one. Verify the PR target and checks, and
    do not merge it unless separately requested.
