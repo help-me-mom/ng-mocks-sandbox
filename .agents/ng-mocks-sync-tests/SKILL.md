@@ -1,384 +1,220 @@
 ---
 name: ng-mocks-sync-tests
-description: Use when syncing ng-mocks-sandbox tests/examples from upstream ng-mocks, regenerating e2e.ts, and replaying only sandbox-specific compatibility edits that are still required.
+description: Use when refreshing the tests branch from the ng-mocks tag pinned in package.json, including batched compatibility cleanup, e2e regeneration, validation, and optional release handoff.
 ---
 
-# ng-mocks sandbox test sync
+# Sync ng-mocks tests into the sandbox
 
-Use this skill when updating the `tests` branch from upstream `ng-mocks`.
+Use this workflow for an update destined for `tests`. Work on a release branch
+based on `tests`; do not run the destructive import on `master`. The workflow
+replaces `src/tests` and `src/examples` with the sources from the upstream tag
+matching the exact `ng-mocks` version in `package.json`.
 
-## Goal
+## Safety rules
 
-Keep `src/tests`, `src/examples`, and `src/e2e.ts` aligned with upstream while preserving only real sandbox-specific compatibility changes that are still required in this sandbox.
-
-This skill should be usable by a medium-reasoning agent without extra repo knowledge. Follow it literally.
-
-## Core rules
-
-- Use this skill only for the `tests` sync workflow.
-- Run repo commands through `core` only:
-  - `docker compose run --rm core <command>`
-- Do not run host `npm`, host `npx`, host `node`, host `prettier`, or host tests.
+- Start from current `tests` and `master` refs with a clean worktree.
+- Read the target version from the exact `ng-mocks` dependency on `master`,
+  then create `releases/<version>` from `tests` and merge `master` into it.
+- Do not overwrite an existing release branch. Inspect it and ask before
+  reusing it.
+- After the merge, verify that `package.json` still pins that exact version.
+- Run npm, npx, Node, formatting, and tests through `core`, never on the host.
+- Keep effective upstream test behavior. Preserve an established destination
+  simplification from `origin/tests` when it still exercises the same result
+  under the versions pinned here; do not replace it merely to mirror upstream
+  syntax. Replay only sandbox compatibility edits that are still necessary.
+- Patch synced source files locally in logical batches. Do not start a Docker
+  container merely to format or inspect each file.
+- Do not use the full browser suite as a per-file feedback loop. Settle the
+  complete imported diff before starting consolidated validation.
+- Classify every changed hunk before staging it. If a classification is
+  unclear, leave it unstaged and stop to report it.
+- Do not edit public documentation as part of the sync. Changes already made
+  on `master` may flow through its merge normally.
 - User instructions override this skill.
 
-## Step 3 boundaries
-
-During Step 3, the agent may do only these actions:
-
-1. Run the Step 3 script.
-2. Apply a manual patch for the diff returned by that script.
-3. Run Prettier on the current Step 3 file.
-4. If the same file comes back, stage that file with `git add <current-step3-file>`.
-
-During Step 3, do not:
-
-- run any other terminal command
-- search the repo
-- inspect other files to decide the patch
-- run tests
-- use history lookups
-- use git commands other than `git add <current-step3-file>` when the same file comes back
-
-The Step 3 script output is the only diff source for Step 3 decisions.
-
-## Commands
-
-Run bundled scripts like this:
-
-- `docker compose run --rm core sh ./.agents/ng-mocks-sync-tests/scripts/step1_sync_upstream_sources.sh`
-- `docker compose run --rm core sh ./.agents/ng-mocks-sync-tests/scripts/step2_regenerate_e2e.sh`
-- `docker compose run --rm core sh ./.agents/ng-mocks-sync-tests/scripts/step3_list_changed_synced_files.sh`
-
-Run Prettier like this:
-
-- `docker compose run --rm core npx prettier --write <repo-relative-file>`
-
-Run tests like this:
-
-- `sh ./compose.sh`
-- `sh ./test.sh`
-
-Notes:
-
-- `compose.sh` is the required bootstrap step for Step 4 in this repo.
-- It installs dependencies and Puppeteer browser binaries for both the `core` container and the host checkout.
-- Do not replace it with ad hoc `npx puppeteer ...` commands.
-- `test.sh` is the repo-local test wrapper for this workflow:
-  - `sh ./test.sh`
-  - `sh ./test.sh coverage`
-
-## Default workflow
-
-1. Start on branch `tests`.
-2. Merge `master` into `tests`.
-3. Run Step 1.
-4. Run Step 2.
-5. Run Step 3.
-6. Process Step 3 files one at a time.
-7. Run Step 4.
-
-## Step 4 algorithm
-
-Run Step 4 after Step 3 returns no file.
-
-1. Run final Prettier and make sure formatting is clean.
-2. Install dependencies and browser binaries:
-   - `sh ./compose.sh`
-3. Run tests:
-   - `sh ./test.sh`
-4. Treat this wrapper flow as required repo behavior, not an optional convenience:
-   - `compose.yml` provides the `NODE_OPTIONS=--max-old-space-size=8192` memory setting for `core`
-   - `compose.yml` also persists `/root/.cache` so the browser installed by `compose.sh` is visible to later `docker compose run --rm core ...` commands
-5. If tests pass, the workflow is done.
-6. If tests fail, inspect the failures.
-7. Fix only failures that are clearly caused by sync transformations or Angular 21 compatibility fallout introduced or exposed by the sync.
-8. Typical Step 4 fixes include:
-   - provider error message matcher updates such as `No provider found for ...`
-   - regex matcher updates needed for Angular 21 wording
-   - application-initializer / root-provider expectation updates caused by Angular 21 behavior
-   - other assertion updates that are clearly required to keep synced tests passing on Angular 21
-9. Do not use Step 4 as permission for unrelated refactors.
-10. After fixing those failures, rerun Prettier if needed, then rerun `sh ./test.sh`.
-11. Repeat until tests pass.
-
-## Step 3 algorithm
-
-Treat this as the exact loop.
-
-1. Run:
-   - `docker compose run --rm core sh ./.agents/ng-mocks-sync-tests/scripts/step3_list_changed_synced_files.sh`
-2. If no file is returned, Step 3 is done.
-3. If a file is returned, inspect only the printed diff for that file.
-4. Decide whether the diff is:
-   - upstream-only
-   - sandbox compatibility cleanup
-   - unclear
-5. If it is unclear, stop and report that.
-6. If it is upstream-only, leave it unchanged.
-7. If it is sandbox compatibility cleanup, apply only the minimum confirmed patch for the current file.
-8. Before applying the patch, do a category-completeness check:
-   - if the diff shows a confirmed cleanup category from this skill, finish that same category across the current file
-   - do not stop after the first matching hunk if the same confirmed category appears later in the current file
-9. Report only the repo-relative file path before applying the patch.
-10. Apply the patch.
-11. Run:
-    - `docker compose run --rm core npx prettier --write <current-step3-file>`
-12. Run Step 3 again.
-13. Compare the new returned file path with the previous file path.
-14. If the same file comes back:
-    - default behavior: stage that file with `git add <current-step3-file>` and continue
-    - if the user asked for review-stop mode: stop, tell the user the same file came back, and show the current returned diff
-15. If a different file comes back, continue the loop.
-
-## Patch scope rules
-
-- Patch the current Step 3 file only.
-- Patch only the printed diff hunk unless this skill explicitly tells you to finish the same confirmed category across the current file.
-- Do not improve unrelated code.
-- Do not rewrite a whole file because one line changed.
-- Preserve blank lines unless the cleanup itself requires a format change.
-- Preserve simple line shape unless the cleanup itself requires a format change.
-- Keep same-line declarations on one line when they still fit after cleanup.
-
-## How to classify a diff
-
-Use this rule of thumb:
-
-- If the diff reintroduces old Angular compatibility shims, old RxJS compatibility shims, Jest fallback runtime helpers, or verbose throw-assertion `try/catch` patterns that this repo does not want, clean it up.
-- If the diff looks like a real upstream behavior change or new test coverage, leave it alone.
-- If you cannot confidently tell whether the diff is sandbox-only compatibility noise, stop and report that.
-
-## Normalization catalog
-
-Only apply these when they are clearly compatibility leftovers.
-
-### Property shims
-
-- `['standalone' as never ...]: false` -> `standalone: false`
-- `['standalone' as never ...]: true` -> remove the field
-- `['imports' as never ...]: value` -> `imports: value`
-- `['hostDirectives' as never ...]: value` -> `hostDirectives: value`
-- `['entryComponents' as never /* TODO remove entryComponents after A16+ support */]: value` -> remove the field
-
-Rules:
-
-- Keep explicit `standalone: false` because the default is `true`.
-- Never keep or invent `standalone: true`.
-- If removing `standalone: true` leaves an empty metadata object, collapse to `@Directive()`, `@Component()`, or `@Pipe()`.
-- If one confirmed property-shim cleanup exists in the current file, finish that same property-shim category across the file.
-
-### Decorator query casts
-
-- `@ContentChild('x', {} as never)` -> `@ContentChild('x')`
-- `@ContentChild(Type, {} as never)` -> `@ContentChild(Type)`
-- `@ContentChildren(Type, {} as never)` -> `@ContentChildren(Type)`
-- `@ViewChild('x', { read: T } as never)` -> `@ViewChild('x', { read: T })`
-- `@ContentChildren(Type, { read: T } as never)` -> `@ContentChildren(Type, { read: T })`
-
-Rules:
-
-- Keep simple decorator + property declarations on one line when they still fit after cleanup.
-- If the diff only split a simple decorator from its property declaration, fold it back:
-  - `@ContentChild(CellDirective)`
-  - `public cell?: CellDirective;`
-  - -> `@ContentChild(CellDirective) public cell?: CellDirective;`
-
-### Decorator metadata casts
-
-- `@Directive({...} as never)` -> `@Directive({...})`
-- `@Component({...} as never)` -> `@Component({...})`
-- `@Pipe({...} as never)` -> `@Pipe({...})`
-
-Rules:
-
-- Keep metadata braces intact unless the metadata becomes empty.
-
-### Alias decorator cleanup
-
-- `@Output({ alias: 'x' } as never)` -> `@Output('x')`
-- `@Input({ alias: 'x' } as never)` -> `@Input('x')`
-
-Rules:
-
-- If alias metadata has real options like `required`, keep object form and remove only the compatibility cast.
-
-### Line shape cleanup
-
-Use this only for formatting noise caused by compatibility edits.
-
-- preserve simple one-line declaration shape when it still fits
-- if upstream splits a decorator field from its declaration without changing semantics, fold it back
-- do this for simple decorator + property patterns such as `@ContentChild`, `@ContentChildren`, `@ViewChild`, `@Input`, `@Output`, and similar declarations
-
-### Version guard cleanup
-
-- Remove `VERSION.major` checks when they only preserve older Angular behavior.
-- Prefer Angular 21 style in this repo.
-- If upstream adds `TestBed.get` / `TestBed.inject` branching, keep `TestBed.inject(...)`.
-
-### Jasmine vs Jest cleanup
-
-This repo prefers Jasmine runtime code.
-
-Normalize these back to the direct Jasmine form:
-
-- `typeof jest === 'undefined' ? jasmine.createSpy() : jest.fn()`
-- `const assertion: any = typeof jasmine === 'undefined' ? expect : jasmine;`
-- `assertion.any(...)`
-- `assertion.objectContaining(...)`
-- `assertion.stringMatching(...)`
-- `expect.any(...)` used only as a runtime compatibility fallback
-
-Keep these forms:
-
-- `const spy = jasmine.createSpy(); // or jest.fn();`
-- `output: jasmine.createSpy(), // or jest.fn(),`
-- `expect(value).toEqual(jasmine.any(Object));`
-- existing useful Jest comments, unchanged
-
-Rules:
-
-- If the current file contains a forbidden Jest helper pattern, finish that same helper category across the whole file.
-- Keep Jest only as adjacent comments when useful.
-- Do not rewrite the wording or placement of an existing useful Jest comment just to make it match another style.
-- Use inline comment when more code follows on the same line.
-- Use next-line comment only when the expression is final.
-
-### InjectionToken cleanup
-
-- `new (InjectionToken as any)(...)` -> `new InjectionToken(...)`
-
-Rules:
-
-- Remove adjacent `A5` comments when they only explain that old shim.
-
-### RxJS EMPTY cleanup
-
-If upstream reintroduces a local shim backed by `new Subject(...)` for standard RxJS exports:
-
-- restore the direct RxJS import
-- remove the local shim block
-- remove `Subject` only if it becomes unused after cleanup
-
-Examples:
-
-- local `EMPTY` shim -> restore `import { EMPTY } from 'rxjs';`
-- local `EMPTY` + `NEVER` shim -> restore only the standard imports actually needed after cleanup
-
-### RxJS import cleanup
-
-If upstream reintroduces a compatibility shim for a standard RxJS export such as `fromEvent`:
-
-- restore the normal import:
-  - `import { fromEvent } from 'rxjs';`
-- remove the shim block, for example:
-  - `let fromEvent: any;`
-  - `try { fromEvent = (rxjs as any).fromEvent; } catch { ... }`
-- remove conditional runtime branches that only exist for that shim
-- restore the direct subscription / assertion flow once the standard import is back
-
-### Regex normalization
-
-Use one consistent regex rule in this repo:
-
-- use `new RegExp(...)`
-- do not use regex literals like `/.../`
-
-Examples:
-
-- `expect(message).toMatch(new RegExp('Cannot find fail input via ngMocks\\.input'));`
-- `expect(fn).toThrowError(new RegExp('Cannot find a TemplateRef via ngMocks\\.findTemplateRef\\(unknownId\\)'));`
-- `new RegExp(\`No provider( found)? for \\\`?${ProviderService.name}\\\`?\`)`
-
-Rules:
-
-- escape backslashes for both the string and the regex
-- escape regex metacharacters inside the string
-- prefer template strings when interpolation is required
-- prefer template strings when they avoid awkward quote escaping
-- if the current file contains mixed regex styles for the same confirmed cleanup case, normalize them to `new RegExp(...)`
-
-### Throw assertion cleanup
-
-Only convert `try/catch` when the block exists only to assert the thrown error.
-
-Convert these sync cases:
-
-- `try { fn(); fail(...); } catch (error) { expect(error.message)... }`
-- `try { fn(); } catch (error) { expect(error.message)... }`
-- guarded catch blocks used only for message assertions:
-  - `catch (error) { if (error instanceof Error) { expect(error.message)... } else { fail(...) } }`
-  - `catch (error) { expect((error as Error).message)... }`
-
-Use:
-
-- sync throw -> `toThrowError(...)`
-
-Rules:
-
-- If the printed diff shows a direct regression from `toThrowError(...)` to `try/catch`, restore the throw matcher.
-- Preserve matcher intent:
-  - exact string checks -> exact string matcher
-  - partial or regex checks -> `new RegExp(...)`
-
-Keep `try/catch` for async cases:
-
-- If cleanup would require `expectAsync(...)`, keep the original `try/catch`.
-- If the code is `await ...; thrower();` inside one `try`, keep the `try/catch`.
-- Do not force `expectAsync(...)` just because a block is async.
-
-### What not to normalize automatically
-
-Do not automatically normalize:
-
-- unrelated refactors
-- general style changes outside a confirmed cleanup category
-- real upstream behavior changes
-- comment wording changes unless they are part of a confirmed compatibility cleanup
-
-## Fast decision guide
-
-If you see this, do this:
-
-- `['standalone' as never ...]: false`
-  - change to `standalone: false`
-- `['standalone' as never ...]: true`
-  - remove it
-- `@ContentChild('x', {} as never)` or a similar query cast
-  - remove the cast and keep the declaration on one line if it still fits
-- simple decorator + property split across two lines with no semantic reason
-  - fold it back onto one line
-- `typeof jest === 'undefined' ? ...`
-  - restore the direct Jasmine form
-- `assertion.any(...)` / `assertion.objectContaining(...)` / `assertion.stringMatching(...)`
-  - restore the direct Jasmine matcher
-- `new (InjectionToken as any)(...)`
-  - change to `new InjectionToken(...)`
-- local `EMPTY` / `NEVER` shim backed by `new Subject(...)`
-  - restore direct RxJS imports and remove the shim block
-- local fallback shim for `fromEvent`
-  - restore the direct RxJS import and remove the shim flow
-- sync `try/catch` used only for `error.message`
-  - convert to `toThrowError(...)`
-- async `try/catch` where conversion would require `expectAsync(...)`
-  - keep the `try/catch`
-
-## When to stop and ask the user
-
-Stop and report if:
-
-- the Step 3 script output is broken or ambiguous
-- the user asked to review the patch before apply
-- the same file came back and the user asked for review-stop mode
-- you cannot tell whether the diff is sandbox-only compatibility cleanup or a real upstream change
-
-## Final reminder
-
-The safe behavior is:
-
-- trust the current Step 3 printed diff
-- apply the smallest confirmed sandbox patch
-- finish only the same confirmed cleanup category across the current file
-- run Prettier on that file
-- rerun Step 3
-- if the same file comes back, stage it and move on
+## Workflow
+
+1. Confirm the worktree is clean, then refresh the public upstream refs before
+   making branch or version decisions:
+
+   ```sh
+   git fetch https://github.com/help-me-mom/ng-mocks-sandbox.git \
+     master:refs/remotes/origin/master \
+     tests:refs/remotes/origin/tests
+   ```
+
+2. Determine the target version from `origin/master`. Require a concrete,
+   published version with no range operator, tag, or workspace protocol; do
+   not rely on the import script to normalize a non-exact dependency. Create
+   the clean release branch `releases/<version>` from `origin/tests`, then
+   merge `origin/master` into it.
+3. Confirm the merged `package.json` pins the same exact version, then import
+   its matching tag:
+
+   ```sh
+   docker compose run --rm core sh ./.agents/ng-mocks-sync-tests/scripts/step1_sync_upstream_sources.sh
+   ```
+
+4. Regenerate the import list:
+
+   ```sh
+   docker compose run --rm core sh ./.agents/ng-mocks-sync-tests/scripts/step2_regenerate_e2e.sh
+   ```
+
+5. Build the cleanup queue locally:
+
+   ```sh
+   git status --short -- src/tests src/examples src/e2e.ts
+   ```
+
+6. Review complete diffs in logical batches with `git diff -- <files>`:
+   - classify each hunk as an upstream change, confirmed sandbox cleanup, or
+     unclear;
+   - for existing files, distinguish a real release behavior change from the
+     import merely overwriting a prior destination simplification; consult the
+     upstream tag-to-tag diff or history when the distinction is unclear;
+   - restore the destination form exactly when its simpler representation
+     still asserts the same behavior under the pinned sandbox;
+   - patch all confirmed instances of the same cleanup category across the
+     full changed set, without broadening beyond imported paths;
+   - stage reviewed upstream changes and necessary compatibility adaptations;
+   - leave unclear files unstaged;
+   - do not format after each file.
+
+   `git diff` does not show untracked additions. Inspect every new file listed
+   by `git status` directly or with `git diff --no-index -- /dev/null <file>`.
+
+7. Use the cheap Step 3 script directly on the host as the final unstaged-file
+   queue:
+
+   ```sh
+   sh ./.agents/ng-mocks-sync-tests/scripts/step3_list_changed_synced_files.sh
+   ```
+
+   This is a final audit, not the primary review loop. If it exposes many
+   files, return to the batched review; otherwise classify, fix, or stage the
+   printed file and repeat until it prints nothing. Before starting Docker,
+   also inspect changed Jasmine labels:
+
+   ```sh
+   git diff --cached -U0 -- src/tests src/examples \
+     | rg "^[+-].*\\b(describe|it)\\("
+   ```
+
+   Restore a prior label only when the imported label clearly duplicates a
+   sibling in the same Jasmine parent, contradicts the API or fixture under
+   test, or is confirmed to abort this sandbox's suite. Do not discard a real
+   upstream rename merely because the same short label exists elsewhere.
+
+8. Confirm `src/e2e.ts` imports every synced `*.spec.ts` exactly once, including
+   new files. Then set up once, format all staged files together, review and
+   stage any formatter delta, and run the static checks together:
+
+   ```sh
+   sh ./compose.sh
+   docker compose run --rm core sh -eu -c \
+     'git diff --cached --name-only --diff-filter=ACMR -z | xargs -0 -r npx prettier --write'
+   docker compose run --rm core sh -eu -c \
+     'npm run prettier:check && npm run ts:check'
+   sh ./test.sh
+   ```
+
+9. Fix only failures caused by the sync or the Angular version pinned in
+   `package.json`. Before rerunning the full suite, find and fix every reviewed
+   occurrence of the same failure category. For example, if Jasmine aborts on
+   a duplicate changed label, inspect all imported label changes first; if a
+   declaration-order-only change causes a pinned-Angular runtime failure,
+   restore the known-good order after confirming the cause. Then repeat the
+   relevant checks once.
+
+`test.sh` forwards arguments to `ng test`; it has no special `coverage`
+argument. On `tests`, `src/e2e.ts` imports the full suite, so `--include` may
+still execute every imported spec and should not be treated as a speedup.
+CircleCI's `WITH_COVERAGE=1` environment variable selects the JUnit
+reporter in this repository; despite the historical name, it does not enable
+Karma code coverage.
+
+## Confirmed compatibility cleanup catalog
+
+Apply a cleanup only when the reviewed synced diff proves it is sandbox-only
+noise.
+
+- Replace computed Angular metadata shims such as
+  `['standalone' as never]: false` with `standalone: false`; remove obsolete
+  `standalone: true` and `entryComponents` shims without dropping metadata
+  braces that still contain real fields.
+- Remove obsolete `as never` casts from decorator metadata and query options.
+- Use direct Jasmine runtime helpers. Keep a useful Jest alternative only as
+  an adjacent `// or ...` comment.
+- Replace `new (InjectionToken as any)(...)` with `new InjectionToken(...)`
+  and remove an adjacent Angular 5 comment when it only explains the shim.
+- Restore direct RxJS exports such as `EMPTY`, `NEVER`, and `fromEvent` instead
+  of local compatibility fallbacks.
+- Prefer the established destination matcher when it remains behaviorally
+  equivalent for the actual value exercised by the test. Use `new RegExp(...)`
+  only when interpolation plus materially partial or variable matching needs
+  it; do not introduce it merely because upstream expresses the same current
+  assertion with a regex or `.toContain(...)`.
+- Convert synchronous `try/catch` blocks used only to inspect
+  `error.message` to `toThrowError(...)`. First retain an existing destination
+  matcher when it remains valid. For a new conversion, preserve material
+  semantics: partial checks use regex matching and exact checks stay exact.
+- Keep an async `try/catch` when conversion would make the spec less readable
+  or would move setup and the throwing call out of the same block.
+- Prefer `TestBed.inject(...)` when an old-version guard chooses between it
+  and `TestBed.get(...)`.
+
+Do not use this catalog for unrelated refactors, comment rewrites, or genuine
+upstream behavior changes.
+
+## Release handoff
+
+A validated working tree is the default stopping point. Do not create the sync
+commit, push, or open a pull request unless the user explicitly asks to
+finalize or publish the release update. A direct request to open the pull
+request authorizes its required sync commit and push, but not merging it.
+
+When release handoff is authorized:
+
+1. Review the complete diff against `tests`. Include only the merge from
+   `master`, the imported upstream sources, the generated `src/e2e.ts`, and
+   confirmed sandbox compatibility fixes. If the user explicitly requested a
+   workflow-skill or agent-instruction update, keep it in a separate docs
+   commit in the same PR rather than folding it into the sync commit.
+2. Stage all intended sync files, including `src/e2e.ts`, which is outside the
+   Step 3 queue. Do not stage generated reports, caches, credentials, or
+   unrelated changes.
+3. Immediately before the sync commit, refresh both upstream refs and verify
+   that they are ancestors of the release branch:
+
+   ```sh
+   git fetch https://github.com/help-me-mom/ng-mocks-sandbox.git \
+     master:refs/remotes/origin/master \
+     tests:refs/remotes/origin/tests
+   git merge-base --is-ancestor origin/master HEAD
+   git merge-base --is-ancestor origin/tests HEAD
+   ```
+
+   If either ref advanced, integrate it and repeat the affected import or
+   validation work before publishing. If refreshed `master` pins a different
+   ng-mocks version, do not keep working under the old release branch name;
+   stop and restart from current `tests`, or ask how to preserve the old work.
+
+4. Keep the merge from `master` separate from the sync commit. Use the
+   historical sync message:
+
+   ```text
+   feat(ng-mocks): <version> version with latest tests
+   ```
+
+5. Push `releases/<version>` and open a ready pull request against `tests`
+   using the historical title:
+
+   ```text
+   feat(ng-mocks): latest version with latest tests
+   ```
+
+6. Preserve the historically empty PR body unless the user asks for an
+   explanation or the change needs one. Verify the PR target and checks, and
+   do not merge it unless separately requested.

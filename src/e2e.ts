@@ -126,6 +126,7 @@ import './tests/issue-14544/service.spec';
 import './tests/issue-14544/test.spec';
 import './tests/issue-14560/test.spec';
 import './tests/issue-14613/test.spec';
+import './tests/issue-14653/test.spec';
 import './tests/issue-1507/test.spec';
 import './tests/issue-151/test.spec';
 import './tests/issue-157/test.spec';
