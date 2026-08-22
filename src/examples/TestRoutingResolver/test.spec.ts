@@ -10,7 +10,7 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Observable } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import {
@@ -27,10 +27,7 @@ class DataService {
   protected flag = true;
 
   public data(): Observable<boolean> {
-    return new Observable<boolean>(observer => {
-      observer.next(this.flag);
-      observer.complete();
-    });
+    return from([this.flag]);
   }
 }
 
@@ -62,11 +59,8 @@ class DataResolver implements Resolve<{
 class MockResolver implements Resolve<{ mock: boolean }> {
   protected mock = true;
 
-  public resolve(): Observable<{ mock: boolean }> {
-    return new Observable<{ mock: boolean }>(observer => {
-      observer.next({ mock: this.mock });
-      observer.complete();
-    });
+  public resolve() {
+    return of({ mock: this.mock });
   }
 }
 
@@ -132,11 +126,7 @@ describe('TestRoutingResolver:test', () => {
 
     // DataService has been replaced with a mock copy,
     // let's set a custom value we will assert later on.
-    dataService.data = () =>
-      new Observable<boolean>(observer => {
-        observer.next(false);
-        observer.complete();
-      });
+    dataService.data = () => from([false]);
 
     // Let's switch to the route with the resolver.
     location.go('/route');
