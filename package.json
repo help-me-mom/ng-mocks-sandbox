@@ -60,7 +60,7 @@
     "karma-junit-reporter": "2.0.1",
     "npm": "11.19.0",
     "prettier": "3.9.6",
-    "puppeteer": "25.8.0",
+    "puppeteer": "25.9.0",
     "ts-node": "10.9.2",
     "typescript": "6.0.3"
   },
